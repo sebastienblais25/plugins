@@ -2,7 +2,6 @@ import { Grid } from 'ag-grid-community';
 import { SEARCH_TEMPLATE, MENU_TEMPLATE, CLEAR_FILTERS_TEMPLATE, COLUMN_VISIBILITY_MENU_TEMPLATE, MOBILE_MENU_TEMPLATE, MOBILE_MENU_BTN_TEMPLATE, RECORD_COUNT_TEMPLATE, APPLY_TO_MAP_TEMPLATE } from './templates';
 import { DetailsAndZoomButtons } from './details-and-zoom-buttons';
 import 'ag-grid-community/dist/styles/ag-grid.css';
-import './main.scss';
 import { PanelRowsManager } from './panel-rows-manager';
 import { PanelStatusManager } from './panel-status-manager';
 import { scrollIntoView, tabToGrid } from './grid-accessibility';
@@ -292,7 +291,7 @@ export class PanelManager {
             };
 
             // Sync filterByExtent
-            this.toggleExtentFilter = function() {
+            this.toggleExtentFilter = function () {
                 that.filterByExtent = this.filterByExtent;
                 if (that.filterByExtent) {
                     that.panelRowsManager.extent = that.mapApi.mapI.extent;
@@ -391,7 +390,7 @@ export class PanelManager {
                             }
                         }
                     case 'number':
-                        switch(colFilter.type) {
+                        switch (colFilter.type) {
                             case 'greaterThanOrEqual':
                                 return `${col} >= ${colFilter.filter}`;
 
@@ -408,7 +407,7 @@ export class PanelManager {
                         const dateTo = new Date(colFilter.dateTo);
                         const from = dateFrom ? `${dateFrom.getMonth() + 1}/${dateFrom.getDate()}/${dateFrom.getFullYear()}` : undefined;
                         const to = dateTo ? `${dateTo.getMonth() + 1}/${dateTo.getDate()}/${dateTo.getFullYear()}` : undefined;
-                        switch(colFilter.type) {
+                        switch (colFilter.type) {
                             case 'greaterThanOrEqual':
                                 return `${col} >= DATE ${from}`;
 
@@ -430,7 +429,7 @@ export class PanelManager {
                 const re = new RegExp(`.*${val.split(" ").join(".*")}`);
                 const sortedRows = that.tableOptions.api.rowModel.rowsToDisplay;
                 const columns = that.tableOptions.columnApi.getAllDisplayedColumns()
-                                .filter(column => column.colDef.filter === 'agTextColumnFilter');
+                    .filter(column => column.colDef.filter === 'agTextColumnFilter');
                 columns.splice(0, 3);
                 let filteredColumns = [];
                 columns.forEach(column => {
