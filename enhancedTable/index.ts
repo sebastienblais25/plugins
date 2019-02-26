@@ -13,7 +13,7 @@ const NUMBER_TYPES = ["esriFieldTypeOID", "esriFieldTypeDouble", "esriFieldTypeI
 const DATE_TYPE = "esriFieldTypeDate";
 const TEXT_TYPE = "esriFieldTypeString";
 
-class TableBuilder {
+export default class TableBuilder {
     intention = 'table';
     attributeHeaders: any;
 
@@ -225,7 +225,7 @@ interface AttrBundle {
     layer: any;
 }
 
-interface TableBuilder {
+export default interface TableBuilder {
     intention: string;
     id: string;
     mapApi: any;
