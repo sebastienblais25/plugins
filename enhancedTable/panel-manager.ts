@@ -1,8 +1,6 @@
 import { Grid } from 'ag-grid-community';
 import { SEARCH_TEMPLATE, MENU_TEMPLATE, CLEAR_FILTERS_TEMPLATE, COLUMN_VISIBILITY_MENU_TEMPLATE, MOBILE_MENU_TEMPLATE, MOBILE_MENU_BTN_TEMPLATE, RECORD_COUNT_TEMPLATE, APPLY_TO_MAP_TEMPLATE } from './templates';
 import { DetailsAndZoomButtons } from './details-and-zoom-buttons';
-import 'ag-grid-community/dist/styles/ag-grid.css';
-import './main.scss';
 import { PanelRowsManager } from './panel-rows-manager';
 import { PanelStatusManager } from './panel-status-manager';
 import { removeAccessibilityListeners, initAccessibilityListeners } from './grid-accessibility';
