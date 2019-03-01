@@ -7,7 +7,7 @@
         "serve": "webpack-dev-server --progress --hot --config ./bin/build/webpack.config.js",
         "test": "tsc && intern",
         "prepublishOnly": "tsc",
-        "postversion": "git push upstream vnpm_package_version%"
+        "postversion": "git push upstream v%npm_package_version%"
     },
     "files": [
         "lib/**/*"
