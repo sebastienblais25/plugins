@@ -9,7 +9,8 @@ const pluginList = {
     areasOfInterest: path.join(SOURCE_PATH, 'areasOfInterest'),
     backToCart: path.join(SOURCE_PATH, 'backToCart'),
     coordInfo: path.join(SOURCE_PATH, 'coordInfo'),
-    customExport: path.join(SOURCE_PATH, 'customExport')
+    customExport: path.join(SOURCE_PATH, 'customExport'),
+    osdp: path.join(SOURCE_PATH, 'osdp')
 };
 
 const hasLoader = ['enhancedTable'];

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <title>Plugin: Coordinate Info</title>
+
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .myMap {
+                height: 80%;
+            }
+
+            input, label {
+                padding: 5px;
+                margin: 7px;
+            }
+
+            input {
+                width: 15%;
+            }
+    </style>
+        </style>
+
+        <link rel="stylesheet" href="/rv-styles.css" />
+        <script src="../osdp.js"></script>
+    </head>
+
+    <body>
+        <div
+            class="myMap"
+            id="mapOSDP"
+            is="rv-map"
+            rv-config="osdp-config.json"
+            rv-langs='["en-CA", "fr-CA"]'
+            rv-plugins="osdp"
+            rv-service-endpoint="https://rcs.open.canada.ca"
+        >
+            <noscript>
+                <p>
+                    This interactive map requires JavaScript. To view this content please enable JavaScript in your
+                    browser or download a browser that supports it.
+                </p>
+                <p></p>
+
+                <p>
+                    Cette carte interactive nécessite JavaScript. Pour voir ce contenu, s'il vous plaît, activer
+                    JavaScript dans votre navigateur ou télécharger un navigateur qui le prend en charge.
+                </p>
+            </noscript>
+        </div>
+
+        <div>
+            <label for="layerId">Layer Id</label>
+            <input id="layerId" type="text" name="layer" value="powerplant100mw-naturalGas"></input>
+            <label for="query">Query</label>
+            <input id="query" type="text" name="query" value="Longitude<-110"></input>
+            <button type="button" onclick="window.osdp.setDefinitonQuery('mapOSDP', document.getElementById('layerId').value, document.getElementById('query').value)">Set def query</button>
+            <button type="button" onclick="window.osdp.resetDefinitionQuery('mapOSDP', document.getElementById('layerId').value)">Reset def query</button>
+        </div>
+        <div>
+            <label for="addLayerUUID">UUID</label>
+            <input id="addLayerUUID" type="text" name="layer" value="3d282116-e556-400c-9306-ca1a3cada77f"></input>
+            <button type="button" onclick="window.osdp.addLayerByUUID(document.getElementById('addLayerUUID').value)">Add Layer</button>
+        </div>
+
+        <script>
+            function setDefQuery(layerId, query) {
+                // use RAMP filter manager to ensure everything is synchronized (map, legend, grid , ...)
+                // it is not implemented in the interface yet, need a little bit of cheating
+                var myMap = RAMP.mapById('mapOSDP');
+                var myLayer = myMap.layers.getLayersById(layerId)[0];
+                var myProxy = myLayer._layerProxy;  // cheating!
+                myProxy.filter.setSql('myUniqueAppCode', query);
+            }
+        </script>
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Object.entries,Object.values,Array.prototype.find,Array.prototype.findIndex,Array.prototype.values,Array.prototype.includes,HTMLCanvasElement.prototype.toBlob,String.prototype.repeat,String.prototype.codePointAt,String.fromCodePoint,NodeList.prototype.@@iterator,Promise,Promise.prototype.finally"></script>
+        <script src="/legacy-api.js"></script>
+        <script src="/rv-main.js"></script>
+    </body>
+</html>
