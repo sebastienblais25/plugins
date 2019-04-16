@@ -17,7 +17,7 @@
 
             input, label {
                 padding: 5px;
-                margin: 12px;
+                margin: 7px;
             }
 
             input {
@@ -33,9 +33,9 @@
     <body>
         <div
             class="myMap"
-            id="mapOSDP"
+            id="mapOSDPBuilder"
             is="rv-map"
-            rv-config="osdp-config.json"
+            rv-config="osdp-builder-config.json"
             rv-langs='["en-CA", "fr-CA"]'
             rv-plugins="osdp"
             rv-service-endpoint="https://rcs.open.canada.ca"
@@ -55,28 +55,8 @@
         </div>
 
         <div>
-            <label id="coordNE">NordEast</label>
-            <label id="coordSW">SouthWest</label>
-        </div>
-        <div>
-            <!-- set defintiion query section -->
-            <label for="layerId">Layer Id</label>
-            <input id="layerId" type="text" name="layer" value="powerplant100mw-naturalGas"></input>
-            <label for="query">Query</label>
-            <input id="query" type="text" name="query" value="Longitude<-110"></input>
-            <button type="button" onclick="window.osdp.setDefinitonQuery('mapOSDP', document.getElementById('layerId').value, document.getElementById('query').value)">Set def query</button>
-            <button type="button" onclick="window.osdp.resetDefinitionQuery('mapOSDP', document.getElementById('layerId').value)">Reset def query</button>
-        </div>
-        <div>
-            <!-- add layer by uuid section -->
-            <label for="addLayerUUID">UUID</label>
-            <input id="addLayerUUID" type="text" name="layer" value="3d282116-e556-400c-9306-ca1a3cada77f"></input>
-            <button type="button" onclick="window.osdp.addLayerByUUID(document.getElementById('addLayerUUID').value)">Add Layer</button>
-        </div>
-
-        <div>
-            <!-- save and load state section -->
-            <button type="button" onclick="window.osdp.saveState('mapOSDPBuilder'); window.open('http://localhost:6001/osdp/samples/osdp-builder.html?rv=B,YmFzZU5yQ2FuMA,NDM0MDE3LjU,MTI5OTM3Ni41,MzAwMDAwMDA,MGM5MDAwMA,MGM5MjAwcG93ZXJwbGFudDEwMG13LW5hdHVyYWxHYXM');">Open Builder</button>
+            <!-- load state section -->
+            <button type="button" onclick="window.osdp.loadState()">Load State</button>
         </div>
 
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Object.entries,Object.values,Array.prototype.find,Array.prototype.findIndex,Array.prototype.values,Array.prototype.includes,HTMLCanvasElement.prototype.toBlob,String.prototype.repeat,String.prototype.codePointAt,String.fromCodePoint,NodeList.prototype.@@iterator,Promise,Promise.prototype.finally"></script>

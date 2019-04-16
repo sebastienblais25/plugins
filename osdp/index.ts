@@ -1,5 +1,5 @@
 export default class OSDP {
-    // A store of the instances of OSDP, 1 per map
+    // a store of the instances of OSDP, 1 per map
     static instances: { [id: string]: OSDP } = {};
 
     init(api: any): void {
@@ -45,6 +45,25 @@ export default class OSDP {
             document.getElementById("coordNE").innerText = "Bounding Box: NE [" + ramAPI.boundsObj.northEast + "]";
             document.getElementById("coordSW").innerText = "SW [" + ramAPI.boundsObj.southWest + "]"; console.log("Bounding Box: " + ramAPI.boundsObj.toString());
         }
+    }
+
+    saveState(mapid: string) {
+        // save bookmark in local storage so it is restored when user returns
+        sessionStorage.setItem(mapid, this._RV.getBookmark());
+
+        // save extent
+        const ext = { LL: this.api.boundsObj.southWest,
+                        UR: this.api.boundsObj.northEast };
+
+
+
+    }
+
+    loadState() {
+        const storage = JSON.parse(JSON.stringify(sessionStorage.getItem('mapOSDPBuilder')));
+
+        this._RV.useBookmark(storage);
+        //this._RV.initialBookmark(storage);
     }
 }
 
