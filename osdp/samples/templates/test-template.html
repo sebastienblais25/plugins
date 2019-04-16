@@ -1,0 +1,48 @@
+
+<ul class="rv-details-list rv-toggle-slide" ng-show="self.isExpanded" aria-hidden="false" style="height: auto; opacity: 1;">
+    <li rv-lightbox="" ng-switch="" on="row.type" class="ng-scope">
+        <div class="rv-details-attrib-key ng-binding">Identifier</div>
+        <span flex="" class="flex"></span>
+        <div class="rv-details-attrib-value ng-binding ng-scope" ng-switch-default="">{{self.layer['Id']}}</div>
+    </li>
+    <li rv-lightbox="" ng-switch="" on="row.type" class="ng-scope">
+        <div class="rv-details-attrib-key ng-binding">Project Category</div>
+        <span flex="" class="flex"></span>
+        <div class="rv-details-attrib-value ng-binding ng-scope" ng-switch-default="">{{self.layer['Category']}}</div>
+    </li>
+    <li rv-lightbox="" ng-switch="" on="row.type" class="ng-scope">
+        <div class="rv-details-attrib-key ng-binding">Title</div>
+        <span flex="" class="flex"></span>
+        <div class="rv-details-attrib-value ng-binding ng-scope" ng-switch-default="">{{self.layer['Title']}}</div>
+    </li>
+    <li rv-lightbox="" ng-switch="" on="row.type" class="ng-scope">
+        <div class="rv-details-attrib-key ng-binding">Proponent</div>
+        <span flex="" class="flex"></span>
+        <div class="rv-details-attrib-value ng-binding ng-scope" ng-switch-default="">{{self.layer['Prop']}}</div>
+    </li>
+    <li rv-lightbox="" ng-switch="" on="row.type" class="ng-scope">
+        <div class="rv-details-attrib-key ng-binding">Province</div>
+        <span flex="" class="flex"></span>
+        <div class="rv-details-attrib-value ng-binding ng-scope" ng-switch-default="">{{self.layer['Province']}}</div>
+    </li>
+    <li rv-lightbox="" ng-switch="" on="row.type" class="ng-scope">
+        <div class="rv-details-attrib-key ng-binding">Place</div>
+        <span flex="" class="flex"></span>
+        <div class="rv-details-attrib-value ng-binding ng-scope" ng-switch-default="">{{self.layer['Place']}}</div>
+    </li>
+    <li rv-lightbox="" ng-switch="" on="row.type" class="ng-scope">
+        <div class="rv-details-attrib-key ng-binding">Publisher</div>
+        <span flex="" class="flex"></span>
+        <div class="rv-details-attrib-value ng-binding ng-scope" ng-switch-default="">{{self.layer['Publish']}}</div>
+    </li>
+    <li rv-lightbox="" ng-switch="" on="row.type" class="ng-scope">
+        <div class="rv-details-attrib-key ng-binding">Website</div>
+        <span flex="" class="flex"></span>
+        <div class="rv-details-attrib-value ng-binding ng-scope" ng-bind-html="self.layer['Website'] | picture | autolink" ng-switch-default=""></div>
+    </li>
+    <li rv-lightbox="" ng-switch="" on="row.type" class="ng-scope">
+        <div class="rv-details-attrib-key ng-binding">Start Date</div>
+        <span flex="" class="flex"></span>
+        <div class="rv-details-attrib-value ng-binding ng-scope" ng-switch-default="">{{self.layer['Start']}}</div>
+    </li>
+</ul>

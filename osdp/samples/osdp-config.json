@@ -58,7 +58,7 @@
         "mouseInfo": {
           "enabled": true,
           "spatialReference": {
-            "wkid": 102100
+            "wkid": 4326
           }
         },
         "northArrow": {
@@ -76,20 +76,22 @@
         }
       },
       "legend": {
-        "type": "structured",
+        "type": "autopopulate",
         "root": {
           "name": "root",
           "children": [
+            {
+              "layerId": "OSDP_Project"
+            },
             {
               "name": "A Group with a hidden layer",
               "expanded": true,
               "children": [
                 {
-                  "layerId": "0",
-                  "hidden": true
+                  "layerId": "rcs.35c51098-5cd8-44b0-b1cd-c8ce2f5dae89.en"
                 },
                 {
-                  "layerId": "powerplant100mw-naturalGas"
+                  "layerId": "rcs.e313db89-4219-4a5e-a543-772a86068710.en"
                 }
               ]
             }
@@ -98,17 +100,42 @@
       },
       "layers": [
         {
-          "id": "0",
+          "id": "rcs.35c51098-5cd8-44b0-b1cd-c8ce2f5dae89.en",
           "name": "Electric Transmission Line",
           "layerType": "esriFeature",
-          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/1"
+          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/1",
+          "catalogueUrl": "https://open.canada.ca/data/en/dataset/35c51098-5cd8-44b0-b1cd-c8ce2f5dae89"
         },
         {
-          "id": "powerplant100mw-naturalGas",
+          "id": "rcs.e313db89-4219-4a5e-a543-772a86068710.en",
           "name": "Natural Gas Pipeline",
           "layerType": "esriFeature",
-          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/2"
-        }
+          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/2",
+          "catalogueUrl": "https://open.canada.ca/data/en/dataset/e313db89-4219-4a5e-a543-772a86068710"
+        },
+        {
+          "id":"OSDP_Project",
+          "layerType": "esriFeature",
+          "url": "https://webservices.maps.canada.ca/arcgis/rest/services/NRCan/osdp_projects_en/MapServer/0",
+          "details": {
+            "parser": "templates/test-script.js",
+            "template": "templates/test-template.html"
+          }
+        },
+        {
+          "id": "geochronologie",
+          "name": "geochronologie.csv",
+          "layerType": "esriFeature",
+          "fileType": "csv",
+          "latField": "Lat. (NAD83)",
+          "longField": "Long. (NAD83)",
+          "nameField": "AGENO",
+          "url": "http://fgpv.cloudapp.net/demo/__assets__/Sample%20Data/G%C3%A9ochronologie.csv",
+          "colour": "#00FF00",
+          "state": {
+            "visibility": false
+          }
+      }
       ],
       "extentSets": [
         {
