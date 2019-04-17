@@ -35,16 +35,23 @@ export default class OSDP {
        // detect any change on the extent box
         var ramAPI = this.api;
         var mapExtentChange = ramAPI.esriMap.on("extent-change", changeHandler);
+        this.extentbox = ramAPI.boundsObj; 
+        document.getElementById('coordNE').innerText = `Bounding Box: NE [${ramAPI.boundsObj.northEast} ]`;
+        document.getElementById('coordSW').innerText = `SW [${ramAPI.boundsObj.southWest}]`;
 
-        document.getElementById("coordNE").innerText = "Bounding Box: NE [" + ramAPI.boundsObj.northEast + "]";
-        document.getElementById("coordSW").innerText = "SW [" + ramAPI.boundsObj.southWest + "]";
-
-        function changeHandler(evt: any) {
-            //var extent = evt.extent,
-            //    zoomed = evt.levelChange;
-            document.getElementById("coordNE").innerText = "Bounding Box: NE [" + ramAPI.boundsObj.northEast + "]";
-            document.getElementById("coordSW").innerText = "SW [" + ramAPI.boundsObj.southWest + "]"; console.log("Bounding Box: " + ramAPI.boundsObj.toString());
+        function changeHandler(evt: any):void {
+            this.extentbox = ramAPI.boundsObj; 
+            document.getElementById('coordNE').innerText = `Bounding Box: NE [${ramAPI.boundsObj.northEast} ]`;
+            document.getElementById('coordSW').innerText = `SW [${ramAPI.boundsObj.southWest}]`;
+            return ramAPI.boundsObj;
         }
+    }
+
+    getBoundingBox(el1:any):any{
+        //returns the extentbox
+        var ramAPI = this.api;
+        el1.innerText = `[${ramAPI.boundsObj.northEast}, ${ramAPI.boundsObj.southWest}]`;
+        return this.extentbox;
     }
 
     saveState(mapid: string) {
@@ -54,9 +61,6 @@ export default class OSDP {
         // save extent
         const ext = { LL: this.api.boundsObj.southWest,
                         UR: this.api.boundsObj.northEast };
-
-
-
     }
 
     loadState() {
@@ -74,6 +78,7 @@ export default interface OSDP {
     handler: any;
     panel: any;
     button: any;
+    extentbox: any;
 }
 
 (<any>window).osdp = new OSDP();
