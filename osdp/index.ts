@@ -4,6 +4,7 @@ export default class OSDP {
 
     init(api: any): void {
         this.api = api;
+        this.OnBoundingBoxChange();
         OSDP.instances[this.api.id] = this;
     }
 
@@ -28,6 +29,22 @@ export default class OSDP {
         const myLayer = myMap.layers.getLayersById(layerId)[0];
         const myProxy = myLayer._layerProxy;  // cheating!
         myProxy.filter.setSql('myUniqueAppCode', '');
+    }
+
+    OnBoundingBoxChange(): void {
+       // detect any change on the extent box
+        var ramAPI = this.api;
+        var mapExtentChange = ramAPI.esriMap.on("extent-change", changeHandler);
+
+        document.getElementById("coordNE").innerText = "Bounding Box: NE [" + ramAPI.boundsObj.northEast + "]";
+        document.getElementById("coordSW").innerText = "SW [" + ramAPI.boundsObj.southWest + "]";
+
+        function changeHandler(evt: any) {
+            //var extent = evt.extent,
+            //    zoomed = evt.levelChange;
+            document.getElementById("coordNE").innerText = "Bounding Box: NE [" + ramAPI.boundsObj.northEast + "]";
+            document.getElementById("coordSW").innerText = "SW [" + ramAPI.boundsObj.southWest + "]"; console.log("Bounding Box: " + ramAPI.boundsObj.toString());
+        }
     }
 }
 

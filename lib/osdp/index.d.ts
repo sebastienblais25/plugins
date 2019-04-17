@@ -1,7 +1,14 @@
-declare class OSDP {
+export default class OSDP {
+    static instances: {
+        [id: string]: OSDP;
+    };
     init(api: any): void;
+    addLayerByUUID(uuid: string): void;
+    setDefinitonQuery(mapId: string, layerId: string, query: string): void;
+    resetDefinitionQuery(mapId: string, layerId: string): void;
+    OnBoundingBoxChange(): void;
 }
-interface OSDP {
+export default interface OSDP {
     api: any;
     translations: any;
     _RV: any;
