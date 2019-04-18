@@ -50,10 +50,9 @@
     </div>
 
     <div>
-        <label id="coordNE">NorthEast Point</label>
-        <label id="coordSW">SouthWest Point</label>
-        <button type="button" onclick="window.osdp.getBoundingBox(document.getElementById('extbbox'))">
-            refresh full Extent Box</button>
+        <!-- get the extent box section -->
+        <button type="button" onclick="displayExtentBox()">
+            Get Extent Box</button>
         <label id="extbbox"></label>
     </div>
     <div>
@@ -90,6 +89,12 @@
         src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Object.entries,Object.values,Array.prototype.find,Array.prototype.findIndex,Array.prototype.values,Array.prototype.includes,HTMLCanvasElement.prototype.toBlob,String.prototype.repeat,String.prototype.codePointAt,String.fromCodePoint,NodeList.prototype.@@iterator,Promise,Promise.prototype.finally"></script>
     <script src="/legacy-api.js"></script>
     <script src="/rv-main.js"></script>
+    <script>
+        function displayExtentBox() {
+            var extbox = window.osdp.getExtentBox();
+            document.getElementById('extbbox').innerText = `[${JSON.stringify(extbox.northEast)}, ${JSON.stringify(extbox.southWest)}]`;
+        }
+    </script>
 </body>
 
 </html>

@@ -4,7 +4,7 @@ export default class OSDP {
 
     init(api: any): void {
         this.api = api;
-        this.OnBoundingBoxChange();
+        this.initUpdateExtentBox();
         OSDP.instances[this.api.id] = this;
     }
 
@@ -31,36 +31,26 @@ export default class OSDP {
         myProxy.filter.setSql('myUniqueAppCode', '');
     }
 
-    OnBoundingBoxChange(): void {
-       // detect any change on the extent box
-        var ramAPI = this.api;
-        var mapExtentChange = ramAPI.esriMap.on("extent-change", changeHandler);
-        this.extentbox = ramAPI.boundsObj; 
-        document.getElementById('coordNE').innerText = `Bounding Box: NE [${ramAPI.boundsObj.northEast} ]`;
-        document.getElementById('coordSW').innerText = `SW [${ramAPI.boundsObj.southWest}]`;
-
-        function changeHandler(evt: any):void {
-            this.extentbox = ramAPI.boundsObj; 
-            document.getElementById('coordNE').innerText = `Bounding Box: NE [${ramAPI.boundsObj.northEast} ]`;
-            document.getElementById('coordSW').innerText = `SW [${ramAPI.boundsObj.southWest}]`;
-            return ramAPI.boundsObj;
+    initUpdateExtentBox() {
+        // set extent box change handler by extChangeHandler
+        // Also initialyse the value of extentbox variable holder
+        var parent = this;
+        parent.api.esriMap.on("extent-change", extChangeHandler);
+        parent.extentbox = parent.api.boundsObj;
+        
+        function extChangeHandler() {
+            parent.extentbox = parent.api.boundsObj;
         }
     }
 
-    getBoundingBox(el1:any):any{
-        //returns the extentbox
-        var ramAPI = this.api;
-        el1.innerText = `[${ramAPI.boundsObj.northEast}, ${ramAPI.boundsObj.southWest}]`;
+    getExtentBox(): any {
+        //returns the extentbox variable holder
         return this.extentbox;
     }
 
     saveState(mapid: string) {
         // save bookmark in local storage so it is restored when user returns
         sessionStorage.setItem(mapid, this._RV.getBookmark());
-
-        // save extent
-        const ext = { LL: this.api.boundsObj.southWest,
-                        UR: this.api.boundsObj.northEast };
     }
 
     loadState() {
