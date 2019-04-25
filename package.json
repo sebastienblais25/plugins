@@ -9,7 +9,11 @@
         "sass": "bash ./compileSass.sh",
         "prepublishOnly": "tsc && npm run sass",
         "postversion": "git push upstream v%npm_package_version%",
+<<<<<<< HEAD
         "nonPublishedBuild": "webpack --config ./bin/build/webpack.config.js"
+=======
+        "deploy": "gh-pages -d dist"
+>>>>>>> feat(slider): Add a time/range slider plugin
     },
     "files": [
         "lib/**/*",
@@ -37,6 +41,7 @@
     "devDependencies": {
         "@types/jquery": "^3.3.29",
         "@types/node": "10.12.21",
+        "@types/nouislider": "^9.0.5",
         "copy-webpack-plugin": "4.6.0",
         "css-loader": "2.1.0",
         "intern": "^4.4.1",
@@ -53,6 +58,11 @@
         "webpack-dev-server": "3.1.14"
     },
     "dependencies": {
+        "dom-to-image": "2.6.0",
+        "file-saver": "1.3.8",
+        "gh-pages": "1.1.0",
+        "gifshot": "0.4.5",
+        "nouislider": "13.1.5",
         "rxjs": "6.3.3",
         "ag-grid-community": "19.0.0"
     }

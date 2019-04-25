@@ -9,10 +9,12 @@ const pluginList = {
     areasOfInterest: path.join(SOURCE_PATH, 'areasOfInterest'),
     backToCart: path.join(SOURCE_PATH, 'backToCart'),
     coordInfo: path.join(SOURCE_PATH, 'coordInfo'),
-    customExport: path.join(SOURCE_PATH, 'customExport')
+    customExport: path.join(SOURCE_PATH, 'customExport'),
+    sliderBasic: path.join(SOURCE_PATH, 'sliderBasic'),
+    rangeSlider: path.join(SOURCE_PATH, 'rangeSlider')
 };
 
-const hasLoader = ['enhancedTable'];
+const hasLoader = ['enhancedTable', 'sliderBasic', 'rangeSlider'];
 
 module.exports = function(env = {}) {
     const config = {

@@ -1,0 +1,10 @@
+export declare const SLIDER_TEMPLATE = "\n<div>\n    <div class=\"rv-slider-content\">\n    <div id=\"drawing\"></div>\n        <div class=\"rv-slider-buttons\">\n            <md-button\n                ng-controller=\"ShowLayerCtrl as ctrl\"\n                aria-label=\"{{ 'plugins.slider.settings' | translate }}\"\n                class=\"md-icon-button primary\"\n                ng-click=\"ctrl.toggleSettings()\">\n                <md-tooltip>{{ 'plugins.slider.settings' | translate }}</md-tooltip>\n                <md-icon md-svg-src=\"maps:layers\"></md-icon>\n            </md-button>\n            <md-button\n                aria-label=\"{{ 'plugins.slider.histo' | translate }}\"\n                class=\"md-icon-button primary\"\n                ng-click=\"self.toggleHisto()\">\n                <md-tooltip>{{ 'plugins.slider.histo' | translate }}</md-tooltip>\n                <md-icon md-svg-src=\"image:photo\"></md-icon>\n            </md-button>\n        </div>\n        <div class=\"rv-slider-controls\">\n            <div class=\"rv-slider-histo\" ng-show=\"self.sliderService.isHistoOpen\">\n                <div id=\"histo\"></div>\n            </div>\n        </div>\n    </div>\n</div>\n";
+export declare const TOGGLE_SETTINGS_TEMPLATE = "\n<div class=\"slider-control\">\n    <md-button\n        ng-controller=\"ToggleSettingCtrl as ctrl\"\n        aria-label=\"{{ 'plugins.slider.settings' | translate }}\"\n        class=\"md-icon-button black\"\n        ng-click=\"ctrl.toggleSettings()\">\n        <md-tooltip>{{ 'plugins.slider.settings' | translate }}</md-tooltip>\n        <md-icon md-svg-src=\"maps:layers\"></md-icon>\n    </md-button>\n</div>\n";
+export declare const TOGGLE_HISTO_TEMPLATE = "\n\n";
+export declare const LOCK_SLIDER_TEMPLATE = "\n\n";
+export declare const PREVIOUS_SLIDER_TEMPLATE = "\n\n";
+export declare const NEXT_SLIDER_TEMPLATE = "\n\n";
+export declare const PLAY_SLIDER_TEMPLATE = "\n\n";
+export declare const PAUSE_SLIDER_TEMPLATE = "\n\n";
+export declare const REFRESH_SLIDER_TEMPLATE = "\n\n";
+export declare const DELAY_SLIDER_TEMPLATE = "\n\n";
