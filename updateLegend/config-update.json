@@ -1,0 +1,448 @@
+{
+	"map": {
+		"components": {
+			"geoSearch": {
+				"enabled": true,
+				"showGraphic": true,
+				"showInfo": true
+			},
+			"mouseInfo": {
+				"enabled": true,
+				"spatialReference": {
+					"wkid": 4326,
+					"vcsWkid": null,
+					"latestWkid": null,
+					"latestVcsWkid": null,
+					"wkt": ""
+				}
+			},
+			"northArrow": {
+				"enabled": true
+			},
+			"basemap": {
+				"enabled": true
+			},
+			"overviewMap": {
+				"enabled": false,
+				"expandFactor": 4,
+				"initiallyExpanded": false
+			},
+			"scaleBar": {
+				"enabled": true
+			},
+			"areaOfInterest": []
+		},
+		"initialBasemapId": "c81c02f9",
+		"extentSets": [{
+				"id": "EXT_NRCAN_Lambert_3978",
+				"default": {
+					"xmin": -8257562.383159766,
+					"ymin": -2656152.2443908225,
+					"xmax": 4892255.583142834,
+					"ymax": 6233865.535644738
+				},
+				"full": {
+					"xmax": 5666163.380958509,
+					"xmin": -4844430.556896179,
+					"ymax": 4170111.408136484,
+					"ymin": -1052774.037634491
+				},
+				"maximum": {
+					"xmin": -4844430.556896179,
+					"ymin": -1052774.037634491,
+					"xmax": 5666163.380958509,
+					"ymax": 4170111.408136484
+				},
+				"spatialReference": {
+					"wkid": 3978
+				}
+			}
+		],
+		"lodSets": [{
+				"id": "LOD_NRCAN_Lambert_3978",
+				"lods": [{
+						"level": 2,
+						"resolution": 13229.193125052918,
+						"scale": 50000000
+					}, {
+						"level": 3,
+						"resolution": 7937.5158750317505,
+						"scale": 30000000
+					}, {
+						"level": 4,
+						"resolution": 4630.2175937685215,
+						"scale": 17500000
+					}, {
+						"level": 5,
+						"resolution": 2645.8386250105837,
+						"scale": 10000000
+					}, {
+						"level": 6,
+						"resolution": 1587.5031750063501,
+						"scale": 6000000
+					}, {
+						"level": 7,
+						"resolution": 926.0435187537042,
+						"scale": 3500000
+					}, {
+						"level": 8,
+						"resolution": 529.1677250021168,
+						"scale": 2000000
+					}, {
+						"level": 9,
+						"resolution": 317.50063500127004,
+						"scale": 1200000
+					}, {
+						"level": 10,
+						"resolution": 185.20870375074085,
+						"scale": 700000
+					}, {
+						"level": 11,
+						"resolution": 111.12522225044451,
+						"scale": 420000
+					}, {
+						"level": 12,
+						"resolution": 66.1459656252646,
+						"scale": 250000
+					}, {
+						"level": 13,
+						"resolution": 38.36466006265346,
+						"scale": 145000
+					}
+				]
+			}
+		],
+		"tileSchemas": [{
+				"id": "Canada--/cad53536",
+				"name": "Canada",
+				"extentSetId": "EXT_NRCAN_Lambert_3978",
+				"lodSetId": "LOD_NRCAN_Lambert_3978",
+				"overviewUrl": {
+					"layerType": "esriTile",
+					"url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBMT3978/MapServer"
+				}
+			}
+		],
+		"baseMaps": [{
+				"id": "c81c02f9",
+				"name": "Grey",
+				"description": "This Canadian basemap provides geographic context with a minimalist appearance. From Natural Resources Canada.",
+				"typeSummary": "",
+				"altText": "Grey",
+				"thumbnailUrl": "",
+				"tileSchemaId": "Canada--/cad53536",
+				"attribution": {
+					"text": {
+						"enabled": true,
+						"value": ""
+					},
+					"logo": {
+						"enabled": false,
+						"value": "",
+						"link": ""
+					}
+				},
+				"layers": [{
+						"id": "127864c9",
+						"layerType": "esriFeature",
+						"url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/Simple/MapServer",
+						"opacity": 1
+					}
+				]
+			}, {
+				"id": "8f2752f4",
+				"name": "Transport without labels",
+				"description": "This Canadian basemap provides geographic context with an emphasis on transportation networks and without labels. From Natural Resources Canada.",
+				"typeSummary": "",
+				"altText": "Transport without labels",
+				"thumbnailUrl": "",
+				"tileSchemaId": "Canada--/cad53536",
+				"attribution": {
+					"text": {
+						"enabled": true,
+						"value": ""
+					},
+					"logo": {
+						"enabled": false,
+						"value": "",
+						"link": ""
+					}
+				},
+				"layers": [{
+						"id": "3d0c1a4b",
+						"layerType": "esriFeature",
+						"url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBMT_CBCT_GEOM_3978/MapServer",
+						"opacity": 1
+					}
+				]
+			}
+		],
+		"layers": [{
+				"layerChoice": "esriTile",
+				"refreshInterval": 0,
+				"layerType": "esriTile",
+				"toggleSymbology": true,
+				"tolerance": 5,
+				"imageFormat": "png32",
+				"singleEntryCollapse": true,
+				"controls": ["opacity", "visibility", "boundaryZoom", "refresh", "reload", "remove", "settings", "data"],
+				"disabledControls": [],
+				"state": {
+					"opacity": 1,
+					"visibility": true,
+					"boundingBox": false,
+					"query": true,
+					"snapshot": false,
+					"hovertips": true
+				},
+				"table": {
+					"title": "",
+					"maximize": false,
+					"applyMap": false,
+					"columns": [{
+							"title": "",
+							"visible": true,
+							"searchable": true,
+							"filter": {
+								"value": "",
+								"static": false
+							}
+						}
+					]
+				},
+				"layerEntries": [],
+				"url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBMT_TXT_3978/MapServer",
+				"name": "Basemap Labels",
+				"id": "CBMT_TXT_3978***6a5b6b4d"
+			}, {
+				"layerChoice": "esriDynamic",
+				"refreshInterval": 0,
+				"layerType": "esriDynamic",
+				"toggleSymbology": true,
+				"tolerance": 5,
+				"imageFormat": "png32",
+				"singleEntryCollapse": true,
+				"controls": ["opacity", "visibility", "query", "boundaryZoom", "refresh", "reload", "remove", "settings", "data"],
+				"disabledControls": [],
+				"state": {
+					"opacity": 1,
+					"visibility": true,
+					"boundingBox": false,
+					"query": true,
+					"snapshot": false,
+					"hovertips": true
+				},
+				"table": {
+					"title": "",
+					"maximize": false,
+					"applyMap": false,
+					"columns": [{
+							"title": "",
+							"visible": true,
+							"searchable": true,
+							"filter": {
+								"value": "",
+								"static": false
+							}
+						}
+					]
+				},
+				"layerEntries": [{
+						"outfields": "*",
+						"stateOnly": false,
+						"singleEntryCollapse": true,
+						"table": {
+							"title": "",
+							"maximize": false,
+							"applyMap": false,
+							"columns": [{
+									"data": "region_name_en",
+									"title": "Health Region Name",
+									"visible": true,
+									"searchable": true,
+									"filter": {
+										"type": "string"
+									}
+								}, {
+									"data": "week_number",
+									"title": "Week Number",
+									"visible": true,
+									"searchable": true,
+									"filter": {
+										"type": "number"
+									}
+								}, {
+									"data": "activity_level",
+									"title": "Activity Level Code",
+									"visible": true,
+									"searchable": true,
+									"filter": {
+										"type": "number"
+									}
+								}, {
+									"data": "activity_level_description",
+									"title": "Activity Level Description",
+									"visible": true,
+									"searchable": true,
+									"filter": {
+										"type": "string"
+									}
+								}, {
+									"data": "OBJECTID",
+									"title": "OBJECTID",
+									"visible": false,
+									"searchable": true,
+									"filter": {
+										"type": "number"
+									}
+								}
+							]
+						},
+						"controls": ["opacity", "visibility", "boundingBox", "query", "snapshot", "boundaryZoom", "refresh", "reload", "remove", "settings", "data", "styles"],
+						"disabledControls": [],
+						"state": {
+							"opacity": 1,
+							"visibility": true,
+							"boundingBox": false,
+							"query": true,
+							"snapshot": false,
+							"hovertips": true
+						},
+						"init": true,
+						"index": 0,
+						"name": "FluWatch - Archive"
+					}
+				],
+				"name": "FluWatch - Latest Week",
+				"id": "FluWatch Latest Week***0903f109",
+				"url": "https://webservices.maps.canada.ca/arcgis/rest/services/PHAC/influenza_influenza_like_illness_activity_en/MapServer"
+			}
+		],
+		"legend": {
+			"legendChoice": "structured",
+			"type": "structured",
+			"root": {
+				"name": "root",
+				"children": [{
+						"infoType": "text",
+						"content": "Loading date..."
+					}, {
+						"layerId": "CBMT_TXT_3978***6a5b6b4d",
+						"symbologyStack": [{
+								"image": "/fgpv/images/basemap_labels_64x64.png"
+							}
+						],
+						"symbologyRenderStyle": "images"
+					}, {
+						"layerId": "FluWatch Latest Week***0903f109",
+						"symbologyExpanded": true
+					}, {
+						"infoType": "text",
+						"content": "<strong>No activity</strong>: No laboratory tests positive for influenza in the reporting week, however, sporadically occurring influenza-like-illness (ILI) may be reported. <strong>Sporadic</strong>: Sporadically occurring ILI and laboratory tests positive for influenza with no outbreaks detected within the influenza surveillance region. <strong>Localized</strong>: Evidence of increased ILI; and laboratory tests positive for influenza; and outbreaks in schools, hospitals, residential institutions and/or other types of facilities occurring in less than 50% of the influenza surveillance region. <strong>Widespread</strong>: Evidence of increased ILI; and  laboratory tests positive for  influenza; and outbreaks in schools, hospitals, residential institutions and/or other types of facilities occurring in greater than or equal to 50% of the influenza surveillance region."
+					}
+				]
+			}
+		},
+		"legend_id": null
+	},
+	"ui": {
+		"sideMenu": {
+			"items": [["basemap"], ["fullscreen", "touch", "help", "about"]],
+			"logo": false
+		},
+		"about": {
+			"content": "<p>FluWatch is Canada's national surveillance system that monitors the spread of flu and flu-like illnesses on an on-going basis.</p><p>Activity Level surveillance is a component of FluWatch that provides an overall assessment of the intensity and geographical spread of laboratory-confirmed influenza cases, influenza-like-illness (ILI) and reported outbreaks for a given surveillance region. Activity Levels are assigned and reported by Provincial and Territorial Ministries of Health. A surveillance region can be classified under one of the four following categories: no activity, sporadic, localized or widespread.</p><p>For more information on flu activity in Canada, see the Influenza surveillance reports: <a href=\"https://www.canada.ca/en/public-health/services/diseases/flu-influenza/influenza-surveillance/weekly-influenza-reports.html\" target=\"_blank\">Weekly influenza reports</a></p><p><strong>Note</strong>: The reported activity levels are a reflection of the surveillance data available to FluWatch at the time of production. Delays in reporting of data may cause data to change retrospectively.</p>",
+			"aboutChoice": "string"
+		},
+		"fullscreen": false,
+		"theme": "default",
+		"logoUrl": "",
+		"failureFeedback": {
+			"failureMessage": "",
+			"failureImageUrl": ""
+		},
+		"title": "",
+		"appBar": {
+			"sideMenu": true,
+			"geoSearch": false,
+			"basemap": false,
+			"layers": true
+		},
+		"navBar": {
+			"zoom": "buttons",
+			"extra": ["fullscreen", "home", "help"]
+		},
+		"restrictNavigation": true,
+		"help": {
+			"folderName": "default"
+		},
+		"legend": {
+			"reorderable": true,
+			"allowImport": false,
+			"isOpen": {
+				"large": true,
+				"medium": false,
+				"small": false
+			}
+		},
+		"tableIsOpen": {
+			"large": false,
+			"medium": false,
+			"small": false,
+			"id": ""
+		},
+		"widgetsWidget": ""
+	},
+	"services": {
+		"proxyUrl": "http://maps.canada.ca/wmsproxy/ws/wmsproxy/executeFromProxy",
+		"esriLibUrl": "/arcgis_js_api/library/3.22/3.22/init.js",
+		"geometryUrl": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/Utilities/Geometry/GeometryServer",
+		"exportMapUrl": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+		"search": {
+			"serviceUrls": {
+				"geoNames": "https://geogratis.gc.ca/services/geoname/en/geonames.json",
+				"geoLocation": "https://geogratis.gc.ca/services/geolocation/en/locate?q=",
+				"geoSuggest": "https://geogratis.gc.ca/services/geolocation/en/suggest?q=",
+				"provinces": "https://geogratis.gc.ca/services/geoname/en/codes/province.json",
+				"types": "https://geogratis.gc.ca/services/geoname/en/codes/concise.json"
+			},
+			"disabledSearches": ["NTS", "FSA", "LAT/LNG"]
+		},
+		"export": {
+			"title": {
+				"isSelected": true,
+				"isSelectable": true,
+				"value": "FluWatch - Latest Week"
+			},
+			"footnote": {
+				"isSelected": true,
+				"isSelectable": false,
+				"value": "© Her Majesty the Queen in Right of Canada, represented by the Minister of Natural Resources"
+			},
+			"map": {
+				"isSelected": true,
+				"isSelectable": true
+			},
+			"mapElements": {
+				"isSelected": true,
+				"isSelectable": true
+			},
+			"legend": {
+				"isSelected": true,
+				"isSelectable": true,
+				"showInfoSymbology": false,
+				"showControlledSymbology": false
+			},
+			"timestamp": {
+				"isSelected": true,
+				"isSelectable": true
+			}
+		},
+		"googleAPIKey": "",
+		"geolocation": "",
+		"coordInfo": "",
+		"print": ""
+	},
+	"version": "2.4",
+	"language": "en-CA"
+}
