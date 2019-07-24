@@ -61,7 +61,7 @@
 
         <div>
             <!-- zoom lat\long section -->
-            <input type="text" id="zoomPt" name="zoomPt" value="POINT(-112.92  53.8)"></input>
+            <input type="text" id="zoomPt" name="zoomPt" value="POINT(-112.92 53.8)"></input>
             <button type="button" onclick="zoomPt()">Zoom Lat\Long</button>
 
             <!-- zoom polygon section section -->
@@ -97,6 +97,19 @@
             <button type="button" onclick="window.osdp.addLayerByConfig('mapOSDP', {})">Add Layer by Config</button>
         </div>
 
+        <div>
+            <!-- Add geometry-->
+            <label for="addGeom">Geom</label>
+            <input id="addGeom" type="text" list="geomlist" name="geom"></input>
+            <datalist id="geomlist">
+                    <option value="POINT(-122 50)">
+                    <option value="POINT(-80 55),POINT(-60 45)">
+                    <option value="POLYGON((-100 50,-100 55,-95 55,-95 50,-100 50))">
+                    <option value="POLYGON((-103 53,-103 58,-98 58,-98 53,-103 53)),POLYGON((-100 50,-100 55,-95 55,-95 50,-100 50))">
+            </datalist>
+            <button type="button" onclick="window.osdp.addGeometry('mapOSDP', document.getElementById('addGeom').value)">Add Geometry</button>
+            <button type="button" onclick="window.osdp.removeGeometries('mapOSDP')">Remove Geometries</button>
+        </div>
         <div>
             <!-- save and load state section -->
             <button type="button" onclick="window.osdp.saveState('mapOSDPBuilder'); window.open('http://localhost:6001/osdp/samples/osdp-builder.html');">Open Builder</button>

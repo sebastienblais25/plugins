@@ -1,4 +1,5 @@
 import { indexOf } from 'benchmark';
+import { runInThisContext } from 'vm';
 
 export default class OSDP {
     // a store of the instances of OSDP, 1 per map
@@ -79,12 +80,84 @@ export default class OSDP {
         return this.extentbox;
     }
 
+    addGeometry(mapId: string, values: string): void {
+        const myMap = (<any>window).RAMP.mapById(mapId);
+        const icon = 'M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z';
+
+        let graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
+        if (typeof graphicsOSDP === 'undefined') {
+            // add graphic layer
+            myMap.layers.addLayer('graphicsOSDP');
+            graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
+        }
+
+        const coord = values.split(',');
+        const points = [];
+        for (let value of coord) {
+            const split = value.split(' ')
+            const x = parseFloat(split[0].substring(split[0].indexOf('(') + 1, split[0].length));
+            const y = parseFloat(split[1].substring(0, split[1].length -1));
+
+            // create a point with unique id, we'll use an svg path for the icon
+            let pt = new (<any>window).RAMP.GEO.Point(`location${Math.round(Math.random() * 100000)}`, [x, y], { icon });
+            
+            // add the point to the simple layer
+            graphicsOSDP.addGeometry(pt);
+            points.push(pt)
+        }
+
+        // get the extent geometry from multi-point
+        if (points.length === 1) {
+            this.zoomPt(mapId, values);
+        } else {
+            const extent = this.createExtentGeom(points);
+            this.zoomPoly(mapId, extent);
+        }
+    }
+
+    removeGeometries(mapId: string) {
+        const myMap = (<any>window).RAMP.mapById(mapId);
+        
+        const graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
+        if (typeof graphicsOSDP !== 'undefined') {
+            // add graphic layer
+            graphicsOSDP.removeGeometry();
+        }
+    }
+
+    createExtentGeom(values: any) {
+        let xMin = -999;
+        let yMin = -999;
+        let xMax = -999;
+        let yMax = -999;
+        for (let value of values) {
+            let x = value._xy.x;
+            let y = value._xy.y;
+
+            if (x < xMin || xMin === -999) {
+                xMin = x;
+            }
+            if (y < yMin || yMin === -999) {
+                yMin = y;
+            }
+            if (x > xMax || xMax === -999) {
+                xMax = x;
+            }
+            if (y > yMax || yMax === -999) {
+                yMax = y;
+            }
+        }
+
+        // we already have function to zoom to WKT so create the extent in this format
+        return `POLYGON((${xMin} ${yMin},${xMin} ${yMax},${xMax} ${yMax},${xMax} ${yMin},${xMin} ${yMin}))`
+    }
+
     zoomPt(mapId: string, value: string): void {
         const myMap = (<any>window).RAMP.mapById(mapId);
         const ramp = (<any>window).RAMP;
         const split = value.split(' ')
-        const x = split[0].substring(split[0].indexOf('(') + 1, split[0].length -1);
-        const y = split[2].substring(0, split[2].length -1);
+        const x = split[0].substring(split[0].indexOf('(') + 1, split[0].length);
+        const y = split[1].substring(0, split[1].length -1);
 
         const pt = new ramp.GEO.XY(parseFloat(x), parseFloat(y));
         myMap.zoom = 13;
