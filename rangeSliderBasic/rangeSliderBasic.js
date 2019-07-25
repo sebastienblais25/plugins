@@ -81,20 +81,43 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./osdp/index.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./rangeSliderBasic/loader.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./osdp/index.ts":
-/*!***********************!*\
-  !*** ./osdp/index.ts ***!
-  \***********************/
+/***/ "./rangeSliderBasic/index.ts":
+/*!***********************************!*\
+  !*** ./rangeSliderBasic/index.ts ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar OSDP = /** @class */ (function () {\n    function OSDP() {\n    }\n    OSDP.prototype.init = function (api) {\n        this.api = api;\n        OSDP.instances[this.api.id] = this;\n        // subscribe to extent-change event\n        // this.OnBoundingBoxChange();\n    };\n    OSDP.prototype.addLayerByUUID = function (uuid) {\n        // only works on legacy API for the moment\n        this._RV.loadRcsLayers([uuid]);\n    };\n    OSDP.prototype.setDefinitonQuery = function (mapId, layerId, query) {\n        // use RAMP filter manager to ensure everything is synchronized (map, legend, grid , ...)\n        // it is not implemented in the interface yet, need a little bit of cheating\n        var myMap = window.RZ.mapById(mapId);\n        var myLayer = myMap.layers.getLayersById(layerId)[0];\n        var myProxy = myLayer._layerProxy; // cheating!\n        myProxy.filter.setSql('myUniqueAppCode', query);\n    };\n    OSDP.prototype.resetDefinitionQuery = function (mapId, layerId) {\n        // use RAMP filter manager to ensure everything is synchronized (map, legend, grid , ...)\n        // it is not implemented in the interface yet, need a little bit of cheating\n        var myMap = window.RZ.mapById(mapId);\n        var myLayer = myMap.layers.getLayersById(layerId)[0];\n        var myProxy = myLayer._layerProxy; // cheating!\n        myProxy.filter.setSql('myUniqueAppCode', '');\n    };\n    OSDP.prototype.OnBoundingBoxChange = function () {\n        // detect any change on the extent box\n        var ramAPI = this.api;\n        var mapExtentChange = ramAPI.esriMap.on(\"extent-change\", changeHandler);\n        document.getElementById(\"coordNE\").innerText = \"Bounding Box: NE [\" + ramAPI.boundsObj.northEast + \"]\";\n        document.getElementById(\"coordSW\").innerText = \"SW [\" + ramAPI.boundsObj.southWest + \"]\";\n        function changeHandler(evt) {\n            //var extent = evt.extent,\n            //    zoomed = evt.levelChange;\n            document.getElementById(\"coordNE\").innerText = \"Bounding Box: NE [\" + ramAPI.boundsObj.northEast + \"]\";\n            document.getElementById(\"coordSW\").innerText = \"SW [\" + ramAPI.boundsObj.southWest + \"]\";\n            console.log(\"Bounding Box: \" + ramAPI.boundsObj.toString());\n        }\n    };\n    OSDP.prototype.saveState = function (mapid) {\n        // save bookmark in local storage so it is restored when user returns\n        sessionStorage.setItem(mapid, this._RV.getBookmark());\n    };\n    OSDP.prototype.loadState = function () {\n        var storage = JSON.parse(JSON.stringify(sessionStorage.getItem('mapOSDPBuilder')));\n        // (<any>window).RV.getMap('mapOSDPBuilder').initialBookmark(storage)\n    };\n    // a store of the instances of OSDP, 1 per map\n    OSDP.instances = {};\n    return OSDP;\n}());\nexports.default = OSDP;\nwindow.osdp = new OSDP();\n\n\n//# sourceURL=webpack:///./osdp/index.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar RangeSliderBasic = /** @class */ (function () {\n    function RangeSliderBasic() {\n    }\n    RangeSliderBasic.prototype.init = function (mapApi) {\n        this.mapApi = mapApi;\n    };\n    return RangeSliderBasic;\n}());\nexports.default = RangeSliderBasic;\n// TableBuilder.prototype.tableOptions = {\n//     enableSorting: true,\n//     floatingFilter: true,\n//     autoSizePadding: 75,\n//     suppressColumnVirtualisation: true,\n//     ensureDomOrder: true,\n//     defaultColDef: {\n//         width: 100\n//     }\n// };\nRangeSliderBasic.prototype.translations = {\n    'en-CA': {\n        settings: 'Layer settings',\n        histo: 'Histogram',\n        bar: {\n            lock: \"Lock left anchor\",\n            unlock: \"Unlock left anchor\",\n            previous: \"Previous\",\n            play: \"Play\",\n            pause: \"Pause\",\n            foward: \"Foward\",\n            delay: \"Delay\",\n            refresh: \"Refresh\"\n        }\n    },\n    'fr-CA': {\n        settings: 'Paramètres de la couche',\n        histo: 'Histogramme',\n        bar: {\n            lock: \"Verrouiller la molette gauche\",\n            unlock: \"Déverrouiller la molette gauche\",\n            previous: \"Précédent\",\n            play: \"Jouer\",\n            pause: \"Pause\",\n            foward: \"Suivant\",\n            delay: \"Délai\",\n            refresh: \"Rafraîchir\"\n        }\n    }\n};\nwindow.rangeSliderBasic = RangeSliderBasic;\n\n\n//# sourceURL=webpack:///./rangeSliderBasic/index.ts?");
+
+/***/ }),
+
+/***/ "./rangeSliderBasic/loader.js":
+/*!************************************!*\
+  !*** ./rangeSliderBasic/loader.js ***!
+  \************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.ts */ \"./rangeSliderBasic/index.ts\");\n/* harmony import */ var _index_ts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_ts__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main.scss */ \"./rangeSliderBasic/main.scss\");\n/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_main_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n//# sourceURL=webpack:///./rangeSliderBasic/loader.js?");
+
+/***/ }),
+
+/***/ "./rangeSliderBasic/main.scss":
+/*!************************************!*\
+  !*** ./rangeSliderBasic/main.scss ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./rangeSliderBasic/main.scss?");
 
 /***/ })
 

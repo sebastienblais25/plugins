@@ -14,8 +14,8 @@
       },
       "legend": {
         "isOpen": {
-          "large": true,
-          "medium": true,
+          "large": false,
+          "medium": false,
           "small": false
         },
         "reorderable": false
@@ -23,9 +23,24 @@
     },
     "version": "2.0",
     "language": "en",
-    "services": {
-      "proxyUrl": "http://167.40.64.74/wmsproxy/ws/wmsproxy/executeFromProxy",
-      "exportMapUrl": "http://section917.cloudapp.net/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+    "services":{  
+      "proxyUrl":"https://maps.canada.ca/wmsproxy/ws/wmsproxy/executeFromProxy",
+      "geometryUrl":"https://webservices.maps.canada.ca/arcgis/rest/services/Utilities/Geometry/GeometryServer",
+      "exportMapUrl":"https://webservices.maps.canada.ca/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+      "search":{  
+         "serviceUrls":{  
+            "geoNames":"https://geogratis.gc.ca/services/geoname/en/geonames.json",
+            "geoLocation":"https://geogratis.gc.ca/services/geolocation/en/locate?q=",
+            "geoSuggest":"https://geogratis.gc.ca/services/geolocation/en/suggest?q=",
+            "provinces":"https://geogratis.gc.ca/services/geoname/en/codes/province.json",
+            "types":"https://geogratis.gc.ca/services/geoname/en/codes/concise.json"
+         },
+         "disabledSearches":[  
+            "NTS",
+            "FSA",
+            "LAT/LNG"
+         ]
+      },
       "export": {
         "title": {
           "value": "Title"
@@ -35,15 +50,6 @@
         "legend": {},
         "footnote": {
           "value": "This is a footnote added from the configuration file. The note is very long so it should wrap on multiple lines when it reaches a certain limit in size. Maybe some user will want to use this as aplace holder to put a lot of information so we need to be able to wrap this content. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce aliquet ante quis aliquet feugiat. Cras eget semper nunc, eu placerat purus. Nunc sed lacinia enim, ut sollicitudin quam. Nunc quis finibus massa, eget maximus enim. Donec ac nisl libero. Nunc eu pharetra arcu. Fusce luctus, magna cursus gravida tristique, risus nisi porttitor magna, ac dictum ipsum dui vel nulla. Integer id ornare augue. Quisque condimentum velit quis elementum porta. Sed dui enim, iaculis cursus diam volutpat, laoreet porta quam. Sed nec aliquet magna. Curabitur commodo fringilla metus, eu posuere sapien mollis nec."
-        }
-      },
-      "search": {
-        "serviceUrls": {
-          "geoNames": "http://geogratis.gc.ca/services/geoname/en/geonames.json",
-          "geoLocation": "http://geogratis.gc.ca/services/geolocation/en/locate?q=",
-          "geoSuggest": "http://geogratis.gc.ca/services/geolocation/en/suggest?q=",
-          "provinces": "http://geogratis.gc.ca/services/geoname/en/codes/province.json",
-          "types": "http://geogratis.gc.ca/services/geoname/en/codes/concise.json"
         }
       }
     },
@@ -92,6 +98,9 @@
                   "layerId": "powerplant100mw-naturalGas"
                 }
               ]
+            },
+            {
+              "layerId": "GeoChron"
             }
           ]
         }
@@ -108,6 +117,17 @@
           "name": "Natural Gas Pipeline",
           "layerType": "esriFeature",
           "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/2"
+        },
+        {
+          "id": "GeoChron",
+          "name": "GeoChron",
+          "layerType": "esriDynamic",
+          "layerEntries": [{
+            "index": 0,
+            "nameField": "OBJECTID",
+            "name": "Geo"
+          }],
+          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/GSCC/Geochronology/MapServer/"
         }
       ],
       "extentSets": [
@@ -260,5 +280,16 @@
           "tileSchemaId": "EXT_NRCAN_Lambert_3978#LOD_NRCAN_Lambert_3978"
         }
       ]
+    },
+    "plugins": {
+      "rangeSlider": {
+        "controls": ["lock", "delay", "refresh", "export"],
+        "layers": {
+            "id": "powerplant100mw-naturalGas",
+            "field": "Longitude",
+            "interval": 20,
+            "range": { "min": -110, "max": -87 }
+        }
+      }
     }
   }

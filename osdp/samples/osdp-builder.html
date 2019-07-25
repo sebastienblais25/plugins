@@ -39,8 +39,6 @@
             rv-langs='["en-CA", "fr-CA"]'
             rv-plugins="osdp"
             rv-service-endpoint="https://rcs.open.canada.ca"
-            rv-wait="true"
-            data-rv-keys
         >
             <noscript>
                 <p>
@@ -56,9 +54,10 @@
             </noscript>
         </div>
 
-        <script>
-            window.osdp.loadState('mapOSDPBuilder');
-        </script>
+        <div>
+            <!-- load state section -->
+            <button type="button" onclick="window.osdp.loadState()">Load State</button>
+        </div>
 
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Object.entries,Object.values,Array.prototype.find,Array.prototype.findIndex,Array.prototype.values,Array.prototype.includes,HTMLCanvasElement.prototype.toBlob,String.prototype.repeat,String.prototype.codePointAt,String.fromCodePoint,NodeList.prototype.@@iterator,Promise,Promise.prototype.finally"></script>
         <script src="/legacy-api.js"></script>
