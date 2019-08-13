@@ -26,16 +26,16 @@ export default class OSDP {
             'name': 'An exemplary Layer',
             'layerType': 'esriFeature',
             'controls': [
-              'remove',
-              'visibility'
+                'remove',
+                'visibility'
             ],
             'state': {
-              'visibility': true,
-              'boundingBox': false
+                'visibility': true,
+                'boundingBox': false
             },
             'url': 'https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_resource_potential_of_north_america_en/MapServer/0'
-          };
-          const myConfigLayer = myMap.layers.addLayer(layerJSON);
+        };
+        const myConfigLayer = myMap.layers.addLayer(layerJSON);
     }
 
     // function to fire on add layer and remove layer
@@ -80,7 +80,46 @@ export default class OSDP {
         return this.extentbox;
     }
 
-    addGeometry(mapId: string, values: string): void {
+    addPointsGeometry(mapId: string, values: string): void {
+        debugger
+        if (this.validate(values))
+        {
+            const input = "["+values+"]";  
+            const myMap = (<any>window).RAMP.mapById(mapId);
+            const icon = 'M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z';
+            var ptcords = JSON.parse(input);
+
+            let graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
+            if (typeof graphicsOSDP === 'undefined') {
+                // add graphic layer
+                myMap.layers.addLayer('graphicsOSDP');
+                graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
+            }
+
+            const points = [];
+            for (let value of ptcords) {
+                // create a point with unique id, we'll use an svg path for the icon
+                const x = value[0];
+                const y = value[1];
+                let pt = new (<any>window).RAMP.GEO.Point(`location${Math.round(Math.random() * 100000)}`, [x, y], { icon });
+                // add the point to the simple layer
+                graphicsOSDP.addGeometry(pt);
+                points.push(pt)
+            }
+
+            // get the extent geometry from multi-point
+            if (points.length === 1) {
+                this.zoomPt(mapId, input);
+            } else {
+                const extent = this.createExtentGeom(points);
+                this.zoomPoints(mapId, extent);
+            }
+        }
+    }
+
+    addPolygonsGeometry(mapId: string, values: string): void {
+        const poly1 = new (<any>window).RAMP.GEO.Polygon(201, JSON.parse(values));
+        const polyAll = new (<any>window).RAMP.GEO.MultiPolygon(206, [poly1]);
         const myMap = (<any>window).RAMP.mapById(mapId);
         const icon = 'M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z';
 
@@ -91,33 +130,14 @@ export default class OSDP {
             graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
         }
 
-        const coord = values.split(',');
-        const points = [];
-        for (let value of coord) {
-            const split = value.split(' ')
-            const x = parseFloat(split[0].substring(split[0].indexOf('(') + 1, split[0].length));
-            const y = parseFloat(split[1].substring(0, split[1].length -1));
-
-            // create a point with unique id, we'll use an svg path for the icon
-            let pt = new (<any>window).RAMP.GEO.Point(`location${Math.round(Math.random() * 100000)}`, [x, y], { icon });
-            
-            // add the point to the simple layer
-            graphicsOSDP.addGeometry(pt);
-            points.push(pt)
-        }
-
-        // get the extent geometry from multi-point
-        if (points.length === 1) {
-            this.zoomPt(mapId, values);
-        } else {
-            const extent = this.createExtentGeom(points);
-            this.zoomPoly(mapId, extent);
-        }
+        const polygons = [];
+        graphicsOSDP.addGeometry([polyAll]);
+        this.zoomPoly(mapId, polyAll.polygonArray);
     }
 
     removeGeometries(mapId: string) {
         const myMap = (<any>window).RAMP.mapById(mapId);
-        
+
         const graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
         if (typeof graphicsOSDP !== 'undefined') {
             // add graphic layer
@@ -130,7 +150,13 @@ export default class OSDP {
         let yMin = -999;
         let xMax = -999;
         let yMax = -999;
-        for (let value of values) {
+
+        let arraylist = values;
+        if (values.type === "Polygon") {
+            arraylist = values.ringArray;
+        }
+
+        for (let value of arraylist) {
             let x = value._xy.x;
             let y = value._xy.y;
 
@@ -153,18 +179,48 @@ export default class OSDP {
     }
 
     zoomPt(mapId: string, value: string): void {
+        debugger
         const myMap = (<any>window).RAMP.mapById(mapId);
         const ramp = (<any>window).RAMP;
-        const split = value.split(' ')
-        const x = split[0].substring(split[0].indexOf('(') + 1, split[0].length);
-        const y = split[1].substring(0, split[1].length -1);
-
-        const pt = new ramp.GEO.XY(parseFloat(x), parseFloat(y));
+        var ptcoords = JSON.parse(value)[0];
+        const pt = new ramp.GEO.XY(parseFloat(ptcoords[0]), parseFloat(ptcoords[1]));
         myMap.zoom = 13;
         myMap.setCenter(pt);
     }
 
-    zoomPoly(mapId: string, value: string): void {
+    zoomPoly(mapId: string, value: any): void {
+        const myMap = (<any>window).RAMP.mapById(mapId);
+        const ramp = (<any>window).RAMP;
+        const polyarray = value;
+        const ext_x = [];
+        const ext_y = [];
+        const coords = polyarray[0].ringArray[0].pointArray;
+        coords.forEach((item: any) => {
+            ext_x.push(item._xy.x);
+            ext_y.push(item._xy.y);
+        });
+
+        // project values
+        const extentbox = [[Math.min(...ext_x), Math.min(...ext_y)], [Math.min(...ext_x), Math.max(...ext_y)],
+        [Math.max(...ext_x), Math.max(...ext_y)], [Math.max(...ext_x), Math.min(...ext_y)],
+        [Math.min(...ext_x), Math.min(...ext_y)]];
+
+        const poly = ramp.GAPI.proj.localProjectGeometry('EPSG:3978', {
+            'rings': [extentbox], 'spatialReference': { 'wkid': 4326 }
+        });
+
+        const xarray = [];
+        const yarray = [];
+        poly.rings[0].forEach((item: any) => { xarray.push(item[0]); yarray.push(item[1]); });
+
+        myMap.setExtent({
+            'xmin': Math.min(...xarray), 'ymin': Math.min(...yarray), 'xmax': Math.max(...xarray), 'ymax': Math.max(...yarray),
+            'spatialReference': { 'wkid': 3978 }
+        });
+
+    }
+
+    zoomPoints(mapId: string, value: string): void {
         const myMap = (<any>window).RAMP.mapById(mapId);
         const ramp = (<any>window).RAMP;
         const split = value.substring(value.indexOf('((') + 2, value.length - 2).split(',');
@@ -178,16 +234,17 @@ export default class OSDP {
 
         // project values
         const poly = ramp.GAPI.proj.localProjectGeometry('EPSG:3978', {
-            'rings': [coords], 'spatialReference': {'wkid': 4326 }});
+            'rings': [coords], 'spatialReference': { 'wkid': 4326 }
+        });
 
         // get array of x and y
-        const x = [];
-        const y = [];
-        poly.rings[0].forEach((item: any) => { x.push(item[0]); y.push(item[1]); });
+        const xarray = [];
+        const yarray = [];
+        poly.rings[0].forEach((item: any) => { xarray.push(item[0]); yarray.push(item[1]); });
 
         // set extent
-        myMap.setExtent( {
-            'xmin': Math.min(...x), 'ymin': Math.min(...y), 'xmax': Math.max(...x), 'ymax': Math.max(...y),
+        myMap.setExtent({
+            'xmin': Math.min(...xarray), 'ymin': Math.min(...yarray), 'xmax': Math.max(...xarray), 'ymax': Math.max(...yarray),
             'spatialReference': { 'wkid': 3978 }
         });
     }
@@ -197,12 +254,39 @@ export default class OSDP {
         sessionStorage.setItem(mapid, this._RV.getBookmark());
     }
 
-    loadState(mapid: string): void{
+    loadState(mapid: string): void {
         // load bookmark from session storage and apply it
         const storage = JSON.parse(JSON.stringify(sessionStorage.getItem(mapid)));
 
         // use a timeout to wait until code finish to run. If no timeout, RV is not define
         setTimeout(() => (<any>window).RV.getMap(mapid).initialBookmark(storage));
+    }
+
+
+    validate(values: string) {
+        var ck_strarray = /^\[[+-]?\d+(\.\d+)?\,+[+-]?\d+(\.\d+)?\]$/
+        var strarray = values;
+        var errors = [];
+
+        debugger
+        if (!ck_strarray.test(strarray)) {
+            errors[errors.length] = "You must enter a valid array of point: [123.55,321.66]";
+        }
+
+        if (errors.length > 0) {
+            this.reportErrors(errors);
+            return false;
+        }
+        return true;
+    }
+
+    reportErrors(errors: any) {
+        var msg = "Please Enter Valide Data...\n";
+        for (var i = 0; i < errors.length; i++) {
+            var numError = i + 1;
+            msg += "\n" + numError + ". " + errors[i];
+        }
+        alert(msg);
     }
 }
 
