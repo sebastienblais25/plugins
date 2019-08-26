@@ -62,7 +62,7 @@ module.exports = function(env = {}) {
             host: '0.0.0.0',
             https: !!env.https,
             disableHostCheck: true,
-            port: 6001,
+            port: 6003,
             stats: { colors: true },
             compress: true
         }

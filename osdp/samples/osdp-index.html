@@ -103,8 +103,8 @@
         <label for="addPoints">Points</label>
         <input id="addPoints" type="text" list="pointslist" name="pointsgeom" onfocus="this.value=''"></input>
         <datalist id="pointslist">
-            <option value="[-75,43]">
-            <option value="[[-80, 55],[-60, 45]]">
+            <option value="POINT(-75 43)">
+            <option value="POINT(-80 55); POINT(-60 45) ">
         </datalist>
         <button type="button"
             onclick="window.osdp.addPointsGeometry('mapOSDP', document.getElementById('addPoints').value)">Add
@@ -116,7 +116,7 @@
         <label for="addPolygon">Polygon</label>
         <input id="addPolygon" type="text" list="polygonlist" name="polyg" onfocus="this.value=''"></input>
         <datalist id="polygonlist">
-            <option value=" [[-74, 45], [-74, 46], [-71, 46], [-71, 45], [-74, 45]]">
+            <option value="POLYGON((-74 45,-74 46,-71 46,-71 45,-74 45))">
             <option
                 value="[[[-77.19,44.93],[-76.86,47.219],[-71.43,47.769],[-72.971,44.556],[-77.19,44.93]],[[-74, 45], [-74, 46], [-71, 46], [-71, 45], [-74, 45]]]">
         </datalist>

@@ -80,44 +80,70 @@ export default class OSDP {
         return this.extentbox;
     }
 
-    addPointsGeometry(mapId: string, values: string): void {
+    inputParsePoints(values:string):any{
+        var arrayPt = values.split(';');
+        arrayPt.forEach((element, index, arr) => {
+            var elt = element;
+            elt = elt.trim();
+            elt = elt.replace('POINT', '').replace('(', '[').replace(')', ']');
+            elt = elt.replace(" ",","); 
+            arr[index] = elt;
+        });
+        return "["+arrayPt+"]";
+    }
+
+    inputParsePolygons(values:string):any{
         debugger
-        if (this.validate(values))
-        {
-            const input = "["+values+"]";  
-            const myMap = (<any>window).RAMP.mapById(mapId);
-            const icon = 'M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z';
-            var ptcords = JSON.parse(input);
+        var arrayPoly = values.split(';');
+        arrayPoly.forEach((element, index, arr) => {
+            debugger
+            var elt = element;
+            elt = elt.trim();
+            elt = elt.replace('POLYGON', '').replace('((', '[[').replace('))', ']]');
+            elt = elt.replace(",", "];[");
+            elt = elt.replace(" ",",");
+            elt = elt.replace(";",","); 
+            arr[index] = elt;
+        });
+        return "["+arrayPoly+"]";
+    }
 
-            let graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
-            if (typeof graphicsOSDP === 'undefined') {
-                // add graphic layer
-                myMap.layers.addLayer('graphicsOSDP');
-                graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
-            }
+    addPointsGeometry(mapId: string, values: string): void {
+        const input = this.inputParsePoints(values);
+        const myMap = (<any>window).RAMP.mapById(mapId);
+        const icon = 'M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z';
+        var ptcords = JSON.parse(input);
 
-            const points = [];
-            for (let value of ptcords) {
-                // create a point with unique id, we'll use an svg path for the icon
-                const x = value[0];
-                const y = value[1];
-                let pt = new (<any>window).RAMP.GEO.Point(`location${Math.round(Math.random() * 100000)}`, [x, y], { icon });
-                // add the point to the simple layer
-                graphicsOSDP.addGeometry(pt);
-                points.push(pt)
-            }
+        let graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
+        if (typeof graphicsOSDP === 'undefined') {
+            // add graphic layer
+            myMap.layers.addLayer('graphicsOSDP');
+            graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
+        }
 
-            // get the extent geometry from multi-point
-            if (points.length === 1) {
-                this.zoomPt(mapId, input);
-            } else {
-                const extent = this.createExtentGeom(points);
-                this.zoomPoints(mapId, extent);
-            }
+        const points = [];
+        for (let value of ptcords) {
+            // create a point with unique id, we'll use an svg path for the icon
+            const x = value[0];
+            const y = value[1];
+            let pt = new (<any>window).RAMP.GEO.Point(`location${Math.round(Math.random() * 100000)}`, [x, y], { icon });
+            // add the point to the simple layer
+            graphicsOSDP.addGeometry(pt);
+            points.push(pt)
+        }
+
+        // get the extent geometry from multi-point
+        if (points.length === 1) {
+            this.zoomPt(mapId, input);
+        } else {
+            const extent = this.createExtentGeom(points);
+            this.zoomPoints(mapId, extent);
         }
     }
 
     addPolygonsGeometry(mapId: string, values: string): void {
+        debugger
+        const input = this.inputParsePolygons(values);
         const poly1 = new (<any>window).RAMP.GEO.Polygon(201, JSON.parse(values));
         const polyAll = new (<any>window).RAMP.GEO.MultiPolygon(206, [poly1]);
         const myMap = (<any>window).RAMP.mapById(mapId);
@@ -261,7 +287,6 @@ export default class OSDP {
         // use a timeout to wait until code finish to run. If no timeout, RV is not define
         setTimeout(() => (<any>window).RV.getMap(mapid).initialBookmark(storage));
     }
-
 
     validate(values: string) {
         var ck_strarray = /^\[[+-]?\d+(\.\d+)?\,+[+-]?\d+(\.\d+)?\]$/
