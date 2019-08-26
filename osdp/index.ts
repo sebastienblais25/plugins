@@ -9,6 +9,21 @@ export default class OSDP {
         this.api = api;
         this.initUpdateExtentBox();
 
+        // subscribe to add layer even to reorder the layers so graphicOSDP is always on top
+        this.api.layers.layerAdded.subscribe(layer => {
+            const map = (<any>window).RAMP.mapById(this.api.id);
+            const pos = Object.keys(map.esriMap._layers).length - 1;
+            map.fgpMapObj.reorderLayer('graphicsOSDP', pos)
+        });
+
+        // add the OSDP grapic layer
+        const myInter = setInterval(() => {
+            if (typeof (<any>window).RAMP.mapById(this.api.id) !== 'undefined') {
+                (<any>window).RAMP.mapById(this.api.id).layersObj.addLayer('graphicsOSDP');
+                clearInterval(myInter);
+            }
+        }, 100);
+
         OSDP.instances[this.api.id] = this;
     }
 
@@ -66,7 +81,7 @@ export default class OSDP {
     initUpdateExtentBox() {
         // set extent box change handler by extChangeHandler
         // also initialyse the value of extentbox variable holder
-        var parent = this;
+        const parent = this;
         parent.api.esriMap.on('extent-change', extChangeHandler);
         parent.extentbox = parent.api.boundsObj;
 
@@ -80,53 +95,44 @@ export default class OSDP {
         return this.extentbox;
     }
 
-    inputParsePoints(values:string):any{
-        var arrayPt = values.split(';');
+    inputParsePoints(values:string): any{
+        const arrayPt = values.split(';');
         arrayPt.forEach((element, index, arr) => {
-            var elt = element;
+            let elt = element;
+            elt = elt.replace('POINT', '').replace(/\( */g, '[').replace(/ *\)/g, ']');
             elt = elt.trim();
-            elt = elt.replace('POINT', '').replace('(', '[').replace(')', ']');
-            elt = elt.replace(" ",","); 
+            elt = elt.replace(/ +/g,', '); 
             arr[index] = elt;
         });
-        return "["+arrayPt+"]";
+        return `[${arrayPt}]`;
     }
 
-    inputParsePolygons(values:string):any{
-        debugger
-        var arrayPoly = values.split(';');
+    inputParsePolygons(values:string): any{
+        const arrayPoly = values.split(';');
         arrayPoly.forEach((element, index, arr) => {
-            debugger
-            var elt = element;
+            let elt = element;
+            elt = elt.replace('POLYGON', '').replace(/\( *\( */g,'[[').replace(/ *\) *\)/g, ']]');
             elt = elt.trim();
-            elt = elt.replace('POLYGON', '').replace('((', '[[').replace('))', ']]');
-            elt = elt.replace(",", "];[");
-            elt = elt.replace(" ",",");
-            elt = elt.replace(";",","); 
+            elt = elt.replace(/, */g, '],[');
+            elt = elt.replace(/ +/g,', ');
             arr[index] = elt;
         });
-        return "["+arrayPoly+"]";
+        return `[${arrayPoly}]`;
     }
 
     addPointsGeometry(mapId: string, values: string): void {
         const input = this.inputParsePoints(values);
         const myMap = (<any>window).RAMP.mapById(mapId);
         const icon = 'M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z';
-        var ptcords = JSON.parse(input);
+        const ptcords = JSON.parse(input);
 
-        let graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
-        if (typeof graphicsOSDP === 'undefined') {
-            // add graphic layer
-            myMap.layers.addLayer('graphicsOSDP');
-            graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
-        }
-
+        const graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
         const points = [];
         for (let value of ptcords) {
             // create a point with unique id, we'll use an svg path for the icon
             const x = value[0];
             const y = value[1];
-            let pt = new (<any>window).RAMP.GEO.Point(`location${Math.round(Math.random() * 100000)}`, [x, y], { icon });
+            let pt = new (<any>window).RAMP.GEO.Point(`location${Math.round(Math.random() * 100000)}`, [x, y], { style: 'ICON', icon: icon, colour: [255, 0, 0], width: 30 });
             // add the point to the simple layer
             graphicsOSDP.addGeometry(pt);
             points.push(pt)
@@ -142,33 +148,20 @@ export default class OSDP {
     }
 
     addPolygonsGeometry(mapId: string, values: string): void {
-        debugger
         const input = this.inputParsePolygons(values);
-        const poly1 = new (<any>window).RAMP.GEO.Polygon(201, JSON.parse(values));
-        const polyAll = new (<any>window).RAMP.GEO.MultiPolygon(206, [poly1]);
+        const poly1 = new (<any>window).RAMP.GEO.Polygon(0, JSON.parse(input));
+        const polyAll = new (<any>window).RAMP.GEO.MultiPolygon(`location${Math.round(Math.random() * 100000)}`, [poly1], { outlineColor: [255, 0, 0], outlineWidth: 3 });
         const myMap = (<any>window).RAMP.mapById(mapId);
-        const icon = 'M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z';
 
-        let graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
-        if (typeof graphicsOSDP === 'undefined') {
-            // add graphic layer
-            myMap.layers.addLayer('graphicsOSDP');
-            graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
-        }
-
-        const polygons = [];
+        const graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
         graphicsOSDP.addGeometry([polyAll]);
-        this.zoomPoly(mapId, polyAll.polygonArray);
+        this.zoomPoly(mapId, values);
     }
 
     removeGeometries(mapId: string) {
         const myMap = (<any>window).RAMP.mapById(mapId);
-
         const graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
-        if (typeof graphicsOSDP !== 'undefined') {
-            // add graphic layer
-            graphicsOSDP.removeGeometry();
-        }
+        graphicsOSDP.removeGeometry();
     }
 
     createExtentGeom(values: any) {
@@ -178,7 +171,7 @@ export default class OSDP {
         let yMax = -999;
 
         let arraylist = values;
-        if (values.type === "Polygon") {
+        if (values.type === 'Polygon') {
             arraylist = values.ringArray;
         }
 
@@ -205,19 +198,22 @@ export default class OSDP {
     }
 
     zoomPt(mapId: string, value: string): void {
-        debugger
         const myMap = (<any>window).RAMP.mapById(mapId);
         const ramp = (<any>window).RAMP;
-        var ptcoords = JSON.parse(value)[0];
+        const ptcoords = JSON.parse(value)[0];
         const pt = new ramp.GEO.XY(parseFloat(ptcoords[0]), parseFloat(ptcoords[1]));
+
         myMap.zoom = 13;
         myMap.setCenter(pt);
     }
 
-    zoomPoly(mapId: string, value: any): void {
+    zoomPoly(mapId: string, value: string): void {
+        const input = this.inputParsePolygons(value);
+        const poly1 = new (<any>window).RAMP.GEO.Polygon(201, JSON.parse(input));
+        const polyAll = new (<any>window).RAMP.GEO.MultiPolygon(206, [poly1]);
         const myMap = (<any>window).RAMP.mapById(mapId);
         const ramp = (<any>window).RAMP;
-        const polyarray = value;
+        const polyarray =  polyAll.polygonArray;
         const ext_x = [];
         const ext_y = [];
         const coords = polyarray[0].ringArray[0].pointArray;
@@ -289,11 +285,10 @@ export default class OSDP {
     }
 
     validate(values: string) {
-        var ck_strarray = /^\[[+-]?\d+(\.\d+)?\,+[+-]?\d+(\.\d+)?\]$/
-        var strarray = values;
-        var errors = [];
+        const ck_strarray = /^\[[+-]?\d+(\.\d+)?\,+[+-]?\d+(\.\d+)?\]$/
+        const strarray = values;
+        const errors = [];
 
-        debugger
         if (!ck_strarray.test(strarray)) {
             errors[errors.length] = "You must enter a valid array of point: [123.55,321.66]";
         }
@@ -306,9 +301,9 @@ export default class OSDP {
     }
 
     reportErrors(errors: any) {
-        var msg = "Please Enter Valide Data...\n";
-        for (var i = 0; i < errors.length; i++) {
-            var numError = i + 1;
+        let msg = "Please Enter Valide Data...\n";
+        for (let i = 0; i < errors.length; i++) {
+            let numError = i + 1;
             msg += "\n" + numError + ". " + errors[i];
         }
         alert(msg);
