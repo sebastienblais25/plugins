@@ -332,6 +332,8 @@ input:focus + .noUi-tooltip {
 @media (max-width: 1023px) {
   .slider-export-control, .slider-refresh-control {
     display: none !important; }
+  .slider-loop-control {
+    display: none !important; }
   #rangeSlider {
     margin-left: 10px !important;
     opacity: 1 !important; } }
@@ -371,6 +373,9 @@ input:focus + .noUi-tooltip {
             display: inline-block;
             margin: 10px 0;
             width: 80px; }
+          .rv-rangeslider .slider-content .slider-bar .slider-controls .slider-bar-control.slider-loop-control .slider-loop-control-active {
+            color: black;
+            opacity: 1; }
           .rv-rangeslider .slider-content .slider-bar .slider-controls .slider-bar-control.slider-play-control {
             margin: auto; }
           .rv-rangeslider .slider-content .slider-bar .slider-controls .slider-bar-control.slider-delay-control {
