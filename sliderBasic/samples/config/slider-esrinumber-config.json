@@ -283,12 +283,11 @@
     },
     "plugins": {
       "rangeSlider": {
-        "controls": ["lock", "delay", "refresh", "export"],
+        "controls": ["lock", "loop", "delay", "refresh", "export"],
         "layers": {
             "id": "GeoChron",
             "field": { "name": "LONGITUDE", "type": "number" },
-            "interval": 20,
-            "delay": 7000,
+            "delay": 3000,
             "range": { "min": -135, "max": -125 }
         }
       }

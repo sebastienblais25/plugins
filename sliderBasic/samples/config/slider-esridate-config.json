@@ -283,11 +283,10 @@
     },
     "plugins": {
       "rangeSlider": {
-        "controls": ["lock", "delay",  "export", "refresh"],
+        "controls": ["lock", "delay", "export", "refresh"],
         "layers": {
             "id": "GeoChron",
             "field": { "name": "LAST_UPDATED", "type": "date" },
-            "interval": 20,
             "delay": 3000,
             "range": { "min": 1109108871000, "max": 1111505342000 }
         }
