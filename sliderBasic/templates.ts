@@ -93,16 +93,18 @@ export const DELAY_BAR_TEMPLATE = `
 
 export const EXPORT_BAR_TEMPLATE = `
 <div class="slider-bar-control slider-export-control">
-    <md-switch
-        ng-controller="ExportSliderCtrl as ctrl"
-        aria-label="{{ 'plugins.sliderBasic.bar.tooltip.gif' | translate }}"
-        class="rv-slider-switch"
-        ng-class="md-primary"
-        ng-model="ctrl.export"
-        ng-change="ctrl.selectExport()">
-        {{ 'plugins.sliderBasic.bar.gif' | translate }}
+    <span>
+        <md-switch
+            ng-controller="ExportSliderCtrl as ctrl"
+            aria-label="{{ 'plugins.sliderBasic.bar.tooltip.gif' | translate }}"
+            class="rv-slider-switch"
+            ng-class="md-primary"
+            ng-model="ctrl.export"
+            ng-change="ctrl.selectExport()">
+            <label>{{ 'plugins.sliderBasic.bar.gif' | translate }}</label>
+        </md-switch>
         <md-tooltip>{{ 'plugins.sliderBasic.bar.tooltip.gif' | translate }}</md-tooltip>
-    </md-switchn>
+    </span>
 </div>`;
 
 function createSVG(icon): string {

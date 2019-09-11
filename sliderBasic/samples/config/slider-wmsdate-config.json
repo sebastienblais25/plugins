@@ -91,37 +91,65 @@
       },
       "layers": [
         {
-          "id": "0",
-          "name": "Electric Transmission Line",
-          "layerType": "esriFeature",
-          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/1"
-        },
-        {
           "id": "powerplant100mw-naturalGas",
           "name": "Natural Gas Pipeline",
           "layerType": "esriFeature",
           "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/2"
         },
         {
-          "id": "GeoChron",
-          "name": "GeoChron",
-          "layerType": "esriDynamic",
-          "layerEntries": [{
-            "index": 0,
-            "nameField": "OBJECTID",
-            "name": "Geo"
-          }],
-          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/GSCC/Geochronology/MapServer/"
-        }
+          "layerType": "ogcWms",
+          "colour": "#ff0000",
+          "toggleSymbology": true,
+          "refreshInterval": 0,
+          "expectedResponseTime": 4000,
+          "tolerance": 5,
+          "imageFormat": "png32",
+          "singleEntryCollapse": false,
+          "suppressGetCapabilities": false,
+          "state": {
+              "opacity": 1,
+              "visibility": true,
+              "boundingBox": false,
+              "query": true,
+              "snapshot": false,
+              "hovertips": true
+          },
+          "layerEntries": [
+              {
+                  "outfields": "*",
+                  "stateOnly": false,
+                  "state": {
+                      "opacity": 1,
+                      "visibility": true,
+                      "boundingBox": false,
+                      "query": true,
+                      "snapshot": false,
+                      "hovertips": true
+                  },
+                  "allStyles": [
+                      "default"
+                  ],
+                  "init": true,
+                  "id": "0",
+                  "name": "Sample",
+                  "currentStyle": "default"
+              }
+          ],
+          "name": "wms flood in Canada",
+          "id": "wms",
+          "url": "https://webservices.maps.canada.ca/arcgis/services/NRCan/EGS_Flood_Product_CurrentYear_en/MapServer/WMSServer",
+          "featureInfoMimeType": "text/html",
+          "legendMimeType": "image/png"
+      }
       ],
       "extentSets": [
         {
           "id": "EXT_NRCAN_Lambert_3978",
           "default": {
-            "xmax": 3549492,
-            "xmin": -2681457,
-            "ymax": 3482193,
-            "ymin": -883440
+            "xmax": 1560049.62920965,
+            "xmin": 1472348.0163064243,
+            "ymax": -144657.39848446375,
+            "ymin": -187472.35911438504
           },
           "spatialReference": {
             "wkid": 3978
@@ -269,10 +297,11 @@
       "rangeSlider": {
         "controls": ["lock", "loop", "delay", "refresh", "export"],
         "layers": {
-            "id": "GeoChron",
-            "field": { "name": "LONGITUDE", "type": "number" },
+            "id": "wms",
+            "field": { "name": "datetime_utc", "type": "date" },
             "delay": 3000,
-            "range": { "min": -135, "max": -125 }
+            "range": { "min": 1554091200000, "max": 1556683200000 },
+            "limit": { "min": 1554091200000, "max": 1559361600000 }
         }
       }
     }

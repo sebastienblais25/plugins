@@ -34,38 +34,52 @@ export default class SliderBasic {
         if (config.id === layer.id) {
             this.extendConfig = {...SliderBasic.prototype.layerOptions, ...config};
             this.extendConfig.language = this._RV.getCurrentLang();
-            const attrs = layer.getAttributes();
 
-            if (attrs.length === 0) {
-                // make sure all attributes are added before creating the slider
-                this.mapApi.layers.attributesAdded.pipe(take(1)).subscribe(attrs => {
-                    if (attrs.attributes.length > 0) {
+            const layerType = layer.type;
 
-                        // get attributes value for specified field
-                        const values = [];
-                        for (let row of attrs.attributes) {
-                            values.push(row[this.extendConfig.field.name])
+            // If layer is ESRI, get all attributes to define the limit
+            if (layerType === 'esriDynamic' || layerType === 'esrifeature') {
+                const attrs = layer.getAttributes();
+
+                if (attrs.length === 0) {
+                    // make sure all attributes are added before creating the slider
+                    this.mapApi.layers.attributesAdded.pipe(take(1)).subscribe(attrs => {
+                        if (attrs.attributes.length > 0) {
+    
+                            // get attributes value for specified field
+                            const values = [];
+                            for (let row of attrs.attributes) {
+                                values.push(row[this.extendConfig.field.name])
+                            }
+    
+                            // set limit and range if not set from configuration
+                            const limits: Range = { min: Math.min.apply(null, values), max: Math.max.apply(null, values) };
+                            if (this.extendConfig.limit.min === null) { this.extendConfig.limit = limits; }
+                            if (this.extendConfig.range.min === null) { this.extendConfig.range = limits; }
                         }
 
-                        // set limit and range if not set from configuration
-                        const limits: Range = { min: Math.min.apply(null, values), max: Math.max.apply(null, values) };
-                        if (this.extendConfig.limit.min === null) { this.extendConfig.limit = limits; }
-                        if (this.extendConfig.range.min === null) { this.extendConfig.range = limits; }
+                        this.setSliderBar(layer);
+                    });
+                }
 
-                        // set step
-                        this.extendConfig.step = (this.extendConfig.range.max - this.extendConfig.range.min);
-
-                        // initialiaze slider bar with active layer
-                        this.extendConfig.layerRef = layer;
-                        this.slider = new SliderBar(this.mapApi, this.extendConfig);
-
-                        // set bar controls then open the panel
-                        this.setBarControls(this.config.controls);
-                        this.panel.open();
-                    }
-                });
+            } else if (layerType === 'ogcWms') {
+                // everything must be set inside configuration (range and limit)
+                this.setSliderBar(layer)
             }
         }
+    }
+
+    setSliderBar(layer: any): void {
+        // set step
+        this.extendConfig.step = (this.extendConfig.range.max - this.extendConfig.range.min);
+    
+        // initialiaze slider bar with active layer
+        this.extendConfig.layerRef = layer;
+        this.slider = new SliderBar(this.mapApi, this.extendConfig);
+
+        // set bar controls then open the panel
+        this.setBarControls(this.config.controls);
+        this.panel.open();
     }
 
     setBarControls(controls: any): void {
@@ -143,7 +157,7 @@ SliderBasic.prototype.translations = {
             refresh: 'Refresh',
             gif: 'GIF',
             tooltip: {
-                gif: 'Click Play to start then Pause to export GIF'
+                gif: 'If enabled, click \"Play\" to start then \"Pause\" to export GIF'
             }
         }
     },
@@ -162,7 +176,7 @@ SliderBasic.prototype.translations = {
             refresh: 'Rafraîchir',
             gif: 'GIF',
             tooltip: {
-                gif: 'Cliquez sur Jouer pour démarrer, puis faites Pause pour exporter le GIF'
+                gif: 'Si activé, cliquez sur \"Jouer\" pour démarrer, puis sur \"Pause\" pour exporter le GIF'
             }
         }
     }

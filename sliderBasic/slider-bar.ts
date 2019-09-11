@@ -312,15 +312,28 @@ export class SliderBar {
 
     setDefinitionQuery(range: Range) {
         const myLayer = this._mapApi.layers.getLayersById(this._config.id)[0];
+        const layerType = myLayer.type;
 
-        if (this._config.field.type === 'number') {
-            myLayer.setFilterSql('rangeSliderNumberFilter', `${this._config.field.name} > ${range.min} AND ${this._config.field.name} <= ${range.max}`);
-        } else if (this._config.field.type === 'date') {
-            const min = new Date(range.min);
-            const max = new Date (range.max);
-            const dateMin = `${min.getMonth() + 1}/${min.getDate()}/${min.getFullYear()}`
-            const dateMax = `${max.getMonth() + 1}/${max.getDate()}/${max.getFullYear()}`
-            myLayer.setFilterSql('rangeSliderDateFilter', `${this._config.field.name} > DATE \'${dateMin}\' AND ${this._config.field.name} <= DATE \'${dateMax}\'`);
+        if (layerType === 'esriDynamic' || layerType === 'esrifeature') {
+            if (this._config.field.type === 'number') {
+                myLayer.setFilterSql('rangeSliderNumberFilter', `${this._config.field.name} > ${range.min} AND ${this._config.field.name} <= ${range.max}`);
+            } else if (this._config.field.type === 'date') {
+                const min = new Date(range.min);
+                const max = new Date (range.max);
+                const dateMin = `${min.getMonth() + 1}/${min.getDate()}/${min.getFullYear()}`;
+                const dateMax = `${max.getMonth() + 1}/${max.getDate()}/${max.getFullYear()}`;
+                myLayer.setFilterSql('rangeSliderDateFilter', `${this._config.field.name} > DATE \'${dateMin}\' AND ${this._config.field.name} <= DATE \'${dateMax}\'`);
+            }
+        } else if (layerType === 'ogcWms') {
+            if (this._config.field.type === 'number') {
+                myLayer.esriLayer.setCustomParameters({}, { 'layerDefs': `{'${this._config.field.name}': '${this._config.field.name} > ${range.min} AND ${this._config.field.name} <= ${range.max}'}` });
+            } else if (this._config.field.type === 'date') {
+                const min = new Date(range.min);
+                const max = new Date (range.max);
+                const dateMin = `${min.getMonth() + 1}/${min.getDate()}/${min.getFullYear()}`;
+                const dateMax = `${max.getMonth() + 1}/${max.getDate()}/${max.getFullYear()}`;
+                myLayer.esriLayer.setCustomParameters({}, { 'layerDefs': `{'${this._config.field.name}': '${this._config.field.name} > DATE ${dateMin}'}` });
+            }
         }
     }
 }

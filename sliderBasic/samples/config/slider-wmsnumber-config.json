@@ -91,28 +91,56 @@
       },
       "layers": [
         {
-          "id": "0",
-          "name": "Electric Transmission Line",
-          "layerType": "esriFeature",
-          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/1"
-        },
-        {
           "id": "powerplant100mw-naturalGas",
           "name": "Natural Gas Pipeline",
           "layerType": "esriFeature",
           "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/2"
         },
         {
-          "id": "GeoChron",
-          "name": "GeoChron",
-          "layerType": "esriDynamic",
-          "layerEntries": [{
-            "index": 0,
-            "nameField": "OBJECTID",
-            "name": "Geo"
-          }],
-          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/GSCC/Geochronology/MapServer/"
-        }
+          "layerType": "ogcWms",
+          "colour": "#ff0000",
+          "toggleSymbology": true,
+          "refreshInterval": 0,
+          "expectedResponseTime": 4000,
+          "tolerance": 5,
+          "imageFormat": "png32",
+          "singleEntryCollapse": false,
+          "suppressGetCapabilities": false,
+          "state": {
+              "opacity": 1,
+              "visibility": true,
+              "boundingBox": false,
+              "query": true,
+              "snapshot": false,
+              "hovertips": true
+          },
+          "layerEntries": [
+              {
+                  "outfields": "*",
+                  "stateOnly": false,
+                  "state": {
+                      "opacity": 1,
+                      "visibility": true,
+                      "boundingBox": false,
+                      "query": true,
+                      "snapshot": false,
+                      "hovertips": true
+                  },
+                  "allStyles": [
+                      "default"
+                  ],
+                  "init": true,
+                  "id": "0",
+                  "name": "Sample",
+                  "currentStyle": "default"
+              }
+          ],
+          "name": "wms",
+          "id": "wms",
+          "url": "https://webservices.maps.canada.ca/arcgis/services/ELECTIONS/federal_electoral_districts_boundaries_2013_fr/MapServer/WMSServer",
+          "featureInfoMimeType": "text/html",
+          "legendMimeType": "image/png"
+      }
       ],
       "extentSets": [
         {
@@ -269,10 +297,11 @@
       "rangeSlider": {
         "controls": ["lock", "loop", "delay", "refresh", "export"],
         "layers": {
-            "id": "GeoChron",
-            "field": { "name": "LONGITUDE", "type": "number" },
+            "id": "wms",
+            "field": { "name": "OBJECTID", "type": "number" },
             "delay": 3000,
-            "range": { "min": -135, "max": -125 }
+            "range": { "min": 90, "max": 100 },
+            "limit": { "min": 0, "max": 400 }
         }
       }
     }
