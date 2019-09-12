@@ -9,11 +9,8 @@
         "sass": "bash ./compileSass.sh",
         "prepublishOnly": "tsc && npm run sass",
         "postversion": "git push upstream v%npm_package_version%",
-<<<<<<< HEAD
-        "nonPublishedBuild": "webpack --config ./bin/build/webpack.config.js"
-=======
+        "nonPublishedBuild": "webpack --config ./bin/build/webpack.config.js",
         "deploy": "gh-pages -d dist"
->>>>>>> feat(slider): Add a time/range slider plugin
     },
     "files": [
         "lib/**/*",
