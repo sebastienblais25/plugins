@@ -135,9 +135,9 @@
                   "currentStyle": "default"
               }
           ],
-          "name": "wms flood in Canada",
+          "name": "wms mineral claims",
           "id": "wms",
-          "url": "https://webservices.maps.canada.ca/arcgis/services/NRCan/EGS_Flood_Product_CurrentYear_en/MapServer/WMSServer",
+          "url": "https://data.aadnc-aandc.gc.ca/geomatics/services/Donnees_Ouvertes-Open_Data/Claim_minier_NU_Mineral_Claim/MapServer/WMSServer",
           "featureInfoMimeType": "text/html",
           "legendMimeType": "image/png"
       }
@@ -146,10 +146,10 @@
         {
           "id": "EXT_NRCAN_Lambert_3978",
           "default": {
-            "xmax": 1560049.62920965,
-            "xmin": 1472348.0163064243,
-            "ymax": -144657.39848446375,
-            "ymin": -187472.35911438504
+            "xmax": 3549492,
+            "xmin": -2681457,
+            "ymax": 3482193,
+            "ymin": -883440
           },
           "spatialReference": {
             "wkid": 3978
@@ -298,10 +298,10 @@
         "controls": ["lock", "loop", "delay", "refresh", "export"],
         "layers": {
             "id": "wms",
-            "field": { "name": "datetime_utc", "type": "date" },
+            "field": { "name": "CANCEL_DT", "type": "date" },
             "delay": 3000,
-            "range": { "min": 1554091200000, "max": 1556683200000 },
-            "limit": { "min": 1554091200000, "max": 1559361600000 }
+            "range": { "min": 504939600000, "max": 631170000000 },
+            "limit": { "min": 504939600000, "max": 1577854800000 }
         }
       }
     }

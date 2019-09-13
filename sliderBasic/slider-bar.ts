@@ -318,23 +318,30 @@ export class SliderBar {
             if (this._config.field.type === 'number') {
                 myLayer.setFilterSql('rangeSliderNumberFilter', `${this._config.field.name} > ${range.min} AND ${this._config.field.name} <= ${range.max}`);
             } else if (this._config.field.type === 'date') {
-                const min = new Date(range.min);
-                const max = new Date (range.max);
-                const dateMin = `${min.getMonth() + 1}/${min.getDate()}/${min.getFullYear()}`;
-                const dateMax = `${max.getMonth() + 1}/${max.getDate()}/${max.getFullYear()}`;
-                myLayer.setFilterSql('rangeSliderDateFilter', `${this._config.field.name} > DATE \'${dateMin}\' AND ${this._config.field.name} <= DATE \'${dateMax}\'`);
+                const dates = this.getDate(range);
+                myLayer.setFilterSql('rangeSliderDateFilter', `${this._config.field.name} > DATE \'${dates[0]}\' AND ${this._config.field.name} <= DATE \'${dates[1]}\'`);
             }
         } else if (layerType === 'ogcWms') {
+            // The way it works with string (we can use wildcard like %)
+            // myLayer.esriLayer.setCustomParameters({}, {layerDefs: "{'0': \"CLAIM_STAT LIKE 'SUSPENDED'\"}"});
             if (this._config.field.type === 'number') {
-                myLayer.esriLayer.setCustomParameters({}, { 'layerDefs': `{'${this._config.field.name}': '${this._config.field.name} > ${range.min} AND ${this._config.field.name} <= ${range.max}'}` });
+                myLayer.esriLayer.setCustomParameters({}, { 'layerDefs': `{'${myLayer._viewerLayer._defaultFC}': '${this._config.field.name} > ${range.min} AND ${this._config.field.name} <= ${range.max}'}` });
             } else if (this._config.field.type === 'date') {
-                const min = new Date(range.min);
-                const max = new Date (range.max);
-                const dateMin = `${min.getMonth() + 1}/${min.getDate()}/${min.getFullYear()}`;
-                const dateMax = `${max.getMonth() + 1}/${max.getDate()}/${max.getFullYear()}`;
-                myLayer.esriLayer.setCustomParameters({}, { 'layerDefs': `{'${this._config.field.name}': '${this._config.field.name} > DATE ${dateMin}'}` });
+                const dates = this.getDate(range);
+                myLayer.esriLayer.setCustomParameters({}, {layerDefs: `{'${myLayer._viewerLayer._defaultFC}': \"${this._config.field.name} > DATE '${dates[0]}' AND ${this._config.field.name} < DATE '${dates[1]}'\"}`});
             }
         }
+
     }
+
+    getDate(range: Range): string[] {
+        const min = new Date(range.min);
+        const max = new Date (range.max);
+        const dateMin = `${min.getMonth() + 1}/${min.getDate()}/${min.getFullYear()}`;
+        const dateMax = `${max.getMonth() + 1}/${max.getDate()}/${max.getFullYear()}`;
+
+        return [dateMin, dateMax];
+    }
+
 }
 
