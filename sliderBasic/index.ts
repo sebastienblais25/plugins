@@ -24,57 +24,60 @@ export default class SliderBasic {
         // set slider bar controls
         this.config = this._RV.getConfig('plugins').rangeSlider;
 
-        // set layer
-        this.mapApi.layersObj.layerAdded.subscribe((layer: any) => this.setLayer(layer, this.config.layers));
+        // add/merge configuration for range, limit and delay
+        this.extendConfig = {...SliderBasic.prototype.layerOptions, ...this.config.params};
+        this.extendConfig.language = this._RV.getCurrentLang();
+
+        // get array of id(s) and set layer(s)
+        const ids = this.config.layers.map(layer => layer.id);
+        this.mapApi.layersObj.layerAdded.subscribe((layer: any) => this.setLayer(layer, this.config.layers, ids));
     }
 
-    setLayer(layer: any, config: any): void {
+    setLayer(layer: any, config: any, ids: string[]): void {
 
         // If it is the right layer, get the attributes
-        if (config.id === layer.id) {
-            this.extendConfig = {...SliderBasic.prototype.layerOptions, ...config};
-            this.extendConfig.language = this._RV.getCurrentLang();
-
-            const layerType = layer.type;
+        if (ids.indexOf(layer.id) !== -1) {
+            const layerInfo = config.find(i => i.id === layer.id);
+            this.extendConfig.layers.push(layerInfo);
+            this.extendConfig.nbLayers += 1;
 
             // If layer is ESRI, get all attributes to define the limit
-            if (layerType === 'esriDynamic' || layerType === 'esrifeature') {
+            const layerType = layer.type;
+            if ((layerType === 'esriDynamic' || layerType === 'esriFeature') && this.extendConfig.nbLayers === this.config.layers.length) {
                 const attrs = layer.getAttributes();
 
                 if (attrs.length === 0) {
                     // make sure all attributes are added before creating the slider
                     this.mapApi.layers.attributesAdded.pipe(take(1)).subscribe(attrs => {
                         if (attrs.attributes.length > 0) {
-    
+
                             // get attributes value for specified field
                             const values = [];
                             for (let row of attrs.attributes) {
-                                values.push(row[this.extendConfig.field.name])
+                                values.push(row[layerInfo.field]);
                             }
-    
+
                             // set limit and range if not set from configuration
                             const limits: Range = { min: Math.min.apply(null, values), max: Math.max.apply(null, values) };
                             if (this.extendConfig.limit.min === null) { this.extendConfig.limit = limits; }
                             if (this.extendConfig.range.min === null) { this.extendConfig.range = limits; }
                         }
 
-                        this.setSliderBar(layer);
+                        this.setSliderBar();
                     });
                 }
-
-            } else if (layerType === 'ogcWms') {
+            } else if (layerType === 'ogcWms' && this.extendConfig.nbLayers === this.config.layers.length) {
                 // everything must be set inside configuration (range and limit)
-                this.setSliderBar(layer)
+                this.setSliderBar();
             }
         }
     }
 
-    setSliderBar(layer: any): void {
+    setSliderBar(): void {
         // set step
         this.extendConfig.step = (this.extendConfig.range.max - this.extendConfig.range.min);
-    
-        // initialiaze slider bar with active layer
-        this.extendConfig.layerRef = layer;
+
+        // initialiaze slider bar
         this.slider = new SliderBar(this.mapApi, this.extendConfig);
 
         // set bar controls then open the panel
@@ -107,7 +110,6 @@ export default class SliderBasic {
         return temp;
     }
 }
-
 export interface Range {
     min: number,
     max: number
@@ -139,7 +141,9 @@ SliderBasic.prototype.layerOptions = {
     loop: false,
     export: false,
     range: { min: null, max: null },
-    limit: { min: null, max: null }
+    limit: { min: null, max: null },
+    layers: [],
+    nbLayers: 0
 };
 
 SliderBasic.prototype.translations = {

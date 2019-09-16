@@ -1,6 +1,7 @@
 export default class SliderBasic {
     init(mapApi: any): void;
     setLayer(layer: any, config: any): void;
+    setSliderBar(layer: any): void;
     setBarControls(controls: any): void;
     compileTemplate(template: any): JQuery<HTMLElement>;
 }

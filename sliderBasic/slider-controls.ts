@@ -94,7 +94,6 @@ export class SliderControls {
         return temp;
     }
 }
-
 export interface SliderControls {
     mapApi: any;
 }

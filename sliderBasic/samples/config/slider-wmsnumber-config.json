@@ -296,13 +296,16 @@
     "plugins": {
       "rangeSlider": {
         "controls": ["lock", "loop", "delay", "refresh", "export"],
-        "layers": {
+        "params": {
+          "delay": 3000,
+          "range": { "min": 90, "max": 100 },
+          "limit": { "min": 0, "max": 400 },
+          "type": "number"
+        },
+        "layers": [{
             "id": "wms",
-            "field": { "name": "OBJECTID", "type": "number" },
-            "delay": 3000,
-            "range": { "min": 90, "max": 100 },
-            "limit": { "min": 0, "max": 400 }
-        }
+            "field": "OBJECTID"
+        }]
       }
     }
   }

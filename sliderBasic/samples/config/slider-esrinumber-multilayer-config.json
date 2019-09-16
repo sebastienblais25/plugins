@@ -86,61 +86,38 @@
         "root": {
           "name": "root",
           "children": [
+            {
+              "name": "A Group with a hidden layer",
+              "expanded": true,
+              "children": [
+                {
+                  "layerId": "0",
+                  "hidden": true
+                },
+                {
+                  "layerId": "powerplant100mw-naturalGas"
+                }
+              ]
+            },
+            {
+              "layerId": "GeoChron"
+            }
           ]
         }
       },
       "layers": [
         {
-          "id": "powerplant100mw-naturalGas",
-          "name": "Natural Gas Pipeline",
+          "id": "0",
+          "name": "Hydroelectric",
           "layerType": "esriFeature",
-          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/2"
+          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/20"
         },
         {
-          "layerType": "ogcWms",
-          "colour": "#ff0000",
-          "toggleSymbology": true,
-          "refreshInterval": 0,
-          "expectedResponseTime": 4000,
-          "tolerance": 5,
-          "imageFormat": "png32",
-          "singleEntryCollapse": false,
-          "suppressGetCapabilities": false,
-          "state": {
-              "opacity": 1,
-              "visibility": true,
-              "boundingBox": false,
-              "query": true,
-              "snapshot": false,
-              "hovertips": true
-          },
-          "layerEntries": [
-              {
-                  "outfields": "*",
-                  "stateOnly": false,
-                  "state": {
-                      "opacity": 1,
-                      "visibility": true,
-                      "boundingBox": false,
-                      "query": true,
-                      "snapshot": false,
-                      "hovertips": true
-                  },
-                  "allStyles": [
-                      "default"
-                  ],
-                  "init": true,
-                  "id": "0",
-                  "name": "Sample",
-                  "currentStyle": "default"
-              }
-          ],
-          "name": "wms mineral claims",
-          "id": "wms",
-          "url": "https://data.aadnc-aandc.gc.ca/geomatics/services/Donnees_Ouvertes-Open_Data/Claim_minier_NU_Mineral_Claim/MapServer/WMSServer",
-          "featureInfoMimeType": "text/html",
-          "legendMimeType": "image/png"
-      }
+          "id": "1",
+          "name": "Natural Gas",
+          "layerType": "esriFeature",
+          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/21"
+        }
       ],
       "extentSets": [
         {
@@ -295,16 +272,18 @@
     },
     "plugins": {
       "rangeSlider": {
-        "controls": ["lock", "loop", "delay", "refresh", "export"],
+        "controls": ["lock", "delay", "refresh"],
         "params": {
           "delay": 3000,
-          "range": { "min": 504939600000, "max": 631170000000 },
-          "limit": { "min": 504939600000, "max": 1577854800000 },
-          "type": "date"
+          "range": { "min": 1400, "max": 1900 },
+          "type": "number"
         },
         "layers": [{
-            "id": "wms",
-            "field": "CANCEL_DT"
+          "id": "0",
+          "field": "Total_MW"
+        }, {
+          "id": "1",
+          "field": "Total_MW"
         }]
       }
     }

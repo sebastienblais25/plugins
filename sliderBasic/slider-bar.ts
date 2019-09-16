@@ -16,7 +16,6 @@ export class SliderBar {
 
     private _slider: any;
     private _mapApi: any;
-    private _layer: any;
     private _config: any;
     private _playInterval: any;
 
@@ -36,7 +35,6 @@ export class SliderBar {
         this._mapApi = mapApi;
         this._slider = document.getElementById('nouislider');
         this._config = config;
-        this._layer = this._config.layerRef; // TODO: do we need
 
         // set dynamic values used in accessor
         this._slider.delay = config.delay;
@@ -56,14 +54,14 @@ export class SliderBar {
                 start: [this._slider.range.min, this._slider.range.max],
                 connect: true,
                 behaviour: 'drag-tap',
-                tooltips: [{ to: (value: number) => this.formatPips(value, this._config.field.type, this._config.language), from: Number },
-                            { to: (value: number) => this.formatPips(value, this._config.field.type, this._config.language), from: Number }],
+                tooltips: [{ to: (value: number) => this.formatPips(value, this._config.type, this._config.language), from: Number },
+                            { to: (value: number) => this.formatPips(value, this._config.type, this._config.language), from: Number }],
                 range: this.setRanges(mapWidth, config.limit, delta),
                 pips: {
                     mode: 'range',
                     density: (mapWidth > 800) ? 2 : 25,
                     format: {
-                        to: (value: number) => { return this.formatPips(value, this._config.field.type, this._config.language); },
+                        to: (value: number) => { return this.formatPips(value, this._config.type, this._config.language); },
                         from: Number
                     }
                 }
@@ -92,7 +90,7 @@ export class SliderBar {
         let range: any = {}
         range.min = limit.min;
         range.max = limit.max;
-        range['50%'] = limit.min + delta / 2
+        range['50%'] = limit.min + delta / 2;
 
         if (width > 800) {
             range['25%'] = limit.min + delta / 4;
@@ -131,7 +129,7 @@ export class SliderBar {
     }
 
     get loop() {
-        return this._slider.loop
+        return this._slider.loop;
     }
 
     set delay(delay: number) {
@@ -311,27 +309,32 @@ export class SliderBar {
     }
 
     setDefinitionQuery(range: Range) {
-        const myLayer = this._mapApi.layers.getLayersById(this._config.id)[0];
-        const layerType = myLayer.type;
+        for (let layer of this._config.layers) {
+            const myLayer = this._mapApi.layers.getLayersById(layer.id)[0];
+            const layerType = myLayer.type;
 
-        if (layerType === 'esriDynamic' || layerType === 'esrifeature') {
-            if (this._config.field.type === 'number') {
-                myLayer.setFilterSql('rangeSliderNumberFilter', `${this._config.field.name} > ${range.min} AND ${this._config.field.name} <= ${range.max}`);
-            } else if (this._config.field.type === 'date') {
-                const dates = this.getDate(range);
-                myLayer.setFilterSql('rangeSliderDateFilter', `${this._config.field.name} > DATE \'${dates[0]}\' AND ${this._config.field.name} <= DATE \'${dates[1]}\'`);
-            }
-        } else if (layerType === 'ogcWms') {
-            // The way it works with string (we can use wildcard like %)
-            // myLayer.esriLayer.setCustomParameters({}, {layerDefs: "{'0': \"CLAIM_STAT LIKE 'SUSPENDED'\"}"});
-            if (this._config.field.type === 'number') {
-                myLayer.esriLayer.setCustomParameters({}, { 'layerDefs': `{'${myLayer._viewerLayer._defaultFC}': '${this._config.field.name} > ${range.min} AND ${this._config.field.name} <= ${range.max}'}` });
-            } else if (this._config.field.type === 'date') {
-                const dates = this.getDate(range);
-                myLayer.esriLayer.setCustomParameters({}, {layerDefs: `{'${myLayer._viewerLayer._defaultFC}': \"${this._config.field.name} > DATE '${dates[0]}' AND ${this._config.field.name} < DATE '${dates[1]}'\"}`});
+            if (layerType === 'esriDynamic' || layerType === 'esriFeature') {
+                if (this._config.type === 'number') {
+                    myLayer.setFilterSql('rangeSliderNumberFilter',
+                        `${layer.field} > ${range.min} AND ${layer.field} <= ${range.max}`);
+                } else if (this._config.type === 'date') {
+                    const dates = this.getDate(range);
+                    myLayer.setFilterSql('rangeSliderDateFilter',
+                        `${layer.field} > DATE \'${dates[0]}\' AND ${layer.field} <= DATE \'${dates[1]}\'`);
+                }
+            } else if (layerType === 'ogcWms') {
+                // The way it works with string (we can use wildcard like %)
+                // myLayer.esriLayer.setCustomParameters({}, {layerDefs: "{'0': \"CLAIM_STAT LIKE 'SUSPENDED'\"}"});
+                if (this._config.type === 'number') {
+                    myLayer.esriLayer.setCustomParameters({}, { 'layerDefs':
+                        `{'${myLayer._viewerLayer._defaultFC}': '${layer.field} > ${range.min} AND ${layer.field} <= ${range.max}'}` });
+                } else if (this._config.type === 'date') {
+                    const dates = this.getDate(range);
+                    myLayer.esriLayer.setCustomParameters({}, { 'layerDefs':
+                        `{'${myLayer._viewerLayer._defaultFC}': \"${layer.field} > DATE '${dates[0]}' AND ${layer.field} < DATE '${dates[1]}'\"}` });
+                }
             }
         }
-
     }
 
     getDate(range: Range): string[] {

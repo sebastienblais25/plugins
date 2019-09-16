@@ -31,4 +31,5 @@ export declare class SliderBar {
     setLeftAnchor(values: number, direction: string, step: number): number;
     setRightAnchor(values: number, direction: string, step: number): number;
     setDefinitionQuery(range: Range): void;
+    getDate(range: Range): string[];
 }
