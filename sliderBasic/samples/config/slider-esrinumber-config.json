@@ -64,7 +64,7 @@
         "mouseInfo": {
           "enabled": true,
           "spatialReference": {
-            "wkid": 102100
+            "wkid": 4326
           }
         },
         "northArrow": {
@@ -86,22 +86,6 @@
         "root": {
           "name": "root",
           "children": [
-            {
-              "name": "A Group with a hidden layer",
-              "expanded": true,
-              "children": [
-                {
-                  "layerId": "0",
-                  "hidden": true
-                },
-                {
-                  "layerId": "powerplant100mw-naturalGas"
-                }
-              ]
-            },
-            {
-              "layerId": "GeoChron"
-            }
           ]
         }
       },
@@ -283,13 +267,17 @@
     },
     "plugins": {
       "rangeSlider": {
-        "controls": ["lock", "delay", "refresh"],
-        "layers": {
+        "controls": ["lock", "loop", "delay", "refresh", "export"],
+        "params": {
+          "delay": 3000,
+          "range": { "min": -135, "max": -125 },
+          "limit": { "min": -135, "max": -90 },
+          "type": "number"
+        },
+        "layers": [{
             "id": "GeoChron",
-            "field": { "name": "LONGITUDE", "type": "number" },
-            "interval": 20,
-            "range": { "min": -110, "max": -87 }
-        }
+            "field": "LONGITUDE"
+        }]
       }
     }
   }

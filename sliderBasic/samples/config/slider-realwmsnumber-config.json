@@ -24,6 +24,7 @@
     "version": "2.0",
     "language": "en",
     "services":{
+      "corsEverywhere": true,
       "proxyUrl":"https://maps.canada.ca/wmsproxy/ws/wmsproxy/executeFromProxy",
       "geometryUrl":"https://webservices.maps.canada.ca/arcgis/rest/services/Utilities/Geometry/GeometryServer",
       "exportMapUrl":"https://webservices.maps.canada.ca/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
@@ -86,48 +87,36 @@
         "root": {
           "name": "root",
           "children": [
-            {
-              "name": "A Group with a hidden layer",
-              "expanded": true,
-              "children": [
-                {
-                  "layerId": "0",
-                  "hidden": true
-                },
-                {
-                  "layerId": "powerplant100mw-naturalGas"
-                }
-              ]
-            },
-            {
-              "layerId": "GeoChron"
-            }
           ]
         }
       },
       "layers": [
         {
-          "id": "0",
-          "name": "Electric Transmission Line",
-          "layerType": "esriFeature",
-          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/1"
+          "id": "wms",
+          "layerType": "ogcWms",
+          "url": "http://webservices.maps.canada.ca/arcgis/services/NRCan/earthquakes_en/MapServer/WmsServer",
+          "name": "Real WMS",
+          "controls": ["data", "visibility", "opacity"],
+          "layerEntries": [
+            {
+                "id": "3",
+                "name": "Sample",
+                "currentStyle": "default"
+            }]
         },
         {
-          "id": "powerplant100mw-naturalGas",
-          "name": "Natural Gas Pipeline",
-          "layerType": "esriFeature",
-          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/2"
-        },
-        {
-          "id": "GeoChron",
-          "name": "GeoChron",
-          "layerType": "esriDynamic",
-          "layerEntries": [{
-            "index": 0,
-            "nameField": "OBJECTID",
-            "name": "Geo"
-          }],
-          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/GSCC/Geochronology/MapServer/"
+          "id": "wfs",
+          "layerType": "ogcWfs",
+          "url": "http://geo.weather.gc.ca/geomet-beta/features/collections/ahccd-trends/items?measurement_type__type_mesure=temp_max&period__periode=Jan&startindex=0&limit=1000",
+          "name": "Homogenized mean temperature",
+          "nameField": "station_name",
+          "state": {
+            "opacity": 1,
+            "visibility": true
+          },
+          "xyInAttribs": true,
+          "colour": "#f04116",
+          "controls": ["data", "visibility", "opacity"]
         }
       ],
       "extentSets": [
@@ -283,15 +272,16 @@
     },
     "plugins": {
       "rangeSlider": {
-        "controls": ["lock", "delay", "export", "refresh"],
+        "controls": ["lock", "loop", "delay", "refresh", "export"],
         "params": {
           "delay": 3000,
-          "range": { "min": 1109108871000, "max": 1111505342000 },
-          "type": "date"
+          "range": { "min": 1051350, "max": 1101350 },
+          "limit": { "min": 1030000, "max": 1130000 },
+          "type": "number"
         },
         "layers": [{
-            "id": "GeoChron",
-            "field": "LAST_UPDATED"
+            "id": "wfs",
+            "field": "station_id__id_station"
         }]
       }
     }
