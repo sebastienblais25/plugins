@@ -59,18 +59,18 @@
             <button type="button" onclick="displayExtentBox()">Get Extent Box</button>
             <label id="extbbox"></label>
         </div>
-    
+
         <div>
             <!-- zoom lat\long section -->
             <input type="text" id="zoomPt" name="zoomPt" value="POINT(-112.92 53.8)"></input>
             <button type="button" onclick="zoomPt()">Zoom Lat\Long</button>
-    
+
             <!-- zoom polygon section section -->
             <input type="text" id="zoomPoly" name="zoomPoly"
                 value="POLYGON((-128.75 53.8,-128.75 53.92,-112.92 53.92,-112.92 53.8,-128.75 53.8))"></input>
             <button type="button" onclick="zoomPoly()">Zoom Polygon</button>
         </div>
-    
+
         <div>
             <!-- set defintiion query section -->
             <label for="layerId">Layer Id</label>
@@ -88,7 +88,7 @@
                 onclick="window.osdp.resetDefinitionQuery('mapOSDP', document.getElementById('layerId').value)">Reset def
                 query</button>
         </div>
-    
+
         <div>
             <!-- add layer by uuid section -->
             <label for="addLayerUUID">UUID</label>
@@ -97,13 +97,14 @@
                 <option value="3d282116-e556-400c-9306-ca1a3cada77f">
                 <option value="b6b6d5a6-bded-4b6e-9e8a-17f6e1b538dc">
                 <option value="7796058d-507f-4b6d-b169-8c6af60c5916">
+                <option value="7fa46d41-2d69-47e8-b66b-51ce178b9983">
             </datalist>
             <button type="button" onclick="window.osdp.addLayerByUUID(document.getElementById('addLayerUUID').value)">Add
                 Layer</button>
             <label id="nbLayer"></label>
             <button type="button" onclick="window.osdp.addLayerByConfig('mapOSDP', {})">Add Layer by Config</button>
         </div>
-    
+
         <div>
             <!-- Add geometry-->
             <label for="addPoints">Points</label>
@@ -137,13 +138,13 @@
                 onclick="window.osdp.saveState('mapOSDPBuilder'); window.open('http://localhost:6001/osdp/samples/osdp-builder.html');">Open
                 Builder</button>
         </div>
-    
+
         <p>Note: To make this work properly for the builder, layer id must be the catalogue id (e.g. rcs.myid.en or
             rcs.myid.fr). This way, bookmark engine recognize the layer and load it. Should be use only with autopopulate
             legend.</p>
         <p>Note: You can't remove layers from a structure legend. To have the remove button, you need autopopulate type.</p>
     </div>
-    
+
     <script
         src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Object.entries,Object.values,Array.prototype.find,Array.prototype.findIndex,Array.prototype.values,Array.prototype.includes,HTMLCanvasElement.prototype.toBlob,String.prototype.repeat,String.prototype.codePointAt,String.fromCodePoint,NodeList.prototype.@@iterator,Promise,Promise.prototype.finally"></script>
     <script src="/legacy-api.js"></script>

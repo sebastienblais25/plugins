@@ -20,11 +20,26 @@ export default class OSDP {
         const myInter = setInterval(() => {
             if (typeof (<any>window).RAMP.mapById(this.api.id) !== 'undefined') {
                 (<any>window).RAMP.mapById(this.api.id).layersObj.addLayer('graphicsOSDP');
+
+                // need to call later because if called before map initilize, rest of function is skipped
+                this.setZoomEndEvent((<any>window).RAMP.mapById(this.api.id));
+
                 clearInterval(myInter);
             }
         }, 100);
 
         OSDP.instances[this.api.id] = this;
+    }
+
+    setZoomEndEvent(mapi: any): void {
+        mapi.esriMap.on('zoom-end', evt => {
+            console.log(`zoom level:  ${evt.level}, new extent: ${JSON.stringify(evt.extent)}`);
+        });
+
+        // I think you have already the code the extent change but I added it in case
+        mapi.extentChanged.subscribe(evt => {
+            console.log(`new extent: ${JSON.stringify(evt)}`);
+        });
     }
 
     addLayerByUUID(uuid: string): void {
@@ -101,7 +116,7 @@ export default class OSDP {
             let elt = element;
             elt = elt.replace('POINT', '').replace(/\( */g, '[').replace(/ *\)/g, ']');
             elt = elt.trim();
-            elt = elt.replace(/ +/g,', '); 
+            elt = elt.replace(/ +/g,', ');
             arr[index] = elt;
         });
         return `[${arrayPt}]`;
@@ -140,7 +155,7 @@ export default class OSDP {
 
         // get the extent geometry from multi-point
         if (points.length === 1) {
-            this.zoomPt(mapId, input);
+            this.zoomPt(mapId, values);
         } else {
             const extent = this.createExtentGeom(points);
             this.zoomPoints(mapId, extent);
@@ -200,8 +215,9 @@ export default class OSDP {
     zoomPt(mapId: string, value: string): void {
         const myMap = (<any>window).RAMP.mapById(mapId);
         const ramp = (<any>window).RAMP;
-        const ptcoords = JSON.parse(value)[0];
-        const pt = new ramp.GEO.XY(parseFloat(ptcoords[0]), parseFloat(ptcoords[1]));
+        const input = this.inputParsePoints(value);
+        const ptcoords = JSON.parse(input);
+        const pt = new ramp.GEO.XY(parseFloat(ptcoords[0][0]), parseFloat(ptcoords[0][1]));
 
         myMap.zoom = 13;
         myMap.setCenter(pt);
@@ -282,31 +298,6 @@ export default class OSDP {
 
         // use a timeout to wait until code finish to run. If no timeout, RV is not define
         setTimeout(() => (<any>window).RV.getMap(mapid).initialBookmark(storage));
-    }
-
-    validate(values: string) {
-        const ck_strarray = /^\[[+-]?\d+(\.\d+)?\,+[+-]?\d+(\.\d+)?\]$/
-        const strarray = values;
-        const errors = [];
-
-        if (!ck_strarray.test(strarray)) {
-            errors[errors.length] = "You must enter a valid array of point: [123.55,321.66]";
-        }
-
-        if (errors.length > 0) {
-            this.reportErrors(errors);
-            return false;
-        }
-        return true;
-    }
-
-    reportErrors(errors: any) {
-        let msg = "Please Enter Valide Data...\n";
-        for (let i = 0; i < errors.length; i++) {
-            let numError = i + 1;
-            msg += "\n" + numError + ". " + errors[i];
-        }
-        alert(msg);
     }
 }
 
