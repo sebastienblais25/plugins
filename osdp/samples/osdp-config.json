@@ -116,7 +116,11 @@
         {
           "id":"OSDP_Project",
           "layerType": "esriFeature",
-          "url": "https://webservices.maps.canada.ca/arcgis/rest/services/NRCan/osdp_projects_en/MapServer/0"
+          "url": "https://webservices.maps.canada.ca/arcgis/rest/services/NRCan/osdp_projects_en/MapServer/0",
+          "details": {
+            "parser": "templates/test-script.js",
+            "template": "templates/test-template.html"
+          }
         },
         {
           "id": "geochronologie",

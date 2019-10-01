@@ -23,20 +23,19 @@
     },
     "version": "2.0",
     "language": "en",
-    "services":{
-      "corsEverywhere": true,
+    "services":{  
       "proxyUrl":"https://maps.canada.ca/wmsproxy/ws/wmsproxy/executeFromProxy",
       "geometryUrl":"https://webservices.maps.canada.ca/arcgis/rest/services/Utilities/Geometry/GeometryServer",
       "exportMapUrl":"https://webservices.maps.canada.ca/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
-      "search":{
-         "serviceUrls":{
+      "search":{  
+         "serviceUrls":{  
             "geoNames":"https://geogratis.gc.ca/services/geoname/en/geonames.json",
             "geoLocation":"https://geogratis.gc.ca/services/geolocation/en/locate?q=",
             "geoSuggest":"https://geogratis.gc.ca/services/geolocation/en/suggest?q=",
             "provinces":"https://geogratis.gc.ca/services/geoname/en/codes/province.json",
             "types":"https://geogratis.gc.ca/services/geoname/en/codes/concise.json"
          },
-         "disabledSearches":[
+         "disabledSearches":[  
             "NTS",
             "FSA",
             "LAT/LNG"
@@ -65,7 +64,7 @@
         "mouseInfo": {
           "enabled": true,
           "spatialReference": {
-            "wkid": 4326
+            "wkid": 102100
           }
         },
         "northArrow": {
@@ -83,40 +82,52 @@
         }
       },
       "legend": {
-        "type": "autopopulate",
+        "type": "structure",
         "root": {
           "name": "root",
           "children": [
+            {
+              "name": "A Group with a hidden layer",
+              "expanded": true,
+              "children": [
+                {
+                  "layerId": "0",
+                  "hidden": true
+                },
+                {
+                  "layerId": "powerplant100mw-naturalGas"
+                }
+              ]
+            },
+            {
+              "layerId": "GeoChron"
+            }
           ]
         }
       },
       "layers": [
         {
-          "id": "wms",
-          "layerType": "ogcWms",
-          "url": "http://webservices.maps.canada.ca/arcgis/services/NRCan/earthquakes_en/MapServer/WmsServer",
-          "name": "Real WMS",
-          "controls": ["data", "visibility", "opacity"],
-          "layerEntries": [
-            {
-                "id": "3",
-                "name": "Sample",
-                "currentStyle": "default"
-            }]
+          "id": "0",
+          "name": "Electric Transmission Line",
+          "layerType": "esriFeature",
+          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/1"
         },
         {
-          "id": "wfs",
-          "layerType": "ogcWfs",
-          "url": "http://geo.weather.gc.ca/geomet-beta/features/collections/ahccd-trends/items?measurement_type__type_mesure=temp_max&period__periode=Jan&startindex=0&limit=1000",
-          "name": "Homogenized mean temperature",
-          "nameField": "station_name",
-          "state": {
-            "opacity": 1,
-            "visibility": true
-          },
-          "xyInAttribs": true,
-          "colour": "#f04116",
-          "controls": ["data", "visibility", "opacity"]
+          "id": "powerplant100mw-naturalGas",
+          "name": "Natural Gas Pipeline",
+          "layerType": "esriFeature",
+          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/2"
+        },
+        {
+          "id": "GeoChron",
+          "name": "GeoChron",
+          "layerType": "esriDynamic",
+          "layerEntries": [{
+            "index": 0,
+            "nameField": "OBJECTID",
+            "name": "Geo"
+          }],
+          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/GSCC/Geochronology/MapServer/"
         }
       ],
       "extentSets": [
@@ -249,7 +260,7 @@
             {
               "id": "CBMT",
               "layerType": "esriFeature",
-              "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBMT3978/MapServer"
+              "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBMT3978/MapServer"
             }
           ],
           "tileSchemaId": "EXT_NRCAN_Lambert_3978#LOD_NRCAN_Lambert_3978"
@@ -263,7 +274,7 @@
             {
               "id": "SMR",
               "layerType": "esriFeature",
-              "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/Simple/MapServer"
+              "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/Simple/MapServer"
             }
           ],
           "tileSchemaId": "EXT_NRCAN_Lambert_3978#LOD_NRCAN_Lambert_3978"
@@ -272,17 +283,13 @@
     },
     "plugins": {
       "rangeSlider": {
-        "controls": ["lock", "loop", "delay", "refresh", "export"],
-        "params": {
-          "delay": 3000,
-          "range": { "min": 1051350, "max": 1101350 },
-          "limit": { "min": 1030000, "max": 1130000 },
-          "type": "number"
-        },
-        "layers": [{
-            "id": "wfs",
-            "field": "station_id__id_station"
-        }]
+        "controls": ["lock", "delay", "refresh", "export"],
+        "layers": {
+            "id": "powerplant100mw-naturalGas",
+            "field": "Longitude",
+            "interval": 20,
+            "range": { "min": -110, "max": -87 }
+        }
       }
     }
   }

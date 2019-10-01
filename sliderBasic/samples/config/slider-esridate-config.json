@@ -64,7 +64,7 @@
         "mouseInfo": {
           "enabled": true,
           "spatialReference": {
-            "wkid": 4326
+            "wkid": 102100
           }
         },
         "northArrow": {
@@ -284,15 +284,12 @@
     "plugins": {
       "rangeSlider": {
         "controls": ["lock", "delay", "export", "refresh"],
-        "params": {
-          "delay": 3000,
-          "range": { "min": 1109108871000, "max": 1111505342000 },
-          "type": "date"
-        },
-        "layers": [{
+        "layers": {
             "id": "GeoChron",
-            "field": "LAST_UPDATED"
-        }]
+            "field": { "name": "LAST_UPDATED", "type": "date" },
+            "delay": 3000,
+            "range": { "min": 1109108871000, "max": 1111505342000 }
+        }
       }
     }
   }
