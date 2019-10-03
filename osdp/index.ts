@@ -29,6 +29,10 @@ export default class OSDP {
         }, 100);
 
         OSDP.instances[this.api.id] = this;
+
+        // test url before trying to load
+        this.testService({ 'url': 'https://geoportal.gc.ca/arcgis/rest/services/FGP/CSAS_CoralsSponges2010_EN/MapServer/18' });
+        this.testService({ 'url': 'https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_resource_potential_of_north_america_en/MapServer/0' });
     }
 
     setZoomEndEvent(mapi: any): void {
@@ -77,6 +81,22 @@ export default class OSDP {
                 clearInterval(myInter);
             }
         }, 100);
+    }
+
+    testService(layer: any) {
+        const request = new XMLHttpRequest();
+        request.open('GET', `${layer.url}?f=json`, true);
+        request.onreadystatechange = function(){
+            if (request.readyState === 4){
+                if (request.response.contains('"code":500')) {
+                    console.log(`Error handling service request :Could not find a service with the name '${layer.url}'
+                        in the configured clusters. Service may be stopped or ArcGIS Server may not be running.`);
+                } else {
+                    console.log(`Layer '${layer.url}' should load properly.`);
+                }
+            }
+        };
+        request.send();
     }
 
     setDefinitonQuery(mapId: string, layerId: string, query: string): void {
