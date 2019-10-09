@@ -123,9 +123,11 @@
             <label for="addPolygon">Polygon</label>
             <input id="addPolygon" type="text" list="polygonlist" name="polyg" onfocus="this.value=''"></input>
             <datalist id="polygonlist">
-                <option value="POLYGON((-74 45,-74 46,-71 46,-71 45,-74 45))">
-                <option
-                    value="POLYGON((-77.19  44.93, -76.86 47.219, -71.43   47.769, -72.971 44.556,-77.19 44.93)); POLYGON((-74 45, -74 46, -71 46, -71 45, -74 45))">
+                <option value="POLYGON((-59 48,-59 50,-52 50,-52 48,-59 48))">
+                <option value="POLYGON((-77.19  44.93, -76.86 47.219, -71.43 47.769, -72.971 44.556,-77.19 44.93)); POLYGON((-74 45, -74 46, -71 46, -71 45, -74 45))">
+                <option value="POLYGON((-69.285653 41.296759,-69.285623 71.468325,-47.632527 71.468325,-47.632527 41.296759,-69.285653 41.296759))">
+                <option value="POLYGON((-141.003 41.6755,-141.003 83.1139,-52.6174 83.1139,-52.6174 41.6755,-141.003 41.6755))">
+                <option value="POLYGON((-74.5000 45.0000,-75.0000 45.0000, -75.0000 45.2500, -74.5000 45.2500, -74.5000 45.0000))">
             </datalist>
             <button type="button"
                 onclick="window.osdp.addPolygonsGeometry('mapOSDP', document.getElementById('addPolygon').value)">Add
@@ -166,7 +168,7 @@
     }
 
     function zoomPoly() {
-        window.osdp.zoomPoly('mapOSDP', document.getElementById('zoomPoly').value);
+        window.osdp.zoomWkt('mapOSDP', document.getElementById('zoomPoly').value, 'POLYGON');
     }
 
     // link to api from script
