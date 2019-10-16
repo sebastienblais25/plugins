@@ -1,58 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta content="width=device-width,initial-scale=1" name="viewport" />
-        <title>Plugin: OSDP</title>
 
-        <style>
-            body {
-                display: flex;
-                flex-direction: column;
-            }
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <title>Plugin: OSDP</title>
 
-            .myMap {
-                height: 80%;
-            }
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
 
-            input, label {
-                padding: 5px;
-                margin: 12px;
-            }
+        .myMap {
+            height: 80%;
+        }
 
-            input {
-                width: 18%;
-            }
-        </style>
+        .osdpFunctions {
+            height: 20%;
+            overflow: scroll;
+        }
 
-        <link rel="stylesheet" href="../../rv-styles.css" />
-        <script src="../osdp.js"></script>
-    </head>
+        input,
+        label {
+            padding: 5px;
+            margin: 12px;
+        }
 
-    <body>
-        <div
-            class="myMap"
-            id="mapOSDP"
-            is="rv-map"
-            rv-config="osdp-config.json"
-            rv-langs='["en-CA", "fr-CA"]'
-            rv-plugins="osdp"
-            rv-service-endpoint="https://rcs.open.canada.ca"
-        >
-            <noscript>
-                <p>
-                    This interactive map requires JavaScript. To view this content please enable JavaScript in your
-                    browser or download a browser that supports it.
-                </p>
-                <p></p>
+        input {
+            width: 18%;
+        }
+    </style>
 
-                <p>
-                    Cette carte interactive nécessite JavaScript. Pour voir ce contenu, s'il vous plaît, activer
-                    JavaScript dans votre navigateur ou télécharger un navigateur qui le prend en charge.
-                </p>
-            </noscript>
-        </div>
+    <link rel="stylesheet" href="../../rv-styles.css" />
+    <script src="../osdp.js"></script>
+</head>
 
+<body>
+    <div class="myMap" id="mapOSDP" is="rv-map" rv-config="osdp-config.json" rv-langs='["en-CA", "fr-CA"]'
+        rv-plugins="osdp" rv-service-endpoint="https://rcs.open.canada.ca">
+        <noscript>
+            <p>
+                This interactive map requires JavaScript. To view this content please enable JavaScript in your
+                browser or download a browser that supports it.
+            </p>
+            <p></p>
+
+            <p>
+                Cette carte interactive nécessite JavaScript. Pour voir ce contenu, s'il vous plaît, activer
+                JavaScript dans votre navigateur ou télécharger un navigateur qui le prend en charge.
+            </p>
+        </noscript>
+    </div>
+
+    <div class="osdpFunctions">
         <div>
             <!-- get the extent box section -->
             <button type="button" onclick="displayExtentBox()">Get Extent Box</button>
@@ -61,75 +62,119 @@
 
         <div>
             <!-- zoom lat\long section -->
-            <input type="text" id="zoomPt" name="zoomPt" value="POINT(-112.92  53.8)"></input>
+            <input type="text" id="zoomPt" name="zoomPt" value="POINT(-112.92 53.8)"></input>
             <button type="button" onclick="zoomPt()">Zoom Lat\Long</button>
 
             <!-- zoom polygon section section -->
-            <input type="text" id="zoomPoly" name="zoomPoly" value="POLYGON((-128.75 53.8,-128.75 53.92,-112.92 53.92,-112.92 53.8,-128.75 53.8))"></input>
+            <input type="text" id="zoomPoly" name="zoomPoly"
+                value="POLYGON((-128.75 53.8,-128.75 53.92,-112.92 53.92,-112.92 53.8,-128.75 53.8))"></input>
             <button type="button" onclick="zoomPoly()">Zoom Polygon</button>
         </div>
 
         <div>
             <!-- set defintiion query section -->
             <label for="layerId">Layer Id</label>
-            <input type="text" id="layerId" list="layersList" name="layers"></input>
+            <input type="text" id="layerId" list="layersList" name="layers" onfocus="this.value=''"></input>
             <datalist id="layersList">
                 <option value="rcs.e313db89-4219-4a5e-a543-772a86068710.en">
                 <option value="rcs.35c51098-5cd8-44b0-b1cd-c8ce2f5dae89.en">
             </datalist>
             <label for="query">Query</label>
-            <input id="query" type="text" name="query" value="Longitude<-110"></input>
-            <button type="button" onclick="window.osdp.setDefinitonQuery('mapOSDP', document.getElementById('layerId').value, document.getElementById('query').value)">Set def query</button>
-            <button type="button" onclick="window.osdp.resetDefinitionQuery('mapOSDP', document.getElementById('layerId').value)">Reset def query</button>
+            <input id="query" type="text" name="query" value="Longitude<-110" onfocus="this.value=''"></input>
+            <button type="button"
+                onclick="window.osdp.setDefinitonQuery('mapOSDP', document.getElementById('layerId').value, document.getElementById('query').value)">Set
+                def query</button>
+            <button type="button"
+                onclick="window.osdp.resetDefinitionQuery('mapOSDP', document.getElementById('layerId').value)">Reset def
+                query</button>
         </div>
 
         <div>
             <!-- add layer by uuid section -->
             <label for="addLayerUUID">UUID</label>
-            <input id="addLayerUUID" type="text" list="rcsList" name="layer"></input>
+            <input id="addLayerUUID" type="text" list="rcsList" name="layer" onfocus="this.value=''"></input>
             <datalist id="rcsList">
-                    <option value="3d282116-e556-400c-9306-ca1a3cada77f">
-                    <option value="b6b6d5a6-bded-4b6e-9e8a-17f6e1b538dc">
-                    <option value="7796058d-507f-4b6d-b169-8c6af60c5916">
+                <option value="3d282116-e556-400c-9306-ca1a3cada77f">
+                <option value="b6b6d5a6-bded-4b6e-9e8a-17f6e1b538dc">
+                <option value="7796058d-507f-4b6d-b169-8c6af60c5916">
+                <option value="7fa46d41-2d69-47e8-b66b-51ce178b9983">
             </datalist>
-            <button type="button" onclick="window.osdp.addLayerByUUID(document.getElementById('addLayerUUID').value)">Add Layer</button>
+            <button type="button" onclick="window.osdp.addLayerByUUID(document.getElementById('addLayerUUID').value)">Add
+                Layer</button>
             <label id="nbLayer"></label>
             <button type="button" onclick="window.osdp.addLayerByConfig('mapOSDP', {})">Add Layer by Config</button>
         </div>
 
         <div>
+            <!-- Add geometry-->
+            <label for="addPoints">Points</label>
+            <input id="addPoints" type="text" list="pointslist" name="pointsgeom" onfocus="this.value=''"></input>
+            <datalist id="pointslist">
+                <option value="POINT(-76.5 47)">
+                <option value="POINT(-80 55); POINT(-60 45) ">
+            </datalist>
+            <button type="button"
+                onclick="window.osdp.addPointsGeometry('mapOSDP', document.getElementById('addPoints').value)">Add
+                Points</button>
+            <button type="button" onclick="window.osdp.removeGeometries('mapOSDP')">Remove Geometries</button>
+        </div>
+        <div>
+            <!-- Add polygon-->
+            <label for="addPolygon">Polygon</label>
+            <input id="addPolygon" type="text" list="polygonlist" name="polyg" onfocus="this.value=''"></input>
+            <datalist id="polygonlist">
+                <option value="POLYGON((-59 48,-59 50,-52 50,-52 48,-59 48))">
+                <option value="POLYGON((-77.19  44.93, -76.86 47.219, -71.43 47.769, -72.971 44.556,-77.19 44.93)); POLYGON((-74 45, -74 46, -71 46, -71 45, -74 45))">
+                <option value="POLYGON((-69.285653 41.296759,-69.285623 71.468325,-47.632527 71.468325,-47.632527 41.296759,-69.285653 41.296759))">
+                <option value="POLYGON((-141.003 41.6755,-141.003 83.1139,-52.6174 83.1139,-52.6174 41.6755,-141.003 41.6755))">
+                <option value="POLYGON((-74.5000 45.0000,-75.0000 45.0000, -75.0000 45.2500, -74.5000 45.2500, -74.5000 45.0000))">
+            </datalist>
+            <button type="button"
+                onclick="window.osdp.addPolygonsGeometry('mapOSDP', document.getElementById('addPolygon').value)">Add
+                Geometry</button>
+            <button type="button" onclick="window.osdp.removeGeometries('mapOSDP')">Remove Geometries</button>
+        </div>
+        <div>
             <!-- save and load state section -->
-            <button type="button" onclick="window.osdp.saveState('mapOSDPBuilder'); window.open('http://localhost:6001/osdp/samples/osdp-builder.html');">Open Builder</button>
+            <button type="button"
+                onclick="window.osdp.saveState('mapOSDPBuilder'); window.open('http://localhost:6001/osdp/samples/osdp-builder.html');">Open
+                Builder</button>
         </div>
 
-        <p>Note: To make this work properly for the builder, layer id must be the catalogue id (e.g. rcs.myid.en or rcs.myid.fr). This way, bookmark engine recognize the layer and load it. Should be use only with autopopulate legend.</p>
+        <p>Note: To make this work properly for the builder, layer id must be the catalogue id (e.g. rcs.myid.en or
+            rcs.myid.fr). This way, bookmark engine recognize the layer and load it. Should be use only with autopopulate
+            legend.</p>
         <p>Note: You can't remove layers from a structure legend. To have the remove button, you need autopopulate type.</p>
-        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Object.entries,Object.values,Array.prototype.find,Array.prototype.findIndex,Array.prototype.values,Array.prototype.includes,HTMLCanvasElement.prototype.toBlob,String.prototype.repeat,String.prototype.codePointAt,String.fromCodePoint,NodeList.prototype.@@iterator,Promise,Promise.prototype.finally"></script>
-        <script src="../../legacy-api.js"></script>
-        <script src="../../rv-main-test.js"></script>
-    </body>
+    </div>
 
-    <script>
-        window.osdp.layersEvents(layer => {
-            document.getElementById('nbLayer').innerHTML = `layers: ${layer._mapInstance._layerRecords.length}`;
-        });
+    <script
+        src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Object.entries,Object.values,Array.prototype.find,Array.prototype.findIndex,Array.prototype.values,Array.prototype.includes,HTMLCanvasElement.prototype.toBlob,String.prototype.repeat,String.prototype.codePointAt,String.fromCodePoint,NodeList.prototype.@@iterator,Promise,Promise.prototype.finally"></script>
+    <script src="../../legacy-api.js"></script>
+    <script src="../../rv-main-test.js"></script>
+</body>
 
-        function displayExtentBox() {
-            var extbox = window.osdp.getExtentBox();
-            document.getElementById('extbbox').innerText = `[${JSON.stringify(extbox.northEast)}, ${JSON.stringify(extbox.southWest)}]`;
-        }
+<script>
+    window.osdp.layersEvents(layer => {
+        document.getElementById('nbLayer').innerHTML = `layers: ${layer._mapInstance._layerRecords.length}`;
+    });
 
-        function zoomPt() {
-            window.osdp.zoomPt('mapOSDP', document.getElementById('zoomPt').value);
-        }
+    function displayExtentBox() {
+        var extbox = window.osdp.getExtentBox();
+        document.getElementById('extbbox').innerText = `[${JSON.stringify(extbox.northEast)}, ${JSON.stringify(extbox.southWest)}]`;
+    }
 
-        function zoomPoly() {
-            window.osdp.zoomPoly('mapOSDP', document.getElementById('zoomPoly').value);
-        }
+    function zoomPt() {
+        window.osdp.zoomPt('mapOSDP', document.getElementById('zoomPt').value);
+    }
 
-        // link to api from script
-        RAMP.mapAdded.subscribe(mapi => {
-            console.log('map');
-        });
-    </script>
+    function zoomPoly() {
+        window.osdp.zoomWkt('mapOSDP', document.getElementById('zoomPoly').value, 'POLYGON');
+    }
+
+    // link to api from script
+    RAMP.mapAdded.subscribe(mapi => {
+        console.log('map');
+    });
+</script>
+
 </html>
