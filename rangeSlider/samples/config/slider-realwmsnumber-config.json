@@ -96,7 +96,7 @@
           "layerType": "ogcWms",
           "url": "http://webservices.maps.canada.ca/arcgis/services/NRCan/earthquakes_en/MapServer/WmsServer",
           "name": "Real WMS",
-          "controls": ["data", "visibility", "opacity"],
+          "controls": ["data", "visibility", "opacity", "reload"],
           "layerEntries": [
             {
                 "id": "3",
@@ -104,6 +104,21 @@
                 "currentStyle": "default"
             }]
         },
+        {
+        "layerChoice": "ogcWms",
+        "layerType": "ogcWms",
+        "suppressGetCapabilities": true,
+        "layerEntries": [
+            {
+                "init": true,
+                "id": "CABIN",
+                "name": "CABIN"
+            }
+        ],
+        "name": "CABIN",
+        "id": "wms2",
+        "url": "https://cabin-rcba.ec.gc.ca/cabin_ows.asp"
+    },
         {
           "id": "wfs",
           "layerType": "ogcWfs",
@@ -275,13 +290,13 @@
         "controls": ["lock", "loop", "delay", "refresh", "export"],
         "params": {
           "delay": 3000,
-          "range": { "min": 1051350, "max": 1101350 },
-          "limit": { "min": 1030000, "max": 1130000 },
+          "range": { "min": 2013, "max": 2014 },
+          "limit": { "min": 2000, "max": 2018 },
           "type": "number"
         },
         "layers": [{
-            "id": "wfs",
-            "field": "station_id__id_station"
+            "id": "wms2",
+            "field": "year"
         }]
       }
     }
