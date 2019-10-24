@@ -81,55 +81,43 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./chart/loader.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./rangeSliderBasic/loader.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./chart/index.ts":
-/*!************************!*\
-  !*** ./chart/index.ts ***!
-  \************************/
+/***/ "./rangeSliderBasic/index.ts":
+/*!***********************************!*\
+  !*** ./rangeSliderBasic/index.ts ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n// decided to first use chartjs because of is simplicity. TODO: look for D3 https://www.slant.co/versus/10578/10577/~chart-js_vs_d3-js\n// https://en.wikipedia.org/wiki/Comparison_of_JavaScript_charting_libraries\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar templates_1 = __webpack_require__(/*! ./templates */ \"./chart/templates.ts\");\nvar Chart = /** @class */ (function () {\n    function Chart() {\n    }\n    Chart.prototype.init = function (mapApi) {\n        this.mapApi = mapApi;\n        this.panel = this.mapApi.panels.create('rangchartechartSlider');\n        // this.panel.element.css(RangeSlider.prototype.panelOptions);\n        this.panel.body = templates_1.CHART_TEMPLATE;\n        // set slider bar controls\n        this.config = this._RV.getConfig('plugins').chart;\n        // add/merge configuration for range, limit and delay\n        //this.extendConfig = {...RangeSlider.prototype.layerOptions, ...this.config.params};\n        //this.extendConfig.language = this._RV.getCurrentLang();\n        // get array of id(s) and set layer(s)\n        //const ids = this.config.layers.map(layer => layer.id);\n        //this.mapApi.layersObj.layerAdded.subscribe((layer: any) => this.setLayer(layer, this.config.layers, ids));\n    };\n    Chart.prototype.compileTemplate = function (template) {\n        var temp = $(template);\n        this.mapApi.$compile(temp);\n        return temp;\n    };\n    return Chart;\n}());\nexports.default = Chart;\nChart.prototype.translations = {\n    'en-CA': {\n        test: 'test-en'\n    },\n    'fr-CA': {\n        test: 'tset-fr'\n    }\n};\nwindow.chart = Chart;\n\n\n//# sourceURL=webpack:///./chart/index.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar RangeSliderBasic = /** @class */ (function () {\n    function RangeSliderBasic() {\n    }\n    RangeSliderBasic.prototype.init = function (mapApi) {\n        this.mapApi = mapApi;\n    };\n    return RangeSliderBasic;\n}());\nexports.default = RangeSliderBasic;\n// TableBuilder.prototype.tableOptions = {\n//     enableSorting: true,\n//     floatingFilter: true,\n//     autoSizePadding: 75,\n//     suppressColumnVirtualisation: true,\n//     ensureDomOrder: true,\n//     defaultColDef: {\n//         width: 100\n//     }\n// };\nRangeSliderBasic.prototype.translations = {\n    'en-CA': {\n        settings: 'Layer settings',\n        histo: 'Histogram',\n        bar: {\n            lock: \"Lock left anchor\",\n            unlock: \"Unlock left anchor\",\n            previous: \"Previous\",\n            play: \"Play\",\n            pause: \"Pause\",\n            foward: \"Foward\",\n            delay: \"Delay\",\n            refresh: \"Refresh\"\n        }\n    },\n    'fr-CA': {\n        settings: 'Paramètres de la couche',\n        histo: 'Histogramme',\n        bar: {\n            lock: \"Verrouiller la molette gauche\",\n            unlock: \"Déverrouiller la molette gauche\",\n            previous: \"Précédent\",\n            play: \"Jouer\",\n            pause: \"Pause\",\n            foward: \"Suivant\",\n            delay: \"Délai\",\n            refresh: \"Rafraîchir\"\n        }\n    }\n};\nwindow.rangeSliderBasic = RangeSliderBasic;\n\n\n//# sourceURL=webpack:///./rangeSliderBasic/index.ts?");
 
 /***/ }),
 
-/***/ "./chart/loader.js":
-/*!*************************!*\
-  !*** ./chart/loader.js ***!
-  \*************************/
+/***/ "./rangeSliderBasic/loader.js":
+/*!************************************!*\
+  !*** ./rangeSliderBasic/loader.js ***!
+  \************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.ts */ \"./chart/index.ts\");\n/* harmony import */ var _index_ts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_ts__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main.scss */ \"./chart/main.scss\");\n/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_main_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n//# sourceURL=webpack:///./chart/loader.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.ts */ \"./rangeSliderBasic/index.ts\");\n/* harmony import */ var _index_ts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_ts__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main.scss */ \"./rangeSliderBasic/main.scss\");\n/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_main_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n//# sourceURL=webpack:///./rangeSliderBasic/loader.js?");
 
 /***/ }),
 
-/***/ "./chart/main.scss":
-/*!*************************!*\
-  !*** ./chart/main.scss ***!
-  \*************************/
+/***/ "./rangeSliderBasic/main.scss":
+/*!************************************!*\
+  !*** ./rangeSliderBasic/main.scss ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./chart/main.scss?");
-
-/***/ }),
-
-/***/ "./chart/templates.ts":
-/*!****************************!*\
-  !*** ./chart/templates.ts ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\n// panels templates: chart holder\nexports.CHART_TEMPLATE = \"\\n<div rv-focus-member class=\\\"rv-chart\\\">\\n    <div class=\\\"chart-content\\\">\\n        'TEST'\\n    </div>\\n</div>\";\n\n\n//# sourceURL=webpack:///./chart/templates.ts?");
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./rangeSliderBasic/main.scss?");
 
 /***/ })
 
