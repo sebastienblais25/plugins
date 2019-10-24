@@ -266,10 +266,10 @@
               "suffix": "mBq / m3"
             }, {
               "type": "combine",
-              "measure": ["Measure 1 (Data)"],
+              "measure": ["Measure 3 (Data)"],
               "regex": "\\(|\\),\\(|\\)",
               "split": ",",
-              "prefix": "measure1_name",
+              "prefix": "measure3_name",
               "suffix": "mBq / m3"
             }]
         }]
