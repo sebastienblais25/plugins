@@ -9,10 +9,11 @@ const pluginList = {
     areasOfInterest: path.join(SOURCE_PATH, 'areasOfInterest'),
     backToCart: path.join(SOURCE_PATH, 'backToCart'),
     coordInfo: path.join(SOURCE_PATH, 'coordInfo'),
-    customExport: path.join(SOURCE_PATH, 'customExport')
+    customExport: path.join(SOURCE_PATH, 'customExport'),
+    collaboration: path.join(SOURCE_PATH, 'collaboration')
 };
 
-const hasLoader = ['enhancedTable'];
+const hasLoader = ['enhancedTable', 'collaboration'];
 
 module.exports = function(env = {}) {
     const config = {
