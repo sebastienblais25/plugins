@@ -10,6 +10,7 @@ const pluginList = {
     backToCart: path.join(SOURCE_PATH, 'backToCart'),
     coordInfo: path.join(SOURCE_PATH, 'coordInfo'),
     customExport: path.join(SOURCE_PATH, 'customExport'),
+    Plugintest: path.join(SOURCE_PATH, 'Plugintest'),
     swiper: path.join(SOURCE_PATH, 'swiper')
 };
 
