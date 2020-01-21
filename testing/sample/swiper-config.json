@@ -261,7 +261,7 @@
       ]
     },
     "plugins": {
-      "Plugintest": {
+      "testing": {
         "type": "vertical",
         "keyboardOffset": 10,
         "layers": [{"id": "0"}, {"id": "1"}]
