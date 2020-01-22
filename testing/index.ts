@@ -1,4 +1,5 @@
 import { form } from './html-assets';
+const FileSaver = require('file-saver'); // le import
 
 export default class Testing{
 
@@ -9,29 +10,19 @@ export default class Testing{
         //set la variable api pour le plugin
         this.mapApi = api;
 
-        this.config = this._RV.getConfig('plugins').test;
+        this.config = this._RV.getConfig('plugins').testing;
         //set la langue pour le plugin
-        //this.config.language = this._RV.getCurrentLang();
+        this.config.language = this._RV.getCurrentLang();
 
         //création d'un button
         this.button = this.mapApi.mapI.addPluginButton(
-            Testing.prototype.translations[/*this._RV.getCurrentLang()*/'en-CA'].testbutton,
+            Testing.prototype.translations[this._RV.getCurrentLang()].testbutton,
             this.onMenuItemClick()
         );
         
-        //code from coord-info
-         // check to see if this init is due to projection change or language switch
-         /*const activeNode = this.mapApi.mapDiv[0].getAttributeNode('coord-info-active');
-         if (activeNode !== null) {
-             this.mapApi.layers.identifyMode = 'none';
-             // if coordinate info was active, turn it on again
-             if (this.panel !== undefined) {
-                 // destroy old panel so that new one gets created
-                 this.panel.close({ destroy: true });
-                 this.panel = undefined;
-             }
-         }*/
 
+        //bouton submit
+        
         this.listenToAlert();
     }
 

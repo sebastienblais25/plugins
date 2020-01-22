@@ -1,13 +1,25 @@
-export const form = `<div tabindex="-2"><ul class="rv-list">
+
+
+
+export const form:string = `<div tabindex="-2"><ul class="rv-list">
 <li>
-<form method="POST" id="form">
-  First name:<br>
-  <input type="text" name="firstname" value="Mickey">
+<form id="form" method="POST">
+  Environnement:<br>
+  <input type="text" name="env" id="env" value="Pro">
   <br>
-  Last name:<br>
-  <input type="text" name="lastname" value="Mouse">
+  Sélectionner le thème:<br>
+  <input type="text" name="theme" id="theme" value="Hydro">
+  <br>
+  Sélectionner la source de la zone de travail:<br>
+  <input type="text" name="ZT" value="1">
+  <br>
+  Sélectionner le type de travail:<br>
+  <input type="text" name="TT" value="Ajout">
+  <br>
+  Date de fin prévue:<br>
+  <input type="date" name="datefin" value="">
   <br><br>
-  <input type="submit" value="Cancel"><input type="submit" value="Submit" onclick="submitform()">
+  <button type="submit" id="submit" value="Submit" onclick="submitForm();">Submit</button>
 </form> 
 </li>
 </ul></div>`;
