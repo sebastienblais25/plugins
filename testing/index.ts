@@ -1,79 +1,62 @@
 import { form } from './html-assets';
-const FileSaver = require('file-saver'); // le import
+import {Info} from './info';
+import { panel } from './panelManager';
+import { resolve } from 'dns';
+
+
+const FileSaver = require('file-saver');
 
 export default class Testing{
 
-    showpanel:boolean = false;
+    _panel:panel = new panel();
 
     //initiation
     init(api: any) {
         //set la variable api pour le plugin
         this.mapApi = api;
-
+        //set _RV
         this.config = this._RV.getConfig('plugins').testing;
         //set la langue pour le plugin
         this.config.language = this._RV.getCurrentLang();
-
-        //création d'un button
+        //création d'un button d'accès à partir du menu
         this.button = this.mapApi.mapI.addPluginButton(
             Testing.prototype.translations[this._RV.getCurrentLang()].testbutton,
             this.onMenuItemClick()
         );
         
-
-        //bouton submit
-        
+        //appel une fonction pour faire un alert lors d'un clic sur la map
         this.listenToAlert();
+        
     }
 
     //add side menu item
     onMenuItemClick() {
         return () => {
-            this.button.isActive = !this.button.isActive;
+            //this.button.isActive = !this.button.isActive;
+
             this._RV.toggleSideNav('close');
-            //(<any>document).getElementsByClassName('rv-mapnav-draw-content')[0].style.display = this.button.isActive ? 'block' : 'none';
-
-
-            // show the panel only when the button is checked
-            if (this.showpanel === false){
-                this.showpanel = true;
-                //add a panel to the viewer
-                this.createPanel();
-            }else{
-                this.showpanel = false;
-            }
+            this.addPanel();
             
         };
     }
 
     //add a panel with a form
-    createPanel(){
-        if (!this.panel) {
-            // make sure both header and body have a digest cycle run on them
-            this.panel = this.mapApi.panels.create('Test');
+    addPanel(){
+        let name:string = 'planifiezZT'
+        let hello = new Info('','','','','');
+        //add panel
+        this.panel = this._panel.createPanel(this.panel, this.mapApi,name,Testing.prototype.translations[this._RV.getCurrentLang()].testbutton);
+        this.panel.body = hello.getFormPanifiez(hello.interactiveDropDownList());
 
-            this.panel.element.css({
-                bottom: '0em',
-                width: '400px'
-            });
-            this.panel.element.addClass('mobile-fullscreen');
-            let closeBtn = this.panel.header.closeButton;
-            this.panel.header.title = 'test';
-        } else {
-            this.panel.close();
-        }
-        this.panel.body = form;
-
+        //add panel to this
         this.panel.open();
+
+        hello.getInformation();
     }
 
 
     //alert when clicked
     listenToAlert(){
-        /*this.mapApi.click.subscribe(function(pointObject:any){
-
-            alert('You clicked on point ' + pointObject.X + " "+ pointObject.Y);
-        });*/
         this.mapApi.click.subscribe(clickEvent => this.clickHandler(clickEvent));
     }
 
@@ -81,10 +64,40 @@ export default class Testing{
         // get current language
         const lang = this._RV.getCurrentLang();
 
-        // get point in lat/long
-        let pt = clickEvent.xy; //this._RV.projectGeometry(clickEvent.mapPoint, 4326);
-        pt.spatialReference = 4326;
-        alert('You clicked on point ' + pt.X + " "+ pt.Y);
+        alert('You clicked on point ');
+        //var blob = new Blob(["Hello, world!"], {type:"application/json"});
+        //FileSaver.saveAs(blob, "hello world.json");
+        //create a json and save the file in the download folder
+        let output:any = {
+            "env": (<HTMLInputElement>document.getElementById("env")).value,
+            "theme": (<HTMLInputElement>document.getElementById("theme")).value,
+            "id_lot": (<HTMLInputElement>document.getElementById("ZT")).value,
+            "clip": "oui",
+            "geom": (<HTMLInputElement>document.getElementById("geom")).value
+        };
+
+        let json:any = JSON.stringify(output)
+        let blob = new Blob([json],{type:"application/json"});
+        FileSaver.saveAs(blob,'export.json');
+
+
+        //appel à l'API
+        /*const promises = [];
+        promises.push(
+            new Promise(resolve =>{
+              $.ajax({
+                url: 'blahblah.ca',
+                cache:false,
+                data:json,
+                dataType:'json',
+                success: data=>resolve()
+              });  
+        })
+        );
+        Promise.all(promises).then(values => {
+            alert('all good');
+        });*/
+
     }
 };
 
@@ -93,23 +106,23 @@ export default interface Testing{
     _RV: any,
     config: any,
     button:any,
-    pointObject :any,
     translations: any,
-    panel:any;
+    panel:any,
+    buttonp:any ;
 };
 
 Testing.prototype.translations = {
     'en-CA': {
-        testbutton: 'Testing',
+        testbutton: 'Planning Work Place',
     },
 
     'fr-CA': {
-        testbutton: 'testing',   
+        testbutton: 'Planifiez zone de travail',   
     }
 };
 
 
-function submitForm(){
+/*function submitForm(){
     $(document).ready(function(){
         // click on button submit
         $("#submit").on('click', function(){
@@ -130,6 +143,6 @@ function submitForm(){
             })
         });
     });
-}
+}*/
 
 (<any>window).testing = Testing;
