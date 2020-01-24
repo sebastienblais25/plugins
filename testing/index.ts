@@ -1,9 +1,7 @@
-import { form } from './html-assets';
+//import { form } from './html-assets';
 import {Info} from './info';
 import { panel } from './panelManager';
-import { resolve } from 'dns';
-
-
+//import { resolve } from 'dns';
 const FileSaver = require('file-saver');
 
 export default class Testing{
@@ -23,39 +21,56 @@ export default class Testing{
             Testing.prototype.translations[this._RV.getCurrentLang()].testbutton,
             this.onMenuItemClick()
         );
-        
-        //appel une fonction pour faire un alert lors d'un clic sur la map
-        this.listenToAlert();
-        
+  
     }
 
     //add side menu item
     onMenuItemClick() {
         return () => {
             //this.button.isActive = !this.button.isActive;
-
             this._RV.toggleSideNav('close');
-            this.addPanel();
-            
+            this.addPanel();  
         };
     }
 
     //add a panel with a form
     addPanel(){
+
+        //à enlever plus tard
         let name:string = 'planifiezZT'
         let hello = new Info('','','','','');
+
         //add panel
         this.panel = this._panel.createPanel(this.panel, this.mapApi,name,Testing.prototype.translations[this._RV.getCurrentLang()].testbutton);
+        //set the from inside the panel
         this.panel.body = hello.getFormPanifiez(hello.interactiveDropDownList());
-
-        //add panel to this
+        //open the panel in the viewer
         this.panel.open();
 
-        hello.getInformation();
+        //submit form Plan
+        hello.submitForm(this._RV);
+        
+        /************ TEST *************/
+        //this.angularControls();
+        //hello.getInformation();
     }
+    /*angularControls(){
+        const that = this;
+        this.mapApi.agControllerRegister('SubmitPlanZT', function(){
+            this.control = {
+                submit:{
+                    name: 'submit',
+                    label: 'submit',
+                    action: () =>{
+                        alert("hello");
+                    }
+                }
+            }
+        })
+    }*/
 
-
-    //alert when clicked
+    //First test with an alert
+    //Event when a click is done on the map
     listenToAlert(){
         this.mapApi.click.subscribe(clickEvent => this.clickHandler(clickEvent));
     }
@@ -63,42 +78,14 @@ export default class Testing{
     clickHandler(clickEvent) {
         // get current language
         const lang = this._RV.getCurrentLang();
-
         alert('You clicked on point ');
         //var blob = new Blob(["Hello, world!"], {type:"application/json"});
         //FileSaver.saveAs(blob, "hello world.json");
         //create a json and save the file in the download folder
-        let output:any = {
-            "env": (<HTMLInputElement>document.getElementById("env")).value,
-            "theme": (<HTMLInputElement>document.getElementById("theme")).value,
-            "id_lot": (<HTMLInputElement>document.getElementById("ZT")).value,
-            "clip": "oui",
-            "geom": (<HTMLInputElement>document.getElementById("geom")).value
-        };
-
-        let json:any = JSON.stringify(output)
-        let blob = new Blob([json],{type:"application/json"});
-        FileSaver.saveAs(blob,'export.json');
-
-
-        //appel à l'API
-        /*const promises = [];
-        promises.push(
-            new Promise(resolve =>{
-              $.ajax({
-                url: 'blahblah.ca',
-                cache:false,
-                data:json,
-                dataType:'json',
-                success: data=>resolve()
-              });  
-        })
-        );
-        Promise.all(promises).then(values => {
-            alert('all good');
-        });*/
-
     }
+
+
+    
 };
 
 export default interface Testing{
@@ -120,29 +107,5 @@ Testing.prototype.translations = {
         testbutton: 'Planifiez zone de travail',   
     }
 };
-
-
-/*function submitForm(){
-    $(document).ready(function(){
-        // click on button submit
-        $("#submit").on('click', function(){
-            // send ajax
-            $.ajax({
-                url: 'http://localhost:6001/testing/sample/', // url where to submit the request
-                type : "POST", // type of action POST || GET
-                dataType : 'json', // data type
-                data : $("#form").serialize(), // post data || get data
-                success : function(result) {
-                    // you can see the result from the console
-                    // tab of the developer tools
-                    console.log(result);
-                },
-                error: function(xhr, resp, text) {
-                    console.log(xhr, resp, text);
-                }
-            })
-        });
-    });
-}*/
 
 (<any>window).testing = Testing;

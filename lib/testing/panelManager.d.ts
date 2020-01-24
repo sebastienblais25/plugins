@@ -1,5 +1,9 @@
 export declare class panel {
     ispanelshowing: boolean;
-    constructor();
     createPanel(panel: any, mapApi: any, panelname?: string, paneltitle?: string): any;
+}
+export interface PanelManager {
+    panel: any;
+    mapApi: any;
+    active: object;
 }

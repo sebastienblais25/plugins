@@ -16,6 +16,47 @@ export class Info{
         this._datefinpr = datefin;
     }
 
+    getFormPanifiez(dropdown:string):string{
+        this._form = 
+        `<div tabindex="-2" ng-controller="SubmitPlanZT as ctrl">
+            <ul class="rv-list">
+                <li>
+                    
+                        Environnement:<br>
+                        <input type="text" name="env" id="env" value="Pro">
+                        <br>
+
+                        Sélectionner le thème:<br>
+                        <select type="text" name="theme" id="theme" placeholder="Select something">
+                        `+ dropdown +`
+                        </select>
+                        <br>
+
+                        Sélectionner la source de la zone de travail:<br>
+                        <input type="text" name="ZT" id="ZT" value="1">
+                        <br>
+
+                        Sélectionner le type de travail:<br>
+                        <input type="text" name="TT" value="Ajout">
+                        <br>
+
+                        Ajouter une géométrie:<br>
+                        <input type="text" name="geom" id="geom" value="geom">
+                        <br>
+
+                        Date de fin prévue:<br>
+                        <input type="date" name="datefin" value="">
+                        <br><br>
+                
+                
+                        <md-button name="submit" id="submit" value="Submit ng-click="">Submit</md-button>
+                </li>   
+            </ul>
+        </div>`;
+
+        return this._form
+    }
+
     getEnvironnement():string{
         return this._environnement;
     }
@@ -64,22 +105,30 @@ export class Info{
         this._datefinpr = datf;
     }*/
 
-
-    getInformation():any{
-        let output:string = `{
-            "env": "`+ (<HTMLInputElement>document.getElementById("env")).value +`"
-        }`;
-
-        let json:any = JSON.stringify(output);
+    //get the infromation out of the form into a string json
+    getInformationToJson():any{
+        //get de properties
+        
+        /***** Tochange ********/
+        let output:any = {
+            "env": (<HTMLInputElement>document.getElementById("env")).value,
+            "theme": (<HTMLInputElement>document.getElementById("theme")).value,
+            "id_lot": (<HTMLInputElement>document.getElementById("ZT")).value,
+            "clip": "oui",
+            "geom": (<HTMLInputElement>document.getElementById("geom")).value
+        };
+        /************ **********/
+        let json:any = JSON.stringify(output)
         return json
     }
 
+    //put a json string into a blob and export into a json file in download file
     transfromIntoJson():void{
-        let blob = new Blob([this.getInformation()],{type:"application/json"});
+        let blob = new Blob([this.getInformationToJson()],{type:"application/json"});
         FileSaver.saveAs(blob,'export.json');
     }
 
-    interactiveDropDownList():string{
+    interactiveDropDownList(/* parametre du json */):string{
         let list = ["Hydro","Route","building"]
         let ddl:string= "";
         for (let i in list) {
@@ -88,48 +137,53 @@ export class Info{
         return ddl;
     }
 
-    getFormPanifiez(dropdown:string):string{
-        this._form = `<div tabindex="-2" ng-controller="SubmitPlanZT">
-            <ul class="rv-list">
-                <li>
-                    <form id="form" method="POST">
-                        Environnement:<br>
-                        <input type="text" name="env" id="env" value="Pro">
-                        <br>
+    
+    //si le button est pas en Angular
+    submitForm(_RV:any):void{
+         // get current language
+         const lang = _RV.getCurrentLang();
+        
+        //To Change
+         $("#submit").click(function() {
+             
+             alert('You clicked on point ');
+             //var blob = new Blob(["Hello, world!"], {type:"application/json"});
+             //FileSaver.saveAs(blob, "hello world.json");
+             //create a json and save the file in the download folder
+             let output:any = {
+                "env": (<HTMLInputElement>document.getElementById("env")).value,
+                "theme": (<HTMLInputElement>document.getElementById("theme")).value,
+                "id_lot": (<HTMLInputElement>document.getElementById("ZT")).value,
+                "clip": "oui",
+                "geom": (<HTMLInputElement>document.getElementById("geom")).value
+            };
+    
+            let json:any = JSON.stringify(output)
+ 
+             
+             let blob = new Blob([json],{type:"application/json"});
+             FileSaver.saveAs(blob,'export.json');
+ 
+ 
+             // pour appel à l'API
+             /*const promises = [];
+             promises.push(
+                 new Promise(resolve =>{
+                 $.ajax({
+                     url: '',
+                     cache:false,
+                     data:json,
+                     dataType:'json',
+                     success: data=>resolve()
+                 });  
+             })
+             );
+             Promise.all(promises).then(values => {
+                 alert('all good');
+             });*/
 
-                        Sélectionner le thème:<br>
-                        <select type="text" name="theme" id="theme" placeholder="Select something">
-                        `+ dropdown +`
-                        </select>
-                        <br>
-
-                        Sélectionner la source de la zone de travail:<br>
-                        <input type="text" name="ZT" id="ZT" value="1">
-                        <br>
-
-                        Sélectionner le type de travail:<br>
-                        <input type="text" name="TT" value="Ajout">
-                        <br>
-
-                        Ajouter une géométrie:<br>
-                        <input type="text" name="geom" id="geom" value="geom">
-                        <br>
-
-                        Date de fin prévue:<br>
-                        <input type="date" name="datefin" value="">
-                        <br><br>
-
-                        <md-button name="submit" id="submit" ng-click="control.action($event)">
-                            Submit
-                        </md-button>
-
-                    </form> 
-                </li>
-            </ul>
-        </div>`;
-
-        return this._form
-    }
+         });
+    };
 
     /*translateform(_RV:any):string{
         let output:string = this.getFormPanifiez();
