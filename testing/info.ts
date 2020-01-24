@@ -89,33 +89,44 @@ export class Info{
     }
 
     getFormPanifiez(dropdown:string):string{
-        this._form = `<div tabindex="-2"><ul class="rv-list">
-        <li>
-        <form id="form" method="POST">
-          Environnement:<br>
-          <input type="text" name="env" id="env" value="Pro">
-          <br>
-          Sélectionner le thème:<br>
-          <select type="text" name="theme" id="theme" placeholder="Select something">
-          `+ dropdown +`
-          </select>
-          <br>
-          Sélectionner la source de la zone de travail:<br>
-          <input type="text" name="ZT" id="ZT" value="1">
-          <br>
-          Sélectionner le type de travail:<br>
-          <input type="text" name="TT" value="Ajout">
-          <br>
-          Ajouter une géométrie:<br>
-          <input type="text" name="geom" id="geom" value="geom">
-          <br>
-          Date de fin prévue:<br>
-          <input type="date" name="datefin" value="">
-          <br><br>
-          <md-button name="submit" id="submit" ng-click="control.action($event)"">Submit</md-button>
-        </form> 
-        </li>
-        </ul></div>`;
+        this._form = `<div tabindex="-2" ng-controller="SubmitPlanZT">
+            <ul class="rv-list">
+                <li>
+                    <form id="form" method="POST">
+                        Environnement:<br>
+                        <input type="text" name="env" id="env" value="Pro">
+                        <br>
+
+                        Sélectionner le thème:<br>
+                        <select type="text" name="theme" id="theme" placeholder="Select something">
+                        `+ dropdown +`
+                        </select>
+                        <br>
+
+                        Sélectionner la source de la zone de travail:<br>
+                        <input type="text" name="ZT" id="ZT" value="1">
+                        <br>
+
+                        Sélectionner le type de travail:<br>
+                        <input type="text" name="TT" value="Ajout">
+                        <br>
+
+                        Ajouter une géométrie:<br>
+                        <input type="text" name="geom" id="geom" value="geom">
+                        <br>
+
+                        Date de fin prévue:<br>
+                        <input type="date" name="datefin" value="">
+                        <br><br>
+
+                        <md-button name="submit" id="submit" ng-click="control.action($event)">
+                            Submit
+                        </md-button>
+
+                    </form> 
+                </li>
+            </ul>
+        </div>`;
 
         return this._form
     }

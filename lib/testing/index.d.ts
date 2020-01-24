@@ -1,8 +1,9 @@
+import { panel } from './panelManager';
 export default class Testing {
-    showpanel: boolean;
+    _panel: panel;
     init(api: any): void;
     onMenuItemClick(): () => void;
-    createPanel(): void;
+    addPanel(): void;
     listenToAlert(): void;
     clickHandler(clickEvent: any): void;
 }
@@ -11,7 +12,7 @@ export default interface Testing {
     _RV: any;
     config: any;
     button: any;
-    pointObject: any;
     translations: any;
     panel: any;
+    buttonp: any;
 }
