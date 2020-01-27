@@ -5,7 +5,7 @@ export default class Testing {
     onMenuItemClick(): () => void;
     addPanel(): void;
     listenToAlert(): void;
-    angularControls(): void;
+    clickHandler(clickEvent: any): void;
 }
 export default interface Testing {
     mapApi: any;

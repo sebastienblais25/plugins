@@ -39,17 +39,22 @@ export class Info{
                         Sélectionner le type de travail:<br>
                         <input type="text" name="TT" value="Ajout">
                         <br>
-
                         Ajouter une géométrie:<br>
                         <input type="text" name="geom" id="geom" value="geom">
                         <br>
 
                         Date de fin prévue:<br>
-                        <input type="date" name="datefin" value="">
+                        <input type="date" name="datefin">
                         <br><br>
                 
-                
-                        <md-button name="submit" id="submit" value="Submit ng-click="">Submit</md-button>
+                        
+                        <div>
+                            <md-button
+                            ng-controller="SubmitCtrl as ctrl"
+                            class="md-icon-button primary"
+                            ng-click="ctrl.submit()"> 
+                            </md-button>
+                        </div>
                 </li>   
             </ul>
         </div>`;
@@ -138,53 +143,7 @@ export class Info{
     }
 
     
-    //si le button est pas en Angular
-    submitForm(_RV:any):void{
-         // get current language
-         const lang = _RV.getCurrentLang();
-        
-        //To Change
-         $("#submit").click(function() {
-             
-             alert('You clicked on point ');
-             //var blob = new Blob(["Hello, world!"], {type:"application/json"});
-             //FileSaver.saveAs(blob, "hello world.json");
-             //create a json and save the file in the download folder
-             let output:any = {
-                "env": (<HTMLInputElement>document.getElementById("env")).value,
-                "theme": (<HTMLInputElement>document.getElementById("theme")).value,
-                "id_lot": (<HTMLInputElement>document.getElementById("ZT")).value,
-                "clip": "oui",
-                "geom": (<HTMLInputElement>document.getElementById("geom")).value
-            };
     
-            let json:any = JSON.stringify(output)
- 
-             
-             let blob = new Blob([json],{type:"application/json"});
-             FileSaver.saveAs(blob,'export.json');
- 
- 
-             // pour appel à l'API
-             /*const promises = [];
-             promises.push(
-                 new Promise(resolve =>{
-                 $.ajax({
-                     url: '',
-                     cache:false,
-                     data:json,
-                     dataType:'json',
-                     success: data=>resolve()
-                 });  
-             })
-             );
-             Promise.all(promises).then(values => {
-                 alert('all good');
-             });*/
-
-         });
-    };
-
     /*translateform(_RV:any):string{
         let output:string = this.getFormPanifiez();
         output.replace(/{pt.y}/,Info.prototype.translations[_RV.getCurrentLang()].envir)

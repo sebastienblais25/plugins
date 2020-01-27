@@ -1,12 +1,13 @@
 //import { form } from './html-assets';
 import {Info} from './info';
-import { panel } from './panelManager';
+import { panelMod } from './panelManager';
+import { AnimateSlideCellRenderer } from 'ag-grid-community';
 //import { resolve } from 'dns';
 const FileSaver = require('file-saver');
 
 export default class Testing{
 
-    _panel:panel = new panel();
+    _panel:panelMod = new panelMod();
 
     //initiation
     init(api: any) {
@@ -48,26 +49,25 @@ export default class Testing{
         this.panel.open();
 
         //submit form Plan
-        hello.submitForm(this._RV);
+        //this._panel.submitForm(this._RV);
+        this.angularControls();
         
         /************ TEST *************/
         //this.angularControls();
         //hello.getInformation();
     }
-    /*angularControls(){
-        const that = this;
-        this.mapApi.agControllerRegister('SubmitPlanZT', function(){
-            this.control = {
-                submit:{
-                    name: 'submit',
-                    label: 'submit',
-                    action: () =>{
-                        alert("hello");
-                    }
-                }
+
+
+    angularControls(){
+        this.mapApi.agControllerRegister('SubmitCtrl',function($scope:any){
+            $scope.$parent.ctrl = {value:{}};
+
+            this.submit=()=>{
+                alert('hello');
             }
-        })
-    }*/
+
+        });
+    }
 
     //First test with an alert
     //Event when a click is done on the map
