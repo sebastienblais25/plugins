@@ -7,6 +7,7 @@ export declare class Info {
     _form: string;
     constructor(env: string, theme: string, zonet: string, typet: string, datefin: string);
     getFormPanifiez(dropdown: string): string;
+    submitForm(_RV: any): any;
     getEnvironnement(): string;
     getTheme(): string;
     getZonetravail(): string;
@@ -20,7 +21,6 @@ export declare class Info {
     getInformationToJson(): any;
     transfromIntoJson(): void;
     interactiveDropDownList(): string;
-    submitForm(_RV: any): void;
 }
 export interface Info {
     translations: any;

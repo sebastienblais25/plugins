@@ -1,10 +1,7 @@
-//import { form } from './html-assets';
+import { form } from './html-assets';
 import {Info} from './info';
 import { panelMod } from './panelManager';
-import { AnimateSlideCellRenderer } from 'ag-grid-community';
-//import { resolve } from 'dns';
 const FileSaver = require('file-saver');
-
 export default class Testing{
 
     _panel:panelMod = new panelMod();
@@ -22,6 +19,7 @@ export default class Testing{
             Testing.prototype.translations[this._RV.getCurrentLang()].testbutton,
             this.onMenuItemClick()
         );
+        
   
     }
 
@@ -44,30 +42,33 @@ export default class Testing{
         //add panel
         this.panel = this._panel.createPanel(this.panel, this.mapApi,name,Testing.prototype.translations[this._RV.getCurrentLang()].testbutton);
         //set the from inside the panel
-        this.panel.body = hello.getFormPanifiez(hello.interactiveDropDownList());
+        this.panel.body =  form //hello.getFormPanifiez(hello.interactiveDropDownList());
+        Testing.prototype.translations[this._RV.getCurrentLang()];
         //open the panel in the viewer
         this.panel.open();
 
-        //submit form Plan
+        
+        //hello.submitForm(this._RV);
+        
+        /***** Button *****/
         //this._panel.submitForm(this._RV);
-        this.angularControls();
+        //submit form Plan
+        this.mapApi.agControllerRegister('SubmitCtrl', function($scope){
+            $scope.alert = window.alert;
+            this.submit = function() {
+                alert('hello');
+                this._panel.submitForm(this._RV);
+            };
+
+        });
+        
+        //this.angularControls();
         
         /************ TEST *************/
         //this.angularControls();
         //hello.getInformation();
     }
 
-
-    angularControls(){
-        this.mapApi.agControllerRegister('SubmitCtrl',function($scope:any){
-            $scope.$parent.ctrl = {value:{}};
-
-            this.submit=()=>{
-                alert('hello');
-            }
-
-        });
-    }
 
     //First test with an alert
     //Event when a click is done on the map
@@ -101,10 +102,22 @@ export default interface Testing{
 Testing.prototype.translations = {
     'en-CA': {
         testbutton: 'Planning Work Place',
+        envir: 'Environnement1',
+        themet: 'Theme',
+        zoneTrv: 'Working Zone',
+        typeTrv: 'Working Type',
+        datefinprv: 'Final date planned',
+        geome: 'Geometry'
     },
 
     'fr-CA': {
-        testbutton: 'Planifiez zone de travail',   
+        testbutton: 'Planifiez zone de travail',
+        envir: 'Environnement2',
+        themet: 'Theme',
+        zoneTrv: 'Zone de travail',
+        typeTrv: 'Type de travail',
+        datefinprv: 'Date fin prévue',
+        geome: 'Géométrie'    
     }
 };
 

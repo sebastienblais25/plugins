@@ -42,47 +42,8 @@ export class panelMod{
     // get current language
     const lang = _RV.getCurrentLang();
    
-   //To Change
-    $("#submit").click(function() {
-        
-        alert('You clicked on point ');
-        //var blob = new Blob(["Hello, world!"], {type:"application/json"});
-        //FileSaver.saveAs(blob, "hello world.json");
-        //create a json and save the file in the download folder
-        let output:any = {
-           "env": (<HTMLInputElement>document.getElementById("env")).value,
-           "theme": (<HTMLInputElement>document.getElementById("theme")).value,
-           "id_lot": (<HTMLInputElement>document.getElementById("ZT")).value,
-           "clip": "oui",
-           "geom": (<HTMLInputElement>document.getElementById("geom")).value
-       };
-
-       let json:any = JSON.stringify(output)
-
-        
-        let blob = new Blob([json],{type:"application/json"});
-        FileSaver.saveAs(blob,'export.json');
-
-
-        // pour appel à l'API
-        /*const promises = [];
-        promises.push(
-            new Promise(resolve =>{
-            $.ajax({
-                url: '',
-                cache:false,
-                data:json,
-                dataType:'json',
-                success: data=>resolve()
-            });  
-        })
-        );
-        Promise.all(promises).then(values => {
-            alert('all good');
-        });*/
-
-    });
-};
+   
+    };
 
 }
 

@@ -1,4 +1,5 @@
 const FileSaver = require('file-saver'); // le import
+import {urlgeoDataGet} from './url';
 
 export class Info{
     _environnement: string;
@@ -16,51 +17,99 @@ export class Info{
         this._datefinpr = datefin;
     }
 
+    //Form with the JQuery
     getFormPanifiez(dropdown:string):string{
-        this._form = 
-        `<div tabindex="-2" ng-controller="SubmitPlanZT as ctrl">
-            <ul class="rv-list">
-                <li>
-                    
-                        Environnement:<br>
-                        <input type="text" name="env" id="env" value="Pro">
-                        <br>
+         this._form = 
+        `<div tabindex="-2" ng-controller="SubmitCtrl">
+            Environnement:<br>
+            <input type="text" name="env" id="env" value="Pro">
+            <br>
 
-                        Sélectionner le thème:<br>
-                        <select type="text" name="theme" id="theme" placeholder="Select something">
-                        `+ dropdown +`
-                        </select>
-                        <br>
+            Sélectionner le thème:<br>
+            <select type="text" name="theme" id="theme" placeholder="Select something">
+            `+ dropdown +`
+            </select>
+            <br>
 
-                        Sélectionner la source de la zone de travail:<br>
-                        <input type="text" name="ZT" id="ZT" value="1">
-                        <br>
+            Sélectionner la source de la zone de travail:<br>
+            <input type="text" name="ZT" id="ZT" value="1">
+            <br>
 
-                        Sélectionner le type de travail:<br>
-                        <input type="text" name="TT" value="Ajout">
-                        <br>
-                        Ajouter une géométrie:<br>
-                        <input type="text" name="geom" id="geom" value="geom">
-                        <br>
+            Sélectionner le type de travail:<br>
+            <input type="text" name="TT" value="Ajout">
+            <br>
+            Ajouter une géométrie:<br>
+            <input type="text" name="geom" id="geom" value="geom">
+            <br>
 
-                        Date de fin prévue:<br>
-                        <input type="date" name="datefin">
-                        <br><br>
-                
-                        
-                        <div>
-                            <md-button
-                            ng-controller="SubmitCtrl as ctrl"
-                            class="md-icon-button primary"
-                            ng-click="ctrl.submit()"> 
-                            </md-button>
-                        </div>
-                </li>   
-            </ul>
+            Date de fin prévue:<br>
+            <input type="date" name="datefin">
+            <br><br>
+    
+            
+            <button class="md-primary md-button" id="submit" ng-click="ctrl.submit()">
+                Submit
+            </button>
         </div>`;
 
         return this._form
     }
+
+    //si le button est pas en Angular
+    submitForm(_RV:any):void{
+        // get current language
+        const lang = _RV.getCurrentLang();
+        
+       //To Change
+        $("#submit").click(function() {
+            //create a json and save the file in the download folder
+            let output:any = {
+            
+               "env": (<HTMLInputElement>document.getElementById("env")).value,
+               "theme": (<HTMLInputElement>document.getElementById("theme")).value,
+               "id_lot": (<HTMLInputElement>document.getElementById("ZT")).value,
+               "clip": "oui",
+               "where_clause" : "where id_lots = 2",
+               "geom": (<HTMLInputElement>document.getElementById("geom")).value
+           };
+
+           //transfrom into raw json
+           let json:any = JSON.stringify(output)
+
+           console.log("hello");
+            
+            //let blob = new Blob([json],{type:"application/json"});
+            //FileSaver.saveAs(blob,'export.json');
+
+            /********* API CALL **********/
+            const promises = [];
+            promises.push(
+                new Promise(resolve =>{
+                $.ajax({
+                    url: urlgeoDataGet,
+                    headers: {
+                        'Authorization': `Bearer ${'toto'}`,
+                    },
+                    type: 'GET',
+                    cache:false,
+                    data:json,
+                    dataType:'json',
+                    success: function(response){
+                        console.log(response);
+                    }
+                    
+                });  
+            })
+            );
+            Promise.all(promises).then(values => {
+                alert('all good');
+                //console.log(values);
+            });
+            /************ *************/
+        });
+
+        
+   };
 
     getEnvironnement():string{
         return this._environnement;
@@ -102,14 +151,6 @@ export class Info{
         this._datefinpr = v;
     }
 
-    /*setAll(en:string, th:string, zt:string, tt:string, datf:string):void{
-        this._environnement =en;
-        this._theme = th;
-        this._zonetravail = zt;
-        this._typetravail = tt;
-        this._datefinpr = datf;
-    }*/
-
     //get the infromation out of the form into a string json
     getInformationToJson():any{
         //get de properties
@@ -142,8 +183,6 @@ export class Info{
         return ddl;
     }
 
-    
-    
     /*translateform(_RV:any):string{
         let output:string = this.getFormPanifiez();
         output.replace(/{pt.y}/,Info.prototype.translations[_RV.getCurrentLang()].envir)

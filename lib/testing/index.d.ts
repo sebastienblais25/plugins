@@ -1,6 +1,6 @@
-import { panel } from './panelManager';
+import { panelMod } from './panelManager';
 export default class Testing {
-    _panel: panel;
+    _panel: panelMod;
     init(api: any): void;
     onMenuItemClick(): () => void;
     addPanel(): void;
@@ -14,5 +14,6 @@ export default interface Testing {
     button: any;
     translations: any;
     panel: any;
+    angular: any;
     buttonp: any;
 }
