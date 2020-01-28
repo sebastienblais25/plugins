@@ -1,36 +1,77 @@
+/*
+loginmenu = 
+startmenu = 
+form =
+*/
 
+export const loginmenu:string= `
+<div ng-controller="connexionCtrl as ctrl">
+    <div>username : </div>
+    <div><input type="text" id="username" placeholder="username"/></div>
+    <div>Password : </div>
+    <div><input type="password" id="password" placeholder="password"/></div>
+
+    <div class="rv-subsection">
+        <md-button class="md-primary md-button"
+        ng-click="ctrl.submitConn()">
+            {{ 'plugins.testing.submit' | translate }}
+            <md-tooltip>{{ 'plugins.testing.submit' | translate }}</md-tooltip>
+        </md-button>
+
+    </div>
+</div>
+`
+
+
+export const startmenu:string=`
+<div>
+    <ul>
+    </u>
+</div>`
 
 
 export const form:string = 
-`<div tabindex="-2" ng-controller="SubmitCtrl as ctrl">
+`<div ng-controller="SubmitCtrl as ctrl">
 
-    {{ 'plugins.testing.envir' | translate }}<br>
-    <input type="text" name="env" id="env" value="Pro">
-    <br>
-
-    Sélectionner le thème:<br>
-    <select type="text" name="theme" id="theme" placeholder="Select something">
+    <div class="rv-subsection">
+        <div>{{ 'plugins.testing.envir' | translate }}</div>
+        <div><input type="text" id="env" value="Pro"/></div>
+    </div>
     
-    </select>
-    <br>
+    <div class="rv-subsection">
+        <div>{{ 'plugins.testing.themet' | translate }}</div>
+        <select type="text" id="theme" placeholder="Select something">
+            {dropdowntheme}
+        </select>
+    </div>
+    
+    <div class="rv-subsection">
+        <div>{{ 'plugins.testing.idlot' | translate }}</div>
+        <input type="text" name="idlot" id="idlot" value="1"/>
+    </div>
+    
+    <div class="rv-subsection">
+        Si Clip:<br>
+        <input type="text" name="clip" id="clip" value="Oui"/>
+    </div>
 
-    Sélectionner la source de la zone de travail:<br>
-    <input type="text" name="ZT" id="ZT" value="1">
-    <br>
+    <div class="rv-subsection">
+        Entrez un where clause:<br>
+        <input type="text" name="whereclause" id="whereclause" value="Ajout"/>
+    </div>
+    
+    <div class="rv-subsection">
+        <div>{{ 'plugins.testing.idlot' | translate }}</div>
+        <input type="text" name="geom" id="geom" value="geom"/>
+    </div>
+    
+    <div class="rv-subsection">
+        <md-button class="md-primary md-button"
+        ng-click="ctrl.submitForm()">
+            {{ 'plugins.testing.submit' | translate }}
+            <md-tooltip>{{ 'plugins.testing.submit' | translate }}</md-tooltip>
+        </md-button>
 
-    Sélectionner le type de travail:<br>
-    <input type="text" name="TT" value="Ajout">
-    <br>
-    Ajouter une géométrie:<br>
-    <input type="text" name="geom" id="geom" value="geom">
-    <br>
-
-    Date de fin prévue:<br>
-    <input type="date" name="datefin">
-    <br><br>
-
-    <button class="md-primary md-button" ng-click="ctrl.submit()">
-        Submit
-    </button>
+    </div>
             
 </div>`;

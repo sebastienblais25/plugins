@@ -1,10 +1,13 @@
-import { form } from './html-assets';
-import {Info} from './info';
-import { panelMod } from './panelManager';
+import { form,loginmenu } from './html-assets';
+import {Planifier} from './planifier';
+
+//import { panelMod } from './panelManager';
 const FileSaver = require('file-saver');
 export default class Testing{
 
-    _panel:panelMod = new panelMod();
+    _tokenbearer:string = "toto";
+    _apireturn:any;
+    _page:number = 0;
 
     //initiation
     init(api: any) {
@@ -19,56 +22,146 @@ export default class Testing{
             Testing.prototype.translations[this._RV.getCurrentLang()].testbutton,
             this.onMenuItemClick()
         );
-        
-  
+        //Ajoute le panel du login menu
+        this.addLoginPanel();
+        //Ajoute le panel du Planifier zone de travail
     }
 
     //add side menu item
     onMenuItemClick() {
         return () => {
-            //this.button.isActive = !this.button.isActive;
+            this.button.isActive = !this.button.isActive;
             this._RV.toggleSideNav('close');
-            this.addPanel();  
+            this.panelL.open();
         };
     }
 
-    //add a panel with a form
-    addPanel(){
 
-        //à enlever plus tard
-        let name:string = 'planifiezZT'
-        let hello = new Info('','','','','');
+    //Creating a login menu
+    addLoginPanel(){
+        let output:string = loginmenu;
+        if (!this.panelL) {
+            //creating the panel
+            this.panelL = this.mapApi.panels.create('Test Login');
+            this.panelL.element.css({bottom: '0em', width: '400px', top: '50px'})
+            this.panelL.header.title = 'Test Login'
+        } else {
+            this.panelL.close();
+        }
+        //if (this._page ==0 ){
+            //add control here
+            this.connexionControls();
+            
+            //add compiler here
+            this.compileTemplate(output);
+            let closeBtn = this.panelL.header.closeButton;
+            //add the template
+            this.panelL.body = output;
+        /*}else{
+            let list = ["Hydro","Route","building"];
+            let plan = new Planifier('','','','','','');
+            this.angularcontrols(plan);
+            
+            let ddl = this.interactiveDropDownList(list);
+            let output = form.replace(/{dropdowntheme}/, ddl)
 
-        //add panel
-        this.panel = this._panel.createPanel(this.panel, this.mapApi,name,Testing.prototype.translations[this._RV.getCurrentLang()].testbutton);
-        //set the from inside the panel
-        this.panel.body =  form //hello.getFormPanifiez(hello.interactiveDropDownList());
-        Testing.prototype.translations[this._RV.getCurrentLang()];
-        //open the panel in the viewer
-        this.panel.open();
 
-        
-        //hello.submitForm(this._RV);
-        
-        /***** Button *****/
-        //this._panel.submitForm(this._RV);
-        //submit form Plan
-        this.mapApi.agControllerRegister('SubmitCtrl', function($scope){
-            $scope.alert = window.alert;
-            this.submit = function() {
-                alert('hello');
-                this._panel.submitForm(this._RV);
-            };
+            // TODO: compiler ton code pour que la directive Angular soit associe a ton code.
+            // Append element
+            this.compileTemplate(output);
 
-        });
-        
-        //this.angularControls();
-        
-        /************ TEST *************/
-        //this.angularControls();
-        //hello.getInformation();
+            let closeBtn = this.panelL.header.closeButton;
+            
+            //Add the from template to the 
+            this.panelL.body = output;
+        }*/
     }
 
+    //add a panel with a form
+    addPanelOption() {
+        //à enlever plus tard
+        let name:string = 'planifiezZT'
+        let plan = new Planifier('','','','','','');
+        let APIreturn:any
+        //add panel
+        if (!this.panelP) {
+        // TODO: Creer le panel
+        this.panelP = this.mapApi.panels.create('Test Submit');
+        this.panelP.element.css({ bottom: '0em', width: '400px', top: '50px' });
+        this.panelP.header.title = name;
+
+        } else { 
+            this.panelP.close
+        }
+        let list = ["Hydro","Route","building"];
+
+        this.angularcontrols(plan);
+        
+        let ddl = this.interactiveDropDownList(list);
+        let output = form.replace(/{dropdowntheme}/, ddl)
+
+
+        // TODO: compiler ton code pour que la directive Angular soit associe a ton code.
+        // Append element
+        this.compileTemplate(output);
+
+        let closeBtn = this.panelP.header.closeButton;
+        
+        //Add the from template to the 
+        this.panelP.body = output; 
+
+    }
+
+
+    //Submit controller
+    angularcontrols(plan:any):void{
+        /************ À placer en fonction ou class ***********/
+        // TODO: creer la directive avant de compiler le code
+        this.mapApi.agControllerRegister('SubmitCtrl', function($scope){
+            this.submitForm = function() { 
+                //get all the information of the form into the class
+                plan = new Planifier((<HTMLInputElement>document.getElementById("env")).value
+            ,(<HTMLInputElement>document.getElementById("theme")).value
+            ,(<HTMLInputElement>document.getElementById("idlot")).value
+            ,(<HTMLInputElement>document.getElementById("clip")).value
+            ,(<HTMLInputElement>document.getElementById("whereclause")).value
+            ,(<HTMLInputElement>document.getElementById("geom")).value);
+                
+                this._apireturn = plan.submitForm(this._tokenbearer);
+                alert(this._apireturn.value);
+            };
+        });
+        /************** ***************/
+    }
+
+    connexionControls(){
+        this.mapApi.agControllerRegister('connexionCtrl', function($scope){
+            this.submitConn = function() { 
+                //get all the information of the form into the class
+                alert('allgood');
+                
+            };
+            
+        });
+        //this._page = 1;
+        //this.addLoginPanel();
+    }
+
+    compileTemplate(template): JQuery<HTMLElement> {
+        let temp = $(template);
+        this.mapApi.$compile(temp);
+        return temp;
+    }
+
+
+    //create a drop list for the template
+    interactiveDropDownList(list:string[]):string{
+        let ddl:string= "";
+        for (let i in list) {
+            ddl += `<option value="` + list[i] + `">`+ list[i] + `</option>`
+        }   
+        return ddl;
+    }
 
     //First test with an alert
     //Event when a click is done on the map
@@ -84,8 +177,6 @@ export default class Testing{
         //FileSaver.saveAs(blob, "hello world.json");
         //create a json and save the file in the download folder
     }
-
-
     
 };
 
@@ -95,29 +186,31 @@ export default interface Testing{
     config: any,
     button:any,
     translations: any,
-    panel:any,
-    buttonp:any ;
+    panelL:any,
+    panelP:any;
 };
 
 Testing.prototype.translations = {
     'en-CA': {
         testbutton: 'Planning Work Place',
-        envir: 'Environnement1',
-        themet: 'Theme',
-        zoneTrv: 'Working Zone',
-        typeTrv: 'Working Type',
+        envir: 'Environnement',
+        themet: 'Select a theme',
+        idlot: 'Select an id',
+        typeTrv: 'working type',
         datefinprv: 'Final date planned',
-        geome: 'Geometry'
+        geome: 'Add your Geometry',
+        submit: 'Submit'
     },
 
     'fr-CA': {
         testbutton: 'Planifiez zone de travail',
-        envir: 'Environnement2',
+        envir: 'Environnement',
         themet: 'Theme',
-        zoneTrv: 'Zone de travail',
+        idlot: 'Selectionne un id de lot',
         typeTrv: 'Type de travail',
         datefinprv: 'Date fin prévue',
-        geome: 'Géométrie'    
+        geome: 'Ajouter votre Géométrie',
+        submit: 'Soumettre'   
     }
 };
 
