@@ -1,12 +1,32 @@
-export declare class Export {
-    _Environnement: string;
+import { connexion } from './apiConnect';
+export declare class Extraire {
+    _conn: connexion;
+    _environnement: string;
     _theme: string;
-    _idProgramme: string;
-    _connectionType: string;
-    _pathFile: string;
-    constructor(environnement: string, theme: string, idProgramme: string, connectionType: string, pathfile: string);
-    exportForm(): void;
-    submitExportFrom(): void;
+    _idLot: string;
+    _clip: string;
+    _whereClause: string;
+    _geom: string;
+    _data: any;
+    constructor(env: string, theme: string, idLot: string, clip: string, whereClause: string, geom: string);
+    submitForm(token: string): any;
+    setHeader(token: string): string;
+    interactiveDropDownList(list: string[]): string;
+    getinfo(data: any): void;
+    getEnvironnement(): string;
+    getTheme(): string;
+    getidLot(): string;
+    getclip(): string;
+    getwhereClause(): string;
+    getgeom(): string;
+    setEnvironnement(env: string): void;
+    setTheme(them: string): void;
+    setidLot(zt: string): void;
+    setclip(clip: string): void;
+    setdatefinpr(v: string): void;
+    setgeom(value: string): void;
+    getInformationToJson(): any;
+    saveJson(output: any): void;
 }
-export interface Export {
+export interface Extraire {
 }

@@ -1,16 +1,11 @@
 export default class Testing {
-    _tokenbearer: string;
-    _apireturn: any;
+    /****** À enlever ******/
+    _navigation: number;
+    /*********** ***********/
     init(api: any): void;
     onMenuItemClick(): () => void;
     addLoginPanel(): void;
-    addPanelOption(): void;
-    angularcontrols(plan: any): void;
-    connexionControls(): void;
-    compileTemplate(template: any): JQuery<HTMLElement>;
-    interactiveDropDownList(list: string[]): string;
-    listenToAlert(): void;
-    clickHandler(clickEvent: any): void;
+    connexionControls(navigation: number, panel: any, mapApi: any): void;
 }
 export default interface Testing {
     mapApi: any;
@@ -19,5 +14,4 @@ export default interface Testing {
     button: any;
     translations: any;
     panel: any;
-    buttonp: any;
 }

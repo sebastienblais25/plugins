@@ -1,10 +1,14 @@
 export class connexion{
+
+    constructor(){
+
+    }
+
     //Send json form to API in ajax
-    submitForm(token:string, json:string, urlgoto:string):any{
+    connexionAPI(token:string, json:string, urlgoto:string):any{
         let outputValue:any;
         
         console.log("hello");
-
         /********* API CALL **********/
         //no promise still
         const promises = [];
@@ -13,35 +17,77 @@ export class connexion{
                 $.ajax({
                     url: urlgoto,
                     headers: {
-                        'Authorization': `Bearer ${token}`,
+                        'Authorization': `Bearer ${token}`
                     },
                     type: 'GET',
                     async: false,
-                    cache:false,
+                    //cache:false,
                     data:json,
                     dataType:'json',
-                    success: data => resolve()
+                    success: //data => resolve()
                     
-                    /*function(response){
+                    function(response){
                         outputValue = response;
-                        console.log(outputValue.value);
-                        
-                    }*/
+                        console.log(outputValue.value); 
+                    }
                 })
-                .done(function(data){
+                /*.done(function(data){
                     console.log('success', data)
                     outputValue = data;
                 })
                 .fail(function(xhr){
                     console.log('error',xhr)
-                });
+                });*/
            })
         );
        Promise.all(promises).then(values => {
-            console.log(values[1]);
+            console.log(values);
         });
-        console.log();
         return outputValue;
             
    };
+   /* Note: connexionAPILogin pourrait etre fusionner juste ajuster le header selon l'utilisation */ 
+
+   connexionAPILogin(urlgoto:string,header:any):any{
+    let outputValue:any;
+    
+    console.log("hello");
+    /********* API CALL Login **********/
+    //no promise still
+    const promises = [];
+    promises.push(
+        new Promise(resolve =>{
+            $.ajax({
+                url: urlgoto,
+                headers: {
+                    header
+                },
+                type: 'GET',
+                async: false,
+                //cache:false,
+                //data:json,
+                dataType:'json',
+                success: //data => resolve()
+                
+                function(response){
+                    outputValue = response;
+                    console.log(outputValue); 
+                }
+            })
+            /*.done(function(data){
+                console.log('success', data)
+                outputValue = data;
+            })
+            .fail(function(xhr){
+                console.log('error',xhr)
+            });*/
+       })
+    );
+   Promise.all(promises).then(values => {
+        console.log(values);
+    });
+    //alert(outputValue)
+    return outputValue;
+        
+};
 }

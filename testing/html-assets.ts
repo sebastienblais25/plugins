@@ -1,11 +1,12 @@
 /*
-loginmenu = 
+loginmenu = The form for the login
 startmenu = 
-form =
+form = Teh from fro extraction
 */
 
 export const loginmenu:string= `
 <div ng-controller="connexionCtrl as ctrl">
+    <div><h2>{{ 'plugins.testing.login' | translate }}</h2></div>
     <div>username : </div>
     <div><input type="text" id="username" placeholder="username"/></div>
     <div>Password : </div>
@@ -32,10 +33,14 @@ export const startmenu:string=`
 
 export const form:string = 
 `<div ng-controller="SubmitCtrl as ctrl">
-
+    <div><h2>{{ 'plugins.testing.extrac' | translate }}</h2></div>
     <div class="rv-subsection">
         <div>{{ 'plugins.testing.envir' | translate }}</div>
-        <div><input type="text" id="env" value="Pro"/></div>
+        <div>
+            <select type="text" id="env" placeholder="Select something">
+                {dropdownenv}
+            </select>
+        </div>
     </div>
     
     <div class="rv-subsection">
@@ -51,17 +56,17 @@ export const form:string =
     </div>
     
     <div class="rv-subsection">
-        Si Clip:<br>
-        <input type="text" name="clip" id="clip" value="Oui"/>
+        Si Clip : 
+        <input type="checkbox" name="clip" id="clip" value="non" checked="oui"/>
     </div>
 
     <div class="rv-subsection">
         Entrez un where clause:<br>
-        <input type="text" name="whereclause" id="whereclause" value="Ajout"/>
+        <input type="text" name="whereclause" id="whereclause" value="" placeholder="Where ..."/>
     </div>
     
     <div class="rv-subsection">
-        <div>{{ 'plugins.testing.idlot' | translate }}</div>
+        <div>{{ 'plugins.testing.geome' | translate }}</div>
         <input type="text" name="geom" id="geom" value="geom"/>
     </div>
     
