@@ -4,16 +4,22 @@ import { connexion } from './apiConnect';
 
 export class login{
 
+    /** Send to APi **/
     _username: string = 'hello';
     _password: string = 'hello';
     _conn: connexion = new connexion();
     
-    /**Return of login**/
+    /** Return of login **/
     _token: string;
     _tokentype: string;
     _expired: number = 3600;
     _rightRead: string;
     _rightWrite: string;
+
+    /** Dropdown List **/
+    _themeAcc: string[];
+    _envAcc: string[] = ['Dev', 'Tst', 'Pro'];
+    
     
 
     //Constructor with only username and pasword for the login
@@ -30,7 +36,7 @@ export class login{
          let data:any = this._conn.connexionAPILogin(urlLoginGet,header);
          alert(data.access_token);
          if (!data.code){
-            this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope);
+            this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme);
         }else{
             alert(data.code)
         }
@@ -42,21 +48,23 @@ export class login{
     getInformationToHeader():any{
         //get de properties
         let output:any = {
-            "username": this._username,
-            "password": this._password,
+            "usager": this._username,
+            "mot_de_passe": this._password,
             "duree_token": this._expired
         };
         //let json:any = JSON.stringify(output)
         return output
     }
 
-    setDataFromAPI(token:string,token_type:string,expired:number, scope:string[]){
+    //Ajoute le reste des données obtenu par le login
+    setDataFromAPI(token:string,token_type:string,expired:number, scope:string[], theme:string[]){
         this._token = token;
         this._tokentype = token_type;
         this._expired = expired;
         this._rightRead = scope[0];
-        this._rightWrite = scope[1]
-        alert(this._rightRead + " " + this._rightWrite);
+        this._rightWrite = scope[1];
+        this._themeAcc = theme
+        //alert(this._rightRead + " " + this._rightWrite);
 
     }
 
@@ -123,6 +131,21 @@ export class login{
     }
     setrightWrite(value: string) {
         this._rightWrite = value;
+    }
+    //List de theme
+    getthemeAcc(): string[] {
+        return this._themeAcc;
+    }
+    setthemeAcc(value: string[]) {
+        this._themeAcc = value;
+    }
+
+    //liste d' environnement
+    getenvAcc(): string[] {
+        return this._envAcc;
+    }
+    setenvAcc(value: string[]) {
+        this._envAcc = value;
     }
 
 }

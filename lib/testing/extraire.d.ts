@@ -10,9 +10,11 @@ export declare class Extraire {
     _data: any;
     constructor(env: string, theme: string, idLot: string, clip: string, whereClause: string, geom: string);
     submitForm(token: string): any;
-    setHeader(token: string): string;
     interactiveDropDownList(list: string[]): string;
-    getinfo(data: any): void;
+    getInformationToJson(): any;
+    saveJson(output: any): void;
+    /*************** Accessor ***********************/
+    getinfo(): any;
     getEnvironnement(): string;
     getTheme(): string;
     getidLot(): string;
@@ -25,8 +27,7 @@ export declare class Extraire {
     setclip(clip: string): void;
     setdatefinpr(v: string): void;
     setgeom(value: string): void;
-    getInformationToJson(): any;
-    saveJson(output: any): void;
+    SetData(data: any): void;
 }
 export interface Extraire {
 }

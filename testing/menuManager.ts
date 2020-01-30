@@ -1,5 +1,4 @@
 import { Extraire } from "./extraire";
-import { form } from './html-assets';
 
 export class manageMenu{
 

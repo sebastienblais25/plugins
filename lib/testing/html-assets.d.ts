@@ -1,3 +1,4 @@
 export declare const loginmenu: string;
 export declare const startmenu: string;
-export declare const form: string;
+export declare const formExtraire: string;
+export declare const fromPlanifier = "\n<div ng-controller=\"submitFromP as ctrl\">\n<div>\n    <div>{{ 'plugins.testing.envir' | translate }}</div>\n    <div></div>\n</div>\n<div>\n    <div>{{ 'plugins.testing.themet' | translate }}</div>\n    <div></div>\n</div>\n<div>\n    <div>{{ 'plugins.testing.zoneTrv' | translate }}</div>\n    <div></div>\n</div>\n<div>\n    <div>{{ 'plugins.testing.typeTrv' | translate }}</div>\n    <div></div>\n</div>\n<div>\n    <div></div>\n    <div></div>\n</div>\n<div>\n    <div></div>\n    <div></div>\n</div>\n<div>\n    <md-button class=\"md-primary md-button\"\n    ng-click=\"ctrl.submitFormP()\">\n        {{ 'plugins.testing.submit' | translate }}\n        <md-tooltip>{{ 'plugins.testing.submit' | translate }}</md-tooltip>\n    </md-button>\n</div>\n\n</div>";

@@ -14,7 +14,7 @@ const pluginList = {
     swiper: path.join(SOURCE_PATH, 'swiper')
 };
 
-const hasLoader = ['enhancedTable', 'swiper'];
+const hasLoader = ['enhancedTable', 'swiper', 'testing'];
 
 module.exports = function(env = {}) {
     const config = {

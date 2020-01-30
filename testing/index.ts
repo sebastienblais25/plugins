@@ -1,4 +1,4 @@
-import { form,loginmenu } from './html-assets';
+import { formExtraire,loginmenu } from './html-assets';
 import {Extraire} from './extraire';
 //import {urlgeoDataGet} from './url';
 import { manageMenu } from './menuManager'
@@ -80,8 +80,8 @@ export default class Testing{
                     alert('Connected'); 
         
                     /****** List a recevoir *******/
-                    let list = ["Hydro","Route","building"];
-                    let listserver = ["Dev", "Tst", "Pro"];
+                    let list = log.getthemeAcc();
+                    let listserver = log.getenvAcc();
 
                     /****** Extraire *******/
                     let ext = new Extraire('','','','','','');
@@ -93,11 +93,8 @@ export default class Testing{
                     let ddltheme = ext.interactiveDropDownList(list);
 
                     //add the dropdown list for the form
-                    let output = form.replace(/{dropdowntheme}/, ddltheme);
+                    let output = formExtraire.replace(/{dropdowntheme}/, ddltheme);
                     output = output.replace(/{dropdownenv}/,ddlEnv);
-
-                    //console.log('hello', ddltheme);
-                    //alert(output)
 
                     // TODO: compiler ton code pour que la directive Angular soit associe a ton code.
                     // Append element
@@ -128,29 +125,52 @@ export default interface Testing{
 //translate label
 Testing.prototype.translations = {
     'en-CA': {
-        testbutton: 'Planning Work Place',
-        envir: 'Environnement',
-        themet: 'Select a theme',
-        idlot: 'Select an id',
-        typeTrv: 'working type',
-        datefinprv: 'Final date planned',
-        geome: 'Add your Geometry',
+        //commun
+        envir: 'Select an environnement :',
+        themet: 'Select a theme :',
+        idUT: 'Select a working unity id :',
+        geome: 'Add your Geometry :',
         submit: 'Submit',
+        //extraction seulement
         extrac: 'Extract',
-        login: 'Login'
+        clip: 'If clip :',
+        where: 'Enter a Where Clause :',
+        //planifier seulement
+        testbutton: 'Planning Work Place',
+        zoneTrv: 'Working Zone :',
+        typeTrv: 'working type :',
+        classe: ' :',
+        datefinprv: 'Final date planned :',
+        log: ' :',
+        //login seulement
+        login: 'Login',
+        username : "username",
+        password : 'password'
     },
 
     'fr-CA': {
-        testbutton: 'Planifiez zone de travail',
-        envir: 'Environnement',
-        themet: 'Theme',
-        idlot: 'Selectionne un id de lot',
-        typeTrv: 'Type de travail',
-        datefinprv: 'Date fin prévue',
-        geome: 'Ajouter votre Géométrie',
+        
+        //commun
+        envir: 'Environnement :',
+        themet: 'Theme :',
+        idUT: 'Selectionne un identifiant d unité de travail :',
+        geome: 'Ajouter votre Géométrie :',
         submit: 'Soumettre',
+        //extraction seulement
         extrac: 'Extraction',
-        login: 'connexion'   
+        clip: 'Si clip :',
+        where: 'Entrer une Where Clause :',
+        //planifier seuelement
+        testbutton: 'Planifiez zone de travail',
+        zoneTrv: 'Zone de travail :',
+        typeTrv: 'Type de travail :',
+        classe: ' :',
+        datefinprv: 'Date fin prévue :',
+        log: ' :',
+        //Login seuelement
+        login: 'connexion :',
+        username : "nom d'usager",
+        password : 'mot de passe'   
     }
 };
 

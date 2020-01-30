@@ -8,7 +8,7 @@ export class Extraire{
     _conn :connexion= new connexion();
     _environnement: string;
     _theme: string;
-    _idLot: string;
+    _idUT: string;
     _clip: string;
     _whereClause: string;
     _geom: string;
@@ -16,10 +16,10 @@ export class Extraire{
     
     
     //Constructor
-    constructor(env:string, theme:string, idLot:string, clip:string,whereClause:string, geom:string){
+    constructor(env:string, theme:string, idUT:string, clip:string,whereClause:string, geom:string){
         this._environnement = env;
         this._theme = theme;
-        this._idLot = idLot;
+        this._idUT = idUT;
         this._clip = clip;
         this._whereClause = whereClause;
         this._geom = geom;
@@ -57,6 +57,28 @@ export class Extraire{
     return ddl;
 }  
 
+    //get the infromation out of the form into a string json
+    getInformationToJson():any{
+        //get de properties
+        let output:any = {
+            "env": this._environnement,
+            "theme": this._theme,
+            "id_lot": this._idUT,
+            "clip": this._clip,
+            "where_clause" : this._whereClause,
+            "geom": this._geom
+        };
+        let json:any = JSON.stringify(output)
+        return json
+    }
+
+    //put a json string into a blob and export into a json file in download file
+    saveJson(output:any):void{
+        let blob = new Blob([output],{type:"application/json"});
+        FileSaver.saveAs(blob,'export.json');
+    }
+
+    /*************** Accessor ***********************/
    getinfo(){
        return this._data;
    }
@@ -69,8 +91,8 @@ export class Extraire{
         return this._theme;
     }
 
-    getidLot():string{
-        return this._idLot;
+    getidUT():string{
+        return this._idUT;
     }
 
     getclip():string{
@@ -93,8 +115,8 @@ export class Extraire{
         this._theme = them;
     }
 
-    setidLot(zt:string):void{
-        this._idLot = zt;
+    setidUT(idUT:string):void{
+        this._idUT = idUT;
     }
 
     setclip(clip:string):void{
@@ -113,26 +135,7 @@ export class Extraire{
         this._data = data;
     }
 
-    //get the infromation out of the form into a string json
-    getInformationToJson():any{
-        //get de properties
-        let output:any = {
-            "env": this._environnement,
-            "theme": this._theme,
-            "id_lot": this._idLot,
-            "clip": this._clip,
-            "where_clause" : this._whereClause,
-            "geom": this._geom
-        };
-        let json:any = JSON.stringify(output)
-        return json
-    }
 
-    //put a json string into a blob and export into a json file in download file
-    saveJson(output:any):void{
-        let blob = new Blob([output],{type:"application/json"});
-        FileSaver.saveAs(blob,'export.json');
-    }
 }
 
 //parametre pour les le planifiez ZT
