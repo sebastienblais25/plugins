@@ -5,6 +5,9 @@ import {urlgeoDataGet} from './url';
 import { connexion } from './apiConnect';
 
 export class Extraire{
+
+    /*********** Properties ***********/
+
     _conn :connexion= new connexion();
     _environnement: string;
     _theme: string;
@@ -15,7 +18,7 @@ export class Extraire{
     _data:any;
     
     
-    //Constructor
+    /************* Constructor *************/
     constructor(env:string, theme:string, idUT:string, clip:string,whereClause:string, geom:string){
         this._environnement = env;
         this._theme = theme;
@@ -25,20 +28,23 @@ export class Extraire{
         this._geom = geom;
     }
 
+    /************* Methods *************/
+
     //Send json form to API in ajax
     submitForm(token:string):any{
        //To Change
             //create a json and save the file in the download folder 
         let json:any = this.getInformationToJson();
         //this.saveJson(json)
-        this.SetData(this._conn.connexionAPI(token, json,urlgeoDataGet));
+        this.setData(this._conn.connexionAPI(token, json,urlgeoDataGet));
 
         //for test
-        if(this.getinfo().value){
+        if(this.getinfo().status == 401){
+            return this.getinfo();
+        }else{
             alert(this.getinfo().value);
-        }
-        return this.getinfo().value;
-            
+            return this.getinfo().value;
+        }      
    };
 
    /*setHeader(token:string):string{
@@ -50,12 +56,12 @@ export class Extraire{
 
    //create a drop list for the template
    interactiveDropDownList(list:string[]):string{
-    let ddl:string= "";
-    for (let i in list) {
-        ddl += `<option value="` + list[i] + `">`+ list[i] + `</option>`
-    }   ;
-    return ddl;
-}  
+        let ddl:string= "";
+        for (let i in list) {
+            ddl += `<option value="` + list[i] + `">`+ list[i] + `</option>`
+        }   ;
+        return ddl;
+    }  
 
     //get the infromation out of the form into a string json
     getInformationToJson():any{
@@ -78,7 +84,7 @@ export class Extraire{
         FileSaver.saveAs(blob,'export.json');
     }
 
-    /*************** Accessor ***********************/
+    /*************** Accessors ***********************/
    getinfo(){
        return this._data;
    }
@@ -131,7 +137,7 @@ export class Extraire{
         this._geom = value;
     }
 
-    SetData(data:any){
+    setData(data:any){
         this._data = data;
     }
 

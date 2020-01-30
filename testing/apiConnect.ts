@@ -8,7 +8,7 @@ export class connexion{
     connexionAPI(token:string, json:string, urlgoto:string):any{
         let outputValue:any;
         
-        console.log("hello");
+        //console.log("hello");
         /********* API CALL **********/
         //no promise still
         const promises = [];
@@ -26,9 +26,14 @@ export class connexion{
                     dataType:'json',
                     success: //data => resolve()
                     
-                    function(response){
+                    function(response,jqXHR){
                         outputValue = response;
-                        console.log(outputValue.value); 
+                        console.log(jqXHR)
+                        
+                    },
+                    error: function(xhr){
+                        alert(xhr.statusText);
+                        outputValue = xhr;
                     }
                 })
                 /*.done(function(data){
@@ -51,7 +56,7 @@ export class connexion{
    connexionAPILogin(urlgoto:string,header:any):any{
     let outputValue:any;
     
-    console.log("hello");
+    //console.log("hello");
     /********* API CALL Login **********/
     //no promise still
     const promises = [];
@@ -72,6 +77,10 @@ export class connexion{
                 function(response){
                     outputValue = response;
                     console.log(outputValue); 
+                },
+                error: function(xhr){
+                    alert(xhr.statusText);
+                    outputValue = xhr;
                 }
             })
             /*.done(function(data){
@@ -87,7 +96,6 @@ export class connexion{
         console.log(values);
     });
     //alert(outputValue)
-    return outputValue;
-        
+    return outputValue;     
 };
 }

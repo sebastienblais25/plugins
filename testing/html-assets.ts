@@ -35,7 +35,7 @@ export const formExtraire:string =
 `<div ng-controller="SubmitCtrl as ctrl">
     
     <div><h2>{{ 'plugins.testing.extrac' | translate }}</h2></div>
-    <div class="divshow">
+    <div class="">
         <div class="rv-subsection">
             <div>{{ 'plugins.testing.envir' | translate }}</div>
             <div>

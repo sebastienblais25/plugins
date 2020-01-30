@@ -1,39 +1,41 @@
 import { Extraire } from "./extraire";
+import { manageButton } from "./ButtonManager";
+import { formExtraire } from './html-assets';
 
-export class manageMenu{
+export class menuManager{
 
 
-    constructor(){};
+    constructor(){}
 
-    //Submit controller
-    angularcontrols(ext:any, token:string, mapApi):void{
-        /************ À placer en fonction ou class ***********/
-        // TODO: creer la directive avant de compiler le code
-        mapApi.agControllerRegister('SubmitCtrl', function($scope){
-            this.submitForm = function() { 
-                //get all the information of the form into the class
-                ext = new Extraire(
-                    (<HTMLInputElement>document.getElementById("env")).value
-            ,(<HTMLInputElement>document.getElementById("theme")).value
-            ,(<HTMLInputElement>document.getElementById("idlot")).value
-            ,(<HTMLInputElement>document.getElementById("clip")).value
-            ,(<HTMLInputElement>document.getElementById("whereclause")).value
-            ,(<HTMLInputElement>document.getElementById("geom")).value);
-                
-                this._apireturn = ext.submitForm(this._tokenbearer);
-                console.log(token);
-                //alert(this._apireturn.value);    
-            };
-           
-        });
-        /************** ***************/
+    extractManager(log:any, panel:any, mapApi:any){
+        let list = log.getthemeAcc();
+        let listserver = log.getenvAcc();
+
+        /************* Extraire ***************/
+        let ext = new Extraire('','','','','','');
+        let mb = new manageButton();
+        //activate the controls for Extraction
+        mb.angularcontrols(ext, log._token, mapApi);
+        //set the dropdown list for the form
+        let ddlEnv = ext.interactiveDropDownList(listserver);
+        let ddltheme = ext.interactiveDropDownList(list);
+
+        //add the dropdown list for the form
+        let output = formExtraire.replace(/{dropdowntheme}/, ddltheme);
+        output = output.replace(/{dropdownenv}/,ddlEnv);
+
+        // TODO: compiler ton code pour que la directive Angular soit associe a ton code.
+        // Append element
+        mb.compileTemplate(output,mapApi);
+
+        //add the compile template to the panel
+        panel.body = output;
     }
 
-    compileTemplate(template,mapApi): JQuery<HTMLElement> {
-        let temp = $(template);
-        mapApi.$compile(temp);
-        return temp;
+    planifManager(log:any, panel:any, mapApi:any){
+
     }
 
-    
+
+
 }

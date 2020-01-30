@@ -1,8 +1,9 @@
 import { formExtraire,loginmenu } from './html-assets';
 import {Extraire} from './extraire';
 //import {urlgeoDataGet} from './url';
-import { manageMenu } from './menuManager'
+import { manageButton } from './ButtonManager'
 import { login } from './login';
+import { menuManager } from './menuManager';
 //const FileSaver = require('file-saver');
 
 
@@ -38,7 +39,7 @@ export default class Testing{
 
     //Creating a login menu
     addLoginPanel(){
-        let mp = new manageMenu();
+        let mb = new manageButton();
         let output:string = loginmenu;
 
         //if (!this.panel) {
@@ -55,7 +56,7 @@ export default class Testing{
         
         
         //compile the login template
-        mp.compileTemplate(output,this.mapApi);
+        mb.compileTemplate(output,this.mapApi);
         //add a close button 
         let closeBtn = this.panel.header.closeButton;
         //add the template
@@ -71,37 +72,16 @@ export default class Testing{
                 //get all the information of the form into the class
                 let log:login = new login((<HTMLInputElement>document.getElementById("username")).value
                 ,(<HTMLInputElement>document.getElementById("password")).value);
-
+                
                 console.log(log._username,log._password)
                 //submit the form to the API
                 let loginfo:any = log.submitForm();
                 //si le retour ne contient pas de code d'erreur
-                if (!loginfo.code){
+                if (loginfo.status != 401){
                     alert('Connected'); 
-        
-                    /****** List a recevoir *******/
-                    let list = log.getthemeAcc();
-                    let listserver = log.getenvAcc();
-
-                    /****** Extraire *******/
-                    let ext = new Extraire('','','','','','');
-                    let mp = new manageMenu();
-                    //activate the controls for Extraction
-                    mp.angularcontrols(ext, log._token, mapApi);
-                    //set the dropdown list for the form
-                    let ddlEnv = ext.interactiveDropDownList(listserver);
-                    let ddltheme = ext.interactiveDropDownList(list);
-
-                    //add the dropdown list for the form
-                    let output = formExtraire.replace(/{dropdowntheme}/, ddltheme);
-                    output = output.replace(/{dropdownenv}/,ddlEnv);
-
-                    // TODO: compiler ton code pour que la directive Angular soit associe a ton code.
-                    // Append element
-                    mp.compileTemplate(output,mapApi);
-
-                    //add the compile template to the panel
-                    panel.body = output;
+                    let menu:menuManager = new menuManager();
+                    menu.extractManager(log,panel,mapApi);
+                    
                 //si le retour de l'API contient un code d'erreur
                 }else{
                     alert(loginfo.code);
