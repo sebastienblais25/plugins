@@ -1,5 +1,6 @@
-import { urlLoginGet } from './url';
+import { urlLoginGet, urlgetidWu } from './config/url';
 import { connexion } from './apiConnect';
+import { idWu } from './config/idWU';
 
 
 export class login{
@@ -19,6 +20,7 @@ export class login{
     /** Dropdown List **/
     _themeAcc: string[];
     _envAcc: string[] = ['Dev', 'Tst', 'Pro'];
+    _idUt:idWu[] = [];
     
     
 
@@ -34,7 +36,7 @@ export class login{
              //create a json and save the file in the download folder 
          let header:any = this.getInformationToHeader();
          let data:any = this._conn.connexionAPILogin(urlLoginGet,header);
-         alert(data.access_token);
+         //alert(data.access_token);
          if (!data.code){
             this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme);
         }else{
@@ -65,7 +67,36 @@ export class login{
         this._rightWrite = scope[1];
         this._themeAcc = theme
         //alert(this._rightRead + " " + this._rightWrite);
+        this.setidUTtheme();
+    }
 
+    setidUTtheme(){
+        let list:string[] = this.getthemeAcc();
+        let json:string = "";
+        for (let i in list) {
+            this._idUt[i] = new idWu(list[i],list);
+            let newUrl = urlgetidWu + list[i]
+            let output:any =this._conn.connexionAPI(this.gettoken(), json, newUrl);
+            //console.log(output.value);
+            
+            this._idUt[i]._wUnit = output.value;
+        }
+        for(let i in this._idUt){
+            for(let j in this._idUt[i]._wUnit){
+                this._idUt[i]._wUnit[j] = this._idUt[i]._theme + ' - ' + this._idUt[i]._wUnit[j];
+            } 
+        }  
+    }
+
+    getUravail(theme:string):string[]{
+        for (let i in this._idUt){
+            if (this._idUt[i].getTheme() == theme){
+                return this._idUt[0]._wUnit
+            }
+        }
+        let ret:string[] = ['No value'];
+        return ret;
+        
     }
 
     //accessor

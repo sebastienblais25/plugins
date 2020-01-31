@@ -1,8 +1,8 @@
 
 
 const FileSaver = require('file-saver'); // le import
-import {urlgeoDataGet} from './url';
-import { connexion } from './apiConnect';
+import {urlgeoDataGet} from '../config/url';
+import { connexion } from '../apiConnect';
 
 export class Extraire{
 
@@ -52,16 +52,7 @@ export class Extraire{
         'Authorization': `Bearer ${token}`
        };
         return output;
-   }*/
-
-   //create a drop list for the template
-   interactiveDropDownList(list:string[]):string{
-        let ddl:string= "";
-        for (let i in list) {
-            ddl += `<option value="` + list[i] + `">`+ list[i] + `</option>`
-        }   ;
-        return ddl;
-    }  
+   }*/ 
 
     //get the infromation out of the form into a string json
     getInformationToJson():any{

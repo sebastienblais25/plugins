@@ -1,4 +1,4 @@
-import { connexion } from "./apiConnect";
+import { connexion } from "../apiConnect";
 
 
 export class planifier{

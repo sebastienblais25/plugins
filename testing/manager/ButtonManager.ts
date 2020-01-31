@@ -1,4 +1,4 @@
-import { Extraire } from "./extraire";
+import { Extraire } from "../operation/extraire";
 
 export class manageButton{
 
@@ -15,7 +15,7 @@ export class manageButton{
                 ext = new Extraire(
                     (<HTMLInputElement>document.getElementById("env")).value
             ,(<HTMLInputElement>document.getElementById("theme")).value
-            ,(<HTMLInputElement>document.getElementById("idlot")).value
+            ,(<HTMLInputElement>document.getElementById("idUt")).value
             ,(<HTMLInputElement>document.getElementById("clip")).value
             ,(<HTMLInputElement>document.getElementById("whereclause")).value
             ,(<HTMLInputElement>document.getElementById("geom")).value);

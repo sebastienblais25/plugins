@@ -1,4 +1,5 @@
 import { connexion } from './apiConnect';
+import { idWu } from './config/idWU';
 export declare class login {
     /** Send to APi **/
     _username: string;
@@ -13,10 +14,13 @@ export declare class login {
     /** Dropdown List **/
     _themeAcc: string[];
     _envAcc: string[];
+    _idUt: idWu[];
     constructor(username?: string, password?: string);
     submitForm(): any;
     getInformationToHeader(): any;
-    setDataFromAPI(token: string, token_type: string, expired: number, scope: string[]): void;
+    setDataFromAPI(token: string, token_type: string, expired: number, scope: string[], theme: string[]): void;
+    setidUTtheme(): void;
+    getUravail(theme: string): string[];
     getusername(): string;
     setusername(value: string): void;
     getpassword(): string;
@@ -33,4 +37,8 @@ export declare class login {
     setrightRead(value: string): void;
     getrightWrite(): string;
     setrightWrite(value: string): void;
+    getthemeAcc(): string[];
+    setthemeAcc(value: string[]): void;
+    getenvAcc(): string[];
+    setenvAcc(value: string[]): void;
 }

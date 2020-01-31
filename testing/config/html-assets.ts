@@ -54,7 +54,9 @@ export const formExtraire:string =
         
         <div class="rv-subsection">
             <div>{{ 'plugins.testing.idUT' | translate }}</div>
-            <input type="text" name="idlot" id="idlot" value="1"/>
+            <select type="text" id="idUt" placeholder="Select something">
+                {dropdownid}
+            </select>
         </div>
         
         <div class="rv-subsection">

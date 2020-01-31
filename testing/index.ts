@@ -1,9 +1,8 @@
-import { formExtraire,loginmenu } from './html-assets';
-import {Extraire} from './extraire';
+import { loginmenu } from './config/html-assets';
 //import {urlgeoDataGet} from './url';
-import { manageButton } from './ButtonManager'
+import { manageButton } from './manager/ButtonManager'
 import { login } from './login';
-import { menuManager } from './menuManager';
+import { menuManager } from './manager/menuManager';
 //const FileSaver = require('file-saver');
 
 
@@ -73,6 +72,8 @@ export default class Testing{
                 let log:login = new login((<HTMLInputElement>document.getElementById("username")).value
                 ,(<HTMLInputElement>document.getElementById("password")).value);
                 
+                
+
                 console.log(log._username,log._password)
                 //submit the form to the API
                 let loginfo:any = log.submitForm();
