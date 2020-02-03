@@ -70,6 +70,7 @@ export class login{
         this.setidUTtheme();
     }
 
+    //build the list of working unit 
     setidUTtheme(){
         let list:string[] = this.getthemeAcc();
         let json:string = "";
@@ -88,7 +89,8 @@ export class login{
         }  
     }
 
-    getUravail(theme:string):string[]{
+    //Return a list of a theme selected
+    getUtravail(theme:string):string[]{
         for (let i in this._idUt){
             if (this._idUt[i].getTheme() == theme){
                 return this._idUt[0]._wUnit

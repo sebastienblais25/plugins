@@ -1,3 +1,4 @@
+/****** Import ******/
 import { connexion } from "../apiConnect";
 
 
@@ -26,14 +27,9 @@ export class planifier{
 
     /************* Methods *************/
 
-    //create a drop list for the template
-   interactiveDropDownList(list:string[]):string{
-    let ddl:string= "";
-    for (let i in list) {
-        ddl += `<option value="` + list[i] + `">`+ list[i] + `</option>`
-    }   ;
-    return ddl;
-}
+   //Send a json to the API and return with the information 
+
+   
 
     //get the infromation out of the form into a string json
     getInformationToJson():any{

@@ -1,3 +1,4 @@
+/****** Import ******/
 import { connexion } from "../apiConnect";
 export declare class planifier {
     /*********** Properties ***********/
@@ -13,7 +14,6 @@ export declare class planifier {
     /*********** Constructor ***********/
     constructor(env: string, theme: string, zt: string, idut: string, tt: string, classes: string[], datefin: string, logfile: string);
     /************* Methods *************/
-    interactiveDropDownList(list: string[]): string;
     getInformationToJson(): any;
     /******** Accessors *********/
     getconn(): connexion;

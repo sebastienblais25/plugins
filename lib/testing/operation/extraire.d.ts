@@ -31,5 +31,3 @@ export declare class Extraire {
     setgeom(value: string): void;
     setData(data: any): void;
 }
-export interface Extraire {
-}

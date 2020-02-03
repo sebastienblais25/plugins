@@ -1,5 +1,7 @@
+import { login } from '../login';
 export declare class manageButton {
     constructor();
-    angularcontrols(ext: any, token: string, mapApi: any): void;
+    extrairecontrols(log: login, panel: any, mapApi: any): void;
+    planControl(log: login, panel: any, mapApi: any): void;
     compileTemplate(template: any, mapApi: any): JQuery<HTMLElement>;
 }

@@ -134,8 +134,3 @@ export class Extraire{
 
 
 }
-
-//parametre pour les le planifiez ZT
-export interface Extraire{
-    
-}

@@ -1,10 +1,8 @@
+/****** Import ******/
 import { loginmenu } from './config/html-assets';
-//import {urlgeoDataGet} from './url';
-import { manageButton } from './manager/ButtonManager'
+import { manageController } from './manager/ControllerManager'
 import { login } from './login';
 import { menuManager } from './manager/menuManager';
-//const FileSaver = require('file-saver');
-
 
 export default class Testing{
     
@@ -31,6 +29,7 @@ export default class Testing{
         return () => {
             //this.button.isActive = !this.button.isActive;
             this._RV.toggleSideNav('close');
+            //open the panel
             this.panel.open();
         };
     }
@@ -38,52 +37,60 @@ export default class Testing{
 
     //Creating a login menu
     addLoginPanel(){
-        let mb = new manageButton();
+        //permet d'Activer le bouton connexion/ login
+        let mb = new manageController();
         let output:string = loginmenu;
 
-        //if (!this.panel) {
-            //creating the panel
-            this.panel = this.mapApi.panels.create('Test Login');
-            this.panel.element.css({bottom: '0em', width: '400px', top: '50px'})
-            this.panel.header.title = 'Generic Title';
-        //} else {
-            this.panel.close();
-       // }
 
-        //add control here   
+        //creating the panel with the dimension and a title for the application
+        this.panel = this.mapApi.panels.create('Test Login');
+        this.panel.element.css({bottom: '0em', width: '400px', top: '50px'})
+        this.panel.header.title = 'Generic Title';
+
+        //add control for the login button
         this.connexionControls(this.panel,this.mapApi);
         
         
         //compile the login template
         mb.compileTemplate(output,this.mapApi);
+
         //add a close button 
         let closeBtn = this.panel.header.closeButton;
-        //add the template
+        //add a toggle button
+        let toggleBtn = this.panel.header.toggleButton;
+        //add the template to the panel
         this.panel.body = output;
     }
 
 
     connexionControls( panel:any,mapApi:any,){
-        //ajoute un controller (html)
+        //ajoute un controller au formulaire html
         this.mapApi.agControllerRegister('connexionCtrl', function($scope){
-            //ajoute la focntion sous le controller(html)
+            //ajoute la fonction sous le controller au formulaire html
             this.submitConn = function() { 
-                //get all the information of the form into the class
+                //prends les informations des input pour envoyer a l'API
                 let log:login = new login((<HTMLInputElement>document.getElementById("username")).value
                 ,(<HTMLInputElement>document.getElementById("password")).value);
                 
                 
-
-                console.log(log._username,log._password)
-                //submit the form to the API
+                //Envoie le formulaire a l API
                 let loginfo:any = log.submitForm();
-                //si le retour ne contient pas de code d'erreur
+
+                //si le retour ne contient pas de code d'erreur continue
                 if (loginfo.status != 401){
                     alert('Connected'); 
                     let menu:menuManager = new menuManager();
-                    menu.extractManager(log,panel,mapApi);
+
+                    let outputExt:string;
+                    let outputPlan:string;
+
+                    outputExt = menu.extractManager(log,panel,mapApi);
+                    outputPlan = menu.planifManager(log,panel,mapApi);
                     
-                //si le retour de l'API contient un code d'erreur
+                    
+                    panel.body = "<div>"  + outputExt+ "</div>";
+
+                //si le retour de l'API contient un code d'erreur et le message
                 }else{
                     alert(loginfo.code);
                     alert(loginfo.message);
@@ -94,6 +101,7 @@ export default class Testing{
 
 };
 
+//Inteface pour avoir accèes au element du viewer
 export default interface Testing{
     mapApi: any,
     _RV: any,
@@ -106,53 +114,60 @@ export default interface Testing{
 //translate label
 Testing.prototype.translations = {
     'en-CA': {
-        //commun
+        //Commun
         envir: 'Select an environnement :',
         themet: 'Select a theme :',
         idUT: 'Select a working unity id :',
         geome: 'Add your Geometry :',
         submit: 'Submit',
-        //extraction seulement
+        cancel: 'Cancel',
+        //Extraction seulement
         extrac: 'Extract',
         clip: 'If clip :',
         where: 'Enter a Where Clause :',
-        //planifier seulement
+        //Planifier seulement
         testbutton: 'Planning Work Place',
+        planif: 'Planning',
         zoneTrv: 'Working Zone :',
         typeTrv: 'working type :',
-        classe: ' :',
+        classe: 'Select a class :',
         datefinprv: 'Final date planned :',
-        log: ' :',
-        //login seulement
+        log: 'Add a log file :',
+        //Login seulement
         login: 'Login',
         username : "username",
         password : 'password'
+        //Livraison seulement
     },
 
     'fr-CA': {
         
-        //commun
+        //Commun
         envir: 'Environnement :',
         themet: 'Theme :',
         idUT: 'Selectionne un identifiant d unité de travail :',
         geome: 'Ajouter votre Géométrie :',
         submit: 'Soumettre',
-        //extraction seulement
+        cancel: 'Annuler',
+        //Extraction seulement
         extrac: 'Extraction',
         clip: 'Si clip :',
         where: 'Entrer une Where Clause :',
-        //planifier seuelement
+        //Planifier seuelement
         testbutton: 'Planifiez zone de travail',
+        planif: 'Planifier',
         zoneTrv: 'Zone de travail :',
         typeTrv: 'Type de travail :',
-        classe: ' :',
+        classe: 'selectionne une classe :',
         datefinprv: 'Date fin prévue :',
-        log: ' :',
-        //Login seuelement
+        log: 'Ajout d un fichier log :',
+        //Login seulement
         login: 'connexion :',
         username : "nom d'usager",
-        password : 'mot de passe'   
+        password : 'mot de passe' 
+        //Livraison seulement  
     }
 };
 
+//accès du plugins à l'application
 (<any>window).testing = Testing;
