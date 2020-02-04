@@ -15,6 +15,7 @@ export class Extraire{
     _clip: string;
     _whereClause: string;
     _geom: string;
+    //data from API
     _data:any;
     
     
@@ -22,7 +23,9 @@ export class Extraire{
     constructor(env:string, theme:string, idUT:string, clip:string,whereClause:string, geom:string){
         this._environnement = env;
         this._theme = theme;
+        alert(theme)
         this._idUT = idUT;
+        alert(idUT)
         this._clip = clip;
         this._whereClause = whereClause;
         this._geom = geom;
@@ -36,14 +39,14 @@ export class Extraire{
             //create a json and save the file in the download folder 
         let json:any = this.getInformationToJson();
         //this.saveJson(json)
-        this.setData(this._conn.connexionAPI(token, json,urlgeoDataGet));
+        this.setData(this._conn.connexionAPI(token, json,urlgeoDataGet, 'Get'));
 
         //for test
-        if(this.getinfo().status == 401){
+        if(this.getinfo() == 'success'){
             return this.getinfo();
         }else{
-            alert(this.getinfo().value);
-            return this.getinfo().value;
+            alert(this.getinfo().status);
+            return this.getinfo().status;
         }      
    };
 

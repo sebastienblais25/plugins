@@ -1,5 +1,5 @@
 import { connexion } from './apiConnect';
-import { idWu } from './config/idWU';
+import { idWu } from './manager/idWU';
 export declare class login {
     /** Send to APi **/
     _username: string;

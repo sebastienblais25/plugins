@@ -5,10 +5,8 @@ export class connexion{
     }
 
     //Send json form to API in ajax
-    connexionAPI(token:string, json:string, urlgoto:string):any{
+    connexionAPI(token:string, jsonstring:string, urlgoto:string, typeConn?:string):any{
         let outputValue:any;
-        
-        //console.log("hello");
         /********* API CALL **********/
         //no promise still
         const promises = [];
@@ -17,23 +15,32 @@ export class connexion{
                 $.ajax({
                     url: urlgoto,
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}`,
+                        'contentType': 'application/json'
                     },
-                    type: 'GET',
+                    type: typeConn,
                     async: false,
                     //cache:false,
-                    data:json,
+                    contentType: "application/json; charset=utf-8",
+                    data: jsonstring,
                     dataType:'json',
+                    processData: false,
                     success: //data => resolve()
                     
                     function(response,jqXHR){
-                        outputValue = response;
-                        console.log(jqXHR)
                         
+                        if (response.message != undefined){
+                            alert(response.message)
+                            outputValue = jqXHR;
+                        }
+                        if(response.value != undefined){
+                            outputValue = response;
+                        }
                     },
                     error: function(xhr){
                         alert(xhr.statusText);
                         outputValue = xhr;
+                        //console.log($('#recommandation').val());
                     }
                 })
                 /*.done(function(data){
@@ -91,11 +98,62 @@ export class connexion{
                 console.log('error',xhr)
             });*/
        })
-    );
-   Promise.all(promises).then(values => {
-        console.log(values);
-    });
-    //alert(outputValue)
-    return outputValue;     
-};
+        );
+    Promise.all(promises).then(values => {
+            console.log(values);
+        });
+        //alert(outputValue)
+        return outputValue;     
+    };
+
+    connexionAPIPost(token:string, jsonstring:string, urlgoto:string, typeConn?:string):any{
+        let outputValue:any;
+        /********* API CALL **********/
+        //no promise still
+        const promises = [];
+        promises.push(
+            new Promise(resolve =>{
+                $.ajax({
+                    url: urlgoto,
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'contentType': 'application/json'
+                    },
+                    type: typeConn,
+                    async: false,
+                    //cache:false,
+                    contentType: "application/json; charset=utf-8",
+                    data: jsonstring,
+                    dataType:'json',
+                    processData: false,
+                    success: //data => resolve()
+                    
+                    function(response,jqXHR){
+                        alert(jqXHR+ ' 1');
+                        console.log(jqXHR );
+                        alert(response.message);
+                        console.log(response.message  + ' 2');
+
+                        outputValue = jqXHR;
+                        
+                    },
+                    error: function(xhr){
+                        alert(xhr.statusText);
+                        alert("hello");
+                        outputValue = xhr;
+                    }
+                })
+                
+           })
+        );
+       Promise.all(promises).then(values => {
+            console.log(values);
+        });
+
+        alert(outputValue + ' 3')
+        
+
+        return outputValue;
+            
+   };
 }

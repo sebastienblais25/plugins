@@ -27,13 +27,15 @@ export const loginmenu:string= `
 
 export const formExtraire:string = 
 `<div ng-controller="SubmitCtrl as ctrl">
-    <div id="testclick" ng-click="ctrl.openplan()">
+    <div class="divButton" id="testclick" ng-click="ctrl.openplan()">
         <h2>{{ 'plugins.testing.planif' | translate }}</h2>
         à enlever
     </div> 
 
-    <div ng-click="ctrl.ShowHide()"><h2 id="testclick">{{ 'plugins.testing.extrac' | translate }}</h2></div>
-    <div class="" ng-show="IsVisible">
+    <div class="divButton" ng-click="ctrl.ShowHide()">
+        <h2>{{ 'plugins.testing.extrac' | translate }}</h2>
+    </div>
+    <div ng-show="IsVisible">
         <div class="rv-subsection">
             <div>{{ 'plugins.testing.envir' | translate }}</div>
             <div>
@@ -44,17 +46,26 @@ export const formExtraire:string =
         </div>
         
         <div class="rv-subsection">
-        <div>{{ 'plugins.testing.themet' | translate }}</div>
-        <select type="text" id="theme" placeholder="Select something">
-            {dropdowntheme}
-        </select>
-        </div>
-        
-        <div class="rv-subsection">
+            <div>{{ 'plugins.testing.themet' | translate }}</div>
+            <md-select 
+             ng-model="ctrl.selectedItemA" 
+             ng-change="ctrl.setList()" 
+             id="theme" 
+             placeholder="Select something">
+                <md-option ng-repeat="item in ctrl.itemsA" ng-value="item.value">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+            </br>
             <div>{{ 'plugins.testing.idUT' | translate }}</div>
-            <select type="text" id="idUt" placeholder="Select something">
-                {dropdownid}
-            </select>
+            <md-select
+             ng-model="ctrl.selectedItemB"
+             ng-change="ctrl.setListB()">
+                <md-option ng-repeat="item in ctrl.itemsB" ng-value="item.value">
+                    {{ item.name }}
+                </md-option>
+            </md-select>
+
         </div>
             
         <div class="rv-subsection">
@@ -79,7 +90,7 @@ export const formExtraire:string =
                 <md-tooltip>{{ 'plugins.testing.submit' | translate }}</md-tooltip>
             </md-button>
 
-    </div>
+        </div>
     </div>        
 </div>`;
 
@@ -88,59 +99,59 @@ export const formPlanifier = `
 <div ng-controller="submitFromP as ctrl">
 <div id="testclick"><h2>{{ 'plugins.testing.planif' | translate }}</h2></div>
 <div class="">
-    <div>
+    <div class="rv-subsection">
         <div>{{ 'plugins.testing.envir' | translate }}</div>
         <div>
-            <select type="text" id="env" placeholder="Select something">
+            <select type="text" id="envp" placeholder="Select something">
                 {dropdownenv}
             </select>
         </div>
     </div>
 
-    <div>
+    <div class="rv-subsection">
         <div>{{ 'plugins.testing.themet' | translate }}</div>
         <div>
-            <select type="text" id="theme" placeholder="Select something">
+            <select type="text" id="themep" placeholder="Select something">
                 {dropdowntheme}
             </select>
         </div>
     </div>
 
-    <div>
-        <div>{{ 'plugins.testing.zoneTrv' | translate }}</div>
-        <div><input type="text" name="ztv" id="ztv" value="" placeholder="Where ..."/></div>
-    </div>
-
-    <div>
+    <div class="rv-subsection">
         <div>{{ 'plugins.testing.idUT' | translate }}</div>
         <div>
-            <select type="text" id="idUt" placeholder="Select something">
+            <select type="text" id="idUtp" placeholder="Select something">
                 {dropdownid}
             </select>
         </div>
     </div>
 
-    <div>
+    <div class="rv-subsection">
         <div>{{ 'plugins.testing.typeTrv' | translate }}</div>
         <div><input type="text" name="ttv" id="ttv" value="" placeholder="Where ..."/></div>
     </div>
 
-    <div>
+    <div class="rv-subsection">
         <div>{{ 'plugins.testing.classe' | translate }}</div>
-        <div><input type="text" name="classes" id="classes" value="" placeholder="Where ..."/></div>
+        <div><input type="text" name="classes" id="classes" value="" placeholder="List of classes"/></div>
     </div>
 
-    <div>
+    <div class="rv-subsection">
         <div>{{ 'plugins.testing.datefinprv' | translate }}</div>
-        <div><input type="text" name="dfp" id="dfp" value="" placeholder="Where ..."/></div>
+        <div><input type="date" name="dfp" id="dfp" value="" placeholder=""/></div>
     </div>
 
-    <div>
-        <div>{{ 'plugins.testing.log' | translate }}</div>
-        <div><input type="text" name="log" id="log" value="" placeholder="Where ..."/></div>
+    <div class="rv-subsection"> 
+        <div>{{ 'plugins.testing.where' | translate }}</div>
+        <div><input type="text" name="wherep" id="wherep" value="" placeholder="Where ..."/></div>
     </div>
 
-    <div>
+    <div class="rv-subsection">
+        <div>{{ 'plugins.testing.geome' | translate }}</div>
+        <div><input type="text" name="geomp" id="geomp" value="" placeholder="Geom"/></div>
+    </div>
+
+    <div class="rv-subsection">
         <md-button class="md-primary md-button"
         ng-click="ctrl.cancelFormP()">
             {{ 'plugins.testing.cancel' | translate }}

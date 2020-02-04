@@ -1,55 +1,103 @@
 /****** Import ******/
+const FileSaver = require('file-saver'); // le import
 import { connexion } from "../apiConnect";
+import { urlPlaniPost } from "../config/url";
 
 
 export class planifier{
 
     /*********** Properties ***********/
     _conn: connexion = new connexion();
+
     _environnement: string;
     _theme: string;
-    _zonetravail: string;
     _idUT: string;
     _typetravail: string;
-    _classes: string[];
-    _datefinpre: string;  
-    _logfile: string;
+    _classes: string;
+    _datefinpre: string;
+    _whereclause: string;  
+    _geom: string;
+
+    //data from API
+    _data: any;
+    
 
     /*********** Constructor ***********/
 
-    constructor(env:string,theme:string,zt:string,idut:string,tt:string,classes:string[],datefin:string,logfile:string){
-        this._environnement
-        this._theme
-        this._zonetravail
-        this._idUT
-        this._typetravail
+    constructor(env:string,theme:string,idut:string,tt:string,classes:string,datefin:string,wc:string,geom:string){
+        this._environnement =  env;
+        this._theme = theme;
+        this._idUT = idut;
+        this._typetravail = tt;
+        this._classes = classes;
+        this._datefinpre = datefin;
+        this._whereclause = wc;
+        this._geom = geom;
     }
 
     /************* Methods *************/
 
    //Send a json to the API and return with the information 
+    submitForm(token:string):any{
+        let json:string = this.getInformationToJson();
+        //this.saveJson(json);
+        this.setdata(this._conn.connexionAPIPost(token, json ,urlPlaniPost,'POST'));
 
+        //for test
+        if(this.getdata().status != undefined) {
+            return this.getdata();
+        }else{
+            alert(this.getdata().value + ' 9');
+            return this.getdata().value;
+        }
+    }
    
 
     //get the infromation out of the form into a string json
     getInformationToJson():any{
         //get de properties
+        let classes:string[] = ['no value'];
         let output:any = {
             "env": this.getenvironnement(),
             "theme": this.gettheme(),
-            "zonetravail": this.getzonetravail(),
             "id_ut": this.getidUT(),
-            "typetravail" : this.gettypetravail(),
-            "classes": this.getclasses(),
-            "date_fin_prevu": this.getdatefinpre(),
-            "log": this.getlogfile()
+            "type_travail": this.gettypetravail(),
+            "liste_classes": classes,
+            "date_fin_prevue": this.getdatefinpre(),
+            "where_clause": this.getzonetravail(),
+            "geom": this.getgeom()
         };
+        /*let output:any = {
+                "env": "string"
+          };*/
+        
+        
         let json:any = JSON.stringify(output)
         return json
     }
 
+    saveJson(output:any):void{
+        let blob = new Blob([output],{type:"application/json"});
+        FileSaver.saveAs(blob,'export.json');
+    }
+
+    setClassesIntoList():string[]{
+        let classes:string[]
+
+
+
+        return classes;
+    }
+
 
     /******** Accessors *********/
+
+    getdata(): any {
+        return this._data;
+    }
+    setdata(value: any) {
+        this._data = value;
+    }
 
     //Connexion a l'API
     getconn(): connexion {
@@ -77,10 +125,10 @@ export class planifier{
 
     //zone de travail
     getzonetravail(): string {
-        return this._zonetravail;
+        return this._whereclause;
     }
     setzonetravail(value: string) {
-        this._zonetravail = value;
+        this._whereclause = value;
     }
 
     //identifiant d'unité de travail
@@ -100,10 +148,10 @@ export class planifier{
     }
 
     //classes
-    getclasses(): string[] {
+    getclasses(): string {
         return this._classes;
     }
-    setclasses(value: string[]) {
+    setclasses(value: string) {
         this._classes = value;
     }
 
@@ -116,10 +164,10 @@ export class planifier{
     }
 
     //logfile
-    getlogfile(): string {
-        return this._logfile;
+    getgeom(): string {
+        return this._geom;
     }
-    setlogfile(value: string) {
-        this._logfile = value;
+    setgeom(value: string) {
+        this._geom = value;
     }
 }

@@ -2,6 +2,7 @@
 import { Extraire } from "../operation/extraire";
 import { menuManager } from "./menuManager";
 import { login } from '../login';
+import { planifier } from '../operation/planifier';
 
 export class manageController{
 
@@ -20,9 +21,6 @@ export class manageController{
             $scope.themes.hydro_50k = log._idUt[0]._wUnit;
             $scope.themes.corint_250k = log._idUt[1]._wUnit; */
 
-
-
-
             $scope.IsVisible = false;
 
 
@@ -36,14 +34,14 @@ export class manageController{
                 //get all the information of the form into the class
                 let ext = new Extraire(
                     (<HTMLInputElement>document.getElementById("env")).value
-                    ,(<HTMLInputElement>document.getElementById("theme")).value
-                    ,(<HTMLInputElement>document.getElementById("idUt")).value
+                    ,this.selectedItemA
+                    ,this.selectedItemB
                     ,(<HTMLInputElement>document.getElementById("clip")).value
                     ,(<HTMLInputElement>document.getElementById("whereclause")).value
                     ,(<HTMLInputElement>document.getElementById("geom")).value);
                 
                 let apireturn:any = ext.submitForm(log._token);
-                if (apireturn.status == 401){
+                if (apireturn != 'success'){
                     alert(apireturn.statusText)
                 }else{
                     $scope.IsVisible = false;
@@ -65,8 +63,47 @@ export class manageController{
 
                     panel.body = "<div>"  + outputPlan+ "</div>";
             } 
+
+
+
+            /************** interactive List ***************/
+
+            this.selectedItemA = '';
+            this.selectedItemB = '';
+
+            this.itemsA = [];
+                /*{ name: 'item 1', value: 'value1' },
+                { name: 'item 2', value: 'value2' },
+                { name: 'item 3', value: 'value3' }
+            ];*/
+
+            for (let i in log._themeAcc){
+                this.itemsA += {name : log._themeAcc[i] , value: log._themeAcc[i]}
+            }
+
+            const newList = {
+                value1: [{ name: 'a', value: 'a1' }, { name: 'b', value: 'b1' }, { name: 'c', value: 'c1' }],
+                value2: [{ name: '1', value: '11' }, { name: '2', value: '21' }, { name: '3', value: '31' }],
+                value3: [{ name: '@', value: '@1' }, { name: '#', value: '#1' }, { name: '$', value: '$1' }]
+            };
+
+            this.itemsB = [];
+
+            this.setList = () => {
+                console.log(`set: ${this.selectedItemA}`);
+
+                // populate list b with new items
+                this.itemsB.length = 0;
+                newList[this.selectedItemA].forEach(item => this.itemsB.push(item))
+            }
         });
-        /************** ***************/
+    }
+
+    listeExtraire(log:login, mapApi:any):any{
+        mapApi.agControllerRegister('autoCtrl', function($scope){
+            
+        });
+
     }
 
     planControl(log:login,panel:any/* À enlever */, mapApi:any):void{
@@ -76,14 +113,24 @@ export class manageController{
             this.submitFormP = function() { 
                 //get all the information of the form into the class
                 
+                let plan:planifier = new planifier(
+                    (<HTMLInputElement>document.getElementById("envp")).value,
+                    (<HTMLInputElement>document.getElementById("themep")).value,
+                    (<HTMLInputElement>document.getElementById("idUtp")).value,
+                    (<HTMLInputElement>document.getElementById("ttv")).value,
+                    (<HTMLInputElement>document.getElementById("classes")).value,
+                    (<HTMLInputElement>document.getElementById("dfp")).value,
+                    (<HTMLInputElement>document.getElementById("wherep")).value,
+                    (<HTMLInputElement>document.getElementById("geomp")).value);
+                //alert(log.gettoken());
+                let apireturn:any = plan.submitForm(log.gettoken());
                 
-                /*let apireturn:any = ext.submitForm(this._tokenbearer);
-                if (apireturn.status == 401){
-                    alert(apireturn.statusText)
+                if (apireturn != undefined){
+                    alert(apireturn + ' 4');
+                    console.log(apireturn);
                 }else{
-                    console.log(token);
-                }*/
-                //alert("hello"/*this._apireturn.value*/);    
+                    console.log(log.gettoken());
+                }   
             };
 
 

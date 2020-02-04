@@ -4,5 +4,5 @@ export declare class menuManager {
     extractManager(log: login, panel: any, mapApi: any): string;
     planifManager(log: login, panel: any, mapApi: any): string;
     interactiveDropDownList(list: string[]): string;
-    setDDLidWorkingUnit(): any;
+    setDDLidWorkingUnit(): void;
 }

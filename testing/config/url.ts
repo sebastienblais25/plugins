@@ -7,3 +7,5 @@
 
  //url for the id working unit
 export const urlgetidWu:string = `http://127.0.0.1:4010/suivi-prod/unite-travail/id/theme/actif/`;
+
+export const urlPlaniPost:string = `http://127.0.0.1:4010/suivi-prod/planification?__dynamic=true`;

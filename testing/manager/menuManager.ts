@@ -19,6 +19,7 @@ export class menuManager{
         //activate the controls for Extraction
         //A enlever le panel
         mb.extrairecontrols(log,panel, mapApi);
+        mb.listeExtraire(log, mapApi);
 
         //set the dropdown list for the form
         let ddlEnv = this.interactiveDropDownList(listserver);

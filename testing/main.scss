@@ -1,3 +1,17 @@
 .divshow{
     display:none;
 }
+
+.divButton {
+    background-color: #ECE7E6;
+    border: none;
+    color: white;
+    padding: 4px 16px;
+    text-align: center;
+    font-size: 16px;
+    //margin: 4px 2px;
+    opacity: 0.6;
+    transition: 0.3s;
+  }
+  
+  .divButton:hover {opacity: 1}

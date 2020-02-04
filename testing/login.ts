@@ -1,6 +1,6 @@
 import { urlLoginGet, urlgetidWu } from './config/url';
 import { connexion } from './apiConnect';
-import { idWu } from './config/idWU';
+import { idWu } from './manager/idWU';
 
 
 export class login{
@@ -77,7 +77,7 @@ export class login{
         for (let i in list) {
             this._idUt[i] = new idWu(list[i],list);
             let newUrl = urlgetidWu + list[i]
-            let output:any =this._conn.connexionAPI(this.gettoken(), json, newUrl);
+            let output:any =this._conn.connexionAPI(this.gettoken(), json, newUrl, 'Get');
             //console.log(output.value);
             
             this._idUt[i]._wUnit = output.value;

@@ -82,12 +82,12 @@ export default class Testing{
                     let menu:menuManager = new menuManager();
 
                     let outputExt:string;
-                    let outputPlan:string;
+                    //let outputPlan:string;
 
                     outputExt = menu.extractManager(log,panel,mapApi);
-                    outputPlan = menu.planifManager(log,panel,mapApi);
+                    //outputPlan = menu.planifManager(log,panel,mapApi);
                     
-                    
+                    //$('rv-mapnav').append('<div><h2>Livraison</h2></div>')
                     panel.body = "<div>"  + outputExt+ "</div>";
 
                 //si le retour de l'API contient un code d'erreur et le message
@@ -121,10 +121,10 @@ Testing.prototype.translations = {
         geome: 'Add your Geometry :',
         submit: 'Submit',
         cancel: 'Cancel',
+        where: 'Enter a Where Clause :',
         //Extraction seulement
         extrac: 'Extract',
         clip: 'If clip :',
-        where: 'Enter a Where Clause :',
         //Planifier seulement
         testbutton: 'Planning Work Place',
         planif: 'Planning',
@@ -132,7 +132,6 @@ Testing.prototype.translations = {
         typeTrv: 'working type :',
         classe: 'Select a class :',
         datefinprv: 'Final date planned :',
-        log: 'Add a log file :',
         //Login seulement
         login: 'Login',
         username : "username",
@@ -149,18 +148,16 @@ Testing.prototype.translations = {
         geome: 'Ajouter votre Géométrie :',
         submit: 'Soumettre',
         cancel: 'Annuler',
+        where: 'Entrer une Where Clause :',
         //Extraction seulement
         extrac: 'Extraction',
         clip: 'Si clip :',
-        where: 'Entrer une Where Clause :',
-        //Planifier seuelement
+        //Planifier seulement
         testbutton: 'Planifiez zone de travail',
         planif: 'Planifier',
-        zoneTrv: 'Zone de travail :',
         typeTrv: 'Type de travail :',
         classe: 'selectionne une classe :',
         datefinprv: 'Date fin prévue :',
-        log: 'Ajout d un fichier log :',
         //Login seulement
         login: 'connexion :',
         username : "nom d'usager",
