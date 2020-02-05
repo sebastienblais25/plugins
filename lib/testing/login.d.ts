@@ -20,6 +20,7 @@ export declare class login {
     getInformationToHeader(): any;
     setDataFromAPI(token: string, token_type: string, expired: number, scope: string[], theme: string[]): void;
     setidUTtheme(): void;
+    setidUtToDDL(theme: string): any;
     getUtravail(theme: string): string[];
     getusername(): string;
     setusername(value: string): void;

@@ -8,6 +8,7 @@ export class login{
     /** Send to APi **/
     _username: string = 'hello';
     _password: string = 'hello';
+    _environnement: string = '';
     _conn: connexion = new connexion();
     
     /** Return of login **/
@@ -87,6 +88,28 @@ export class login{
                 this._idUt[i]._wUnit[j] = this._idUt[i]._theme + ' - ' + this._idUt[i]._wUnit[j];
             } 
         }  
+    }
+
+    setidUtToDDL(theme:string):any{
+        /*let listtest = {
+            hydro_50k : [{name:'', value:''},{name:'', value:''},{name:'', value:''}],
+            corint_250k : [{name:'', value:''},{name:'', value:''},{name:'', value:''}]
+        };*/
+
+        let list = []
+        let rank:any;
+
+        for (let i in this._themeAcc){
+            if (this._themeAcc[i] === theme){
+                rank = i;
+            }
+        }
+            
+        for(let j in this._idUt[rank]._wUnit){
+                list.push({name: this._idUt[rank]._wUnit[j], value: this._idUt[rank]._wUnit[j]});
+        } 
+        
+        return list;
     }
 
     //Return a list of a theme selected

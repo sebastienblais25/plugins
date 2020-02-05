@@ -3,6 +3,7 @@
 const FileSaver = require('file-saver'); // le import
 import {urlgeoDataGet} from '../config/url';
 import { connexion } from '../apiConnect';
+import { login } from '../login';
 
 export class Extraire{
 
@@ -34,12 +35,12 @@ export class Extraire{
     /************* Methods *************/
 
     //Send json form to API in ajax
-    submitForm(token:string):any{
+    submitForm(log:login):any{
        //To Change
             //create a json and save the file in the download folder 
-        let json:any = this.getInformationToJson();
+        let json:any = this.getInformationToJson(log);
         //this.saveJson(json)
-        this.setData(this._conn.connexionAPI(token, json,urlgeoDataGet, 'Get'));
+        this.setData(this._conn.connexionAPI(log.gettoken(), json,urlgeoDataGet, 'Get'));
 
         //for test
         if(this.getinfo() == 'success'){
@@ -58,10 +59,10 @@ export class Extraire{
    }*/ 
 
     //get the infromation out of the form into a string json
-    getInformationToJson():any{
+    getInformationToJson(log:login):any{
         //get de properties
         let output:any = {
-            "env": this._environnement,
+            "env": log._environnement,
             "theme": this._theme,
             "id_lot": this._idUT,
             "clip": this._clip,

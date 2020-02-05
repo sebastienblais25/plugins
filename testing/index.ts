@@ -3,6 +3,7 @@ import { loginmenu } from './config/html-assets';
 import { manageController } from './manager/ControllerManager'
 import { login } from './login';
 import { menuManager } from './manager/menuManager';
+import { MenuPrincipal } from './manager/menu';
 
 export default class Testing{
     
@@ -79,16 +80,10 @@ export default class Testing{
                 //si le retour ne contient pas de code d'erreur continue
                 if (loginfo.status != 401){
                     alert('Connected'); 
-                    let menu:menuManager = new menuManager();
-
-                    let outputExt:string;
-                    //let outputPlan:string;
-
-                    outputExt = menu.extractManager(log,panel,mapApi);
-                    //outputPlan = menu.planifManager(log,panel,mapApi);
+                    let menu:MenuPrincipal =  new MenuPrincipal();
                     
                     //$('rv-mapnav').append('<div><h2>Livraison</h2></div>')
-                    panel.body = "<div>"  + outputExt+ "</div>";
+                    panel.body = menu.createMenuPrincipal(log,panel,mapApi);
 
                 //si le retour de l'API contient un code d'erreur et le message
                 }else{
@@ -135,8 +130,10 @@ Testing.prototype.translations = {
         //Login seulement
         login: 'Login',
         username : "username",
-        password : 'password'
+        password : 'password',
         //Livraison seulement
+        delivery : 'Delivery',
+
     },
 
     'fr-CA': {
@@ -161,8 +158,9 @@ Testing.prototype.translations = {
         //Login seulement
         login: 'connexion :',
         username : "nom d'usager",
-        password : 'mot de passe' 
-        //Livraison seulement  
+        password : 'mot de passe', 
+        //Livraison seulement 
+        delivery : 'Livraison', 
     }
 };
 
