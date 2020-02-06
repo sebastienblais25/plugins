@@ -7,7 +7,7 @@ formDelivery = The from for the delivery
 
 export const loginmenu:string= `
 
-<div ng-controller="connexionCtrl as ctrl">
+<div ng-controller="connexionCtrl as ctrl0">
     <div><h2>{{ 'plugins.testing.login' | translate }}</h2></div>
     <div>{{ 'plugins.testing.username' | translate }} : </div>
     <div><input type="text" id="username" placeholder="{{ 'plugins.testing.username' | translate }}"/></div>
@@ -16,7 +16,7 @@ export const loginmenu:string= `
 
     <div class="rv-subsection">
         <md-button class="md-primary md-button"
-        ng-click="ctrl.submitConn()">
+        ng-click="ctrl0.submitConn()">
             {{ 'plugins.testing.submit' | translate }}
             <md-tooltip>{{ 'plugins.testing.submit' | translate }}</md-tooltip>
         </md-button>
@@ -26,8 +26,7 @@ export const loginmenu:string= `
 
 export const topmenu:string= `
 <div ng-controller="topmenuCtrl as ctrl1"> 
-   
-        <label>{{ 'plugins.testing.envir' | translate }}</label>
+    <div class="largeur">
         <md-select 
         ng-change="ctrl1.setEnv()" 
         ng-model="ctrl1.selectedItemENT" 
@@ -37,6 +36,7 @@ export const topmenu:string= `
                 {{ item.name }}
             </md-option>
         </md-select>
+    </div>
     
 `;
 
@@ -47,57 +47,72 @@ export const formPlanifier = `
     </div>
     <div ng-show="IsVisible" ng-style="bgEnv">
         
-            <md-input-container class="largeur">
-                <label>{{ 'plugins.testing.themet' | translate }}</label>
-                <md-select 
-                
-                ng-model="ctrl2.selectedItemC" 
-                ng-change="ctrl2.setList()" 
-                id="theme" 
-                placeholder="Select a theme">
-                    <md-option ng-repeat="item in ctrl2.itemsC" ng-value="item.value">
-                        {{ item.name }}
-                    </md-option>
-                </md-select>
-            </md-container>
-
+            <div>
+                <md-input-container class="ddlshow">
+                    <label>{{ 'plugins.testing.themet' | translate }}</label>
+                    <md-select 
+                    
+                    ng-model="ctrl2.selectedItemC" 
+                    ng-change="ctrl2.setList()" 
+                    id="theme" 
+                    placeholder="Select a theme">
+                        <md-option ng-repeat="item in ctrl2.itemsC" ng-value="item.value">
+                            {{ item.name }}
+                        </md-option>
+                    </md-select>
+                </md-container>
+            </div>
+            <div>
             <md-input-container class="largeur">
                 <label>{{ 'plugins.testing.idUT' | translate }}</label>
                 <input type="text" name="idUt" id="idUt" ng-value="ctrl2.idut" placeholder="Where ...">
             </md-container>
-        
+            </div>
+            <div>
             <md-input-container class="largeur">
                 <label>{{ 'plugins.testing.typeTrv' | translate }}</label>
                 <input type="text" name="ttv" id="ttv" value="" placeholder="Where ...">
             </md-container>
-            
+            </div>
+            <div>
             <md-input-container class="largeur">
                 <label>{{ 'plugins.testing.classe' | translate }}</label>
                 <input type="text" name="classes" id="classes" value="" placeholder="List of classes">
             </md-container> 
-        
+            </div>
+            <div>
             <md-input-container class="largeur">
                 <label>{{ 'plugins.testing.datefinprv' | translate }}</label>
                 <input type="date" name="dfp" id="dfp" value="" placeholder="">
             </md-container>
-            
+            </div>
+            <div>
             <md-input-container class="largeur">
                 <label>{{ 'plugins.testing.where' | translate }}</label>
                 <input type="text" name="wherep" id="wherep" value="" placeholder="Where ...">
             </md-container>
-            
+            </div>
+            <div>
             <md-input-container class="largeur">
                 <label>{{ 'plugins.testing.geome' | translate }}</label>
-                <input type="text" name="geomp" id="geomp" value="" placeholder="Geom">
+                <input type="text" name="geomp" id="geomp" value="" placeholder="Geom"> 
             </md-container>
-
             <md-input-container>
+                <md-checkbox ng-model="ctrl2.checkTool" ng-click="ctrl2.toggleDraw()">
+                    Drawing
+                </md-checkbox>
+            </md-container>
+            </div>
+            <div>
+            <md-input-container class="largeur">
                 <md-button class="md-primary md-button"
                 ng-click="ctrl2.submitFormP()">
                     {{ 'plugins.testing.submit' | translate }}
                     <md-tooltip>{{ 'plugins.testing.submit' | translate }}</md-tooltip>
                 </md-button>
             </md-container>
+            </div>
+        
     </div>
 </div>`;
 

@@ -1,4 +1,5 @@
 import { connexion } from '../apiConnect';
+import { login } from '../login';
 export declare class Extraire {
     /*********** Properties ***********/
     _conn: connexion;
@@ -10,10 +11,10 @@ export declare class Extraire {
     _geom: string;
     _data: any;
     /************* Constructor *************/
-    constructor(env: string, theme: string, idUT: string, clip: string, whereClause: string, geom: string);
+    constructor(theme: string, idUT: string, clip: string, whereClause: string, geom: string);
     /************* Methods *************/
-    submitForm(token: string): any;
-    getInformationToJson(): any;
+    submitForm(log: login): any;
+    getInformationToJson(log: login): any;
     saveJson(output: any): void;
     /*************** Accessors ***********************/
     getinfo(): any;

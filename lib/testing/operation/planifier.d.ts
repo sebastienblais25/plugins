@@ -1,4 +1,5 @@
 import { connexion } from "../apiConnect";
+import { login } from '../login';
 export declare class planifier {
     /*********** Properties ***********/
     _conn: connexion;
@@ -12,10 +13,10 @@ export declare class planifier {
     _geom: string;
     _data: any;
     /*********** Constructor ***********/
-    constructor(env: string, theme: string, idut: string, tt: string, classes: string, datefin: string, wc: string, geom: string);
+    constructor(theme: string, idut: string, tt: string, classes: string, datefin: string, wc: string, geom: string);
     /************* Methods *************/
-    submitForm(token: string): any;
-    getInformationToJson(): any;
+    submitForm(log: login): any;
+    getInformationToJson(log: login): any;
     saveJson(output: any): void;
     setClassesIntoList(): string[];
     /******** Accessors *********/

@@ -2,7 +2,7 @@ export default class Testing {
     init(api: any): void;
     onMenuItemClick(): () => void;
     addLoginPanel(): void;
-    connexionControls(panel: any, mapApi: any): void;
+    connexionControls(panel: any, mapApi: any, config: any): void;
 }
 export default interface Testing {
     mapApi: any;

@@ -3,6 +3,7 @@ import { Extraire } from "../operation/extraire";
 import { menuManager } from "./menuManager";
 import { login } from '../login';
 import { planifier } from '../operation/planifier';
+import { PanelManager } from "../Drawing/panel-manager";
 
 export class manageController{
 
@@ -10,7 +11,7 @@ export class manageController{
     constructor(){};
 
     
-    planControl(log:login,panel:any/* À enlever */, mapApi:any):void{
+    planControl(log:login, mapApi:any, config:any):void{
         mapApi.agControllerRegister('submitFromP', function($scope){
             $scope.IsVisible = false;
 
@@ -71,11 +72,23 @@ export class manageController{
                 this.idut = this.selectedItemC + '_'+ dd + mm + yyyy + '_';
                 //newList[this.selectedItemA].forEach(item => this.itemsB.push(item))
             }
+
+            let count:number = 0;
+            
+            this.toggleDraw = () => {
+                
+                if (count == 0){
+                    let toolbar:PanelManager = new PanelManager(mapApi,config);
+                    count ++;
+                }
+                (<any>document).getElementsByClassName('rv-mapnav-draw-content')[0].style.display = this.checkTool? 'none' : 'block';
+            }
+
         });
     }
 
     //Submit controller
-    extrairecontrols(log:login,panel:any/* À enlever */, mapApi:any, open?:boolean):void{
+    extrairecontrols(log:login, mapApi:any):void{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitCtrl', function($scope){
@@ -112,16 +125,6 @@ export class manageController{
                 //alert(this._apireturn.value);    
             };
             
-            //test
-            //Ouvre le fromulaire dans un nouveau panel a changer pour pour mettre dans la classe menu si choisi
-            this.openplan = function(){
-                let menu:menuManager = new menuManager();
-
-                    let outputPlan:string;
-                    outputPlan = menu.planifManager(log,panel,mapApi);
-
-                    panel.body = "<div>"  + outputPlan+ "</div>";
-            } 
 
             /************** interactive List ***************/
 
@@ -160,7 +163,7 @@ export class manageController{
         });
     }
 
-    deliControl(log:login,panel:any/* À enlever */, mapApi:any):void{
+    deliControl(log:login, mapApi:any):void{
         mapApi.agControllerRegister('submitFromD', function($scope){
 
             $scope.IsVisible = false;
@@ -238,7 +241,7 @@ export class manageController{
     }
 
 
-    topmenuControl(log:login,panel:any/* À enlever */, mapApi:any){
+    topmenuControl(log:login, mapApi:any){
         mapApi.agControllerRegister('topmenuCtrl', function($scope){
 
             /************** interactive List ***************/
@@ -248,13 +251,14 @@ export class manageController{
             this.itemsENT = [];
 
             for (let i in log._envAcc){
-                this.itemsENT.push({name : log._envAcc[i] , value: log._envAcc[i]});
+                this.itemsENT.push({name : 'Environnement : ' +log._envAcc[i] , value: log._envAcc[i]});
             }
             this.setEnv = () => {
                 log._environnement = this.selectedItemENT;
+                //alert(this.selectedItemENT);
                 if(log._environnement === 'Tst')
                     $scope.bgEnv = {
-                        "background-color" : "purple", 
+                        "background-color" : "lightblue", 
                     }
                 else if(log._environnement === 'Dev'){
                     $scope.bgEnv = {

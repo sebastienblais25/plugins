@@ -15,6 +15,9 @@ export default class Testing{
         this.config = this._RV.getConfig('plugins').testing;
         //set la langue pour le plugin
         this.config.language = this._RV.getCurrentLang();
+        //set la config pour la geometry
+        //to try
+        this.config.url = this._RV.getConfig('services').geometryUrl;
         //création d'un button d'accès à partir du menu
         this.button = this.mapApi.mapI.addPluginButton(
             Testing.prototype.translations[this._RV.getCurrentLang()].testbutton,
@@ -49,7 +52,7 @@ export default class Testing{
         this.panel.header.title = 'Generic Title';
 
         //add control for the login button
-        this.connexionControls(this.panel,this.mapApi);
+        this.connexionControls(this.panel,this.mapApi,this.config);
         
         
         //compile the login template
@@ -64,7 +67,7 @@ export default class Testing{
     }
 
 
-    connexionControls( panel:any,mapApi:any,){
+    connexionControls( panel:any,mapApi:any,config:any){
         //ajoute un controller au formulaire html
         this.mapApi.agControllerRegister('connexionCtrl', function($scope){
             //ajoute la fonction sous le controller au formulaire html
@@ -79,11 +82,11 @@ export default class Testing{
 
                 //si le retour ne contient pas de code d'erreur continue
                 if (loginfo.status != 401){
-                    alert('Connected'); 
+                    //alert('Connected'); 
                     let menu:MenuPrincipal =  new MenuPrincipal();
                     
                     //$('rv-mapnav').append('<div><h2>Livraison</h2></div>')
-                    panel.body = menu.createMenuPrincipal(log,panel,mapApi);
+                    panel.body = menu.createMenuPrincipal(log,panel,mapApi,config);
 
                 //si le retour de l'API contient un code d'erreur et le message
                 }else{

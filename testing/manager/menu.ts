@@ -7,7 +7,7 @@ export class MenuPrincipal{
 
     constructor(){};
 
-    createMenuPrincipal(log:login, panel:any, mapApi:any):string{
+    createMenuPrincipal(log:login, panel:any, mapApi:any, config:any):string{
         let menu:menuManager = new menuManager();
         let compiler:manageController = new manageController();
 
@@ -19,10 +19,10 @@ export class MenuPrincipal{
         let menuprincipal:string
         
 
-        outputExt = menu.extractManager(log,panel,mapApi);
-        outputPlan = menu.planifManager(log,panel,mapApi);
-        outputDeli = menu.deliManager(log,panel,mapApi);
-        outputTopmenu = menu.topMenuManager(log,panel,mapApi);
+        outputExt = menu.extractManager(log,mapApi);
+        outputPlan = menu.planifManager(log,mapApi, config);
+        outputDeli = menu.deliManager(log,mapApi);
+        outputTopmenu = menu.topMenuManager(log,mapApi);
 
         menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputDeli +"</div>";
         compiler.compileTemplate(menuprincipal,mapApi)

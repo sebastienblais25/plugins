@@ -8,7 +8,7 @@ export class menuManager{
 
     constructor(){}
 
-    extractManager(log:login, panel:any, mapApi:any):string{
+    extractManager(log:login, mapApi:any):string{
 
         /************* Extraire ***************/
         //let ext = new Extraire('','','','','','');
@@ -16,7 +16,7 @@ export class menuManager{
 
         //activate the controls for Extraction
         //A enlever le panel
-        mb.extrairecontrols(log,panel, mapApi);
+        mb.extrairecontrols(log, mapApi);
 
         //add the dropdown list for the form
         let output = formExtraire;
@@ -28,13 +28,13 @@ export class menuManager{
         return output;
     }
 
-    planifManager(log:login, panel:any, mapApi:any):string{
+    planifManager(log:login, mapApi:any, config:any):string{
 
         /********* Planifier *********/
         let mb = new manageController();
 
         //A Enlever le panel
-        mb.planControl(log,panel, mapApi);
+        mb.planControl(log, mapApi, config);
 
         //add the dropdown list for the form
         let output = formPlanifier;
@@ -45,24 +45,24 @@ export class menuManager{
         return output;
     }
 
-    deliManager(log:login, panel:any, mapApi:any):string{
+    deliManager(log:login, mapApi:any):string{
         let listserver = log.getenvAcc();
         
 
 
         let mb = new manageController();
 
-        mb.deliControl(log,panel, mapApi)
+        mb.deliControl(log, mapApi)
 
         let output = formDelivery;
         //mb.compileTemplate(output,mapApi);
         return output
     }
 
-    topMenuManager(log:login, panel:any, mapApi:any):string{
+    topMenuManager(log:login, mapApi:any):string{
         let mb = new manageController();
 
-        mb.topmenuControl(log,panel, mapApi)
+        mb.topmenuControl(log, mapApi)
 
         let output = topmenu;
         //mb.compileTemplate(output,mapApi);

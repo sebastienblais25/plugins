@@ -21,7 +21,7 @@
         "reorderable": false
       }
     },
-    "version": "2.0",
+    "version": "3.2",
     "language": "en",
     "services":{
       "proxyUrl":"https://maps.canada.ca/wmsproxy/ws/wmsproxy/executeFromProxy",
@@ -262,9 +262,6 @@
     },
     "plugins": {
       "testing": {
-        "type": "vertical",
-        "keyboardOffset": 10,
-        "layers": [{"id": "0"}, {"id": "1"}]
       }
     }
   }

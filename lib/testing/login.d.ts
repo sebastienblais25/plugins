@@ -4,6 +4,7 @@ export declare class login {
     /** Send to APi **/
     _username: string;
     _password: string;
+    _environnement: string;
     _conn: connexion;
     /** Return of login **/
     _token: string;
