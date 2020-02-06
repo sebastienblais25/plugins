@@ -1,5 +1,6 @@
 import { login } from "../login";
 import { menuManager } from "./menuManager";
+import { manageController } from "./ControllerManager";
 
 
 export class MenuPrincipal{
@@ -8,6 +9,7 @@ export class MenuPrincipal{
 
     createMenuPrincipal(log:login, panel:any, mapApi:any):string{
         let menu:menuManager = new menuManager();
+        let compiler:manageController = new manageController();
 
         let outputExt:string;
         let outputPlan:string;
@@ -23,6 +25,7 @@ export class MenuPrincipal{
         outputTopmenu = menu.topMenuManager(log,panel,mapApi);
 
         menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputDeli +"</div>";
+        compiler.compileTemplate(menuprincipal,mapApi)
 
         return menuprincipal;
     }

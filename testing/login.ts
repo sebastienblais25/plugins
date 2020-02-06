@@ -8,7 +8,7 @@ export class login{
     /** Send to APi **/
     _username: string = 'hello';
     _password: string = 'hello';
-    _environnement: string = '';
+    _environnement: string = 'Pro';
     _conn: connexion = new connexion();
     
     /** Return of login **/

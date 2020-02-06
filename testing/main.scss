@@ -13,5 +13,21 @@
     opacity: 0.6;
     transition: 0.3s;
   }
+
+  .largeur{
+    width:350px;
+  }
   
   .divButton:hover {opacity: 1}
+
+  .envbackground{
+    background-color: white;
+  }
+
+  .envbackground-tst{
+    background-color: lightcoral;
+}
+
+.envbackground-dev{
+    background-color: lightskyblue;
+}

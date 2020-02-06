@@ -21,12 +21,9 @@ export class Extraire{
     
     
     /************* Constructor *************/
-    constructor(env:string, theme:string, idUT:string, clip:string,whereClause:string, geom:string){
-        this._environnement = env;
+    constructor(theme:string, idUT:string, clip:string,whereClause:string, geom:string){
         this._theme = theme;
-        alert(theme)
         this._idUT = idUT;
-        alert(idUT)
         this._clip = clip;
         this._whereClause = whereClause;
         this._geom = geom;

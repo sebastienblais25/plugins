@@ -30,7 +30,7 @@ export class connexion{
                     function(response,jqXHR){
                         
                         if (response.message != undefined){
-                            alert(response.message)
+                            alert(response.message + ' 1')
                             outputValue = jqXHR;
                         }
                         if(response.value != undefined){
@@ -129,10 +129,10 @@ export class connexion{
                     success: //data => resolve()
                     
                     function(response,jqXHR){
-                        alert(jqXHR+ ' 1');
+                        //alert(jqXHR+ ' 1');
                         console.log(jqXHR );
                         alert(response.message);
-                        console.log(response.message  + ' 2');
+                        //console.log(response.message  + ' 2');
 
                         outputValue = jqXHR;
                         
@@ -150,7 +150,7 @@ export class connexion{
             console.log(values);
         });
 
-        alert(outputValue + ' 3')
+        //alert(outputValue + ' 3')
         
 
         return outputValue;

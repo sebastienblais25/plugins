@@ -26,22 +26,22 @@ export class manageController{
                 //get all the information of the form into the class
                 
                 let plan:planifier = new planifier(
-                    (<HTMLInputElement>document.getElementById("envp")).value,
                     this.selectedItemC,
-                    this.selectedItemD,
+                    (<HTMLInputElement>document.getElementById("idUt")).value,
                     (<HTMLInputElement>document.getElementById("ttv")).value,
                     (<HTMLInputElement>document.getElementById("classes")).value,
                     (<HTMLInputElement>document.getElementById("dfp")).value,
                     (<HTMLInputElement>document.getElementById("wherep")).value,
                     (<HTMLInputElement>document.getElementById("geomp")).value);
                 //alert(log.gettoken());
-                let apireturn:any = plan.submitForm(log.gettoken());
+                let apireturn:any = plan.submitForm(log);
                 
                 if (apireturn != undefined){
                     alert(apireturn + ' 4');
                     console.log(apireturn);
                 }else{
                     console.log(log.gettoken());
+                    $scope.IsVisible = false;
                 }   
             };
             /************** interactive List ***************/
@@ -54,24 +54,28 @@ export class manageController{
             for (let i in log._themeAcc){
                 this.itemsC.push({name : log._themeAcc[i] , value: log._themeAcc[i]});
             }
-            /*this.itemsD = [];
-
+            
             this.setList = () => {
                 console.log(`set: ${this.selectedItemC}`);
-
-                // populate list b with new items
-                this.itemsD.length = 0;
-                let list:any = log.setidUtToDDL(this.selectedItemC)
-                for (let i in list){
-                    this.itemsD.push(list[i])
+                let today = new Date();
+                let dd:string = String(today.getDate());
+                let mm:string = String(today.getMonth() + 1); //January is 0!
+                let yyyy:string = String(today.getFullYear());
+                if(dd.length < 2){
+                    dd = '0'+dd;
                 }
+                if(mm.length < 2){
+                    mm = '0'+mm;
+                }
+                // populate list b with new items
+                this.idut = this.selectedItemC + '_'+ dd + mm + yyyy + '_';
                 //newList[this.selectedItemA].forEach(item => this.itemsB.push(item))
-            }*/
+            }
         });
     }
 
     //Submit controller
-    extrairecontrols(log:login,panel:any/* À enlever */, mapApi:any):void{
+    extrairecontrols(log:login,panel:any/* À enlever */, mapApi:any, open?:boolean):void{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitCtrl', function($scope){
@@ -88,11 +92,10 @@ export class manageController{
             //Envoie le formulaire a l'Api
             this.submitForm = function() { 
                 //get all the information of the form into the class
-                alert(this.selectedItemEN + this.selectedItemA + this.selectedItemB) 
+                //alert(this.selectedItemA + this.selectedItemB) 
 
                 let ext = new Extraire(
-                     this.selectedItemEN
-                    ,this.selectedItemA
+                     this.selectedItemA
                     ,this.selectedItemB
                     ,(<HTMLInputElement>document.getElementById("clip")).value
                     ,(<HTMLInputElement>document.getElementById("whereclause")).value
@@ -249,7 +252,20 @@ export class manageController{
             }
             this.setEnv = () => {
                 log._environnement = this.selectedItemENT;
-                alert(log._environnement);
+                if(log._environnement === 'Tst')
+                    $scope.bgEnv = {
+                        "background-color" : "purple", 
+                    }
+                else if(log._environnement === 'Dev'){
+                    $scope.bgEnv = {
+                        "background-color" : "pink", 
+                    }
+                }else{
+                    $scope.bgEnv = {
+                        "background-color" : "white", 
+                    }
+                }
+                //alert(log._environnement);
             }
             
         });

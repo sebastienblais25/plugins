@@ -2,6 +2,7 @@
 const FileSaver = require('file-saver'); // le import
 import { connexion } from "../apiConnect";
 import { urlPlaniPost } from "../config/url";
+import { login } from '../login';
 
 
 export class planifier{
@@ -24,8 +25,7 @@ export class planifier{
 
     /*********** Constructor ***********/
 
-    constructor(env:string,theme:string,idut:string,tt:string,classes:string,datefin:string,wc:string,geom:string){
-        this._environnement =  env;
+    constructor(theme:string,idut:string,tt:string,classes:string,datefin:string,wc:string,geom:string){
         this._theme = theme;
         this._idUT = idut;
         this._typetravail = tt;
@@ -38,27 +38,27 @@ export class planifier{
     /************* Methods *************/
 
    //Send a json to the API and return with the information 
-    submitForm(token:string):any{
-        let json:string = this.getInformationToJson();
+    submitForm(log:login):any{
+        let json:string = this.getInformationToJson(log);
         //this.saveJson(json);
-        this.setdata(this._conn.connexionAPIPost(token, json ,urlPlaniPost,'POST'));
+        this.setdata(this._conn.connexionAPIPost(log.gettoken(), json ,urlPlaniPost,'POST'));
 
         //for test
         if(this.getdata().status != undefined) {
             return this.getdata();
         }else{
-            alert(this.getdata().value + ' 9');
+            //alert(this.getdata().value + ' 9');
             return this.getdata().value;
         }
     }
    
 
     //get the infromation out of the form into a string json
-    getInformationToJson():any{
+    getInformationToJson(log:login):any{
         //get de properties
         let classes:string[] = ['no value'];
         let output:any = {
-            "env": this.getenvironnement(),
+            "env": log._environnement,
             "theme": this.gettheme(),
             "id_ut": this.getidUT(),
             "type_travail": this.gettypetravail(),
