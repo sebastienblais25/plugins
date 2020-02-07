@@ -3,7 +3,6 @@ import { loginmenu } from './config/html-assets';
 import { manageController } from './manager/ControllerManager'
 import { login } from './login';
 import { menuManager } from './manager/menuManager';
-import { MenuPrincipal } from './manager/menu';
 
 export default class Testing{
     
@@ -42,7 +41,6 @@ export default class Testing{
     //Creating a login menu
     addLoginPanel(){
         //permet d'Activer le bouton connexion/ login
-        let mb = new manageController();
         let output:string = loginmenu;
 
 
@@ -56,7 +54,7 @@ export default class Testing{
         
         
         //compile the login template
-        mb.compileTemplate(output,this.mapApi);
+        this.compileTemplate(output,this.mapApi);
 
         //add a close button 
         let closeBtn = this.panel.header.closeButton;
@@ -83,10 +81,8 @@ export default class Testing{
                 //si le retour ne contient pas de code d'erreur continue
                 if (loginfo.status != 401){
                     //alert('Connected'); 
-                    let menu:MenuPrincipal =  new MenuPrincipal();
+                    let menu:menuManager =  new menuManager(log,panel,mapApi,config);
                     
-                    //$('rv-mapnav').append('<div><h2>Livraison</h2></div>')
-                    panel.body = menu.createMenuPrincipal(log,panel,mapApi,config);
 
                 //si le retour de l'API contient un code d'erreur et le message
                 }else{
@@ -97,6 +93,11 @@ export default class Testing{
         });
     }
 
+    compileTemplate(template,mapApi): JQuery<HTMLElement> {
+        let temp = $(template);
+        mapApi.$compile(temp);
+        return temp;
+    }
 };
 
 //Inteface pour avoir accèes au element du viewer
@@ -124,9 +125,8 @@ Testing.prototype.translations = {
         extrac: 'Extract',
         clip: 'If clip :',
         //Planifier seulement
-        testbutton: 'Planning Work Place',
+        testbutton: 'GeoSys',
         planif: 'Planning',
-        zoneTrv: 'Working Zone :',
         typeTrv: 'working type :',
         classe: 'Select a class :',
         datefinprv: 'Final date planned :',
@@ -153,7 +153,7 @@ Testing.prototype.translations = {
         extrac: 'Extraction',
         clip: 'Si clip :',
         //Planifier seulement
-        testbutton: 'Planifiez zone de travail',
+        testbutton: 'GeoSys',
         planif: 'Planifier',
         typeTrv: 'Type de travail :',
         classe: 'selectionne une classe :',

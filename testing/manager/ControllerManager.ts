@@ -13,6 +13,7 @@ export class manageController{
     
     planControl(log:login, mapApi:any, config:any):void{
         mapApi.agControllerRegister('submitFromP', function($scope){
+            const that = this;
             $scope.IsVisible = false;
 
             //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
@@ -154,7 +155,7 @@ export class manageController{
 
                 // populate list b with new items
                 this.itemsB.length = 0;
-                let list:any = log.setidUtToDDL(this.selectedItemA)
+                let list:any = log.setidUTtheme(this.selectedItemA)
                 for (let i in list){
                     this.itemsB.push(list[i])
                 }
@@ -206,13 +207,11 @@ export class manageController{
             this.selectedItemF = '';
             this.selectedItemEND = '';
 
-
             this.itemsEND = [];
 
             for (let i in log._envAcc){
                 this.itemsEND.push({name : log._envAcc[i] , value: log._envAcc[i]});
             }
-
 
             this.itemsE = [];
 
@@ -227,7 +226,7 @@ export class manageController{
 
                 // populate list b with new items
                 this.itemsF.length = 0;
-                let list:any = log.setidUtToDDL(this.selectedItemE)
+                let list:any = log.setidUTtheme(this.selectedItemE)
                 for (let i in list){
                     this.itemsF.push(list[i])
                 }

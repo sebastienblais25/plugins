@@ -58,7 +58,6 @@ export class planifier{
         //get de properties
         let classes:string[] = ['no value'];
         let output:any = {
-            "env": log._environnement,
             "theme": this.gettheme(),
             "id_ut": this.getidUT(),
             "type_travail": this.gettypetravail(),
@@ -74,6 +73,41 @@ export class planifier{
         
         let json:any = JSON.stringify(output)
         return json
+    }
+
+    // À ajuster pour pouvoir faire un geoJson qui se fait automatique
+    createGeoJson(){
+
+        let geojson:any = {
+            "type" : "Polygon",
+            "crs" : {
+                "type" : "name",
+                "properties" : {
+                    "name" : "EPSG:4617"
+                }
+            },
+            "Coordinates" : [
+                [
+                    [
+                        -115,
+                        51
+                    ],
+                    [
+                        -115,
+                        51
+                    ],
+                    [
+                        -115,
+                        51
+                    ],
+                    [
+                        -115,
+                        51
+                    ]
+                ]
+            ]
+
+        }
     }
 
     saveJson(output:any):void{

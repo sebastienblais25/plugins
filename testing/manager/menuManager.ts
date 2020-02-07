@@ -5,54 +5,58 @@ import { login } from '../login';
 
 export class menuManager{
 
+    _compiler:manageController;
 
-    constructor(){}
+
+    constructor(log:login, panel:any, mapApi:any, config:any){
+        this._compiler = new manageController();
+
+        let outputExt:string;
+        let outputPlan:string;
+        let outputDeli:string;
+        let outputTopmenu:string;
+        
+        let menuprincipal:string
+
+        outputExt = this.extractManager(log,mapApi);
+        outputPlan = this.planifManager(log,mapApi, config);
+        outputDeli = this.deliManager(log,mapApi);
+        outputTopmenu = this.topMenuManager(log,mapApi);
+
+        menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputDeli +"</div>";
+        this._compiler.compileTemplate(menuprincipal,mapApi)
+        
+        panel.body = menuprincipal;
+    }
 
     extractManager(log:login, mapApi:any):string{
-
-        /************* Extraire ***************/
-        //let ext = new Extraire('','','','','','');
-        let mb = new manageController();
-
-        //activate the controls for Extraction
-        //A enlever le panel
-        mb.extrairecontrols(log, mapApi);
+        
+        
+        
+        this._compiler.extrairecontrols(log, mapApi);
 
         //add the dropdown list for the form
         let output = formExtraire;
-        //output = output.replace(/{dropdownenv}/,ddlEnv);
-
-        //mb.compileTemplate(output,mapApi);
-
-        //add the compile template to the panel
+        
         return output;
     }
 
     planifManager(log:login, mapApi:any, config:any):string{
 
-        /********* Planifier *********/
-        let mb = new manageController();
+        
 
-        //A Enlever le panel
-        mb.planControl(log, mapApi, config);
+        this._compiler.planControl(log, mapApi, config);
 
         //add the dropdown list for the form
         let output = formPlanifier;
         
-        //mb.compileTemplate(output,mapApi);
-
-        //add the compile template to the panel
         return output;
     }
 
     deliManager(log:login, mapApi:any):string{
         let listserver = log.getenvAcc();
         
-
-
-        let mb = new manageController();
-
-        mb.deliControl(log, mapApi)
+        this._compiler.deliControl(log, mapApi)
 
         let output = formDelivery;
         //mb.compileTemplate(output,mapApi);
@@ -60,16 +64,15 @@ export class menuManager{
     }
 
     topMenuManager(log:login, mapApi:any):string{
-        let mb = new manageController();
 
-        mb.topmenuControl(log, mapApi)
+        this._compiler.topmenuControl(log, mapApi)
 
         let output = topmenu;
         //mb.compileTemplate(output,mapApi);
         return output
     }
 
-       //create a drop list for the template
+
 
 
 

@@ -63,7 +63,7 @@ export class PanelManager {
                     active: false,
                     createIcon: () => { (<any>that).createIcon(this.controls.picker) }
                 },
-                point: {
+                /*point: {
                     name: 'point',
                     label: 'plugins.collaboration.draw.point',
                     icon: 'M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z',
@@ -74,8 +74,8 @@ export class PanelManager {
                     action: () => {
                         (<any>that).setActive(this.controls, 'point')
                     }
-                },
-                polyline: {
+                },*/
+                /*polyline: {
                     name: 'polyline',
                     label: 'plugins.collaboration.draw.line',
                     icon:  'M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z',
@@ -86,7 +86,7 @@ export class PanelManager {
                     action: () => {
                         (<any>that).setActive(this.controls, 'polyline');
                     }
-                },
+                },*/
                 polygon: {
                     name: 'polygon',
                     label: 'plugins.collaboration.draw.polygon',

@@ -59,7 +59,6 @@ export class Extraire{
     getInformationToJson(log:login):any{
         //get de properties
         let output:any = {
-            "env": log._environnement,
             "theme": this._theme,
             "id_lot": this._idUT,
             "clip": this._clip,

@@ -15,12 +15,12 @@ export declare class login {
     /** Dropdown List **/
     _themeAcc: string[];
     _envAcc: string[];
-    _idUt: idWu[];
+    _idUt: idWu;
     constructor(username?: string, password?: string);
     submitForm(): any;
     getInformationToHeader(): any;
     setDataFromAPI(token: string, token_type: string, expired: number, scope: string[], theme: string[]): void;
-    setidUTtheme(): void;
+    setidUTtheme(theme: string): any[];
     setidUtToDDL(theme: string): any;
     getUtravail(theme: string): string[];
     getusername(): string;

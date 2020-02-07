@@ -21,7 +21,8 @@ export class login{
     /** Dropdown List **/
     _themeAcc: string[];
     _envAcc: string[] = ['Dev', 'Tst', 'Pro'];
-    _idUt:idWu[] = [];
+    _equipe:string;
+    _idUt:idWu;
     
     
 
@@ -39,7 +40,7 @@ export class login{
          let data:any = this._conn.connexionAPILogin(urlLoginGet,header);
          //alert(data.access_token);
          if (!data.code){
-            this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme);
+            this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe);
         }else{
             alert(data.code)
         }
@@ -60,56 +61,37 @@ export class login{
     }
 
     //Ajoute le reste des données obtenu par le login
-    setDataFromAPI(token:string,token_type:string,expired:number, scope:string[], theme:string[]){
+    setDataFromAPI(token:string,token_type:string,expired:number, scope:string[], theme:string[] , equipe:string){
         this._token = token;
         this._tokentype = token_type;
         this._expired = expired;
         this._rightRead = scope[0];
         this._rightWrite = scope[1];
         this._themeAcc = theme
+        this._equipe = equipe;
         //alert(this._rightRead + " " + this._rightWrite);
-        this.setidUTtheme();
     }
 
     //build the list of working unit 
-    setidUTtheme(){
-        let list:string[] = this.getthemeAcc();
+    setidUTtheme(theme:string){
         let json:string = "";
-        for (let i in list) {
-            this._idUt[i] = new idWu(list[i],list);
-            let newUrl = urlgetidWu + list[i]
-            let output:any =this._conn.connexionAPI(this.gettoken(), json, newUrl, 'Get');
-            //console.log(output.value);
-            
-            this._idUt[i]._wUnit = output.value;
-        }
-        for(let i in this._idUt){
-            for(let j in this._idUt[i]._wUnit){
-                this._idUt[i]._wUnit[j] = this._idUt[i]._theme + ' - ' + this._idUt[i]._wUnit[j];
-            } 
-        }  
-    }
-
-    setidUtToDDL(theme:string):any{
-        /*let listtest = {
-            hydro_50k : [{name:'', value:''},{name:'', value:''},{name:'', value:''}],
-            corint_250k : [{name:'', value:''},{name:'', value:''},{name:'', value:''}]
-        };*/
-
-        let list = []
-        let rank:any;
-
-        for (let i in this._themeAcc){
-            if (this._themeAcc[i] === theme){
-                rank = i;
-            }
-        }
-            
-        for(let j in this._idUt[rank]._wUnit){
-                list.push({name: this._idUt[rank]._wUnit[j], value: this._idUt[rank]._wUnit[j]});
-        } 
         
+        let newUrl = urlgetidWu + theme;
+        let output:any =this._conn.connexionAPI(this.gettoken(), json, newUrl, 'Get');
+        this._idUt = new idWu(theme,output.value);
+        
+        
+        for(let j in this._idUt._wUnit){
+            this._idUt._wUnit[j] = this._idUt._theme + ' - ' + this._idUt._wUnit[j];
+        }
+
+        let list=[];
+        for(let j in this._idUt._wUnit){
+            list.push( { name: this._idUt._wUnit[j], value: this._idUt._wUnit[j]});
+        } 
+    
         return list;
+         
     }
 
     //Return a list of a theme selected
