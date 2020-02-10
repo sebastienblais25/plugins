@@ -3,7 +3,7 @@
 const FileSaver = require('file-saver'); // le import
 import {urlgeoDataGet} from '../config/url';
 import { connexion } from '../apiConnect';
-import { login } from '../login';
+import { User } from '../user';
 
 export class Extraire{
 
@@ -32,7 +32,7 @@ export class Extraire{
     /************* Methods *************/
 
     //Send json form to API in ajax
-    submitForm(log:login):any{
+    submitForm(log:User):any{
        //To Change
             //create a json and save the file in the download folder 
         let json:any = this.getInformationToJson(log);
@@ -56,7 +56,7 @@ export class Extraire{
    }*/ 
 
     //get the infromation out of the form into a string json
-    getInformationToJson(log:login):any{
+    getInformationToJson(log:User):any{
         //get de properties
         let output:any = {
             "theme": this._theme,

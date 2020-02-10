@@ -1,7 +1,7 @@
 /****** Import ******/
 import { Extraire } from "../operation/extraire";
 import { menuManager } from "./menuManager";
-import { login } from '../login';
+import { User } from '../user';
 import { planifier } from '../operation/planifier';
 import { PanelManager } from "../Drawing/panel-manager";
 
@@ -11,27 +11,38 @@ export class manageController{
     constructor(){};
 
     
-    planControl(log:login, mapApi:any, config:any):void{
+    planControl(log:User, mapApi:any, config:any):void{
         mapApi.agControllerRegister('submitFromP', function($scope){
             const that = this;
             $scope.IsVisible = false;
 
             //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
             this.ShowHide = function(){
-                if(log._environnement!= ''){
+                if(log._environnementSel!= ''){
                     $scope.IsVisible = $scope.IsVisible ? false : true; 
                 }    
             };
 
             //Envoie le fromulaire a l'API
             this.submitFormP = function() { 
+
+
                 //get all the information of the form into the class
+                let listofclass = []
+                for(let i in this.classes){
+                    if(this.classes[i].wanted ==true){
+                        alert(this.classes[i].name);
+                        listofclass.push(this.classes[i].name);
+                    }
+                }
                 
+
+                //alert(this.classes[0].wanted);
                 let plan:planifier = new planifier(
                     this.selectedItemC,
                     (<HTMLInputElement>document.getElementById("idUt")).value,
                     (<HTMLInputElement>document.getElementById("ttv")).value,
-                    (<HTMLInputElement>document.getElementById("classes")).value,
+                    listofclass,
                     (<HTMLInputElement>document.getElementById("dfp")).value,
                     (<HTMLInputElement>document.getElementById("wherep")).value,
                     (<HTMLInputElement>document.getElementById("geomp")).value);
@@ -44,7 +55,7 @@ export class manageController{
                 }else{
                     console.log(log.gettoken());
                     $scope.IsVisible = false;
-                }   
+                }
             };
             /************** interactive List ***************/
 
@@ -56,6 +67,9 @@ export class manageController{
             for (let i in log._themeAcc){
                 this.itemsC.push({name : log._themeAcc[i] , value: log._themeAcc[i]});
             }
+
+            //the group of classes for a theme
+            this.classes = []
             
             this.setList = () => {
                 console.log(`set: ${this.selectedItemC}`);
@@ -71,25 +85,38 @@ export class manageController{
                 }
                 // populate list b with new items
                 this.idut = this.selectedItemC + '_'+ dd + mm + yyyy + '_';
-                //newList[this.selectedItemA].forEach(item => this.itemsB.push(item))
+
+
+                /** liste de classes **/
+                log.getlistofclasses(this.selectedItemC);
+                this.classes.length = 0;
+                let list= [];
+                //create the list with name and varaible for the checkbox
+                for(let i in log._classeslist){
+                    list.push( { name: log._classeslist[i] , wanted: true });
+                }
+                //add the new list in list for the template
+                for (let i in list){
+                    this.classes.push(list[i])
+                }
             }
 
             let count:number = 0;
             
             this.toggleDraw = () => {
                 
-                if (count == 0){
+                /*if (count == 0){
                     let toolbar:PanelManager = new PanelManager(mapApi,config);
                     count ++;
                 }
-                (<any>document).getElementsByClassName('rv-mapnav-draw-content')[0].style.display = this.checkTool? 'none' : 'block';
+                (<any>document).getElementsByClassName('rv-mapnav-draw-content')[0].style.display = this.checkTool? 'none' : 'block';*/
             }
 
         });
     }
 
     //Submit controller
-    extrairecontrols(log:login, mapApi:any):void{
+    extrairecontrols(log:User, mapApi:any):void{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitCtrl', function($scope){
@@ -98,7 +125,7 @@ export class manageController{
 
             //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
             this.ShowHide = function(){
-                if(log._environnement!= ''){
+                if(log._environnementSel!= ''){
                     $scope.IsVisible = $scope.IsVisible ? false : true; 
                 }  
             };
@@ -164,14 +191,14 @@ export class manageController{
         });
     }
 
-    deliControl(log:login, mapApi:any):void{
+    deliControl(log:User, mapApi:any):void{
         mapApi.agControllerRegister('submitFromD', function($scope){
 
             $scope.IsVisible = false;
 
             //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
             this.ShowHide = function(){
-                if(log._environnement!= ''){
+                if(log._environnementSel!= ''){
                     $scope.IsVisible = $scope.IsVisible ? false : true; 
                 }    
             };
@@ -240,7 +267,7 @@ export class manageController{
     }
 
 
-    topmenuControl(log:login, mapApi:any){
+    topmenuControl(log:User, mapApi:any){
         mapApi.agControllerRegister('topmenuCtrl', function($scope){
 
             /************** interactive List ***************/
@@ -248,18 +275,19 @@ export class manageController{
             this.selectedItemENT = '';
 
             this.itemsENT = [];
-
+            //changement
             for (let i in log._envAcc){
-                this.itemsENT.push({name : 'Environnement : ' +log._envAcc[i] , value: log._envAcc[i]});
+                this.itemsENT.push({name : 'Environnement : ' +log._envAcc[i]._env , value: log._envAcc[i]._env});
             }
             this.setEnv = () => {
-                log._environnement = this.selectedItemENT;
-                //alert(this.selectedItemENT);
-                if(log._environnement === 'Tst')
+
+                log._environnementSel = this.selectedItemENT;
+                log.setEnvironnementSelected(this.selectedItemENT);
+                if(log._environnementSel === 'TST')
                     $scope.bgEnv = {
                         "background-color" : "lightblue", 
                     }
-                else if(log._environnement === 'Dev'){
+                else if(log._environnementSel === 'DEV'){
                     $scope.bgEnv = {
                         "background-color" : "pink", 
                     }

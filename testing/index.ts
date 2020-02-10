@@ -1,7 +1,7 @@
 /****** Import ******/
 import { loginmenu } from './config/html-assets';
 import { manageController } from './manager/ControllerManager'
-import { login } from './login';
+import { User } from './user';
 import { menuManager } from './manager/menuManager';
 
 export default class Testing{
@@ -71,7 +71,7 @@ export default class Testing{
             //ajoute la fonction sous le controller au formulaire html
             this.submitConn = function() { 
                 //prends les informations des input pour envoyer a l'API
-                let log:login = new login((<HTMLInputElement>document.getElementById("username")).value
+                let log:User = new User((<HTMLInputElement>document.getElementById("username")).value
                 ,(<HTMLInputElement>document.getElementById("password")).value);
                 
                 

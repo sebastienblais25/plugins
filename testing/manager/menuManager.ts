@@ -1,14 +1,14 @@
 /****** Import ******/
 import { manageController } from "./ControllerManager";
 import { formExtraire, formPlanifier, formDelivery, topmenu } from '../config/html-assets';
-import { login } from '../login';
+import { User } from '../user';
 
 export class menuManager{
 
     _compiler:manageController;
 
 
-    constructor(log:login, panel:any, mapApi:any, config:any){
+    constructor(log:User, panel:any, mapApi:any, config:any){
         this._compiler = new manageController();
 
         let outputExt:string;
@@ -29,7 +29,7 @@ export class menuManager{
         panel.body = menuprincipal;
     }
 
-    extractManager(log:login, mapApi:any):string{
+    extractManager(log:User, mapApi:any):string{
         
         
         
@@ -41,7 +41,7 @@ export class menuManager{
         return output;
     }
 
-    planifManager(log:login, mapApi:any, config:any):string{
+    planifManager(log:User, mapApi:any, config:any):string{
 
         
 
@@ -53,7 +53,7 @@ export class menuManager{
         return output;
     }
 
-    deliManager(log:login, mapApi:any):string{
+    deliManager(log:User, mapApi:any):string{
         let listserver = log.getenvAcc();
         
         this._compiler.deliControl(log, mapApi)
@@ -63,7 +63,7 @@ export class menuManager{
         return output
     }
 
-    topMenuManager(log:login, mapApi:any):string{
+    topMenuManager(log:User, mapApi:any):string{
 
         this._compiler.topmenuControl(log, mapApi)
 

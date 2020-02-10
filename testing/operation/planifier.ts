@@ -2,7 +2,7 @@
 const FileSaver = require('file-saver'); // le import
 import { connexion } from "../apiConnect";
 import { urlPlaniPost } from "../config/url";
-import { login } from '../login';
+import { User } from '../user';
 
 
 export class planifier{
@@ -14,7 +14,7 @@ export class planifier{
     _theme: string;
     _idUT: string;
     _typetravail: string;
-    _classes: string;
+    _classes: string[];
     _datefinpre: string;
     _whereclause: string;  
     _geom: string;
@@ -25,7 +25,7 @@ export class planifier{
 
     /*********** Constructor ***********/
 
-    constructor(theme:string,idut:string,tt:string,classes:string,datefin:string,wc:string,geom:string){
+    constructor(theme:string,idut:string,tt:string,classes:string[],datefin:string,wc:string,geom:string){
         this._theme = theme;
         this._idUT = idut;
         this._typetravail = tt;
@@ -38,7 +38,7 @@ export class planifier{
     /************* Methods *************/
 
    //Send a json to the API and return with the information 
-    submitForm(log:login):any{
+    submitForm(log:User):any{
         let json:string = this.getInformationToJson(log);
         //this.saveJson(json);
         this.setdata(this._conn.connexionAPIPost(log.gettoken(), json ,urlPlaniPost,'POST'));
@@ -54,14 +54,15 @@ export class planifier{
    
 
     //get the infromation out of the form into a string json
-    getInformationToJson(log:login):any{
+    getInformationToJson(log:User):any{
         //get de properties
+        alert(this.getclasses());
         let classes:string[] = ['no value'];
         let output:any = {
             "theme": this.gettheme(),
             "id_ut": this.getidUT(),
             "type_travail": this.gettypetravail(),
-            "liste_classes": classes,
+            "liste_classes": this.getclasses(),
             "date_fin_prevue": this.getdatefinpre(),
             "where_clause": this.getzonetravail(),
             "geom": this.getgeom()
@@ -117,9 +118,6 @@ export class planifier{
 
     setClassesIntoList():string[]{
         let classes:string[]
-
-
-
         return classes;
     }
 
@@ -182,10 +180,10 @@ export class planifier{
     }
 
     //classes
-    getclasses(): string {
+    getclasses(): string[] {
         return this._classes;
     }
-    setclasses(value: string) {
+    setclasses(value: string[]) {
         this._classes = value;
     }
 

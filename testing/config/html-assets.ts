@@ -32,7 +32,7 @@ export const topmenu:string= `
         ng-model="ctrl1.selectedItemENT" 
         id="env" 
         placeholder="{{ 'plugins.testing.envir' | translate }}">
-            <md-option ng-repeat="item in ctrl1.itemsENT" ng-value="item.value" ng-selected="ctrl1.itemsENT.indexOf(item) == 2">
+            <md-option ng-repeat="item in ctrl1.itemsENT" ng-value="item.value" ng-selected="ctrl1.itemsENT.indexOf(item) == 0">
                 {{ item.name }}
             </md-option>
         </md-select>
@@ -74,12 +74,15 @@ export const formPlanifier = `
                 <input type="text" name="ttv" id="ttv" value="" placeholder="Where ...">
             </md-container>
             </div>
+
             <div>
-            <md-input-container class="largeur">
-                <label>{{ 'plugins.testing.classe' | translate }}</label>
-                <input type="text" name="classes" id="classes" value="" placeholder="List of classes">
-            </md-container> 
+                    <span class="classeslist">{{ 'plugins.testing.classe' | translate }}</span><md-checkbox class="md-secondary checklist" ng-model="ctrl2.classes.wanted"></md-checkbox>
+                    <md-list-item class="itemlist" ng-repeat="class in ctrl2.classes">
+                        <span class="largeurlist">{{ class.name }}</span>
+                        <md-checkbox class="md-secondary checklist" aria-label="{{ class.name }}" ng-model="class.wanted"></md-checkbox>
+                    </md-list-item>
             </div>
+            
             <div>
             <md-input-container class="largeur">
                 <label>{{ 'plugins.testing.datefinprv' | translate }}</label>
@@ -104,7 +107,7 @@ export const formPlanifier = `
             </md-container>
             </div>
             <div>
-            <md-input-container class="largeur">
+            <md-input-container>
                 <md-button class="md-primary md-button"
                 ng-click="ctrl2.submitFormP()">
                     {{ 'plugins.testing.submit' | translate }}

@@ -3,24 +3,62 @@
     width:350px;
 }
 
-.divButton {
-    background-color: #ECE7E6;
-    border: none;
-    color: white;
-    padding: 4px 16px;
-    text-align: center;
-    font-size: 12px;
-    margin: 0px 0px;
-    opacity: 0.6;
-    transition: 0.3s;
-  }
+.listClasses{
+  height : 30px;
+  width : 350px;
+}
 
- .divButton:hover {opacity: 1}
+
+.divButton {
+  background-color: #ECE7E6;
+  border: none;
+  color: white;
+  padding: 4px 16px;
+  text-align: center;
+  font-size: 12px;
+  margin: 0px 0px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.divButton:hover {opacity: 1}
+
+.itemlist{
+  padding:0px 0px 0px 0px;
+  margin: 0px 0px 10px 0px;
+  max-height: 30px;
+  min-height: 30px;
+ }
+
+.classeslist{
+  max-height: 40px;
+  padding:0px 0px 0px 0px;
+  margin: 0px 0px 10px 0px;
+  display: inline-block;
+  width: 335px;
+}
 
 .largeur{
   width:350px;
-  padding:0px;
+  padding: 0px 0px 0px 0px;
   margin: 0px 0px 0px 0px;
+  max-height: 50px;
+  
+}
+
+.largeurlist{
+  max-height: 30px;
+  padding:0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  display: inline-block;
+  width: 350px;
+}
+
+.checklist{
+  max-height: 30px;
+  padding:0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  text-align: right ;
 }
 
 
