@@ -1,7 +1,7 @@
 
 
 const FileSaver = require('file-saver'); // le import
-import {urlgeoDataGet} from '../config/url';
+import {urlgeoDataGet,urlgeoDatGetId} from '../config/url';
 import { connexion } from '../apiConnect';
 import { User } from '../user';
 
@@ -10,9 +10,9 @@ export class Extraire{
     /*********** Properties ***********/
 
     _conn :connexion= new connexion();
-    _environnement: string;
     _theme: string;
     _idUT: string;
+    _listClasses:string[];
     _clip: string;
     _whereClause: string;
     _geom: string;
@@ -21,7 +21,7 @@ export class Extraire{
     
     
     /************* Constructor *************/
-    constructor(theme:string, idUT:string, clip:string,whereClause:string, geom:string){
+    constructor(theme:string, idUT?:string, clip?:string,whereClause?:string, geom?:string){
         this._theme = theme;
         this._idUT = idUT;
         this._clip = clip;
@@ -33,34 +33,48 @@ export class Extraire{
 
     //Send json form to API in ajax
     submitForm(log:User):any{
-       //To Change
-            //create a json and save the file in the download folder 
-        let json:any = this.getInformationToJson(log);
+        //create a json and save the file in the download folder 
+        let json:string = "";
+        let url:string;
+        
+        if(this._idUT === ""){
+            json =  this.getInformationToJsonSR();
+            url = urlgeoDataGet
+            alert(json + ' 1')
+        }else{
+            url = urlgeoDatGetId + this._idUT
+            alert('extract planned' + ' 1')
+        }
         //this.saveJson(json)
-        this.setData(this._conn.connexionAPI(log.gettoken(), json,urlgeoDataGet, 'Get'));
+        
+        this.setData(this._conn.connexionAPI(log.gettoken(), json, url, 'Get'));
 
         //for test
         if(this.getinfo() == 'success'){
+            //alert( this.getinfo());
             return this.getinfo();
         }else{
-            alert(this.getinfo().status);
+            //alert(this.getinfo().status);
             return this.getinfo().status;
         }      
    };
 
-   /*setHeader(token:string):string{
-       let output:any ={
-        'Authorization': `Bearer ${token}`
-       };
-        return output;
-   }*/ 
+   setInfoForSR(list:string[],clip:string,whereClause:string, geom:string){
+    this._idUT = "";
+    this._listClasses = list;
+    this._clip = clip;
+    this._whereClause = whereClause;
+    this._geom = geom;
+   }
 
     //get the infromation out of the form into a string json
-    getInformationToJson(log:User):any{
+    
+
+    getInformationToJsonSR():any{
         //get de properties
         let output:any = {
             "theme": this._theme,
-            "id_lot": this._idUT,
+            "liste_classes": this._listClasses,
             "clip": this._clip,
             "where_clause" : this._whereClause,
             "geom": this._geom
@@ -80,10 +94,6 @@ export class Extraire{
        return this._data;
    }
 
-    getEnvironnement():string{
-        return this._environnement;
-    }
-
     getTheme():string{
         return this._theme;
     }
@@ -102,10 +112,6 @@ export class Extraire{
 
     getgeom(): string {
         return this._geom;
-    }
-
-    setEnvironnement(env:string):void{
-        this._environnement = env
     }
 
     setTheme(them:string):void{

@@ -1,4 +1,4 @@
-import { urlLoginGet, urlgetidWu, urlEnvList, urlClassesList } from './config/url';
+import { urlLoginGet, urlgetidWu, urlEnvList, urlClassesList,urlWorkingType } from './config/url';
 import { connexion } from './apiConnect';
 import { idWu } from './manager/idWU';
 import { Environnement } from './manager/environnement';
@@ -31,6 +31,7 @@ export class User{
     _equipe:string;
     _idUt:idWu;
     _classeslist:string[];
+    _workinType:string[] = [];
     
     
 
@@ -115,24 +116,39 @@ export class User{
 
     //build the list of working unit 
     setidUTtheme(theme:string){
+        //json file
         let json:string = "";
-        
+        //set the new url and get the connection
         let newUrl = urlgetidWu + theme;
         let output:any =this._conn.connexionAPI(this.gettoken(), json, newUrl, 'Get');
         this._idUt = new idWu(theme,output.value);
-        
         //À enlever Mocking Only
         for(let j in this._idUt._wUnit){
             this._idUt._wUnit[j] = this._idUt._theme + ' - ' + this._idUt._wUnit[j];
         }
-
         let list=[];
         for(let j in this._idUt._wUnit){
             list.push( { name: this._idUt._wUnit[j], value: this._idUt._wUnit[j]});
-        } 
-    
+        }
+        return list;    
+    }
+
+    //build a list of workingtype
+    setworkingtype(theme:string){
+        //json file
+        let json:string = "";
+        //set the new url and get the connection
+        let newUrl = urlWorkingType + theme;
+        let output:any =this._conn.connexionAPI(this.gettoken(), json, newUrl, 'Get');
+        
+        for(let j in output){
+            this._workinType.push(output[j].nom);
+        }
+        let list=[];
+        for(let j in this._workinType){
+            list.push( { name: this._workinType[j], value: this._workinType[j]});
+        }
         return list;
-         
     }
 
     //Return a list of a theme selected

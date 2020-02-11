@@ -56,7 +56,7 @@ export class planifier{
     //get the infromation out of the form into a string json
     getInformationToJson(log:User):any{
         //get de properties
-        alert(this.getclasses());
+        //alert(this.getclasses());
         let classes:string[] = ['no value'];
         let output:any = {
             "theme": this.gettheme(),

@@ -122,8 +122,9 @@ Testing.prototype.translations = {
         cancel: 'Cancel',
         where: 'Enter a Where Clause :',
         //Extraction seulement
-        extrac: 'Extract',
-        clip: 'If clip :',
+        extrac: 'Planned Extract',
+        extract: 'Extract without planning',
+        clip: 'If clip',
         //Planifier seulement
         testbutton: 'GeoSys',
         planif: 'Planning',
@@ -150,8 +151,9 @@ Testing.prototype.translations = {
         cancel: 'Annuler',
         where: 'Entrer une Where Clause :',
         //Extraction seulement
-        extrac: 'Extraction',
-        clip: 'Si clip :',
+        extrac: 'Extraction Planifié',
+        extract: 'Extraction Sans Retour',
+        clip: 'Si clip',
         //Planifier seulement
         testbutton: 'GeoSys',
         planif: 'Planifier',

@@ -1,6 +1,5 @@
 /****** Import ******/
 import { Extraire } from "../operation/extraire";
-import { menuManager } from "./menuManager";
 import { User } from '../user';
 import { planifier } from '../operation/planifier';
 import { PanelManager } from "../Drawing/panel-manager";
@@ -31,17 +30,13 @@ export class manageController{
                 let listofclass = []
                 for(let i in this.classes){
                     if(this.classes[i].wanted ==true){
-                        alert(this.classes[i].name);
                         listofclass.push(this.classes[i].name);
                     }
                 }
-                
-
-                //alert(this.classes[0].wanted);
                 let plan:planifier = new planifier(
                     this.selectedItemC,
                     (<HTMLInputElement>document.getElementById("idUt")).value,
-                    (<HTMLInputElement>document.getElementById("ttv")).value,
+                    this.selectedItemD,
                     listofclass,
                     (<HTMLInputElement>document.getElementById("dfp")).value,
                     (<HTMLInputElement>document.getElementById("wherep")).value,
@@ -60,7 +55,7 @@ export class manageController{
             /************** interactive List ***************/
 
             this.selectedItemC = '';
-            //this.selectedItemD = '';
+            this.selectedItemD = '';
 
             this.itemsC = [];
 
@@ -68,8 +63,10 @@ export class manageController{
                 this.itemsC.push({name : log._themeAcc[i] , value: log._themeAcc[i]});
             }
 
+            //List of working type
+            this.itemsD = [];
             //the group of classes for a theme
-            this.classes = []
+            this.classes = [];
             
             this.setList = () => {
                 console.log(`set: ${this.selectedItemC}`);
@@ -86,6 +83,10 @@ export class manageController{
                 // populate list b with new items
                 this.idut = this.selectedItemC + '_'+ dd + mm + yyyy + '_';
 
+                //populate the working type list
+                this.itemsD.length = 0;
+                this.itemsD = log.setworkingtype(this.selectedItemC);
+
 
                 /** liste de classes **/
                 log.getlistofclasses(this.selectedItemC);
@@ -93,7 +94,7 @@ export class manageController{
                 let list= [];
                 //create the list with name and varaible for the checkbox
                 for(let i in log._classeslist){
-                    list.push( { name: log._classeslist[i] , wanted: true });
+                    list.push( { name: log._classeslist[i] , wanted: false });
                 }
                 //add the new list in list for the template
                 for (let i in list){
@@ -101,16 +102,29 @@ export class manageController{
                 }
             }
 
+
+            this.toggleAll = () => {
+                if( this.classes[0].wanted === true){
+                    for(let i in this.classes){
+                        this.classes[i].wanted = false;
+                    }  
+                }else{
+                    for(let i in this.classes){
+                        this.classes[i].wanted = true;
+                    }
+                }
+            }
+
             let count:number = 0;
             
-            this.toggleDraw = () => {
+            /*this.toggleDraw = () => {
                 
-                /*if (count == 0){
+                if (count == 0){
                     let toolbar:PanelManager = new PanelManager(mapApi,config);
                     count ++;
                 }
-                (<any>document).getElementsByClassName('rv-mapnav-draw-content')[0].style.display = this.checkTool? 'none' : 'block';*/
-            }
+                (<any>document).getElementsByClassName('rv-mapnav-draw-content')[0].style.display = this.checkTool? 'none' : 'block';
+            }*/
 
         });
     }
@@ -133,14 +147,9 @@ export class manageController{
             //Envoie le formulaire a l'Api
             this.submitForm = function() { 
                 //get all the information of the form into the class
-                //alert(this.selectedItemA + this.selectedItemB) 
-
                 let ext = new Extraire(
                      this.selectedItemA
-                    ,this.selectedItemB
-                    ,(<HTMLInputElement>document.getElementById("clip")).value
-                    ,(<HTMLInputElement>document.getElementById("whereclause")).value
-                    ,(<HTMLInputElement>document.getElementById("geom")).value);
+                    ,this.selectedItemB);
                 
                 let apireturn:any = ext.submitForm(log);
                 if (apireturn != 'success'){
@@ -158,15 +167,6 @@ export class manageController{
 
             this.selectedItemA = '';
             this.selectedItemB = '';
-            this.selectedItemEN = '';
-
-
-            this.itemsEN = [];
-
-            for (let i in log._envAcc){
-                this.itemsEN.push({name : log._envAcc[i] , value: log._envAcc[i]});
-            }
-
 
             this.itemsA = [];
 
@@ -186,7 +186,100 @@ export class manageController{
                 for (let i in list){
                     this.itemsB.push(list[i])
                 }
-                //newList[this.selectedItemA].forEach(item => this.itemsB.push(item))
+            }
+        });
+    }
+
+    extraireSRcontrols(log:User, mapApi:any):void{
+        /************ À placer en fonction ou class ***********/
+        // TODO: creer la directive avant de compiler le code
+        mapApi.agControllerRegister('SubmitExCtrl', function($scope){
+            
+            $scope.IsVisible = false;
+
+            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
+            this.ShowHide = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisible = $scope.IsVisible ? false : true; 
+                }  
+            };
+
+            //Envoie le formulaire a l'Api
+            this.submitSRForm = function() { 
+                //get all the information of the form into the class
+                let listofclass = []
+                for(let i in this.classes){
+                    if(this.classes[i].wanted ==true){
+                        listofclass.push(this.classes[i].name);
+                    }
+                }
+                let siClip:string;
+                if(this.cbClip == true){
+                    siClip = 'oui';
+                }else{
+                    siClip = 'non';
+                }
+
+                let extsr = new Extraire(
+                     this.selectedItemA);
+                extsr.setInfoForSR(listofclass,
+                    siClip,
+                    (<HTMLInputElement>document.getElementById("whereclause")).value,
+                    (<HTMLInputElement>document.getElementById("geom")).value)
+                
+                let apireturn:any = extsr.submitForm(log);
+                if (apireturn != 'success'){
+                    alert(apireturn.statusText)
+                }else{
+                    $scope.IsVisible = false;
+                    console.log(log._token);
+                }
+              
+                //alert(this._apireturn.value);    
+            };
+            
+
+            /************** interactive List ***************/
+
+            this.selectedItemA = '';
+            
+            this.itemsA = [];
+
+            for (let i in log._themeAcc){
+                this.itemsA.push({name : log._themeAcc[i] , value: log._themeAcc[i]});
+            }
+
+            this.classes = [];
+
+            //création de la liste pour les unité de travail
+            this.setList = () => {
+                log.getlistofclasses(this.selectedItemC);
+                this.classes.length = 0;
+                let list= [];
+                //create the list with name and varaible for the checkbox
+                for(let i in log._classeslist){
+                    list.push( { name: log._classeslist[i] , wanted: false });
+                }
+                //add the new list in list for the template
+                for (let i in list){
+                    this.classes.push(list[i])
+                }
+            }
+
+            this.toggleAll = () => {
+                if( this.classes[0].wanted === true){
+                    for(let i in this.classes){
+                        this.classes[i].wanted = false;
+                    }  
+                }else{
+                    for(let i in this.classes){
+                        this.classes[i].wanted = true;
+                    }
+                }
+            }
+
+            this.ifClip = () => {
+
             }
         });
     }
@@ -232,13 +325,6 @@ export class manageController{
 
             this.selectedItemE = '';
             this.selectedItemF = '';
-            this.selectedItemEND = '';
-
-            this.itemsEND = [];
-
-            for (let i in log._envAcc){
-                this.itemsEND.push({name : log._envAcc[i] , value: log._envAcc[i]});
-            }
 
             this.itemsE = [];
 
@@ -266,7 +352,14 @@ export class manageController{
 
     }
 
-
+    
+    /**
+     * Change the environnement of the user and change the color of the backgournd if not PRO
+     *
+     * @param {User} log getting all the information of the user and getting the envrionnemnt h'es already in
+     * @param {*} mapApi need the mapApi for setting the controller.
+     * @memberof manageController
+     */
     topmenuControl(log:User, mapApi:any){
         mapApi.agControllerRegister('topmenuCtrl', function($scope){
 
@@ -302,12 +395,17 @@ export class manageController{
         });
     }
 
-    //Compilateur de HTML avec les variables pour les boutons
+    /**
+     *Compilateur de HTML avec les variables pour les boutons
+     *
+     * @param {*} template
+     * @param {*} mapApi
+     * @returns {JQuery<HTMLElement>}
+     * @memberof manageController
+     */
     compileTemplate(template,mapApi): JQuery<HTMLElement> {
         let temp = $(template);
         mapApi.$compile(temp);
         return temp;
-    }
-
-    
+    }  
 }

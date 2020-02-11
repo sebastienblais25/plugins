@@ -1,14 +1,5 @@
-.ddlshow{
-    padding-bottom: 4px;
-    width:350px;
-}
 
-.listClasses{
-  height : 30px;
-  width : 350px;
-}
-
-
+//Bouton du menu
 .divButton {
   background-color: #ECE7E6;
   border: none;
@@ -21,13 +12,106 @@
   transition: 0.3s;
 }
 
+// lors du hover du bouton du menu
 .divButton:hover {opacity: 1}
+
+
+// class for thw witdh of input
+.largeur{
+  width:350px;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  max-height: 50px;
+  
+}
+
+//for the top menu
+.topmenu{
+  width: 380px;
+  height: 40px;
+}
+
+//block environnement of the topmenu
+.envDiv{
+  width: 60%;
+  height: 40px;
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  
+}
+
+//set a space between dropdown dans header
+.envSelect{
+  margin-top: 5px;
+}
+
+//button for the info user
+.infoDiv{
+  width: 20%;
+  height: 40px;
+  float: left;
+  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #ECE7E6;
+  opacity: 0.4;
+  transition: 0.3s;
+}
+
+//hover of button info user
+.infoDiv :hover{
+  opacity: 1;
+}
+
+//button for help 
+.helpDiv{
+  width: 20%;
+  height: 40px;
+  float: left;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 0px;
+  padding-left: 0px;
+
+}
+
+//set a space for de dropdown of angular
+.ddlshow{
+  padding-bottom: 4px;
+  width:350px;
+}
+
+// set space for the dropdown of extract
+.ddlshowEX{
+  padding-bottom: 4px;
+  width:350px;
+  margin-bottom: 0px;
+}
+
+/** CSS for the field classes  **/
+.listClasses{
+height : 30px;
+width : 350px;
+}
+
+.divclasse{
+  height:100px;
+  width: 360px;
+  overflow-y:scroll;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: #ECE7E6;
+  ;
+}
 
 .itemlist{
   padding:0px 0px 0px 0px;
-  margin: 0px 0px 10px 0px;
+  margin: 0px 0px 0px 0px;
   max-height: 30px;
   min-height: 30px;
+  width: 325px;
  }
 
 .classeslist{
@@ -35,15 +119,16 @@
   padding:0px 0px 0px 0px;
   margin: 0px 0px 10px 0px;
   display: inline-block;
-  width: 335px;
+  width: 320px;
 }
 
-.largeur{
-  width:350px;
-  padding: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
-  max-height: 50px;
-  
+//for extraction
+.classeslistEX{
+  max-height: 40px;
+  padding:0px 0px 0px 0px;
+  margin: 10px 0px 10px 0px;
+  display: inline-block;
+  width: 320px;
 }
 
 .largeurlist{
@@ -61,7 +146,38 @@
   text-align: right ;
 }
 
+.cbAlone{
+  margin: 10px 0px 10px 0px;
+  width:350px;
+  padding: 0px 0px 0px 0px;
+  max-height: 50px;
+}
 
+/***** ********/
+
+//For the field of the date
+.datfinfield {
+  width:350px;
+  padding: 0px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
+  max-height: 50px;
+}
+
+
+//For teh submit button
+.submitbtn{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+//set a minimum height for the form
+.extractspace{
+  min-height: 150px;
+}
+
+
+
+/********** CSS Drawing tools ***********/
 .rv-control-active {
   background-color: rgba(200, 200, 200, 0.5);
   clip-path: circle(15px at center);

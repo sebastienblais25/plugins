@@ -30,7 +30,7 @@ export class connexion{
                     function(response,jqXHR){
                         
                         if (response.message != undefined){
-                            //alert(response + ' 1')
+                            //alert(response.message + ' 123')
                             outputValue = jqXHR;
                         }else{
                             //alert(response + ' 2')
