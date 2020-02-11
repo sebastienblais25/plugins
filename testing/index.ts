@@ -65,6 +65,14 @@ export default class Testing{
     }
 
 
+    /**
+     * first controller, the one function is the submit button to do a connexion call to the API and
+     * return all the information for the user and stored in the usr class.
+     * @param {*} panel the panel from the viewer
+     * @param {*} mapApi the API from the viewer and angular
+     * @param {*} config the config of the viewer(the other file in samples)
+     * @memberof Testing
+     */
     connexionControls( panel:any,mapApi:any,config:any){
         //ajoute un controller au formulaire html
         this.mapApi.agControllerRegister('connexionCtrl', function($scope){
@@ -73,17 +81,12 @@ export default class Testing{
                 //prends les informations des input pour envoyer a l'API
                 let log:User = new User((<HTMLInputElement>document.getElementById("username")).value
                 ,(<HTMLInputElement>document.getElementById("password")).value);
-                
-                
                 //Envoie le formulaire a l API
                 let loginfo:any = log.submitForm();
-
                 //si le retour ne contient pas de code d'erreur continue
                 if (loginfo.status != 401){
                     //alert('Connected'); 
                     let menu:menuManager =  new menuManager(log,panel,mapApi,config);
-                    
-
                 //si le retour de l'API contient un code d'erreur et le message
                 }else{
                     alert(loginfo.code);
@@ -93,6 +96,14 @@ export default class Testing{
         });
     }
 
+
+    /**
+     * Compile a html template to read to compil and replace all the variable inside the template
+     * @param {*} template the html template to compile
+     * @param {*} mapApi the API of the viewer to compile it(service angular)
+     * @returns {JQuery<HTMLElement>}
+     * @memberof Testing
+     */
     compileTemplate(template,mapApi): JQuery<HTMLElement> {
         let temp = $(template);
         mapApi.$compile(temp);

@@ -34,22 +34,29 @@ export class User{
     _workinType:string[] = [];
     
     
-
-    //Constructor with only username and pasword for the login
+    /**
+     *Creates an instance of User. with only the username and a password for the connections
+     * @param {string} [username] name of the user
+     * @param {string} [password] password of the user
+     * @memberof User
+     */
     constructor(username?:string, password?:string){
         this._username =  username;
         this._password = password;
     }
 
-    //submit the from to the API
+    /**
+     * With the connexion to the APi send a json file with the username and the password in the header to get
+     * the token for the rest of the connexion.
+     * @returns {*} the data from the API. we dont know the return of the API so ANY.
+     * @memberof User
+     */
     submitForm():any{
         //To Change
              //create a json and save the file in the download folder 
         let json = '';
         let header:any = this.getInformationToHeader();
         let data:any = this._conn.connexionAPILogin(urlLoginGet,header);
-
-
         //Getting the list of environnement and their URL
         this.setListEnv(this._conn.connexionAPI(this.gettoken(), json, urlEnvList, 'Get'));
 
@@ -63,7 +70,11 @@ export class User{
              
     };
 
-    //Create the list of environnemnt and their url with Pro first
+    /**
+     * Create the list of environnement and their url and place the PRO environnment in first
+     * @param {*} output its the data from API.
+     * @memberof User
+     */
     setListEnv(output:any){
         for (let i in output){
             if(output[i].env === 'PRO'){
@@ -78,7 +89,11 @@ export class User{
         }
     }
 
-    //set the url for the environnemnt selected
+    /**
+     * Set the environnement url to a properties with the environnement selected
+     * @param {string} env the environnement selected by the user
+     * @memberof User
+     */
     setEnvironnementSelected(env:string){
         for (let i in this._envAcc){
             if(this._envAcc[i]._env === env){
@@ -90,7 +105,11 @@ export class User{
 
     }
 
-    //get the infromation out of the form into a string json
+    /**
+     * put the information of the user in a header for the first connexion to the API
+     * @returns {*}
+     * @memberof User
+     */
     getInformationToHeader():any{
         //get de properties
         let output:any = {
@@ -115,6 +134,13 @@ export class User{
     }
 
     //build the list of working unit 
+    /**
+     * build the object for the working unit id and setting the theme in front for the mocking
+     * and set a list for the dropdown list int the forms.
+     * @param {string} theme the theme selected by the user
+     * @returns return a list of working unit id with a name and a value for a dropdownlist
+     * @memberof User
+     */
     setidUTtheme(theme:string){
         //json file
         let json:string = "";
@@ -134,6 +160,13 @@ export class User{
     }
 
     //build a list of workingtype
+    /**
+     * build the list for the working type and
+     * and set a list for the dropdown list int the forms.
+     * @param {string} theme the theme selected by the user
+     * @returns return a list of working type name with a name and a value for a dropdownlist
+     * @memberof User
+     */
     setworkingtype(theme:string){
         //json file
         let json:string = "";
@@ -151,18 +184,13 @@ export class User{
         return list;
     }
 
-    //Return a list of a theme selected
-    getUtravail(theme:string):string[]{
-        for (let i in this._idUt){
-            if (this._idUt[i].getTheme() == theme){
-                return this._idUt[0]._wUnit
-            }
-        }
-        let ret:string[] = ['No value'];
-        return ret;
-        
-    }
-
+    /**
+     * create a json file for getting a list of classes 
+     * mostly hardcoded.
+     * @param {string} theme the theme selected by the user
+     * @returns {string} return a raw json
+     * @memberof User
+     */
     createJsonClasses(theme:string):string{
         let output:any = {
             "fichiers" : theme,
@@ -175,13 +203,17 @@ export class User{
         return json 
     }
 
-    getlistofclasses(theme:string):any{
+    /**
+     * the call to get the classes needed from the API 
+     * @param {string} theme the theme selected by the user
+     * @memberof User
+     */
+    getlistofclasses(theme:string){
         
         theme = theme + ':ress.json'
         let json = this.createJsonClasses(theme);
         let data:any = this._conn.connexionAPI(this.gettoken(), json , urlClassesList,'GET');
         this._classeslist = data.value.liste_classe;
-        //alert(this._classeslist);
     }
 
     //accessor

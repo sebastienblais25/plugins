@@ -22,3 +22,15 @@ export const urlClassesList:string = `http://127.0.0.1:4010/systeme/ressources`;
 
 //url getting the list of working type for theme(/suivi-prod/type-travail/theme/{theme}) Get
 export const urlWorkingType:string = `http://127.0.0.1:4010/suivi-prod/type-travail/theme/`;
+
+//url for delivery(Insert)(/geodata/{identifiant}) Post
+export const urlDeliveryInsert:string = `http://127.0.0.1:4010/geodata/`;
+
+//url for delivery(Update)(/geodata/{identifiant}) Put
+export const urlDeliveryUpdate:string = `http://127.0.0.1:4010/geodata/`;
+
+//url for creating MD(/geosys/creer-md) Post
+export const urlCreateMD:string = `http://127.0.0.1:4010/geosys/creer-md`;
+
+//url for validating MD() Post
+export const urlValidateMD:string = `http://127.0.0.1:4010/geosys/valider-md`;
