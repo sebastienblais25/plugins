@@ -21,6 +21,17 @@ export class Extraire{
     
     
     /************* Constructor *************/
+
+
+    /**
+     *Creates an instance of Extraire.
+     * @param {string} theme le thème sélectionner par l'utilisateur
+     * @param {string} [idUT] le identifiant d'unité de travail sélectioner par l'utilisateur
+     * @param {string} [clip] Si l'utilisateur veut un clip lors de l'Extraction
+     * @param {string} [whereClause] si l'utilisateur a mis un where clause
+     * @param {string} [geom] la géométrie entré par l'utilisateur.
+     * @memberof Extraire
+     */
     constructor(theme:string, idUT?:string, clip?:string,whereClause?:string, geom?:string){
         this._theme = theme;
         this._idUT = idUT;
@@ -32,22 +43,32 @@ export class Extraire{
     /************* Methods *************/
 
     //Send json form to API in ajax
+
+    /**
+     * Envoie un raw json a l'Api s'il s'agit d'un extraction sans retour ou envoie aucun json, mais 
+     * envoie l'identifiant d'unité de travail dans le url s'il s'agit d'une extraction planifié
+     * @param {User} log le sparamtere de l'utilisateur
+     * @returns {*} retorune le succes ou l'erreur de l'opération un avec un message
+     * @memberof Extraire
+     */
     submitForm(log:User):any{
         //create a json and save the file in the download folder 
         let json:string = "";
         let url:string;
-        
+        //if idUt is empty send an unplanned extract
         if(this._idUT === ""){
             json =  this.getInformationToJsonSR();
-            url = urlgeoDataGet
+            url = log.constructUrl(urlgeoDataGet);
             alert(json + ' 1')
+        //if idUt is set sent the idUt in the url and the json is empty
         }else{
-            url = urlgeoDatGetId + this._idUT
+            url = log.constructUrl(urlgeoDatGetId + this._idUT);
             alert('extract planned' + ' 1')
         }
         //this.saveJson(json)
-        
+        //Call to the Api
         this.setData(this._conn.connexionAPI(log.gettoken(), json, url, 'Get'));
+
 
         //for test
         if(this.getinfo() == 'success'){
@@ -59,6 +80,15 @@ export class Extraire{
         }      
    };
 
+   
+   /**
+    *set toutes les propriété pour une extraction sans retour
+    * @param {string[]} list la liste de classe sélectionner par l'utilisatuer
+    * @param {string} clip si l'utilisateur veut un clip de ses données
+    * @param {string} whereClause
+    * @param {string} geom
+    * @memberof Extraire
+    */
    setInfoForSR(list:string[],clip:string,whereClause:string, geom:string){
     this._idUT = "";
     this._listClasses = list;
@@ -70,6 +100,11 @@ export class Extraire{
     //get the infromation out of the form into a string json
     
 
+    /**
+     *Creation d'un fichier json pour faire l'appel à l'API
+     * @returns {*} retourne un raw Json pour l'API
+     * @memberof Extraire
+     */
     getInformationToJsonSR():any{
         //get de properties
         let output:any = {

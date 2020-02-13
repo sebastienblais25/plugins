@@ -1,12 +1,17 @@
 /****** Import ******/
 import { loginmenu } from './config/html-assets';
-import { manageController } from './manager/ControllerManager'
 import { User } from './user';
 import { menuManager } from './manager/menuManager';
+import { legendLayer } from '../tests/rampPage';
 
 export default class Testing{
     
     //initiation
+    /**
+     * Initialize the plugins into the viewer
+     * @param {*} api Ramp API 
+     * @memberof Testing
+     */
     init(api: any) {
         //set la variable api pour le plugin
         this.mapApi = api;
@@ -17,6 +22,8 @@ export default class Testing{
         //set la config pour la geometry
         //to try
         this.config.url = this._RV.getConfig('services').geometryUrl;
+
+        //this.config.Layer  = this._RV.getConfig('map').layers;
         //création d'un button d'accès à partir du menu
         this.button = this.mapApi.mapI.addPluginButton(
             Testing.prototype.translations[this._RV.getCurrentLang()].testbutton,
@@ -27,18 +34,33 @@ export default class Testing{
         this.addLoginPanel();
     }
 
-    //add side menu item
+  
+
+    /**
+     * Add a button in the side to open the plugins and close this side menu
+     * @returns 
+     * @memberof Testing
+     */
     onMenuItemClick() {
         return () => {
             //this.button.isActive = !this.button.isActive;
             this._RV.toggleSideNav('close');
             //open the panel
             this.panel.open();
+            for(let i in this.config.Layer){
+                console.log(this.config.Layer[i].name);
+            }
+            
         };
     }
 
 
     //Creating a login menu
+    /**
+     *Création du panel pour le plugins et ensuite ajoute le formulaire pou la connexion 
+     * de l'utilisateur 
+     * @memberof Testing
+     */
     addLoginPanel(){
         //permet d'Activer le bouton connexion/ login
         let output:string = loginmenu;
@@ -127,14 +149,14 @@ Testing.prototype.translations = {
         //Commun
         envir: 'Select an environnement :',
         themet: 'Select a theme :',
-        idUT: 'Select a working unity id :',
+        idUT: 'Select a working unit id :',
         geome: 'Add your Geometry :',
         submit: 'Submit',
         cancel: 'Cancel',
         where: 'Enter a Where Clause :',
         //Extraction seulement
         extrac: 'Planned Extract',
-        extract: 'Extract without planning',
+        extract: 'Unplanned Extract',
         clip: 'If clip',
         //Planifier seulement
         testbutton: 'GeoSys',
@@ -148,6 +170,9 @@ Testing.prototype.translations = {
         password : 'password',
         //Livraison seulement
         delivery : 'Delivery',
+        postput : 'Select an operation :',
+        insert : 'Insert',
+        update : 'Update',
 
     },
 
@@ -176,7 +201,10 @@ Testing.prototype.translations = {
         username : "nom d'usager",
         password : 'mot de passe', 
         //Livraison seulement 
-        delivery : 'Livraison', 
+        delivery : 'Livraison',
+        postput : 'Sélectionne une opération :',
+        insert : 'Insérer',
+        update : 'Mise à jour', 
     }
 };
 

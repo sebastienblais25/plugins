@@ -5,7 +5,7 @@ export class connexion{
     }
 
     //Send json form to API in ajax
-    connexionAPI(token:string, jsonstring:string, urlgoto:string, typeConn?:string):any{
+    connexionAPI(token:string, jsonstring:any, urlgoto:string, typeConn?:string):any{
         let outputValue:any;
         /********* API CALL **********/
         //no promise still

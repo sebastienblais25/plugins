@@ -46,6 +46,17 @@ export class User{
     }
 
     /**
+     *Contruct an url with the environnement selected and the url for the action
+     * @param {string} url url of the action
+     * @param {string} [adding] add the theme or id at the end (optional)
+     * @returns {string}
+     * @memberof User
+     */
+    constructUrl(url:string, adding:string=''):string{
+        return /*this._urlEnvselected*/ url + adding
+    }
+
+    /**
      * With the connexion to the APi send a json file with the username and the password in the header to get
      * the token for the rest of the connexion.
      * @returns {*} the data from the API. we dont know the return of the API so ANY.
@@ -56,9 +67,9 @@ export class User{
              //create a json and save the file in the download folder 
         let json = '';
         let header:any = this.getInformationToHeader();
-        let data:any = this._conn.connexionAPILogin(urlLoginGet,header);
+        let data:any = this._conn.connexionAPILogin(this.constructUrl(urlLoginGet),header);
         //Getting the list of environnement and their URL
-        this.setListEnv(this._conn.connexionAPI(this.gettoken(), json, urlEnvList, 'Get'));
+        this.setListEnv(this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlEnvList), 'Get'));
 
          //alert(data.access_token);
          if (!data.code){
@@ -144,9 +155,8 @@ export class User{
     setidUTtheme(theme:string){
         //json file
         let json:string = "";
-        //set the new url and get the connection
-        let newUrl = urlgetidWu + theme;
-        let output:any =this._conn.connexionAPI(this.gettoken(), json, newUrl, 'Get');
+        //set the new url and get the connection 
+        let output:any =this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlgetidWu + theme), 'Get');
         this._idUt = new idWu(theme,output.value);
         //À enlever Mocking Only
         for(let j in this._idUt._wUnit){
@@ -171,8 +181,7 @@ export class User{
         //json file
         let json:string = "";
         //set the new url and get the connection
-        let newUrl = urlWorkingType + theme;
-        let output:any =this._conn.connexionAPI(this.gettoken(), json, newUrl, 'Get');
+        let output:any =this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlWorkingType + theme), 'Get');
         
         for(let j in output){
             this._workinType.push(output[j].nom);
@@ -212,7 +221,7 @@ export class User{
         
         theme = theme + ':ress.json'
         let json = this.createJsonClasses(theme);
-        let data:any = this._conn.connexionAPI(this.gettoken(), json , urlClassesList,'GET');
+        let data:any = this._conn.connexionAPI(this.gettoken(), json , this.constructUrl(urlClassesList),'GET');
         this._classeslist = data.value.liste_classe;
     }
 
