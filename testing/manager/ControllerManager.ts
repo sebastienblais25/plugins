@@ -41,6 +41,7 @@ export class manageController{
             /************** interactive List ***************/
             this.selectedItemC = '';
             this.selectedItemD = '';
+            this.dfp = '';
 
             this.itemsC = [];
             //theme list
@@ -130,7 +131,7 @@ export class manageController{
                     (<HTMLInputElement>document.getElementById("idUt")).value,
                     this.selectedItemD,
                     listofclass,
-                    (<HTMLInputElement>document.getElementById("dfp")).value,
+                    this.dfp,
                     (<HTMLInputElement>document.getElementById("wherep")).value,
                     (<HTMLInputElement>document.getElementById("geomp")).value);
                 //alert(log.gettoken());
@@ -266,6 +267,8 @@ export class manageController{
             /************** interactive List ***************/
 
             this.selectedItemA = '';
+            this.whereclause = '';
+            this.geom = '';
             
             this.itemsA = [];
 
@@ -353,6 +356,8 @@ export class manageController{
      * @memberof manageController
      */
     deliControl(log:User, mapApi:any):void{
+        //mapApi.agDirectiveRegister()
+
         mapApi.agControllerRegister('submitFromD', function($scope){
 
             $scope.IsVisible = false;
@@ -394,35 +399,106 @@ export class manageController{
                 for (let i in list){
                     this.itemsF.push(list[i])
                 }
-                //newList[this.selectedItemA].forEach(item => this.itemsB.push(item))
+            }
+
+            this.filechanged = () => {
+                this.fileSelect.trigger('click');
             }
 
             //Envoie le fromulaire a l'API
-            this.submitFormD = function() { 
+            this.submitFormD = function(element) { 
                 //get all the information of the form into the class
                 let formdata = new FormData();
-                alert(this.fileMD);
-                formdata.append('fichier_data',this.fileMD);
-                formdata.append('fichier_data',this.fileFGDB);
-                let livre:Livraison = new Livraison();
-                livre.submitForm(JSON.stringify(formdata),log);
+                formdata.append('fichier_data',(<HTMLInputElement>document.getElementById('fileMD')).files[0]);
+                formdata.append('fichier_meta',(<HTMLInputElement>document.getElementById('filefgdb')).files[0]);
+                let livre:Livraison = new Livraison(this.selectedItemF,this.selectedItemE,this.typeOper);
+                let apireturn:any = livre.submitForm(formdata,log);
                 
                 //alert(log.gettoken());
-                /*let apireturn:any = plan.submitForm(log);
                 
                 if (apireturn != undefined){
                     alert(apireturn + ' 4');
                     console.log(apireturn);
+                    $scope.SelectedMenu = {
+                        "background-color" : "red", 
+                    }
                 }else{
                     console.log(log.gettoken());
-                } */
+                    $scope.SelectedMenu = {
+                        "background-color" : "green", 
+                    }
+                }
             };
            
-        });
-
-
-
+        })
     }
+
+
+
+    /**
+     *
+     *
+     * @param {User} log
+     * @param {*} mapApi
+     * @memberof manageController
+     */
+    creerControl(log:User, mapApi:any):void{
+        mapApi.agControllerRegister('submitFromC', function($scope){
+            $scope.IsVisible = false;
+            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
+            this.ShowHide = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisible = $scope.IsVisible ? false : true;
+                    if($scope.IsVisible == true){
+                        $scope.SelectedMenu = {
+                            "opacity" : "1", 
+                        }
+                    }else{
+                        $scope.SelectedMenu = {
+                        }
+                    } 
+                }    
+            };
+
+            /************** interactive List ***************/
+            this.typeOper = '';
+            this.selectedItemE = '';
+            this.selectedItemF = '';
+
+            this.itemsE = [];
+
+            for (let i in log._themeAcc){
+                this.itemsE.push({name : log._themeAcc[i] , value: log._themeAcc[i]});
+            }
+
+            this.itemsF = [];
+
+            this.sources = [];
+
+            //création de la liste pour les unité de travail
+            this.setList = () => {
+                //changer pour sources
+                log.getlistofclasses(this.selectedItemC);
+                this.sources.length = 0;
+                let listC= [];
+                //create the list with name and varaible for the checkbox
+                for(let i in log._classeslist){
+                    listC.push( { name: log._classeslist[i] , wanted: false });
+                }
+                //add the new list in list for the template
+                for (let i in listC){
+                    this.sources.push(listC[i])
+                }
+                // populate list b with new items
+                this.itemsF.length = 0;
+                let list:any = log.setidUTtheme(this.selectedItemE)
+                for (let i in list){
+                    this.itemsF.push(list[i])
+                }
+            }
+        })
+    }
+
 
     
     /**

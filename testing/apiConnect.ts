@@ -5,7 +5,7 @@ export class connexion{
     }
 
     //Send json form to API in ajax
-    connexionAPI(token:string, jsonstring:any, urlgoto:string, typeConn?:string):any{
+    connexionAPI(token:string, jsonstring:any, urlgoto:string, typeConn:string):any{
         let outputValue:any;
         /********* API CALL **********/
         //no promise still
@@ -106,8 +106,8 @@ export class connexion{
         //alert(outputValue)
         return outputValue;     
     };
-
-    connexionAPIPost(token:string, jsonstring:string, urlgoto:string, typeConn?:string):any{
+//Facultatif si post ne marche plus regarder celui-ci
+    connexionAPIPost(token:string, jsonstring:string, urlgoto:string, typeConn:string):any{
         let outputValue:any;
         /********* API CALL **********/
         //no promise still
@@ -157,4 +157,57 @@ export class connexion{
         return outputValue;
             
    };
+
+   connexionAPIFormData(token:string, formdata:any, urlgoto:string, typeConn:string):any{
+    let outputValue:any;
+    /********* API CALL **********/
+    //no promise still
+    const promises = [];
+    promises.push(
+        new Promise(resolve =>{
+            $.ajax({
+                url: urlgoto,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+                type: typeConn,
+                async: false,
+                //cache:false,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                data: formdata,
+                processData: false,
+                success: //data => resolve()
+                
+                function(response,jqXHR){
+                    
+                    if (response.message != undefined){
+                        //alert(response.message + ' 123')
+                        outputValue = jqXHR;
+                    }else{
+                        //alert(response + ' 2')
+                        outputValue = response;
+                    }
+                    
+                },
+                error: function(xhr){
+                    alert(xhr.statusText);
+                    outputValue = xhr;
+                    //console.log($('#recommandation').val());
+                }
+            })
+            /*.done(function(data){
+                console.log('success', data)
+                outputValue = data;
+            })
+            .fail(function(xhr){
+                console.log('error',xhr)
+            });*/
+            })
+        );
+        Promise.all(promises).then(values => {
+            console.log(values);
+        });
+        return outputValue;
+    }
 }

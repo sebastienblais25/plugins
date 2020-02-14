@@ -59,7 +59,7 @@ export class planifier{
     submitForm(log:User):any{
         let json:string = this.getInformationToJson(log);
         //this.saveJson(json);
-        this.setdata(this._conn.connexionAPIPost(log.gettoken(), json ,log.constructUrl(urlPlaniPost),'POST'));
+        this.setdata(this._conn.connexionAPI(log.gettoken(), json ,log.constructUrl(urlPlaniPost),'POST'));
 
         //for test
         if(this.getdata().status != undefined) {

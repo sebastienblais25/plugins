@@ -1,6 +1,6 @@
 /****** Import ******/
 import { manageController } from "./ControllerManager";
-import { formExtraireSR,formExtraireP, formPlanifier, formDelivery, topmenu } from '../config/html-assets';
+import { formExtraireSR, formExtraireP, formPlanifier, formDelivery, topmenu, formCreerMD } from '../config/html-assets';
 import { User } from '../user';
 
 export class menuManager{
@@ -25,6 +25,7 @@ export class menuManager{
         let outputExtSR:string;
         let outputPlan:string;
         let outputDeli:string;
+        let outputCreer:string;
         let outputTopmenu:string;
         
         let menuprincipal:string;
@@ -34,10 +35,11 @@ export class menuManager{
         outputExtSR = this.extractSRManager(log,mapApi);
         outputPlan = this.planifManager(log,mapApi, config);
         outputDeli = this.deliManager(log,mapApi);
+        outputCreer = this.creerMDManager(log,mapApi);
         outputTopmenu = this.topMenuManager(log,mapApi);
 
         //compile the form together
-        menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputExtSR + outputDeli +"</div>";
+        menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputExtSR + outputDeli + outputCreer + "</div>";
         this._compiler.compileTemplate(menuprincipal,mapApi);
         
         //put the form in the panel
@@ -125,5 +127,21 @@ export class menuManager{
         let output = formExtraireSR;
         return output;
 
+    }
+
+
+    /**
+     *
+     *
+     * @param {User} log
+     * @param {*} mapApi
+     * @returns {string}
+     * @memberof menuManager
+     */
+    creerMDManager(log:User, mapApi:any):string{
+        this._compiler.creerControl(log, mapApi);
+
+        let output = formCreerMD;
+        return output;
     }
 }

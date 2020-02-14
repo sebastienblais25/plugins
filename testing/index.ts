@@ -163,7 +163,7 @@ Testing.prototype.translations = {
         planif: 'Planning',
         typeTrv: 'working type :',
         classe: 'Select a class :',
-        datefinprv: 'Final date planned :',
+        datefinprv: 'Final date planned',
         //Login seulement
         login: 'Login',
         username : "username",
@@ -195,7 +195,7 @@ Testing.prototype.translations = {
         planif: 'Planifier',
         typeTrv: 'Type de travail :',
         classe: 'selectionne une classe :',
-        datefinprv: 'Date fin prévue :',
+        datefinprv: 'Date fin prévue',
         //Login seulement
         login: 'connexion :',
         username : "nom d'usager",

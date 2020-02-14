@@ -10,13 +10,24 @@ export class Livraison{
     _typeConn:string;
     _conn :connexion= new connexion();
 
-    constructor(){};
+    constructor(idut:string,theme:string, typeconn:string){
+        this._idUt = idut;
+        this._theme = theme;
+        this._typeConn =typeconn;
+    };
 
     submitForm(form:any, log:User){
-        console.log(form);
-        let apire:any = this._conn.connexionAPI(log.gettoken(), form , log.constructUrl(urlDeliveryUpdate, 'hello'), 'Put');
+        let method:string;
+        if(this._typeConn === 'Update'){
+            method = 'Put';
+        }else{
+            method = 'Post'
+        }
 
-        alert(apire);
+        console.log(form.get('fichier_data'));
+        let apire:any = this._conn.connexionAPIFormData(log.gettoken(), form , log.constructUrl(urlDeliveryUpdate, this._idUt), method);
+
+        //alert(apire);
         //for test
         if(apire == 'success'){
             //alert( this.getinfo());
