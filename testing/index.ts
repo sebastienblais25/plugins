@@ -29,7 +29,6 @@ export default class Testing{
             Testing.prototype.translations[this._RV.getCurrentLang()].testbutton,
             this.onMenuItemClick()
         );
-        
         //Ajoute un panel
         this.addLoginPanel();
     }
@@ -44,13 +43,12 @@ export default class Testing{
     onMenuItemClick() {
         return () => {
             //this.button.isActive = !this.button.isActive;
+            //alert(this.mapApi.layer);
             this._RV.toggleSideNav('close');
-            //open the panel
-            this.panel.open();
-            for(let i in this.config.Layer){
-                console.log(this.config.Layer[i].name);
-            }
+
             
+            //open the panel
+            this.panel.open();  
         };
     }
 
@@ -64,7 +62,6 @@ export default class Testing{
     addLoginPanel(){
         //permet d'Activer le bouton connexion/ login
         let output:string = loginmenu;
-
 
         //creating the panel with the dimension and a title for the application
         this.panel = this.mapApi.panels.create('Test Login');
@@ -173,6 +170,18 @@ Testing.prototype.translations = {
         postput : 'Select an operation :',
         insert : 'Insert',
         update : 'Update',
+        fileMD : 'File metadata : ',
+        fileGDB : 'File geodatabase : ',
+        //CréerMD seulement
+        creer : 'CreateMD',
+        source : 'Select the sources ID : ',
+        precision : 'Select the precision ID : ',
+        contrainte : 'Select the legal contraint ID : ',
+        //ValiderMd seulement
+        //Nettoyage seulement
+        nettoyage : 'Cleaning',
+        //Annuler seulement
+        annuler : 'Cancel',
 
     },
 
@@ -205,6 +214,18 @@ Testing.prototype.translations = {
         postput : 'Sélectionne une opération :',
         insert : 'Insérer',
         update : 'Mise à jour', 
+        fileMD : 'Fichier métadonnée : ',
+        fileGDB : 'Fichier géo base de donnée',
+        //CréerMD seulement
+        creer : 'CreerMD',
+        source : 'Sélectionner les identifiants des sources : ',
+        precision : 'Sélectionner les identifiant de précison : ',
+        contrainte : 'Sélectionner les identifiants de contraintes légales : ',
+        //ValiderMD seulement
+        //Nettoyage seulement
+        nettoyage : 'Nettoyage',
+        //Annuler seulement
+        annuler : 'Annuler',
     }
 };
 

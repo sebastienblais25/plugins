@@ -18,6 +18,7 @@ export class planifier{
     _datefinpre: string;
     _whereclause: string;  
     _geom: string;
+    _json:string = '';
 
     //data from API
     _data: any;
@@ -57,17 +58,11 @@ export class planifier{
      * @memberof planifier
      */
     submitForm(log:User):any{
-        let json:string = this.getInformationToJson(log);
+        this.getInformationToJson();
         //this.saveJson(json);
-        this.setdata(this._conn.connexionAPI(log.gettoken(), json ,log.constructUrl(urlPlaniPost),'POST'));
-
-        //for test
-        if(this.getdata().status != undefined) {
-            return this.getdata();
-        }else{
-            //alert(this.getdata().value + ' 9');
-            return this.getdata().value;
-        }
+        this.setdata(this._conn.connexionAPI(log.gettoken(), this.getJson() ,log.constructUrl(urlPlaniPost),'POST'));
+        //what we get from the API
+        return this.getdata();
     }
    
 
@@ -79,74 +74,60 @@ export class planifier{
      * @returns {*} retourne un raw json pour envoyer a l'Api
      * @memberof planifier
      */
-    getInformationToJson(log:User):any{
+    getInformationToJson(){
         //get de properties
         //alert(this.getclasses());
         let output:any = {
             "theme": this.gettheme(),
             "id_ut": this.getidUT(),
-            "type_travail": this.gettypetravail(),
+            "type_travail": this.gettypetravail().toString(),
             "liste_classes": this.getclasses(),
             "date_fin_prevue": this.getdatefinpre(),
             "where_clause": this.getzonetravail(),
             "geom": this.getgeom()
         };
-        let json:any = JSON.stringify(output)
-        return json
+        this._json= JSON.stringify(output)
     }
-
-    // À ajuster pour pouvoir faire un geoJson qui se fait automatique
 
     /**
      *Création d'un geoJson pour envoyer la geométrie d'un polygone
-     *
      * @memberof planifier
      */
-    createGeoJson(){
-
+    createGeoJson(proj:string , coord:string[]){
         let geojson:any = {
             "type" : "Polygon",
             "crs" : {
                 "type" : "name",
                 "properties" : {
-                    "name" : "EPSG:4617"
+                    "name" : proj
                 }
             },
             "Coordinates" : [
                 [
-                    [
-                        -115,
-                        51
-                    ],
-                    [
-                        -115,
-                        51
-                    ],
-                    [
-                        -115,
-                        51
-                    ],
-                    [
-                        -115,
-                        51
-                    ]
+                    coord
                 ]
             ]
         };
         return geojson;
     }
 
-
     /**
      * sauvegarde un fichier json dans le fichier de download de l'utilisateur
      * @param {*} output le fichier json a sauvegarder.
      * @memberof planifier
      */
-    saveJson(output:any):void{
-        let blob = new Blob([output],{type:"application/json"});
+    saveJson():void{
+        let blob = new Blob([this._json],{type:"application/json"});
         FileSaver.saveAs(blob,'export.json');
     }
     /******** Accessors *********/
+    getJson():string{
+        return this._json;
+    }
+
+    setJson(json:string){
+        this._json = json;
+    }
 
     getdata(): any {
         return this._data;

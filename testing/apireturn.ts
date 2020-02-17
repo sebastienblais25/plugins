@@ -3,18 +3,18 @@
 export class Apireturn{
 
 
-    _id:number;
-    _idListeCode:number;
+    _id:string;
+    _idListeCode:string;
     _nom:string;
     _descEn:string;
     _descFr:string;
 
 
-    constructor(id:number){
+    constructor(id:string){
         this._id = id;
     }
 
-    setRemaining(idListCode:number,nom:string,descEn:string, descFr:string){
+    setRemaining(idListCode:string,nom:string,descEn:string, descFr:string){
         this._idListeCode =idListCode;
         this._nom = nom;
         this._descEn = descEn;

@@ -1,6 +1,6 @@
 /****** Import ******/
 import { manageController } from "./ControllerManager";
-import { formExtraireSR, formExtraireP, formPlanifier, formDelivery, topmenu, formCreerMD } from '../config/html-assets';
+import { formExtraireSR, formExtraireP, formPlanifier, formDelivery, topmenu, formCreerMD, formNettoyage, formCancel } from '../config/html-assets';
 import { User } from '../user';
 
 export class menuManager{
@@ -21,25 +21,19 @@ export class menuManager{
         this._compiler = new manageController();
 
         //varaible for the form
-        let outputExt:string;
-        let outputExtSR:string;
-        let outputPlan:string;
-        let outputDeli:string;
-        let outputCreer:string;
-        let outputTopmenu:string;
+        let outputExt:string  = this.extractManager(log,mapApi);
+        let outputExtSR:string = this.extractSRManager(log,mapApi);
+        let outputPlan:string = this.planifManager(log,mapApi, config);
+        let outputDeli:string = this.deliManager(log,mapApi);
+        let outputCreer:string = this.creerMDManager(log,mapApi);
+        let outputNettoyage:string = this.nettoyageManager(log,mapApi);
+        let outputCancel:string = this.cancelManager(log,mapApi);
+        let outputTopmenu:string = this.topMenuManager(log,mapApi);
         
         let menuprincipal:string;
 
-        //create each form
-        outputExt = this.extractManager(log,mapApi);
-        outputExtSR = this.extractSRManager(log,mapApi);
-        outputPlan = this.planifManager(log,mapApi, config);
-        outputDeli = this.deliManager(log,mapApi);
-        outputCreer = this.creerMDManager(log,mapApi);
-        outputTopmenu = this.topMenuManager(log,mapApi);
-
         //compile the form together
-        menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputExtSR + outputDeli + outputCreer + "</div>";
+        menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputExtSR + outputDeli + outputCreer + outputNettoyage + outputCancel + "</div>";
         this._compiler.compileTemplate(menuprincipal,mapApi);
         
         //put the form in the panel
@@ -131,17 +125,44 @@ export class menuManager{
 
 
     /**
-     *
-     *
-     * @param {User} log
-     * @param {*} mapApi
-     * @returns {string}
+     * Set the template of the create From
+     * @param {User} log all the info of the user
+     * @param {*} mapApi the Api of the user
+     * @returns {string} return the compiled output
      * @memberof menuManager
      */
     creerMDManager(log:User, mapApi:any):string{
         this._compiler.creerControl(log, mapApi);
 
         let output = formCreerMD;
+        return output;
+    }
+
+
+    /**
+     * 
+     * @param {User} log
+     * @param {*} mapApi
+     * @returns {string}
+     * @memberof menuManager
+     */
+    nettoyageManager(log:User, mapApi:any):string{
+        this._compiler.nettoyagecontrols(log, mapApi);
+        
+        let output = formNettoyage;
+        return output;
+    }
+
+    /**
+     *
+     * @param {User} log
+     * @param {*} mapApi
+     * @returns {string}
+     * @memberof menuManager
+     */
+    cancelManager(log:User, mapApi:any):string{
+        this._compiler.cancelcontrols(log, mapApi);
+        let output = formCancel;
         return output;
     }
 }

@@ -16,12 +16,12 @@ export class Extraire{
     _clip: string;
     _whereClause: string;
     _geom: string;
+    _json:string;
     //data from API
     _data:any;
     
     
     /************* Constructor *************/
-
 
     /**
      *Creates an instance of Extraire.
@@ -42,8 +42,6 @@ export class Extraire{
 
     /************* Methods *************/
 
-    //Send json form to API in ajax
-
     /**
      * Envoie un raw json a l'Api s'il s'agit d'un extraction sans retour ou envoie aucun json, mais 
      * envoie l'identifiant d'unité de travail dans le url s'il s'agit d'une extraction planifié
@@ -53,13 +51,12 @@ export class Extraire{
      */
     submitForm(log:User):any{
         //create a json and save the file in the download folder 
-        let json:string = "";
         let url:string;
         //if idUt is empty send an unplanned extract
         if(this._idUT === ""){
-            json =  this.getInformationToJsonSR();
+            this.getInformationToJsonSR();
             url = log.constructUrl(urlgeoDataGet);
-            alert(json + ' 1')
+            alert(this.getJson() + ' 1')
         //if idUt is set sent the idUt in the url and the json is empty
         }else{
             url = log.constructUrl(urlgeoDatGetId + this._idUT);
@@ -67,17 +64,8 @@ export class Extraire{
         }
         //this.saveJson(json)
         //Call to the Api
-        this.setData(this._conn.connexionAPI(log.gettoken(), json, url, 'Get'));
-
-
-        //for test
-        if(this.getinfo() == 'success'){
-            //alert( this.getinfo());
-            return this.getinfo();
-        }else{
-            //alert(this.getinfo().status);
-            return this.getinfo().status;
-        }      
+        this.setData(this._conn.connexionAPI(log.gettoken(), this.getJson(), url, 'Get'));
+        return this.getData();
    };
 
    
@@ -97,15 +85,12 @@ export class Extraire{
     this._geom = geom;
    }
 
-    //get the infromation out of the form into a string json
-    
-
     /**
      *Creation d'un fichier json pour faire l'appel à l'API
      * @returns {*} retourne un raw Json pour l'API
      * @memberof Extraire
      */
-    getInformationToJsonSR():any{
+    getInformationToJsonSR(){
         //get de properties
         let output:any = {
             "theme": this._theme,
@@ -114,8 +99,7 @@ export class Extraire{
             "where_clause" : this._whereClause,
             "geom": this._geom
         };
-        let json:any = JSON.stringify(output)
-        return json
+        this._json = JSON.stringify(output)
     }
 
     //put a json string into a blob and export into a json file in download file
@@ -125,9 +109,17 @@ export class Extraire{
     }
 
     /*************** Accessors ***********************/
-   getinfo(){
-       return this._data;
-   }
+    getJson():string{
+        return this._json;
+    }
+
+    setJson(json:string){
+        this._json =json;
+    }
+
+    getData(): any {
+        return this._data;
+    }
 
     getTheme():string{
         return this._theme;

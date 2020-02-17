@@ -1,5 +1,5 @@
 import { connexion } from "../apiConnect";
-import { login } from '../login';
+import { User } from '../user';
 export declare class planifier {
     /*********** Properties ***********/
     _conn: connexion;
@@ -7,18 +7,52 @@ export declare class planifier {
     _theme: string;
     _idUT: string;
     _typetravail: string;
-    _classes: string;
+    _classes: string[];
     _datefinpre: string;
     _whereclause: string;
     _geom: string;
     _data: any;
     /*********** Constructor ***********/
-    constructor(theme: string, idut: string, tt: string, classes: string, datefin: string, wc: string, geom: string);
+    /**
+     *Creates an instance of planifier.
+     * @param {string} theme un theme choisi par l'utilisateur parmi la liste
+     * @param {string} idut un id avec préfixe du theme et de la date créer avant le nom
+     * @param {string} tt un type de travail sélectionner selon une liste créer par sélectio d'un theme
+     * @param {string[]} classes une liste de classes sélectionner relier a un theme
+     * @param {string} datefin une date de fin prévu entré par l'utilisateur
+     * @param {string} wc si un where clause est entré par l'tuilsateur
+     * @param {string} geom une geométrie entré par l'utilisateur
+     * @memberof planifier
+     */
+    constructor(theme: string, idut: string, tt: string, classes: string[], datefin: string, wc: string, geom: string);
     /************* Methods *************/
-    submitForm(log: login): any;
-    getInformationToJson(log: login): any;
+    /**
+     *Send a json to the API and return with the information
+     *
+     * @param {User} log les parametre de l'utilisateur de la classe user
+     * @returns {*} retourne les informations de l'API si le fromulaire a été envoyé avec succès ou non
+     * @memberof planifier
+     */
+    submitForm(log: User): any;
+    /**
+     * Transfrome les infromation du formulaire en fichier raw json
+     *
+     * @param {User} log
+     * @returns {*} retourne un raw json pour envoyer a l'Api
+     * @memberof planifier
+     */
+    getInformationToJson(log: User): any;
+    /**
+     *Création d'un geoJson pour envoyer la geométrie d'un polygone
+     * @memberof planifier
+     */
+    createGeoJson(proj: string, coord: string[]): any;
+    /**
+     * sauvegarde un fichier json dans le fichier de download de l'utilisateur
+     * @param {*} output le fichier json a sauvegarder.
+     * @memberof planifier
+     */
     saveJson(output: any): void;
-    setClassesIntoList(): string[];
     /******** Accessors *********/
     getdata(): any;
     setdata(value: any): void;
@@ -34,8 +68,8 @@ export declare class planifier {
     setidUT(value: string): void;
     gettypetravail(): string;
     settypetravail(value: string): void;
-    getclasses(): string;
-    setclasses(value: string): void;
+    getclasses(): string[];
+    setclasses(value: string[]): void;
     getdatefinpre(): string;
     setdatefinpre(value: string): void;
     getgeom(): string;

@@ -95,7 +95,7 @@ export const formPlanifier = `
 
         <div>
                 <span class="classeslist">{{ 'plugins.testing.classe' | translate }}</span><md-checkbox ng-model="ctrl2.listeclasse" aria-label="checkall" class="md-secondary checklist" ng-click="ctrl2.toggleAll()"></md-checkbox>
-                <div class="divclasse">
+                <div class="planning">
                     <md-list-item class="itemlist" ng-repeat="class in ctrl2.classes">
                         <span class="largeurlist">{{ class.name }}</span>
                         <md-checkbox class="md-secondary checklist" aria-label="{{ class.name }}" ng-model="class.wanted"></md-checkbox>
@@ -285,11 +285,11 @@ export const formDelivery = `
             </md-input-container>
 
             
-                <label>File MD :</label>
+                <label>{{ 'plugins.testing.fileMD' | translate }}</label>
                 <input  type="file" id="fileMD"/>
         
             
-                <label>File fgdb :</label>
+                <label>{{ 'plugins.testing.fileGDB' | translate }}</label>
                 <input type="file" id="filefgdb"/>
             
             <md-input-container class="submitbtn">
@@ -308,7 +308,7 @@ export const formDelivery = `
 export const formCreerMD:string = `
 <div ng-controller="submitFromC as ctrl6">
     <div ng-style="SelectedMenu" class="divButton" ng-click="ctrl6.ShowHide()">
-        <h2>{{ 'plugins.testing.delivery' | translate }}</h2>
+        <h2>{{ 'plugins.testing.creer' | translate }}</h2>
     </div>
     <div ng-show="IsVisible" ng-style="bgEnv">
         <div class="rv-subsection">
@@ -338,7 +338,7 @@ export const formCreerMD:string = `
             </md-input-container>
 
             <div>
-                <span class="classeslistEX">{{ 'plugins.testing.classe' | translate }}</span><md-checkbox aria-label="checkall" ng-model="ctrl6.listeSources" class="md-secondary checklist" ng-click="ctrl6.toggleAll()"></md-checkbox>
+                <span class="classeslistEX">{{ 'plugins.testing.source' | translate }}</span><md-checkbox aria-label="checkall" ng-model="ctrl6.listeSources" class="md-secondary checklist" ng-click="ctrl6.toggleAllS()"></md-checkbox>
                 <div class="divclasse">
                     <md-list-item class="itemlist" ng-repeat="source in ctrl6.sources">
                         <span class="largeurlist">{{ source.name }}</span>
@@ -348,9 +348,9 @@ export const formCreerMD:string = `
             </div>
 
             <div>
-                <span class="classeslistEX">{{ 'plugins.testing.classe' | translate }}</span><md-checkbox aria-label="checkall" ng-model="ctrl6.listePrecision" class="md-secondary checklist" ng-click="ctrl6.toggleAll()"></md-checkbox>
+                <span class="classeslistEX">{{ 'plugins.testing.precision' | translate }}</span><md-checkbox aria-label="checkall" ng-model="ctrl6.listePrecision" class="md-secondary checklist" ng-click="ctrl6.toggleAllP()"></md-checkbox>
                 <div class="divclasse">
-                    <md-list-item class="itemlist" ng-repeat="precision in ctrl6.precisons">
+                    <md-list-item class="itemlist" ng-repeat="precision in ctrl6.precisions">
                         <span class="largeurlist">{{ precision.name }}</span>
                         <md-checkbox class="md-secondary checklist" aria-label="{{ precision.name }}" ng-model="precision.wanted"></md-checkbox>
                     </md-list-item>
@@ -358,7 +358,7 @@ export const formCreerMD:string = `
             </div>
 
             <div>
-                <span class="classeslistEX">{{ 'plugins.testing.classe' | translate }}</span><md-checkbox aria-label="checkall" ng-model="ctrl6.listeContrainte" class="md-secondary checklist" ng-click="ctrl6.toggleAll()"></md-checkbox>
+                <span class="classeslistEX">{{ 'plugins.testing.contrainte' | translate }}</span><md-checkbox aria-label="checkall" ng-model="ctrl6.listeContrainte" class="md-secondary checklist" ng-click="ctrl6.toggleAllC()"></md-checkbox>
                 <div class="divclasse">
                     <md-list-item class="itemlist" ng-repeat="contrainte in ctrl6.contraintes">
                         <span class="largeurlist">{{ contrainte.name }}</span>
@@ -378,5 +378,107 @@ export const formCreerMD:string = `
         </div>
     </div>
 </div>
+
+`;
+
+export const formNettoyage:string = 
+`<div ng-controller="SubmitNetCtrl as ctrl7">
+    <div ng-style="SelectedMenu" class="divButton" ng-click="ctrl7.ShowHide()">
+        <h2>{{ 'plugins.testing.nettoyage' | translate }}</h2>
+    </div>
+    <div ng-show="IsVisible" ng-style="bgEnv" class="extractspace">
+        <div class="rv-subsection">
+            <md-input-container class="ddlshowEX">
+                <label>{{ 'plugins.testing.themet' | translate }}</label>
+                <md-select 
+                ng-model="ctrl7.selectedItemA" 
+                ng-change="ctrl7.setList()" 
+                id="theme" 
+                placeholder="{{ 'plugins.testing.themet' | translate }}">
+                    <md-option ng-repeat="item in ctrl7.itemsA" ng-value="item.value">
+                        {{ item.name }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="ddlshowEX">
+                <label>{{ 'plugins.testing.idUT' | translate }}</label>
+                <md-select
+                ng-model="ctrl7.selectedItemB"
+                ng-change="ctrl7.setListB()"
+                placeholder="{{ 'plugins.testing.idUT' | translate }}">
+                    <md-option ng-repeat="item in ctrl7.itemsB" ng-value="item.value">
+                        {{ item.name }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="submitbtn">
+                <md-button class="md-primary md-button"
+                ng-click="ctrl7.submitNett()">
+                    {{ 'plugins.testing.submit' | translate }}
+                    <md-tooltip>{{ 'plugins.testing.submit' | translate }}</md-tooltip>
+                </md-button>
+            </md-input-container>
+        </div>
+    </div>        
+</div>
+</div>`;
+
+
+export const formCancel:string = `
+<div ng-controller="cancelStep as ctrl8">
+    <div ng-style="SelectedMenu" class="divButton" ng-click="ctrl8.ShowHide()">
+        <h2>{{ 'plugins.testing.annuler' | translate }}</h2>
+    </div>
+    <div ng-show="IsVisible" ng-style="bgEnv" class="extractspace">
+        <div class="rv-subsection">
+            <md-input-container class="ddlshowEX">
+                <label>{{ 'plugins.testing.themet' | translate }}</label>
+                <md-select 
+                ng-model="ctrl8.selectedItemA" 
+                ng-change="ctrl8.setList()" 
+                id="theme" 
+                placeholder="{{ 'plugins.testing.themet' | translate }}">
+                    <md-option ng-repeat="item in ctrl8.itemsA" ng-value="item.value">
+                        {{ item.name }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="ddlshowEX">
+                <label>{{ 'plugins.testing.idUT' | translate }}</label>
+                <md-select
+                ng-model="ctrl8.selectedItemB"
+                ng-change="ctrl8.setListB()"
+                placeholder="{{ 'plugins.testing.idUT' | translate }}">
+                    <md-option ng-repeat="item in ctrl8.itemsB" ng-value="item.value">
+                        {{ item.name }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="ddlshowEX">
+                <label>{{ 'plugins.testing.postput' | translate }}</label>
+                <md-select
+                ng-model="ctrl8.stepCan"
+                placeholder="{{ 'plugins.testing.postput' | translate }}">
+                    <md-option value="P">Planning</md-option>
+                    <md-option value="E">Extract</md-option>
+                    <md-option value="D">Delivery</md-option>
+                    <md-option value="C">Create</md-option>
+                    <md-option value="V">Validate</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="submitbtn">
+                <md-button class="md-primary md-button"
+                ng-click="ctrl8.submitCan()">
+                    {{ 'plugins.testing.submit' | translate }}
+                    <md-tooltip>{{ 'plugins.testing.submit' | translate }}</md-tooltip>
+                </md-button>
+            </md-input-container>
+        </div>
+    </div>    
 </div>
 `;

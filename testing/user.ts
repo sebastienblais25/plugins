@@ -1,7 +1,9 @@
-import { urlLoginGet, urlgetidWu, urlEnvList, urlClassesList,urlWorkingType } from './config/url';
+import { urlLoginGet, urlgetidWu, urlEnvList,
+     urlClassesList,urlWorkingType, urlGetCode } from './config/url';
 import { connexion } from './apiConnect';
 import { idWu } from './manager/idWU';
 import { Environnement } from './manager/environnement';
+import { Apireturn } from './apireturn';
 
 
 export class User{
@@ -22,16 +24,16 @@ export class User{
     _token: string;
     _tokentype: string;
     _expired: number = 3600;
-    _rightRead: string;
-    _rightWrite: string;
+    _rightRead:Apireturn;
+    _rightWrite:Apireturn;
 
     /** List **/
-    _themeAcc: string[];
+    _themeAcc:Apireturn[] = [];
     _envAcc: Environnement[] = [];
-    _equipe:string;
+    _equipe:Apireturn;
     _idUt:idWu;
     _classeslist:string[];
-    _workinType:string[] = [];
+    _workinType:Apireturn[] = [];
     
     
     /**
@@ -133,15 +135,42 @@ export class User{
     }
 
     //Ajoute le reste des données obtenu par le login
+    /**
+     * sett all the info information obtain form a login into the properties of the class
+     *
+     * @param {string} token
+     * @param {string} token_type
+     * @param {number} expired
+     * @param {string[]} scope
+     * @param {string[]} theme
+     * @param {string} equipe
+     * @memberof User
+     */
     setDataFromAPI(token:string,token_type:string,expired:number, scope:string[], theme:string[] , equipe:string){
         this._token = token;
         this._tokentype = token_type;
         this._expired = expired;
-        this._rightRead = scope[0];
-        this._rightWrite = scope[1];
-        this._themeAcc = theme
-        this._equipe = equipe;
+        this._rightRead = new Apireturn(scope[0]);
+        this._rightWrite = new Apireturn(scope[1]);
+        this._equipe = new Apireturn(equipe);
         //alert(this._rightRead + " " + this._rightWrite);
+        for (let i in theme){
+            this._themeAcc.push(new Apireturn(theme[i]));
+            this.getinfoForCode(theme[i],i)
+        }
+    }
+
+    /**
+     * Get all the information of a code into the properties _themeAcc
+     * @param {string} theme the code of the theme to get all of his info
+     * @param {string} rank the rankl of the list _themeAcc
+     * @memberof User
+     */
+    getinfoForCode(theme:string, rank:string){
+        let json:string ='';
+        let data:any;
+        data = this._conn.connexionAPI(this.gettoken(),json,this.constructUrl(urlGetCode,theme),'Get');
+        this._themeAcc[rank].setRemaining(data.id_liste_code,data.nom,data.desc_en,data.desc_fr);
     }
 
     //build the list of working unit 
@@ -184,11 +213,12 @@ export class User{
         let output:any =this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlWorkingType + theme), 'Get');
         
         for(let j in output){
-            this._workinType.push(output[j].nom);
+            this._workinType.push(new Apireturn(output[j].id));
+            this._workinType[j].setRemaining(output[j].id_list_code, output[j].nom,output[j].desc_en, output[j].desc_fr);
         }
         let list=[];
         for(let j in this._workinType){
-            list.push( { name: this._workinType[j], value: this._workinType[j]});
+            list.push( { name: this._workinType[j]._nom, value: this._workinType[j]._id});
         }
         return list;
     }
@@ -200,7 +230,7 @@ export class User{
      * @returns {string} return a raw json
      * @memberof User
      */
-    createJsonClasses(theme:string):string{
+    createJsonRessources(theme:string/*, path:string */):string{
         let output:any = {
             "fichiers" : theme,
             "chemin_recherche":[
@@ -217,12 +247,16 @@ export class User{
      * @param {string} theme the theme selected by the user
      * @memberof User
      */
-    getlistofclasses(theme:string){
-        
+    getlistofclasses(theme:string/*,path:string*/){
+        let listS = [];
         theme = theme + ':ress.json'
-        let json = this.createJsonClasses(theme);
+        let json = this.createJsonRessources(theme/*,path */);
         let data:any = this._conn.connexionAPI(this.gettoken(), json , this.constructUrl(urlClassesList),'GET');
         this._classeslist = data.value.liste_classe;
+        for(let i in this._classeslist){
+            listS.push( { name: this._classeslist[i] , wanted: false });
+        }
+        return listS
     }
 
     //accessor
@@ -276,25 +310,25 @@ export class User{
 
     /* RightRead*/
     getrightRead(): string {
-        return this._rightRead;
+        return this._rightRead._nom;
     }
     setrightRead(value: string) {
-        this._rightRead = value;
+        this._rightRead._nom = value;
     }
 
     /*RightWrite */
     getrightWrite(): string {
-        return this._rightWrite;
+        return this._rightWrite._nom;
     }
     setrightWrite(value: string) {
-        this._rightWrite = value;
+        this._rightWrite._nom = value;
     }
     //List de theme
-    getthemeAcc(): string[] {
-        return this._themeAcc;
+    getthemeAcc(): string {
+        return this._themeAcc[0]._nom;
     }
-    setthemeAcc(value: string[]) {
-        this._themeAcc = value;
+    setthemeAcc(value: string) {
+        this._themeAcc[0]._nom = value;
     }
 
     //liste d' environnement

@@ -32,5 +32,11 @@ export const urlDeliveryUpdate:string = `http://127.0.0.1:4010/geodata/`;
 //url for creating MD(/geosys/creer-md) Post
 export const urlCreateMD:string = `http://127.0.0.1:4010/geosys/creer-md`;
 
-//url for validating MD() Post
+//url for validating MD(/geosys/valider-md) Post
 export const urlValidateMD:string = `http://127.0.0.1:4010/geosys/valider-md`;
+
+//url for getting all the info for a code(/suivi-prod/codes/{code}) Get
+export const urlGetCode:string = `http://127.0.0.1:4010/suivi-prod/codes/`;
+
+//url for cleaning a working unit id (/suivi-prod/unite-travail/{identifiant}) Delete
+export const urlDeleteClean:string = `http://127.0.0.1:4010/suivi-prod/unite-travail/`
