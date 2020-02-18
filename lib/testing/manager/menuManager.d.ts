@@ -54,12 +54,27 @@ export declare class menuManager {
      */
     extractSRManager(log: User, mapApi: any): string;
     /**
-     *
+     * Set the template of the create From
+     * @param {User} log all the info of the user
+     * @param {*} mapApi the Api of the user
+     * @returns {string} return the compiled output
+     * @memberof menuManager
+     */
+    creerMDManager(log: User, mapApi: any): string;
+    /**
      *
      * @param {User} log
      * @param {*} mapApi
      * @returns {string}
      * @memberof menuManager
      */
-    creerMDManager(log: User, mapApi: any): string;
+    nettoyageManager(log: User, mapApi: any): string;
+    /**
+     *
+     * @param {User} log
+     * @param {*} mapApi
+     * @returns {string}
+     * @memberof menuManager
+     */
+    cancelManager(log: User, mapApi: any): string;
 }

@@ -65,11 +65,8 @@ export class planifier{
         return this.getdata();
     }
    
-
-    //get the infromation out of the form into a string json
     /**
      * Transfrome les infromation du formulaire en fichier raw json
-     *
      * @param {User} log
      * @returns {*} retourne un raw json pour envoyer a l'Api
      * @memberof planifier
@@ -89,27 +86,6 @@ export class planifier{
         this._json= JSON.stringify(output)
     }
 
-    /**
-     *Création d'un geoJson pour envoyer la geométrie d'un polygone
-     * @memberof planifier
-     */
-    createGeoJson(proj:string , coord:string[]){
-        let geojson:any = {
-            "type" : "Polygon",
-            "crs" : {
-                "type" : "name",
-                "properties" : {
-                    "name" : proj
-                }
-            },
-            "Coordinates" : [
-                [
-                    coord
-                ]
-            ]
-        };
-        return geojson;
-    }
 
     /**
      * sauvegarde un fichier json dans le fichier de download de l'utilisateur

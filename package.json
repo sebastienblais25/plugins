@@ -59,6 +59,7 @@
         "file-saver": "2.0.0",
         "gh-pages": "1.1.0",
         "rxjs": "6.3.3",
+        "shapefile": "^0.6.6",
         "vanilla-picker": "^2.10.0"
     }
 }

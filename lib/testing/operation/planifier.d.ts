@@ -11,6 +11,7 @@ export declare class planifier {
     _datefinpre: string;
     _whereclause: string;
     _geom: string;
+    _json: string;
     _data: any;
     /*********** Constructor ***********/
     /**
@@ -36,12 +37,11 @@ export declare class planifier {
     submitForm(log: User): any;
     /**
      * Transfrome les infromation du formulaire en fichier raw json
-     *
      * @param {User} log
      * @returns {*} retourne un raw json pour envoyer a l'Api
      * @memberof planifier
      */
-    getInformationToJson(log: User): any;
+    getInformationToJson(): void;
     /**
      *Création d'un geoJson pour envoyer la geométrie d'un polygone
      * @memberof planifier
@@ -52,8 +52,10 @@ export declare class planifier {
      * @param {*} output le fichier json a sauvegarder.
      * @memberof planifier
      */
-    saveJson(output: any): void;
+    saveJson(): void;
     /******** Accessors *********/
+    getJson(): string;
+    setJson(json: string): void;
     getdata(): any;
     setdata(value: any): void;
     getconn(): connexion;

@@ -40,7 +40,7 @@ export const topmenu:string= `
                 </md-option>
             </md-select>
         </div>
-        <div class="infoDiv">
+        <div class="infoDiv" ng-click="ctrl1.openInfoUser()">
             <span>info user</span>
         </div>
         <div class="helpDiv">
@@ -113,22 +113,26 @@ export const formPlanifier = `
         <div>
         <md-input-container class="largeur">
             <label>{{ 'plugins.testing.where' | translate }}</label>
-            <input type="text" name="wherep" id="wherep" value="" placeholder="Where ...">
+            <input type="text" name="wherep" ng-model="ctrl2.wherep" value="" placeholder="Where ...">
         </md-input-container>
         </div>
 
         <div>
         <md-input-container class="largeur">
             <label>{{ 'plugins.testing.geome' | translate }}</label>
-            <input type="text" name="geomp" id="geomp" value="" placeholder="Geom"> 
+            <input type="text" name="geomp" ng-model="ctrl2.geomp" value="" placeholder="Geom"> 
         </md-input-container>
-        <md-input-container>
+        <md-input-container class="largeur">
             <md-checkbox ng-model="ctrl2.checkTool" ng-click="ctrl2.toggleDraw()">
                 Drawing
             </md-checkbox>
         </md-input-container>
         </div>
-
+        <md-input-container class="largeur">
+        <label>Shapefile(.zip)</label>
+        <input  type="file" id="fileshp" ng-model="ctrl2.filshp"/>
+        <md-button></md-button>
+        </md-input-container>
         <div>
         <md-input-container class="submitbtn">
             <md-button class="md-primary md-button"

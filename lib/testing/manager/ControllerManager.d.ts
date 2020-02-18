@@ -45,11 +45,24 @@ export declare class manageController {
      */
     topmenuControl(log: User, mapApi: any): void;
     /**
-     *Compilateur de HTML avec les variables pour les boutons
-     *
-     * @param {*} template
-     * @param {*} mapApi
-     * @returns {JQuery<HTMLElement>}
+     * the controller for the cleaning function
+     * @param {User} log getting all the information of the user and getting the envrionnemnt h'es already in
+     * @param {*} mapApi need the mapApi for setting the controller.
+     * @memberof manageController
+     */
+    nettoyagecontrols(log: User, mapApi: any): void;
+    /**
+     * The controoller for to cancel function
+     * @param {User} log getting all the information of the user and getting the envrionnemnt h'es already in
+     * @param {*} mapApi need the mapApi for setting the controller.
+     * @memberof manageController
+     */
+    cancelcontrols(log: User, mapApi: any): void;
+    /**
+     * Compilateur de HTML avec les variables pour les boutons
+     * @param {*} template the template for the form
+     * @param {*} mapApi the main API with the function to compile
+     * @returns {JQuery<HTMLElement>} return the output compiled
      * @memberof manageController
      */
     compileTemplate(template: any, mapApi: any): JQuery<HTMLElement>;

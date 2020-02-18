@@ -2,7 +2,7 @@
 import { loginmenu } from './config/html-assets';
 import { User } from './user';
 import { menuManager } from './manager/menuManager';
-import { legendLayer } from '../tests/rampPage';
+
 
 export default class Testing{
     
@@ -15,6 +15,7 @@ export default class Testing{
     init(api: any) {
         //set la variable api pour le plugin
         this.mapApi = api;
+
         //set _RV
         this.config = this._RV.getConfig('plugins').testing;
         //set la langue pour le plugin
@@ -46,7 +47,6 @@ export default class Testing{
             //alert(this.mapApi.layer);
             this._RV.toggleSideNav('close');
 
-            
             //open the panel
             this.panel.open();  
         };
@@ -105,6 +105,7 @@ export default class Testing{
                 //si le retour ne contient pas de code d'erreur continue
                 if (loginfo.status != 401){
                     //alert('Connected'); 
+                    
                     let menu:menuManager =  new menuManager(log,panel,mapApi,config);
                 //si le retour de l'API contient un code d'erreur et le message
                 }else{
@@ -137,6 +138,7 @@ export default interface Testing{
     config: any,
     button:any,
     translations: any,
+    windowD:any,
     panel:any;
 };
 
@@ -152,12 +154,12 @@ Testing.prototype.translations = {
         cancel: 'Cancel',
         where: 'Enter a Where Clause :',
         //Extraction seulement
-        extrac: 'Planned Extract',
-        extract: 'Unplanned Extract',
+        extrac: 'Planned Extract - 2',
+        extract: 'Unplanned Extract - 2',
         clip: 'If clip',
         //Planifier seulement
         testbutton: 'GeoSys',
-        planif: 'Planning',
+        planif: 'Planning - 1',
         typeTrv: 'working type :',
         classe: 'Select a class :',
         datefinprv: 'Final date planned',
@@ -166,22 +168,22 @@ Testing.prototype.translations = {
         username : "username",
         password : 'password',
         //Livraison seulement
-        delivery : 'Delivery',
+        delivery : 'Delivery - 5',
         postput : 'Select an operation :',
         insert : 'Insert',
         update : 'Update',
         fileMD : 'File metadata : ',
         fileGDB : 'File geodatabase : ',
         //CréerMD seulement
-        creer : 'CreateMD',
+        creer : 'CreateMD - 3',
         source : 'Select the sources ID : ',
         precision : 'Select the precision ID : ',
         contrainte : 'Select the legal contraint ID : ',
         //ValiderMd seulement
         //Nettoyage seulement
-        nettoyage : 'Cleaning',
+        nettoyage : 'Cleaning - 6',
         //Annuler seulement
-        annuler : 'Cancel',
+        annuler : 'Cancel - 0',
 
     },
 
@@ -196,12 +198,12 @@ Testing.prototype.translations = {
         cancel: 'Annuler',
         where: 'Entrer une Where Clause :',
         //Extraction seulement
-        extrac: 'Extraction Planifié',
-        extract: 'Extraction Sans Retour',
+        extrac: 'Extraction Planifié - 2',
+        extract: 'Extraction Sans Retour - 2',
         clip: 'Si clip',
         //Planifier seulement
         testbutton: 'GeoSys',
-        planif: 'Planifier',
+        planif: 'Planifier - 1',
         typeTrv: 'Type de travail :',
         classe: 'selectionne une classe :',
         datefinprv: 'Date fin prévue',
@@ -210,22 +212,22 @@ Testing.prototype.translations = {
         username : "nom d'usager",
         password : 'mot de passe', 
         //Livraison seulement 
-        delivery : 'Livraison',
+        delivery : 'Livraison - 5',
         postput : 'Sélectionne une opération :',
         insert : 'Insérer',
         update : 'Mise à jour', 
         fileMD : 'Fichier métadonnée : ',
         fileGDB : 'Fichier géo base de donnée',
         //CréerMD seulement
-        creer : 'CreerMD',
+        creer : 'CreerMD - 3',
         source : 'Sélectionner les identifiants des sources : ',
         precision : 'Sélectionner les identifiant de précison : ',
         contrainte : 'Sélectionner les identifiants de contraintes légales : ',
         //ValiderMD seulement
         //Nettoyage seulement
-        nettoyage : 'Nettoyage',
+        nettoyage : 'Nettoyage - 6',
         //Annuler seulement
-        annuler : 'Annuler',
+        annuler : 'Annuler - 0',
     }
 };
 

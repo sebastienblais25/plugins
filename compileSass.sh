@@ -1,5 +1,5 @@
 # Directory names of plugins with sass to compile
-plugins=("enhancedTable" "swiper" "testing")
+plugins=("enhancedTable" "swiper" "testing" "draw")
 
 for plugin in "${plugins}"
 do

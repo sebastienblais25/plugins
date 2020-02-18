@@ -10,11 +10,12 @@ const pluginList = {
     backToCart: path.join(SOURCE_PATH, 'backToCart'),
     coordInfo: path.join(SOURCE_PATH, 'coordInfo'),
     customExport: path.join(SOURCE_PATH, 'customExport'),
+    draw: path.join(SOURCE_PATH, 'draw'),
     testing: path.join(SOURCE_PATH, 'testing'),
     swiper: path.join(SOURCE_PATH, 'swiper')
 };
 
-const hasLoader = ['enhancedTable', 'swiper', 'testing'];
+const hasLoader = ['enhancedTable', 'swiper', 'testing', 'draw'];
 
 module.exports = function(env = {}) {
     const config = {

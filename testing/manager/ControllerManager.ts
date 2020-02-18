@@ -40,6 +40,8 @@ export class manageController{
             this.selectedItemC = '';
             this.selectedItemD = '';
             this.dfp = '';
+            this.geomp = 'hello';
+            this.wherep = 'hello';
             this.itemsC = [];
             //theme list
             for (let i in log._themeAcc){
@@ -94,15 +96,29 @@ export class manageController{
                     }
                 }
             }
-            let count:number = 0;
-            /*this.toggleDraw = () => {
-                
-                if (count == 0){
-                    let toolbar:PanelManager = new PanelManager(mapApi,config);
-                    count ++;
-                }
-                (<any>document).getElementsByClassName('rv-mapnav-draw-content')[0].style.display = this.checkTool? 'none' : 'block';
-            }*/
+            //subscribe for the drawing
+            (<any>window).drawObs.drawPolygon.subscribe(value => {
+                this.geomp = JSON.stringify(value);
+            });
+            this.toggleDraw = function() {
+                var copyElement = document.createElement("span");
+                copyElement.appendChild(document.createTextNode(this.geomp));
+                copyElement.id = 'tempCopyToClipboard';
+                document.body.append(copyElement);
+                // select the text
+                var range = document.createRange();
+                range.selectNode(copyElement);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                // copy & cleanup
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                copyElement.remove();
+            }
+
+            this.loadshp = () => {
+                alert('hello');
+            }
             /********** Form submission ************/
             //Envoie le fromulaire a l'API
             this.submitFormP = function() { 
@@ -114,15 +130,14 @@ export class manageController{
                     }
                 }
                 //set the information in the the json 
-                alert(this.selectedItemD)
                 let plan:planifier = new planifier(
                     this.selectedItemC,
                     (<HTMLInputElement>document.getElementById("idUt")).value,
                     this.selectedItemD,
                     listofclass,
                     this.dfp,
-                    (<HTMLInputElement>document.getElementById("wherep")).value,
-                    (<HTMLInputElement>document.getElementById("geomp")).value);
+                    this.geomp,
+                    this.wherep);
                 //submit the form to the API
                 let apireturn:any = plan.submitForm(log);
                 //If the return isn't a succes
@@ -259,6 +274,11 @@ export class manageController{
                     }
                 }
             }
+            //subscribe for the drawing
+            (<any>window).drawObs.drawPolygon.subscribe(value => {
+                //console.log(`Polygon added: ${JSON.stringify(value)}`);
+                this.geom = JSON.stringify(value);
+            });
             /**************** From Submission ***************/
             //Envoie le formulaire a l'Api
             this.submitSRForm = function() { 
@@ -505,6 +525,15 @@ export class manageController{
                         "background-color" : "white", 
                     }
                 }
+            }
+            /*********** Info User Panel *************/
+            this.openInfoUser = () =>{
+                let panel:any;
+                panel = mapApi.panels.create('infoUser');
+                panel.element.css({top: '0px;', left : '410px;', bottom: '50%;', margin: '100px 300px 300px 500px'});
+                panel.header.title = 'Info User';
+                let closeBtn = panel.header.closeButton;
+                panel.open();
             }
             
         });

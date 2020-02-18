@@ -9,6 +9,7 @@ export declare class Extraire {
     _clip: string;
     _whereClause: string;
     _geom: string;
+    _json: string;
     _data: any;
     /************* Constructor *************/
     /**
@@ -44,10 +45,12 @@ export declare class Extraire {
      * @returns {*} retourne un raw Json pour l'API
      * @memberof Extraire
      */
-    getInformationToJsonSR(): any;
+    getInformationToJsonSR(): void;
     saveJson(output: any): void;
     /*************** Accessors ***********************/
-    getinfo(): any;
+    getJson(): string;
+    setJson(json: string): void;
+    getData(): any;
     getTheme(): string;
     getidUT(): string;
     getclip(): string;

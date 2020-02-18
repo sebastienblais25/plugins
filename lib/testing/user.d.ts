@@ -15,12 +15,12 @@ export declare class User {
     _token: string;
     _tokentype: string;
     _expired: number;
-    _rightRead: string;
-    _rightWrite: string;
+    _rightRead: Apireturn;
+    _rightWrite: Apireturn;
     /** List **/
     _themeAcc: Apireturn[];
     _envAcc: Environnement[];
-    _equipe: string;
+    _equipe: Apireturn;
     _idUt: idWu;
     _classeslist: string[];
     _workinType: Apireturn[];

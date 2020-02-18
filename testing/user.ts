@@ -259,6 +259,28 @@ export class User{
         return listS
     }
 
+    /**
+     *Création d'un geoJson pour envoyer la geométrie d'un polygone
+     * @memberof planifier
+     */
+    createGeoJson(value:any){
+        let geojson:any = {
+            "type" : value.type,
+            "crs" : {
+                "type" : "name",
+                "properties" : {
+                    "name" : value.spacialReference
+                }
+            },
+            "Coordinates" : [
+                [
+                    value.ring
+                ]
+            ]
+        };
+        return geojson;
+    }
+
     //accessor
     /*Username */
     getusername(): string {

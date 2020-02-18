@@ -11,3 +11,4 @@ export declare const urlDeliveryUpdate: string;
 export declare const urlCreateMD: string;
 export declare const urlValidateMD: string;
 export declare const urlGetCode: string;
+export declare const urlDeleteClean: string;
