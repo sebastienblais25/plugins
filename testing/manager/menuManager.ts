@@ -1,11 +1,34 @@
 /****** Import ******/
+
+import { formPlanifier } from '../templates/planning';
+
+import { formExtraireSR, formExtraireP } from '../templates/extract';
+import { formCreerMD } from '../templates/create';
+import {  formDelivery } from '../templates/delivery';
+import {  topmenu } from '../templates/topmenu';
+import {  formNettoyage } from '../templates/cleaning';
+import { formCancel } from '../templates/cancel';
 import { manageController } from "./ControllerManager";
-import { formExtraireSR, formExtraireP, formPlanifier, formDelivery, topmenu, formCreerMD, formNettoyage, formCancel } from '../config/html-assets';
+//import { formExtraireSR, formExtraireP, formPlanifier, formDelivery, topmenu, formCreerMD, formNettoyage, formCancel } from '../templates/validate';
+
 import { User } from '../user';
+import { PlanningController } from '../Controller/planningC';
+import { ExtractController } from '../Controller/extractC';
+import { CreateController } from '../Controller/createC';
+import { DeliveryController } from '../Controller/deliveryC';
+import { CleaningController } from '../Controller/cleaningC';
+import { CancelController } from '../Controller/cancelC';
+import { TopMenuController } from '../Controller/topmenuC';
 
 export class menuManager{
 
-    _compiler:manageController;
+    _compiler:TopMenuController;
+    _planning:PlanningController;
+    _extract:ExtractController;
+    _create:CreateController;
+    _delivery:DeliveryController;
+    _cleaning:CleaningController;
+    _cancel:CancelController;
 
 
     /**
@@ -18,7 +41,13 @@ export class menuManager{
      */
     constructor(log:User, panel:any, mapApi:any, config:any){
         //set the manage controller
-        this._compiler = new manageController();
+        this._compiler = new TopMenuController();
+        this._planning = new PlanningController();
+        this._extract = new ExtractController();
+        this._create = new CreateController();
+        this._delivery = new DeliveryController();
+        this. _cleaning = new CleaningController();
+        this._cancel = new CancelController();
 
         //varaible for the form
         let outputExt:string  = this.extractManager(log,mapApi);
@@ -49,7 +78,7 @@ export class menuManager{
      */
     extractManager(log:User, mapApi:any):string{
         
-        this._compiler.extrairecontrols(log, mapApi);
+        this._extract.extrairecontrols(log, mapApi);
 
         //add the dropdown list for the form
         let output = formExtraireP;
@@ -68,7 +97,7 @@ export class menuManager{
      */
     planifManager(log:User, mapApi:any, config:any):string{
 
-        this._compiler.planControl(log, mapApi, config);
+        this._planning.planControl(log, mapApi, config);
 
         //add the dropdown list for the form
         let output = formPlanifier;
@@ -85,7 +114,7 @@ export class menuManager{
      */
     deliManager(log:User, mapApi:any):string{
         
-        this._compiler.deliControl(log, mapApi);
+        this._delivery.deliControl(log, mapApi);
 
         let output = formDelivery;
         //mb.compileTemplate(output,mapApi);
@@ -116,7 +145,7 @@ export class menuManager{
      * @memberof menuManager
      */
     extractSRManager(log:User, mapApi:any):string{
-        this._compiler.extraireSRcontrols(log, mapApi);
+        this._extract.extraireSRcontrols(log, mapApi);
 
         let output = formExtraireSR;
         return output;
@@ -132,7 +161,7 @@ export class menuManager{
      * @memberof menuManager
      */
     creerMDManager(log:User, mapApi:any):string{
-        this._compiler.creerControl(log, mapApi);
+        this._create.creerControl(log, mapApi);
 
         let output = formCreerMD;
         return output;
@@ -147,7 +176,7 @@ export class menuManager{
      * @memberof menuManager
      */
     nettoyageManager(log:User, mapApi:any):string{
-        this._compiler.nettoyagecontrols(log, mapApi);
+        this._cleaning.nettoyagecontrols(log, mapApi);
         
         let output = formNettoyage;
         return output;
@@ -161,7 +190,7 @@ export class menuManager{
      * @memberof menuManager
      */
     cancelManager(log:User, mapApi:any):string{
-        this._compiler.cancelcontrols(log, mapApi);
+        this._cancel.cancelcontrols(log, mapApi);
         let output = formCancel;
         return output;
     }

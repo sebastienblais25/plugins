@@ -92,7 +92,7 @@ export class connexion{
                 
                 function(response){
                     outputValue = response;
-                    console.log(outputValue); 
+                    //console.log(outputValue); 
                 },
                 error: function(xhr){
                     alert(xhr.statusText);
@@ -109,7 +109,7 @@ export class connexion{
        })
         );
     Promise.all(promises).then(values => {
-            console.log(values);
+            //console.log(values);
         });
         //alert(outputValue)
         return outputValue;     

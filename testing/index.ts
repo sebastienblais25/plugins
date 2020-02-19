@@ -1,5 +1,5 @@
 /****** Import ******/
-import { loginmenu } from './config/html-assets';
+import { loginmenu } from './templates/login';
 import { User } from './user';
 import { menuManager } from './manager/menuManager';
 
@@ -70,7 +70,6 @@ export default class Testing{
 
         //add control for the login button
         this.connexionControls(this.panel,this.mapApi,this.config);
-        
         
         //compile the login template
         this.compileTemplate(output,this.mapApi);
