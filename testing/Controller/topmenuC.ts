@@ -41,13 +41,21 @@ export class TopMenuController{
                 }
             }
             /*********** Info User Panel *************/
+            let count:number = 0
             this.openInfoUser = () =>{
                 let panel:any;
-                panel = mapApi.panels.create('infoUser');
-                panel.element.css({top: '0px;', left : '410px;', bottom: '50%;', margin: '100px 300px 300px 500px'});
-                panel.header.title = 'Info User';
-                let closeBtn = panel.header.closeButton;
+                console.log(mapApi.panels);
+                if (count < 1){
+                    panel = mapApi.panels.create('infoUser');
+                    panel.element.css({top: '0px;', left : '410px;', bottom: '50%;', margin: '100px 300px 300px 500px'});
+                    panel.header.title = 'Info User';
+                    let closeBtn = panel.header.closeButton;
+                    count++;
+                }
+
+                
                 panel.open();
+                
             }
             
         });

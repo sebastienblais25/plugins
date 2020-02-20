@@ -98,7 +98,7 @@ export class ExtractController{
             /************** interactive List ***************/
             this.selectedItemA = '';
             this.whereclause = '';
-            this.geom = '';
+            //this.geomSR = '';
             this.itemsA = [];
             for (let i in log._themeAcc){
                 this.itemsA.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
@@ -127,12 +127,47 @@ export class ExtractController{
             //subscribe for the drawing
             (<any>window).drawObs.drawPolygon.subscribe(value => {
                 //console.log(`Polygon added: ${JSON.stringify(value)}`);
-                this.geom = JSON.stringify(value);
+                //this.geomSR = JSON.stringify(value);
+                (<HTMLInputElement>document.getElementById('geomEx')).value= JSON.stringify(value);
             });
+
+            //load a shp
+            this.loadshpEX = () => {
+                let geom:any;
+                let files:any = (<HTMLInputElement>document.getElementById('fileshpEX')).files
+                if(files.length == 0){
+                    alert('hello');
+                }else{
+                    
+                    let file:any = files[0];
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        if (reader.readyState != 2 || reader.error){
+                            return;
+                        } else {
+                            let shp = require("shpjs");
+                            shp(reader.result).then(function(dta){
+                                console.log(dta);
+                                geom = JSON.stringify(dta);
+                                log._geom = JSON.stringify(dta);
+                                (<HTMLInputElement>document.getElementById('geomEx')).value = geom;
+                                //this.geomSR = geom
+                            });
+
+                        }
+                    }
+                    reader.readAsArrayBuffer(file);
+                    
+                      
+                }
+            }
+            
             /**************** From Submission ***************/
             //Envoie le formulaire a l'Api
             this.submitSRForm = function() { 
                 //get all the information of the form into the class
+                this.geomSR = log._geom;
                 let listofclass = []
                 for(let i in this.classes){
                     if(this.classes[i].wanted ==true){
@@ -145,12 +180,13 @@ export class ExtractController{
                 }else{
                     siClip = 'non';
                 }
+                //console.log(this.geomSR)
                 let extsr = new Extraire(
                      this.selectedItemA);
                     extsr.setInfoForSR(listofclass,
                     siClip,
                     this.whereclause,
-                    this.geom)
+                    this.geomSR)
                 let apireturn:any = extsr.submitForm(log);
                 if (apireturn != 'success'){
                     alert(apireturn.statusText)

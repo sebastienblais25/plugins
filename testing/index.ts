@@ -152,9 +152,10 @@ Testing.prototype.translations = {
         submit: 'Submit',
         cancel: 'Cancel',
         where: 'Enter a Where Clause :',
+        shp: 'Download Shapefile (.zip)',
         //Extraction seulement
         extrac: 'Planned Extract - 2',
-        extract: 'Unplanned Extract - 2',
+        extract: 'Unplanned Extract - 2.1',
         clip: 'If clip',
         //Planifier seulement
         testbutton: 'GeoSys',
@@ -179,6 +180,8 @@ Testing.prototype.translations = {
         precision : 'Select the precision ID : ',
         contrainte : 'Select the legal contraint ID : ',
         //ValiderMd seulement
+        valider : 'ValidateMD - 4',
+        filejson: 'fichier JSON à valider : ',
         //Nettoyage seulement
         nettoyage : 'Cleaning - 6',
         //Annuler seulement
@@ -196,9 +199,10 @@ Testing.prototype.translations = {
         submit: 'Soumettre',
         cancel: 'Annuler',
         where: 'Entrer une Where Clause :',
+        shp: 'Téléchargement Shapefile (.zip)',
         //Extraction seulement
         extrac: 'Extraction Planifié - 2',
-        extract: 'Extraction Sans Retour - 2',
+        extract: 'Extraction Sans Retour - 2.1',
         clip: 'Si clip',
         //Planifier seulement
         testbutton: 'GeoSys',
@@ -223,6 +227,8 @@ Testing.prototype.translations = {
         precision : 'Sélectionner les identifiant de précison : ',
         contrainte : 'Sélectionner les identifiants de contraintes légales : ',
         //ValiderMD seulement
+        valider : 'ValiderMD - 4',
+        filejson: 'fichier JSON à valider : ',
         //Nettoyage seulement
         nettoyage : 'Nettoyage - 6',
         //Annuler seulement

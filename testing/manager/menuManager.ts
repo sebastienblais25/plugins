@@ -8,8 +8,9 @@ import {  formDelivery } from '../templates/delivery';
 import {  topmenu } from '../templates/topmenu';
 import {  formNettoyage } from '../templates/cleaning';
 import { formCancel } from '../templates/cancel';
-import { manageController } from "./ControllerManager";
-//import { formExtraireSR, formExtraireP, formPlanifier, formDelivery, topmenu, formCreerMD, formNettoyage, formCancel } from '../templates/validate';
+import { validateform } from '../templates/validate';
+//import { manageController } from "./ControllerManager";
+//import { formExtraireSR, formExtraireP, formPlanifier, formDelivery, topmenu, formCreerMD, formNettoyage, formCancel, validateform } from '../templates/validate';
 
 import { User } from '../user';
 import { PlanningController } from '../Controller/planningC';
@@ -19,6 +20,7 @@ import { DeliveryController } from '../Controller/deliveryC';
 import { CleaningController } from '../Controller/cleaningC';
 import { CancelController } from '../Controller/cancelC';
 import { TopMenuController } from '../Controller/topmenuC';
+import { ValidateController } from '../Controller/validateC';
 
 export class menuManager{
 
@@ -29,6 +31,7 @@ export class menuManager{
     _delivery:DeliveryController;
     _cleaning:CleaningController;
     _cancel:CancelController;
+    _validate: ValidateController;
 
 
     /**
@@ -48,12 +51,14 @@ export class menuManager{
         this._delivery = new DeliveryController();
         this. _cleaning = new CleaningController();
         this._cancel = new CancelController();
+        this._validate = new ValidateController();
 
         //varaible for the form
         let outputExt:string  = this.extractManager(log,mapApi);
         let outputExtSR:string = this.extractSRManager(log,mapApi);
         let outputPlan:string = this.planifManager(log,mapApi, config);
         let outputDeli:string = this.deliManager(log,mapApi);
+        let outputVali:string = this.validateManager(log,mapApi);
         let outputCreer:string = this.creerMDManager(log,mapApi);
         let outputNettoyage:string = this.nettoyageManager(log,mapApi);
         let outputCancel:string = this.cancelManager(log,mapApi);
@@ -62,7 +67,7 @@ export class menuManager{
         let menuprincipal:string;
 
         //compile the form together
-        menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputExtSR + outputDeli + outputCreer + outputNettoyage + outputCancel + "</div>";
+        menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputExtSR + outputCreer + outputVali + outputDeli + outputNettoyage + outputCancel + "</div>";
         this._compiler.compileTemplate(menuprincipal,mapApi);
         
         //put the form in the panel
@@ -193,5 +198,12 @@ export class menuManager{
         this._cancel.cancelcontrols(log, mapApi);
         let output = formCancel;
         return output;
+    }
+
+    validateManager(log:User, mapApi:any):string{
+        this._validate.valiControl(log,mapApi);
+        let output = validateform;
+        return output;
+    
     }
 }

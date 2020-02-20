@@ -34,6 +34,7 @@ export class User{
     _idUt:idWu;
     _classeslist:string[];
     _workinType:Apireturn[] = [];
+    _geom:string;
     
     
     /**

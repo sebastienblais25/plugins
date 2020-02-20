@@ -96,7 +96,8 @@ export class PlanningController{
             }
             //subscribe for the drawing
             (<any>window).drawObs.drawPolygon.subscribe(value => {
-                this.geomp = JSON.stringify(value);
+                let ArcGIS = require('terraformer-arcgis-parser');
+                this.geomp = JSON.stringify(ArcGIS.parse(value));
             });
             this.toggleDraw = function() {
                 var copyElement = document.createElement("span");
@@ -131,12 +132,29 @@ export class PlanningController{
                             return;
                         } else {
                             alert('working');
-                            //console.log(reader.result);
-                            
-                            /*shp.(reader.result).then(function(geojson){
+                            const myMap = (<any>window).RAMP.mapById(mapApi.id);
+                            (<any>window).RAMP.mapById(mapApi.id).layersObj.addLayer('demoPolygon');
 
-                            })*/
-                            console.log(reader.result)
+                            
+                            //const graphicGeosys = mapApi.layers.getLayersById('graphicGeosys')[0];
+                            
+                            let shp = require("shpjs");
+                            shp(reader.result).then(function(dta){
+                                console.log(JSON.stringify(dta.features[0].geometry.coordinates[0][0][0]));
+                                let coord = JSON.stringify(dta.features[0].geometry.coordinates[0]);
+                                //const input = this.inputParse(coord,'POLYGON');
+                                //const poly1 = new (<any>window).RAMP.GEO.polygon(0,JSON.parse(coord));
+                                //const polyall =  new (<any>window).RAMP.GEO.MultiPolygon(`location${Math.round(Math.random() * 100000)}`,
+                                //[poly1], { outlineColor: [255, 0, 0], outlineWidth: 3 });
+                                const graphicsOSDP = myMap.layers.getLayersById('demoPolygon');
+                                graphicsOSDP.addGeometry(coord);
+                        
+                                // zoom to extent of polygon(s)
+                                this.zoomExtent(mapApi.id, JSON.parse(coord)[0], 1.25);
+                        
+                                this.geomp = JSON.stringify(dta);
+                            });
+                            console.log(myMap);
                             /*let shapefile = require("shapefile");
                             shapefile.read(reader.result)
                                 .then(data => {

@@ -56,4 +56,5 @@ export const formCancel:string = `
         </div>
     </div>    
 </div>
+</div>
 `;

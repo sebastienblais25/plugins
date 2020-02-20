@@ -78,8 +78,8 @@ export const formPlanifier = `
         </md-input-container>
         </div>
         
-        <label>Shapefile(.shp)</label>
-        <input  type="file" id="fileshp" ng-model="ctrl2.filshp"/>
+        <label>Shapefile(.zip)</label>
+        <input  type="file" id="fileshp" ng-model="ctrl2.filshp" accept=".zip"/>
         <md-button ng-click="ctrl2.loadshp()">add shp</md-button>
         
         <div>

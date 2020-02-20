@@ -86,9 +86,13 @@ export const formExtraireSR:string =
         
             <md-input-container class="largeur">
                 <label>{{ 'plugins.testing.geome' | translate }}</label>
-                <div><input type="text" ng-model="ctrl4.geom" placeholder="geom"/></div>
+                <div><input type="text" id="geomEx" ng-model="geomSR " placeholder="geom"/></div>
             </md-input-container>
-        
+
+            <label>Shapefile(.zip)</label>
+            <input  type="file" id="fileshpEX" ng-model="ctrl4.filshp" accept=".zip"/>
+            <md-button ng-click="ctrl4.loadshpEX()">add shp</md-button>
+
             <md-input-container class="submitbtn">
                 <md-button class="md-primary md-button"
                 ng-click="ctrl4.submitSRForm()">
