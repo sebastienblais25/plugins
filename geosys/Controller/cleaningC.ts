@@ -22,11 +22,11 @@ export class CleaningController{
                 if(log._environnementSel!= ''){
                     $scope.IsVisible = $scope.IsVisible ? false : true; 
                     if($scope.IsVisible == true){
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuC = {
                             "opacity" : "1", 
                         }
                     }else{
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuC = {
                         }
                     }
                 }  
@@ -60,7 +60,7 @@ export class CleaningController{
                     if (renet != 'success'){
 
                         alert(renet.statusText)
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuC = {
                          "background-color" : "red", 
                     }
                     }else{
@@ -68,7 +68,7 @@ export class CleaningController{
                         $scope.IsVisible = false;
                         //console.log(log._token);
                         alert("Deleted")
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuC = {
                             "background-color" : "green", 
                         }
                     }

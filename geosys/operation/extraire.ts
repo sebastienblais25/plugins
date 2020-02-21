@@ -19,6 +19,7 @@ export class Extraire{
     _json:string;
     //data from API
     _data:any;
+    _envopt:string;
     
     
     /************* Constructor *************/
@@ -68,7 +69,6 @@ export class Extraire{
         return this.getData();
    };
 
-   
    /**
     *set toutes les propriété pour une extraction sans retour
     * @param {string[]} list la liste de classe sélectionner par l'utilisatuer
@@ -109,6 +109,14 @@ export class Extraire{
     }
 
     /*************** Accessors ***********************/
+    setEnvOpt(env:string){
+        this._envopt = env;
+    }
+
+    getEnvOpt():string{
+       return this._envopt;
+    }
+
     getJson():string{
         return this._json;
     }

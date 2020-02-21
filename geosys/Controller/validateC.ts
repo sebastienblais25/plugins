@@ -22,11 +22,11 @@ export class ValidateController{
                 if(log._environnementSel!= ''){
                     $scope.IsVisible = $scope.IsVisible ? false : true;
                     if($scope.IsVisible == true){
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuV = {
                             "opacity" : "1", 
                         }
                     }else{
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuV = {
                         }
                     } 
                 }    
@@ -66,12 +66,12 @@ export class ValidateController{
                 if (api != undefined){
                     alert(api + ' 4');
                     console.log(api);
-                    $scope.SelectedMenu = {
+                    $scope.SelectedMenuV = {
                         "background-color" : "red", 
                     }
                 }else{
                     console.log(log.gettoken());
-                    $scope.SelectedMenu = {
+                    $scope.SelectedMenuV = {
                         "background-color" : "green", 
                     }
                 }

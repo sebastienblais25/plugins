@@ -37,8 +37,10 @@
   float: left;
   margin: 0px;
   padding: 0px;
+  background-color: rgb(247, 247, 247);
   
 }
+
 
 //set a space between dropdown dans header
 .envSelect{
@@ -69,10 +71,16 @@
   height: 40px;
   float: left;
   text-align: center;
-  margin-top: 10px;
+  padding-top: 10px;
   margin-left: 0px;
   padding-left: 0px;
+  background-color: #ECE7E6;
+  opacity: 0.4;
+  transition: 0.3s;
+}
 
+.helpDiv:hover{
+  opacity: 1;
 }
 
 //set a space for de dropdown of angular
@@ -162,6 +170,11 @@
   max-height: 50px;
 }
 
+.advanced{
+  margin-top: 10px;
+  opacity: 0.5;
+}
+
 /***** ********/
 
 //For the field of the date
@@ -172,11 +185,22 @@
   max-height: 50px;
 }
 
+.md-datepicker-input-container {
+  width: 280px;
+}
+
+
 
 //For teh submit button
 .submitbtn{
-  margin-top: 0px;
+  margin-top: 15px;
   margin-bottom: 0px;
+  height: 50px;
+  width: 352px;
+}
+
+.centerText{
+  text-align: center;
 }
 
 //set a minimum height for the form
@@ -184,31 +208,34 @@
   min-height: 150px;
 }
 
-
-
-/********** CSS Drawing tools ***********/
-.rv-control-active {
-  background-color: rgba(200, 200, 200, 0.5);
-  clip-path: circle(15px at center);
+.btnShape{
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
 }
 
-.rv-mapnav-draw-content {
-  padding-bottom: 30px;
-
-  .rv-draw-button {
-    margin: 0px!important;
-  }
+.btnCopy{
+  margin: 0px 0px 0px 5px;
+  padding: 0px;
 }
 
-// overrides vanilla-picker
-.popup.popup_left {
-  top:  -170px!important;
-
-  .picker_arrow {
-    top: 60%!important;
-  }
+.inputshape{
+  max-width: 250px;
 }
 
-.rv-draw-text-hide {
-  visibility: hidden;
+/******* Arrow down **********/
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }

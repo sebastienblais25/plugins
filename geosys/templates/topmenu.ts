@@ -9,7 +9,7 @@ export const topmenu:string= `
             ng-change="ctrl1.setEnv()" 
             ng-model="ctrl1.selectedItemENT" 
             id="env" 
-            placeholder="{{ 'plugins.testing.envir' | translate }}">
+            placeholder="{{ 'plugins.geosys.envir' | translate }}">
                 <md-option ng-repeat="item in ctrl1.itemsENT" ng-value="item.value" ng-selected="ctrl1.itemsENT.indexOf(item) == 0">
                     {{ item.name }}
                 </md-option>

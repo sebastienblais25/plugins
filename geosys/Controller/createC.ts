@@ -20,11 +20,11 @@ export class CreateController{
                 if(log._environnementSel!= ''){
                     $scope.IsVisible = $scope.IsVisible ? false : true;
                     if($scope.IsVisible == true){
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuCr = {
                             "opacity" : "1", 
                         }
                     }else{
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuCr = {
                         }
                     } 
                 }    

@@ -11,11 +11,11 @@ const pluginList = {
     coordInfo: path.join(SOURCE_PATH, 'coordInfo'),
     customExport: path.join(SOURCE_PATH, 'customExport'),
     draw: path.join(SOURCE_PATH, 'draw'),
-    testing: path.join(SOURCE_PATH, 'testing'),
+    geosys: path.join(SOURCE_PATH, 'geosys'),
     swiper: path.join(SOURCE_PATH, 'swiper')
 };
 
-const hasLoader = ['enhancedTable', 'swiper', 'testing', 'draw'];
+const hasLoader = ['enhancedTable', 'swiper', 'geosys', 'draw'];
 
 module.exports = function(env = {}) {
     const config = {

@@ -16,16 +16,17 @@ export class ExtractController{
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitCtrl', function($scope){ 
             $scope.IsVisible = false;
+            $scope.ISVisibleASP = false;
             //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
             this.ShowHide = function(){
                 if(log._environnementSel!= ''){
                     $scope.IsVisible = $scope.IsVisible ? false : true; 
                     if($scope.IsVisible == true){
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuE = {
                             "opacity" : "1", 
                         }
                     }else{
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuE = {
                         }
                     }
                 }  
@@ -48,6 +49,24 @@ export class ExtractController{
                     this.itemsB.push(list[i])
                 }
             }
+            /************** Advanced Setting ***************/
+            this.ShowHideAdvanced = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
+                    /*if($scope.IsVisibleASP == true){
+                       
+                    }else{
+                        
+                    }*/
+                }  
+            };
+            /************** interactive List Advanced Setting ***************/
+            this.selectedItemENT = '';
+            this.itemsENT = [];
+            //changement
+            for (let i in log._envAcc){
+                this.itemsENT.push({name : log._envAcc[i]._env , value: log._envAcc[i]._env});
+            }
             /**************** From Submission ***************/
              this.submitForm = function() { 
                 //get all the information of the form into the class
@@ -57,12 +76,12 @@ export class ExtractController{
                 let apireturn:any = ext.submitForm(log);
                 if (apireturn != 'success'){
                     alert(apireturn.statusText)
-                    $scope.SelectedMenu = {
+                    $scope.SelectedMenuE = {
                         "background-color" : "red", 
                     }
                 }else{
                     $scope.IsVisible = false;
-                    $scope.SelectedMenu = {
+                    $scope.SelectedMenuE = {
                         "background-color" : "green", 
                     }
                 } 
@@ -86,11 +105,11 @@ export class ExtractController{
                 if(log._environnementSel!= ''){
                     $scope.IsVisible = $scope.IsVisible ? false : true;
                     if($scope.IsVisible == true){
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuEU = {
                             "opacity" : "1", 
                         }
                     }else{
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuEU = {
                         }
                     }
                 }  
@@ -162,7 +181,24 @@ export class ExtractController{
                       
                 }
             }
-            
+            /************** Advanced Setting ***************/
+            this.ShowHideAdvanced = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
+                    /*if($scope.IsVisibleASP == true){
+                       
+                    }else{
+                        
+                    }*/
+                }  
+            };
+            /************** interactive List Advanced Setting ***************/
+            this.selectedItemENT = '';
+            this.itemsENT = [];
+            //changement
+            for (let i in log._envAcc){
+                this.itemsENT.push({name : log._envAcc[i]._env , value: log._envAcc[i]._env});
+            }
             /**************** From Submission ***************/
             //Envoie le formulaire a l'Api
             this.submitSRForm = function() { 
@@ -190,12 +226,12 @@ export class ExtractController{
                 let apireturn:any = extsr.submitForm(log);
                 if (apireturn != 'success'){
                     alert(apireturn.statusText)
-                    $scope.SelectedMenu = {
+                    $scope.SelectedMenuEU = {
                         "background-color" : "red", 
                     }
                 }else{
                     $scope.IsVisible = false;
-                    $scope.SelectedMenu = {
+                    $scope.SelectedMenuEU = {
                         "background-color" : "green", 
                     }
                 }   

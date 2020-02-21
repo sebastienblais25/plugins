@@ -261,7 +261,7 @@
       ]
     },
     "plugins": {
-      "testing": {
+      "geosys": {
       },
       "draw": {  
         "tools": ["picker", "point", "polyline", "polygon", "measure", "extent"]

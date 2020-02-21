@@ -1,5 +1,6 @@
 import { User } from "../user";
 import { Creer } from "../operation/creer";
+import { infoUser } from '../templates/infoUser';
 
 
 export class TopMenuController{
@@ -41,20 +42,28 @@ export class TopMenuController{
                 }
             }
             /*********** Info User Panel *************/
-            let count:number = 0
             this.openInfoUser = () =>{
-                let panel:any;
-                console.log(mapApi.panels);
-                if (count < 1){
-                    panel = mapApi.panels.create('infoUser');
-                    panel.element.css({top: '0px;', left : '410px;', bottom: '50%;', margin: '100px 300px 300px 500px'});
-                    panel.header.title = 'Info User';
-                    let closeBtn = panel.header.closeButton;
-                    count++;
+                if (!this.panel) {
+                    // make sure both header and body have a digest cycle run on them
+                    this.panel = mapApi.panels.create('infoUser');
+        
+                    this.panel.element.css({
+                        bottom: '0em',
+                        width: '400px'
+                    });
+        
+                    this.panel.element.css({top: '0px;', left : '410px;', bottom: '50%;', margin: '100px 300px 300px 500px'});
+        
+                    let closeBtn = this.panel.header.closeButton;
+                    this.panel.header.title = `Info user`;
+                } else {
+                    this.panel.close();
                 }
-
-                
-                panel.open();
+                let output = infoUser.replace('(username)',log.getusername());
+                output = output.replace('(theme)',log.getAllThemeNAme());
+                this.panel.body = output;
+        
+                this.panel.open();
                 
             }
             
@@ -73,4 +82,12 @@ export class TopMenuController{
         mapApi.$compile(temp);
         return temp;
     } 
+
+    
+}
+
+export interface TopMenuController {
+    
+    panel: any;
+    
 }

@@ -20,4 +20,5 @@ export class Apireturn{
         this._descEn = descEn;
         this._descFr = descFr;
     }
+
 }

@@ -4,20 +4,20 @@ import { User } from './user';
 import { menuManager } from './manager/menuManager';
 
 
-export default class Testing{
+export default class Geosys{
     
     //initiation
     /**
      * Initialize the plugins into the viewer
      * @param {*} api Ramp API 
-     * @memberof Testing
+     * @memberof Geosys
      */
     init(api: any) {
         //set la variable api pour le plugin
         this.mapApi = api;
 
         //set _RV
-        this.config = this._RV.getConfig('plugins').testing;
+        this.config = this._RV.getConfig('plugins').geosys;
         //set la langue pour le plugin
         this.config.language = this._RV.getCurrentLang();
         //set la config pour la geometry
@@ -27,7 +27,7 @@ export default class Testing{
         //this.config.Layer  = this._RV.getConfig('map').layers;
         //création d'un button d'accès à partir du menu
         this.button = this.mapApi.mapI.addPluginButton(
-            Testing.prototype.translations[this._RV.getCurrentLang()].testbutton,
+            Geosys.prototype.translations[this._RV.getCurrentLang()].testbutton,
             this.onMenuItemClick()
         );
         //Ajoute un panel
@@ -39,7 +39,7 @@ export default class Testing{
     /**
      * Add a button in the side to open the plugins and close this side menu
      * @returns 
-     * @memberof Testing
+     * @memberof Geosys
      */
     onMenuItemClick() {
         return () => {
@@ -57,7 +57,7 @@ export default class Testing{
     /**
      *Création du panel pour le plugins et ensuite ajoute le formulaire pou la connexion 
      * de l'utilisateur 
-     * @memberof Testing
+     * @memberof Geosys
      */
     addLoginPanel(){
         //permet d'Activer le bouton connexion/ login
@@ -89,7 +89,7 @@ export default class Testing{
      * @param {*} panel the panel from the viewer
      * @param {*} mapApi the API from the viewer and angular
      * @param {*} config the config of the viewer(the other file in samples)
-     * @memberof Testing
+     * @memberof Geosys
      */
     connexionControls( panel:any,mapApi:any,config:any){
         //ajoute un controller au formulaire html
@@ -121,7 +121,7 @@ export default class Testing{
      * @param {*} template the html template to compile
      * @param {*} mapApi the API of the viewer to compile it(service angular)
      * @returns {JQuery<HTMLElement>}
-     * @memberof Testing
+     * @memberof Geosys
      */
     compileTemplate(template,mapApi): JQuery<HTMLElement> {
         let temp = $(template);
@@ -131,7 +131,7 @@ export default class Testing{
 };
 
 //Inteface pour avoir accèes au element du viewer
-export default interface Testing{
+export default interface Geosys{
     mapApi: any,
     _RV: any,
     config: any,
@@ -142,7 +142,7 @@ export default interface Testing{
 };
 
 //translate label
-Testing.prototype.translations = {
+Geosys.prototype.translations = {
     'en-CA': {
         //Commun
         envir: 'Select an environnement :',
@@ -237,4 +237,4 @@ Testing.prototype.translations = {
 };
 
 //accès du plugins à l'application
-(<any>window).testing = Testing;
+(<any>window).geosys = Geosys;

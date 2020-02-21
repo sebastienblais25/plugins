@@ -347,9 +347,20 @@ export class User{
         this._rightWrite._nom = value;
     }
     //List de theme
-    getthemeAcc(): string {
-        return this._themeAcc[0]._nom;
+    getthemeAcc(): Apireturn[] {
+        return this._themeAcc;
     }
+
+    getAllThemeNAme():string{
+        let output:string;
+        output = this.getthemeAcc()[0]._nom;
+        for(let i in this.getthemeAcc()){
+            if( i != '0')
+            output += '<div>' +this.getthemeAcc()[i]._nom + '</div>'
+        }
+        return output;
+    }
+
     setthemeAcc(value: string) {
         this._themeAcc[0]._nom = value;
     }

@@ -25,11 +25,11 @@ export class PlanningController{
                 if(log._environnementSel!= ''){
                     $scope.IsVisible = $scope.IsVisible ? false : true;
                     if($scope.IsVisible == true){
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuP = {
                             "opacity" : "1", 
                         }
                     }else{
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuP = {
                         }
                     }
                 }    
@@ -191,12 +191,12 @@ export class PlanningController{
                 let apireturn:any = plan.submitForm(log);
                 //If the return isn't a succes
                 if (apireturn != 'success'){
-                    $scope.SelectedMenu = {
+                    $scope.SelectedMenuP = {
                         "background-color" : "red", 
                     }
                 }else{
                     $scope.IsVisible = false;
-                    $scope.SelectedMenu = {
+                    $scope.SelectedMenuP = {
                         "background-color" : "green", 
                     }
                 }

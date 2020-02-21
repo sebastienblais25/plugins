@@ -21,11 +21,11 @@ export class DeliveryController{
                 if(log._environnementSel!= ''){
                     $scope.IsVisible = $scope.IsVisible ? false : true;
                     if($scope.IsVisible == true){
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuD = {
                             "opacity" : "1", 
                         }
                     }else{
-                        $scope.SelectedMenu = {
+                        $scope.SelectedMenuD = {
                         }
                     } 
                 }    
@@ -49,9 +49,27 @@ export class DeliveryController{
                     this.itemsF.push(list[i])
                 }
             }
-            this.filechanged = () => {
-                this.fileSelect.trigger('click');
+            
+
+            /************** Advanced Setting ***************/
+            this.ShowHideAdvanced = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
+                    /*if($scope.IsVisibleASP == true){
+                       
+                    }else{
+                        
+                    }*/
+                }  
+            };
+            /************** interactive List Advanced Setting ***************/
+            this.selectedItemENT = '';
+            this.itemsENT = [];
+            //changement
+            for (let i in log._envAcc){
+                this.itemsENT.push({name : log._envAcc[i]._env , value: log._envAcc[i]._env});
             }
+
             //Envoie le fromulaire a l'API
             this.submitFormD = function(element) { 
                 //get all the information of the form into the class
@@ -63,12 +81,12 @@ export class DeliveryController{
                 if (apireturn != undefined){
                     alert(apireturn + ' 4');
                     console.log(apireturn);
-                    $scope.SelectedMenu = {
+                    $scope.SelectedMenuD = {
                         "background-color" : "red", 
                     }
                 }else{
                     console.log(log.gettoken());
-                    $scope.SelectedMenu = {
+                    $scope.SelectedMenuD = {
                         "background-color" : "green", 
                     }
                 }
