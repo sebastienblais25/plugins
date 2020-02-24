@@ -40,3 +40,6 @@ export const urlGetCode:string = `http://127.0.0.1:4010/suivi-prod/codes/`;
 
 //url for cleaning a working unit id (/suivi-prod/unite-travail/{identifiant}) Delete
 export const urlDeleteClean:string = `http://127.0.0.1:4010/suivi-prod/unite-travail/`
+
+//url for cancelling for step for a theme (/suivi-prod/etape-ut/{identifiant}) Delete
+export const urlCancelStep:string = `http://127.0.0.1:4010/suivi-prod/etape-ut/`;

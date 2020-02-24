@@ -38,8 +38,8 @@ export class PlanningController{
             this.selectedItemC = '';
             this.selectedItemD = '';
             this.dfp = '';
-            this.geomp = 'hello';
-            this.wherep = 'hello';
+            this.geomp = '';
+            this.wherep = '';
             this.itemsC = [];
             //theme list
             for (let i in log._themeAcc){
@@ -115,7 +115,7 @@ export class PlanningController{
                 copyElement.remove();
             }
             
-            //load a shp
+            /************** Shapefile Load ***************/
             this.loadshp = () => {
                 
                 let files:any = (<HTMLInputElement>document.getElementById('fileshp')).files
@@ -132,36 +132,26 @@ export class PlanningController{
                             return;
                         } else {
                             alert('working');
-                            const myMap = (<any>window).RAMP.mapById(mapApi.id);
+                            let myMap = (<any>window).RAMP.mapById(mapApi.id);
                             (<any>window).RAMP.mapById(mapApi.id).layersObj.addLayer('demoPolygon');
 
                             
-                            //const graphicGeosys = mapApi.layers.getLayersById('graphicGeosys')[0];
+                            let testLayer = mapApi.layers.getLayersById('demoPolygon')[0];
                             
                             let shp = require("shpjs");
                             shp(reader.result).then(function(dta){
-                                console.log(JSON.stringify(dta.features[0].geometry.coordinates[0][0][0]));
-                                let coord = JSON.stringify(dta.features[0].geometry.coordinates[0]);
-                                //const input = this.inputParse(coord,'POLYGON');
-                                //const poly1 = new (<any>window).RAMP.GEO.polygon(0,JSON.parse(coord));
-                                //const polyall =  new (<any>window).RAMP.GEO.MultiPolygon(`location${Math.round(Math.random() * 100000)}`,
-                                //[poly1], { outlineColor: [255, 0, 0], outlineWidth: 3 });
-                                const graphicsOSDP = myMap.layers.getLayersById('demoPolygon');
-                                graphicsOSDP.addGeometry(coord);
-                        
-                                // zoom to extent of polygon(s)
-                                this.zoomExtent(mapApi.id, JSON.parse(coord)[0], 1.25);
+                                //console.log(JSON.stringify(dta.features[0].geometry.coordinates[0][0][0]));
+                                //let coord = JSON.stringify(dta.features[0].geometry.coordinates[0]);
+                                let test = `{"type":"polygon","rings":[[[680080.4921259843,1739908.6310642622],[2759709.6513843033,1724033.5993141988],[2696209.5243840497,985844.622936246],[822955.7778765559,938219.5276860553],[680080.4921259843,1739908.6310642622]]],"_ring":0,"spatialReference":{"wkid":3978}}`;
+                                //log.createPolygons(mapApi.id,test);
+                               
+                                console.log(myMap)
+                                
+                                
                         
                                 this.geomp = JSON.stringify(dta);
                             });
-                            console.log(myMap);
-                            /*let shapefile = require("shapefile");
-                            shapefile.read(reader.result)
-                                .then(data => {
-                                    
-                                    console.log(data);
-                                    this.geomp = JSON.stringify(data);
-                            });*/
+                            
                         }
                     }
                     reader.readAsArrayBuffer(file);

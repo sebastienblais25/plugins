@@ -105,7 +105,8 @@ export const formExtraireSR:string =
         
             <md-input-container class="largeur">
                 <label>{{ 'plugins.geosys.geome' | translate }}</label>
-                <div><input type="text" id="geomEx" ng-model="geomSR " placeholder="geom"/></div>
+                <div><input type="text" id="geomEx" ng-model="ctrl4.geomSR " placeholder="geom" class="inputshape"/></div>
+                <md-button ng-click="ctrl4.copyToClip()" class="btnCopy md-raised">Copy</md-button>
             </md-input-container>
 
             <label>Shapefile(.zip)</label>

@@ -17,9 +17,10 @@ export class Extraire{
     _whereClause: string;
     _geom: string;
     _json:string;
+    _optEnv:string;
     //data from API
     _data:any;
-    _envopt:string;
+    _envopt:string = '';
     
     
     /************* Constructor *************/
@@ -57,17 +58,30 @@ export class Extraire{
         if(this._idUT === ""){
             this.getInformationToJsonSR();
             url = log.constructUrl(urlgeoDataGet);
-            alert(this.getJson() + ' 1')
+            alert(this.getJson())
         //if idUt is set sent the idUt in the url and the json is empty
         }else{
             url = log.constructUrl(urlgeoDatGetId + this._idUT);
-            alert('extract planned' + ' 1')
+            alert('extract planned')
         }
         //this.saveJson(json)
         //Call to the Api
-        this.setData(this._conn.connexionAPI(log.gettoken(), this.getJson(), url, 'Get'));
+        console.log(this._envopt)
+        this.setData(this._conn.connexionAPI(log.gettoken(), this.getJson(), url, 'Get',this._envopt));
         return this.getData();
    };
+
+
+   /**
+    * Set an optionnal environnement for the header of the json
+    * @param {string} env the optionnal environnement
+    * @memberof Extraire
+    */
+   setOptionnalEnvironnement(env:string){
+        let optEnv:string = `'env_app' : ${env}`;
+        //console.log(optEnv);
+        this._envopt = optEnv;
+   }
 
    /**
     *set toutes les propriété pour une extraction sans retour

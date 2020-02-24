@@ -55,11 +55,6 @@ export class DeliveryController{
             this.ShowHideAdvanced = function(){
                 if(log._environnementSel!= ''){
                     $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
-                    /*if($scope.IsVisibleASP == true){
-                       
-                    }else{
-                        
-                    }*/
                 }  
             };
             /************** interactive List Advanced Setting ***************/
@@ -77,6 +72,7 @@ export class DeliveryController{
                 formdata.append('fichier_data',(<HTMLInputElement>document.getElementById('fileMD')).files[0]);
                 formdata.append('fichier_meta',(<HTMLInputElement>document.getElementById('filefgdb')).files[0]);
                 let livre:Livraison = new Livraison(this.selectedItemF,this.selectedItemE,this.typeOper);
+                livre.setOptionnalEnvironnement(this.selectedItemENT);
                 let apireturn:any = livre.submitForm(formdata,log);     
                 if (apireturn != undefined){
                     alert(apireturn + ' 4');

@@ -2,66 +2,6 @@ export class connexion{
 
     constructor(){}
 
-    /**
-     * connection to the Api with ajax and promises
-     * @param {string} token the token for the connection
-     * @param {*} jsonstring the body in json 
-     * @param {string} urlgoto the url to jion the API
-     * @param {string} typeConn the type of connection Get, Post, put ...
-     * @returns {*} return all the information we get from the Api
-     * @memberof connexion
-     */
-    connexionAPI(token:string, jsonstring:any, urlgoto:string, typeConn:string):any{
-        let outputValue:any;
-        /********* API CALL **********/
-        //no promise still
-        const promises = [];
-        promises.push(
-            new Promise(resolve =>{
-                $.ajax({
-                    url: urlgoto,
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'contentType': 'application/json'
-                    },
-                    type: typeConn,
-                    async: false,
-                    //cache:false,
-                    contentType: "application/json; charset=utf-8",
-                    data: jsonstring,
-                    dataType:'json',
-                    processData: false,
-                    success: //data => resolve()
-                    
-                    function(response,jqXHR){
-                        if(response == undefined){
-                            outputValue = 'success';
-                            alert('delete')
-                        }else{
-                            if (response.message != undefined){
-                                alert('Planning and extract')
-                                outputValue = jqXHR;
-                            }else{
-                                //alert(response + ' 2')
-                                outputValue = response;
-                            }  
-                        }  
-                    },
-                    error: function(xhr){
-                        alert(xhr.statusText);
-                        outputValue = xhr;
-                        //console.log($('#recommandation').val());
-                    }
-                })
-           })
-        );
-        Promise.all(promises).then(values => {
-            console.log(values);
-        });
-        //alert(outputValue + ' 123')
-        return outputValue;       
-   };
-
    /**
     *the connexion to the Api for the login
     * @param {string} urlgoto the url for the login
@@ -115,6 +55,67 @@ export class connexion{
         return outputValue;     
     };
 
+    /**
+     * connection to the Api with ajax and promises
+     * @param {string} token the token for the connection
+     * @param {*} jsonstring the body in json 
+     * @param {string} urlgoto the url to jion the API
+     * @param {string} typeConn the type of connection Get, Post, put ...
+     * @returns {*} return all the information we get from the Api
+     * @memberof connexion
+     */
+    connexionAPI(token:string, jsonstring:any, urlgoto:string, typeConn:string, optEnv:string=''):any{
+        let outputValue:any;
+        /********* API CALL **********/
+        //no promise still
+        const promises = [];
+        promises.push(
+            new Promise(resolve =>{
+                $.ajax({
+                    url: urlgoto,
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'contentType': 'application/json',
+                        optEnv
+                    },
+                    type: typeConn,
+                    async: false,
+                    //cache:false,
+                    contentType: "application/json; charset=utf-8",
+                    data: jsonstring,
+                    dataType:'json',
+                    processData: false,
+                    success: //data => resolve()
+                    
+                    function(response,jqXHR){
+                        if(response == undefined){
+                            outputValue = 'success';
+                            alert('delete')
+                        }else{
+                            if (response.message != undefined){
+                                alert('Planning and extract')
+                                outputValue = jqXHR;
+                            }else{
+                                //alert(response + ' 2')
+                                outputValue = response;
+                            }  
+                        }  
+                    },
+                    error: function(xhr){
+                        alert(xhr.statusText);
+                        outputValue = xhr;
+                        //console.log($('#recommandation').val());
+                    }
+                })
+           })
+        );
+        Promise.all(promises).then(values => {
+            console.log(values);
+        });
+        //alert(outputValue + ' 123')
+        return outputValue;       
+   };
+
    /**
      * connection to the Api with ajax and promises for files
      * @param {string} token the token for the connection
@@ -124,7 +125,7 @@ export class connexion{
      * @returns {*} return all the information we get from the Api
     * @memberof connexion
     */
-   connexionAPIFormData(token:string, formdata:any, urlgoto:string, typeConn:string):any{
+   connexionAPIFormData(token:string, formdata:any, urlgoto:string, typeConn:string, optEnv:string=''):any{
     let outputValue:any;
     /********* API CALL **********/
     //no promise still
@@ -135,6 +136,7 @@ export class connexion{
                 url: urlgoto,
                 headers: {
                     'Authorization': `Bearer ${token}`,
+                    optEnv
                 },
                 type: typeConn,
                 async: false,

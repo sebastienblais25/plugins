@@ -9,6 +9,7 @@ export class Livraison{
     _idUt:string;
     _typeConn:string;
     _conn :connexion= new connexion();
+    _envopt:string = '';
 
     constructor(idut:string,theme:string, typeconn:string){
         this._idUt = idut;
@@ -23,9 +24,9 @@ export class Livraison{
         }else{
             method = 'Post'
         }
-
-        console.log(form.get('fichier_data'));
-        let apire:any = this._conn.connexionAPIFormData(log.gettoken(), form , log.constructUrl(urlDeliveryUpdate, this._idUt), method);
+        console.log(this._envopt);
+        //console.log(form.get('fichier_data'));
+        let apire:any = this._conn.connexionAPIFormData(log.gettoken(), form , log.constructUrl(urlDeliveryUpdate, this._idUt), method, this._envopt);
 
         //alert(apire);
         //for test
@@ -38,5 +39,15 @@ export class Livraison{
         }      
     }
 
+    /**
+    * Set an optionnal environnement for the header of the json
+    * @param {string} env the optionnal environnement
+    * @memberof Livraison
+    */
+   setOptionnalEnvironnement(env:string){
+    let optEnv:string = `'env_app' : ${env}`;
+    //console.log(optEnv);
+    this._envopt = optEnv;
+}
 
 }

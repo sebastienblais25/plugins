@@ -73,7 +73,9 @@ export class ExtractController{
                 let ext = new Extraire(
                      this.selectedItemA
                     ,this.selectedItemB);
+                ext.setOptionnalEnvironnement(this.selectedItemENT);
                 let apireturn:any = ext.submitForm(log);
+                //if the conection to the API is a success
                 if (apireturn != 'success'){
                     alert(apireturn.statusText)
                     $scope.SelectedMenuE = {
@@ -96,7 +98,7 @@ export class ExtractController{
      * @memberof manageController
      */
     extraireSRcontrols(log:User, mapApi:any):void{
-        /************ À placer en fonction ou class ***********/
+        /************ Bouton Extraire ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitExCtrl', function($scope){
             $scope.IsVisible = false;
@@ -143,53 +145,77 @@ export class ExtractController{
                     }
                 }
             }
-            //subscribe for the drawing
+            /************** subscribe to the drawing event ***************/
             (<any>window).drawObs.drawPolygon.subscribe(value => {
-                //console.log(`Polygon added: ${JSON.stringify(value)}`);
-                //this.geomSR = JSON.stringify(value);
-                (<HTMLInputElement>document.getElementById('geomEx')).value= JSON.stringify(value);
+                console.log(`Polygon added: ${JSON.stringify(value)}`);
+                //log.createGeoJson('ESPG:3978',value.rings)
+                let arcGIS = require('terraformer-arcgis-parser');
+                let primitive = arcGIS.parse({
+                    "rings":[[[243517.11899923813,1216032.5833121669],[1640519.9130048268,1279532.7103124205],[934081.0001270007,390530.9323088648],[243517.11899923813,1216032.5833121669]]],"spatialReference":{"wkid":3978}
+                  });
+                console.log(JSON.stringify(primitive));
+                JSON.stringify(value)
+                //this.geomSR = JSON.stringify(log.createGeoJson('ESPG:3978',value.rings));
+                //alert(JSON.stringify(value));
+                log._geom = JSON.stringify(value);
+                //(<HTMLInputElement>document.getElementById('geomEx')).value= JSON.stringify(value);
             });
 
-            //load a shp
+            /************** Copy to clipboard ***************/
+            this.copyToClip = function() {
+                var copyElement = document.createElement("span");
+                copyElement.appendChild(document.createTextNode(log._geom));
+                copyElement.id = 'tempCopyToClipboard';
+                document.body.append(copyElement);
+                // select the text
+                var range = document.createRange();
+                range.selectNode(copyElement);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                // copy & cleanup
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                copyElement.remove();
+            }
+            /************** Shapefile load ***************/
             this.loadshpEX = () => {
                 let geom:any;
+                //get the files in the input
                 let files:any = (<HTMLInputElement>document.getElementById('fileshpEX')).files
+                //if there is no file
                 if(files.length == 0){
                     alert('hello');
                 }else{
-                    
                     let file:any = files[0];
-                    
+                    //A file reader
                     const reader = new FileReader();
+                    //fonction for the file reader
                     reader.onload = (e) => {
                         if (reader.readyState != 2 || reader.error){
                             return;
                         } else {
+                            //package to read a shapefile and get a geojson
                             let shp = require("shpjs");
+                            
+                            
                             shp(reader.result).then(function(dta){
-                                console.log(dta);
+                                //console.log(dta);
                                 geom = JSON.stringify(dta);
+                                log.createGeoJson('EPSG:4326',dta.features[0].geometry.coordinates[0]);
                                 log._geom = JSON.stringify(dta);
                                 (<HTMLInputElement>document.getElementById('geomEx')).value = geom;
-                                //this.geomSR = geom
+                                this.geomSR = geom
                             });
 
                         }
                     }
-                    reader.readAsArrayBuffer(file);
-                    
-                      
+                    reader.readAsArrayBuffer(file);     
                 }
             }
             /************** Advanced Setting ***************/
             this.ShowHideAdvanced = function(){
                 if(log._environnementSel!= ''){
                     $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
-                    /*if($scope.IsVisibleASP == true){
-                       
-                    }else{
-                        
-                    }*/
                 }  
             };
             /************** interactive List Advanced Setting ***************/
@@ -223,6 +249,8 @@ export class ExtractController{
                     siClip,
                     this.whereclause,
                     this.geomSR)
+                extsr.setOptionnalEnvironnement(this.selectedItemENT);
+                //If the connection to the API is a Success
                 let apireturn:any = extsr.submitForm(log);
                 if (apireturn != 'success'){
                     alert(apireturn.statusText)

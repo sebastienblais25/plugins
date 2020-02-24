@@ -9,8 +9,8 @@ import { Apireturn } from './apireturn';
 export class User{
 
     /** Send to APi **/
-    _username: string = 'hello';
-    _password: string = 'hello';
+    _username: string;
+    _password: string;
     
 
     /** Environnement **/
@@ -47,6 +47,57 @@ export class User{
         this._username =  username;
         this._password = password;
     }
+
+
+    // //test
+    // inputParse(values:string, parseType: string): any{
+    //     const arrayPoly = values.split(';');
+    //     arrayPoly.forEach((element, index, arr) => {
+    //         let elt = element;
+    //         elt = elt.replace(parseType, '').replace(/\( */g, '[').replace(/ *\)/g, ']');
+    //         elt = elt.trim();
+    //         elt = elt.replace(/, */g, '],['); // specific for polygons
+    //         elt = elt.replace(/ +/g,', ');
+    //         arr[index] = elt;
+    //     });
+    //     return `[${arrayPoly}]`;
+    // }
+
+    // createPolygons(mapId:string,values:string){
+    //     const myMap = (<any>window).RAMP.mapById(mapId);
+    //     (<any>window).RAMP.mapById(mapId).layersObj.addLayer('graphicsOSDP');
+    //     const input = this.inputParse(values, 'POLYGON');
+    //     console.log('test')
+    //     const poly1 = new (<any>window).RAMP.GEO.Polygon(0, JSON.parse(input));
+    //     console.log(poly1);
+    //     // create a multipolygon with unique id
+    //     const polyAll = new (<any>window).RAMP.GEO.MultiPolygon(`location${Math.round(Math.random() * 100000)}`, [poly1],{ outlineColor: [255, 0, 0], outlineWidth: 3 });
+
+    //     // add the multipolygon to the graphic layer
+    //     const graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
+    //     graphicsOSDP.addGeometry([polyAll]);
+
+    //     // zoom to extent of polygon(s)
+    //     this.zoomExtent(mapId, JSON.parse(input)[0], 1.25);
+    // }
+
+    // zoomExtent (mapId: string, coords: [], expand: number = 1): void {
+    //     const myMap = (<any>window).RAMP.mapById(mapId);
+    //     const ramp = (<any>window).RAMP;
+
+    //     let x = [];
+    //     let y = [];
+    //     coords.forEach(item => {
+    //         x.push(item[0]);
+    //         y.push(item[1]);
+    //     })
+
+    //     let ext = ramp.GAPI.proj.projectEsriExtent({
+    //         'xmin': Math.min(...x), 'ymin': Math.min(...y), 'xmax': Math.max(...x), 'ymax': Math.max(...y),
+    //         'spatialReference': { 'wkid': 4326 } }, myMap.esriMap.spatialReference);
+
+    //     myMap.setExtent(ext.expand(expand));
+    // }
 
     /**
      *Contruct an url with the environnement selected and the url for the action
@@ -264,21 +315,22 @@ export class User{
      *Création d'un geoJson pour envoyer la geométrie d'un polygone
      * @memberof planifier
      */
-    createGeoJson(value:any){
+    createGeoJson(crs:string,coord:string){
         let geojson:any = {
-            "type" : value.type,
+            "type" : 'Polygon',
             "crs" : {
                 "type" : "name",
                 "properties" : {
-                    "name" : value.spacialReference
+                    "name" : crs
                 }
             },
-            "Coordinates" : [
-                [
-                    value.ring
-                ]
+            "coordinates" : [
+                
+                    coord
+                
             ]
         };
+        console.log(JSON.stringify(geojson))
         return geojson;
     }
 

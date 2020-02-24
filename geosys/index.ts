@@ -43,7 +43,7 @@ export default class Geosys{
      */
     onMenuItemClick() {
         return () => {
-            //this.button.isActive = !this.button.isActive;
+            this.button.isActive = !this.button.isActive;
             //alert(this.mapApi.layer);
             this._RV.toggleSideNav('close');
 

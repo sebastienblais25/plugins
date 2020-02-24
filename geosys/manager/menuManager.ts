@@ -9,6 +9,7 @@ import {  topmenu } from '../templates/topmenu';
 import {  formNettoyage } from '../templates/cleaning';
 import { formCancel } from '../templates/cancel';
 import { validateform } from '../templates/validate';
+import { menuFileExplorer } from '../templates/fileManager';
 //import { manageController } from "./ControllerManager";
 //import { formExtraireSR, formExtraireP, formPlanifier, formDelivery, topmenu, formCreerMD, formNettoyage, formCancel, validateform } from '../templates/validate';
 
@@ -21,6 +22,8 @@ import { CleaningController } from '../Controller/cleaningC';
 import { CancelController } from '../Controller/cancelC';
 import { TopMenuController } from '../Controller/topmenuC';
 import { ValidateController } from '../Controller/validateC';
+import { FileManagerController } from '../controller/fileManagerC'
+
 
 export class menuManager{
 
@@ -32,6 +35,7 @@ export class menuManager{
     _cleaning:CleaningController;
     _cancel:CancelController;
     _validate: ValidateController;
+    _fileManager:FileManagerController
 
 
     /**
@@ -52,6 +56,7 @@ export class menuManager{
         this. _cleaning = new CleaningController();
         this._cancel = new CancelController();
         this._validate = new ValidateController();
+        this._fileManager = new FileManagerController();
 
         //varaible for the form
         let outputExt:string  = this.extractManager(log,mapApi);
@@ -63,11 +68,12 @@ export class menuManager{
         let outputNettoyage:string = this.nettoyageManager(log,mapApi);
         let outputCancel:string = this.cancelManager(log,mapApi);
         let outputTopmenu:string = this.topMenuManager(log,mapApi);
+        let outputFileManager:string = this.fileExplorerManager(log,mapApi);
         
         let menuprincipal:string;
 
         //compile the form together
-        menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputExtSR + outputCreer + outputVali + outputDeli + outputNettoyage + outputCancel + "</div>";
+        menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputExtSR + outputCreer + outputVali + outputDeli + outputNettoyage + outputCancel + outputFileManager + "</div>";
         this._compiler.compileTemplate(menuprincipal,mapApi);
         
         //put the form in the panel
@@ -200,10 +206,25 @@ export class menuManager{
         return output;
     }
 
+
+    /**
+     *
+     *
+     * @param {User} log
+     * @param {*} mapApi
+     * @returns {string}
+     * @memberof menuManager
+     */
     validateManager(log:User, mapApi:any):string{
         this._validate.valiControl(log,mapApi);
         let output = validateform;
         return output;
     
+    }
+
+    fileExplorerManager(log:User, mapApi:any):string{
+        this._fileManager.fileManagercontrols(log, mapApi);
+        let output = menuFileExplorer;
+        return output;
     }
 }
