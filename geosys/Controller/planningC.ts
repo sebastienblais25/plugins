@@ -143,7 +143,7 @@ export class PlanningController{
                                 //console.log(JSON.stringify(dta.features[0].geometry.coordinates[0][0][0]));
                                 //let coord = JSON.stringify(dta.features[0].geometry.coordinates[0]);
                                 let test = `{"type":"polygon","rings":[[[680080.4921259843,1739908.6310642622],[2759709.6513843033,1724033.5993141988],[2696209.5243840497,985844.622936246],[822955.7778765559,938219.5276860553],[680080.4921259843,1739908.6310642622]]],"_ring":0,"spatialReference":{"wkid":3978}}`;
-                                //log.createPolygons(mapApi.id,test);
+                                log.createPolygons(mapApi.id,test);
                                
                                 console.log(myMap)
                                 
