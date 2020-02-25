@@ -1,0 +1,15 @@
+export declare const urlgeoDataGet: string;
+export declare const urlgeoDatGetId: string;
+export declare const urlLoginGet: string;
+export declare const urlgetidWu: string;
+export declare const urlPlaniPost: string;
+export declare const urlEnvList: string;
+export declare const urlClassesList: string;
+export declare const urlWorkingType: string;
+export declare const urlDeliveryInsert: string;
+export declare const urlDeliveryUpdate: string;
+export declare const urlCreateMD: string;
+export declare const urlValidateMD: string;
+export declare const urlGetCode: string;
+export declare const urlDeleteClean: string;
+export declare const urlCancelStep: string;
