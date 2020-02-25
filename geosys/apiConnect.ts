@@ -90,10 +90,8 @@ export class connexion{
                     function(response,jqXHR){
                         if(response == undefined){
                             outputValue = 'success';
-                            alert('delete')
                         }else{
                             if (response.message != undefined){
-                                alert('Planning and extract')
                                 outputValue = jqXHR;
                             }else{
                                 //alert(response + ' 2')

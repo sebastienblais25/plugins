@@ -5,11 +5,11 @@ export const loginmenu:string= `
     <div class="centerText"><h2>{{ 'plugins.geosys.login' | translate }}</h2></div>
     <md-input-container class="largeur">
     <label>{{ 'plugins.geosys.username' | translate }}</label> 
-    <input type="text" id="username" placeholder="{{ 'plugins.geosys.username' | translate }}"/>
+    <input type="text" id="username" ng-model="ctrl0.usernam" placeholder="{{ 'plugins.geosys.username' | translate }}"/>
     </md-input-container>
     <md-input-container class="largeur">
     <label>{{ 'plugins.geosys.password ' | translate }}</label> 
-    <input type="password" id="password" placeholder="{{ 'plugins.geosys.password ' | translate }}"/>
+    <input type="password" id="password" ng-model="ctrl0.passwrd" placeholder="{{ 'plugins.geosys.password ' | translate }}"/>
     </md-input-container>
     <div class="rv-subsection">
         <md-button class="md-primary md-raised" style="float: right;"

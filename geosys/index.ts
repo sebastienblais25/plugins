@@ -95,22 +95,25 @@ export default class Geosys{
         //ajoute un controller au formulaire html
         this.mapApi.agControllerRegister('connexionCtrl', function($scope){
             //ajoute la fonction sous le controller au formulaire html
+            this.usernam = '';
+            this.passwrd = '';
             this.submitConn = function() { 
+                
                 //prends les informations des input pour envoyer a l'API
-                let log:User = new User((<HTMLInputElement>document.getElementById("username")).value
-                ,(<HTMLInputElement>document.getElementById("password")).value);
+                let log:User = new User(this.usernam
+                ,this.passwrd);
                 //Envoie le formulaire a l API
-                //let loginfo:any = log.submitForm();
+                let loginfo:any = log.submitForm();
                 //si le retour ne contient pas de code d'erreur continue
-                //if (loginfo.status != 401){
+                if (loginfo.status != 401){
                     //alert('Connected'); 
                     
                     let menu:menuManager =  new menuManager(log,panel,mapApi,config);
                 //si le retour de l'API contient un code d'erreur et le message
-                //}else{
-                    //alert(loginfo.code);
-                    //alert(loginfo.message);
-                //}
+                }else{
+                    alert(loginfo.code);
+                    alert(loginfo.message);
+                }
             }; 
         });
     }

@@ -14,14 +14,14 @@ import { menuFileExplorer } from '../templates/fileManager';
 //import { formExtraireSR, formExtraireP, formPlanifier, formDelivery, topmenu, formCreerMD, formNettoyage, formCancel, validateform } from '../templates/validate';
 
 import { User } from '../user';
-import { PlanningController } from '../Controller/planningC';
-import { ExtractController } from '../Controller/extractC';
-import { CreateController } from '../Controller/createC';
-import { DeliveryController } from '../Controller/deliveryC';
-import { CleaningController } from '../Controller/cleaningC';
-import { CancelController } from '../Controller/cancelC';
-import { TopMenuController } from '../Controller/topmenuC';
-import { ValidateController } from '../Controller/validateC';
+import { PlanningController } from '../controller/planningC';
+import { ExtractController } from '../controller/extractC';
+import { CreateController } from '../controller/createC';
+import { DeliveryController } from '../controller/deliveryC';
+import { CleaningController } from '../controller/cleaningC';
+import { CancelController } from '../controller/cancelC';
+import { TopMenuController } from '../controller/topmenuC';
+import { ValidateController } from '../controller/validateC';
 import { FileManagerController } from '../controller/fileManagerC'
 
 
@@ -222,6 +222,15 @@ export class menuManager{
     
     }
 
+
+    /**
+     *
+     *
+     * @param {User} log
+     * @param {*} mapApi
+     * @returns {string}
+     * @memberof menuManager
+     */
     fileExplorerManager(log:User, mapApi:any):string{
         this._fileManager.fileManagercontrols(log, mapApi);
         let output = menuFileExplorer;

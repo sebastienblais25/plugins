@@ -1,9 +1,5 @@
 import { planifier } from "../operation/planifier";
 import { User } from "../user";
-import { urlWorkingType } from '../config/url';
-import { CLEAR_FILTERS_TEMPLATE } from '../../enhancedTable/templates';
-//const FileReader = require('filereader')
-
 
 export class PlanningController{
 
@@ -96,20 +92,23 @@ export class PlanningController{
             }
             //subscribe for the drawing
             (<any>window).drawObs.drawPolygon.subscribe(value => {
-                let ArcGIS = require('terraformer-arcgis-parser');
-                this.geomp = JSON.stringify(ArcGIS.parse(value));
+                //create a geojson with the infromation obtain
+                log.createGeoJson('ESPG:'+value.spatialReference.wkid,value.rings)
+                //show the geo json in the input 
+                this.geomp = log._geom;
             });
             this.toggleDraw = function() {
+                //add an element to put the text
                 var copyElement = document.createElement("span");
                 copyElement.appendChild(document.createTextNode(this.geomp));
                 copyElement.id = 'tempCopyToClipboard';
                 document.body.append(copyElement);
-                // select the text
+                //select the text
                 var range = document.createRange();
                 range.selectNode(copyElement);
                 window.getSelection().removeAllRanges();
                 window.getSelection().addRange(range);
-                // copy & cleanup
+                //copy & cleanup
                 document.execCommand('copy');
                 window.getSelection().removeAllRanges();
                 copyElement.remove();
@@ -126,36 +125,31 @@ export class PlanningController{
                     let file:any = files[0];
                     
                     const reader = new FileReader();
-                    reader.onload = (e) => {
+                    reader.onload = function(e) {
                         if (reader.readyState != 2 || reader.error){
-                            alert('hello');
+                            alert('Wrong file');
                             return;
                         } else {
-                            alert('working');
-                            let myMap = (<any>window).RAMP.mapById(mapApi.id);
-                            (<any>window).RAMP.mapById(mapApi.id).layersObj.addLayer('demoPolygon');
-
-                            
-                            let testLayer = mapApi.layers.getLayersById('demoPolygon')[0];
-                            
+                            //package to read a shapefile and get a geojson
                             let shp = require("shpjs");
+                            //read the zip shapefile
                             shp(reader.result).then(function(dta){
-                                //console.log(JSON.stringify(dta.features[0].geometry.coordinates[0][0][0]));
-                                //let coord = JSON.stringify(dta.features[0].geometry.coordinates[0]);
-                                let test = `{"type":"polygon","rings":[[[680080.4921259843,1739908.6310642622],[2759709.6513843033,1724033.5993141988],[2696209.5243840497,985844.622936246],[822955.7778765559,938219.5276860553],[680080.4921259843,1739908.6310642622]]],"_ring":0,"spatialReference":{"wkid":3978}}`;
-                                log.createPolygons(mapApi.id,test);
-                               
-                                console.log(myMap)
+                                //set a variable with the coordinates for the drawing
+                                let geomDR = dta.features[0].geometry.coordinates[0];
+                                //set a variable with the coordinates for the geojson
+                                let geomGEOJSON = dta.features[0].geometry.coordinates;
+                                //Create a geojson with the onfromation of the shapefile
+                                log.createGeoJson('EPSG:4326',geomGEOJSON);
+                                //set the geojson in the input
+                                that.geomp = log._geom;
+                                //create the polygon in the viewer with a zoom on it
+                                log.createPolygons(mapApi.id,geomDR);
                                 
-                                
-                        
-                                this.geomp = JSON.stringify(dta);
-                            });
-                            
+                            }); 
                         }
+                        
                     }
-                    reader.readAsArrayBuffer(file);
-                      
+                    reader.readAsArrayBuffer(file);   
                 }
             }
             /********** Form submission ************/

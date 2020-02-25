@@ -48,56 +48,7 @@ export class User{
         this._password = password;
     }
 
-
-    //test
-    inputParse(values:string, parseType: string): any{
-        const arrayPoly = values.split(';');
-        arrayPoly.forEach((element, index, arr) => {
-            let elt = element;
-            elt = elt.replace(parseType, '').replace(/\( */g, '[').replace(/ *\)/g, ']');
-            elt = elt.trim();
-            elt = elt.replace(/, */g, '],['); // specific for polygons
-            elt = elt.replace(/ +/g,', ');
-            arr[index] = elt;
-        });
-        return `[${arrayPoly}]`;
-    }
-
-    createPolygons(mapId:string,values:string){
-        const myMap = (<any>window).RAMP.mapById(mapId);
-        (<any>window).RAMP.mapById(mapId).layersObj.addLayer('graphicsOSDP');
-        const input = this.inputParse(values, 'POLYGON');
-        console.log('test')
-        const poly1 = new (<any>window).RAMP.GEO.Polygon(0, JSON.parse(input));
-        console.log(poly1);
-        // create a multipolygon with unique id
-        const polyAll = new (<any>window).RAMP.GEO.MultiPolygon(`location${Math.round(Math.random() * 100000)}`, [poly1],{ outlineColor: [255, 0, 0], outlineWidth: 3 });
-
-        // add the multipolygon to the graphic layer
-        const graphicsOSDP = myMap.layers.getLayersById('graphicsOSDP')[0];
-        graphicsOSDP.addGeometry([polyAll]);
-
-        // zoom to extent of polygon(s)
-        this.zoomExtent(mapId, JSON.parse(input)[0], 1.25);
-    }
-
-    zoomExtent (mapId: string, coords: [], expand: number = 1): void {
-        const myMap = (<any>window).RAMP.mapById(mapId);
-        const ramp = (<any>window).RAMP;
-
-        let x = [];
-        let y = [];
-        coords.forEach(item => {
-            x.push(item[0]);
-            y.push(item[1]);
-        })
-
-        let ext = ramp.GAPI.proj.projectEsriExtent({
-            'xmin': Math.min(...x), 'ymin': Math.min(...y), 'xmax': Math.max(...x), 'ymax': Math.max(...y),
-            'spatialReference': { 'wkid': 4326 } }, myMap.esriMap.spatialReference);
-
-        myMap.setExtent(ext.expand(expand));
-    }
+   
 
     /**
      *Contruct an url with the environnement selected and the url for the action
@@ -189,7 +140,6 @@ export class User{
     //Ajoute le reste des données obtenu par le login
     /**
      * sett all the info information obtain form a login into the properties of the class
-     *
      * @param {string} token
      * @param {string} token_type
      * @param {number} expired
@@ -324,17 +274,61 @@ export class User{
                     "name" : crs
                 }
             },
-            "coordinates" : [
-                
-                    coord
-                
-            ]
+            "coordinates" : 
+                coord
         };
-        console.log(JSON.stringify(geojson))
-        return geojson;
+        this._geom = JSON.stringify(geojson);  
     }
 
-    //accessor
+    /**
+     * Create a layer in the viewer to add a polygon in viewer
+     * @param {string} mapId the map ID of the viewer
+     * @param {*} values the coordinates of the drawing
+     * @memberof User
+     */
+    createPolygons(mapId:string,values:any){
+        //create a constant to get the map in the viewer
+        const myMap = (<any>window).RAMP.mapById(mapId);
+        //create a layer in the map in the viewer
+        (<any>window).RAMP.mapById(mapId).layersObj.addLayer('shpUpload');
+        //create a polygons with all the coordinates(the coordinates needs to be in lat/lon)
+        const poly1 = new (<any>window).RAMP.GEO.Polygon(0, values);
+        //create a multipolygon with an id
+        const polyAll = new (<any>window).RAMP.GEO.MultiPolygon(`location${Math.round(Math.random() * 100000)}`, [poly1],{ outlineColor: [55, 50, 200], outlineWidth: 3 });
+        // add the multipolygon to the graphic layer
+        const shpUpload = myMap.layers.getLayersById('shpUpload')[0];
+        //add the geometry in the layer created
+        shpUpload.addGeometry([polyAll]);
+        //zoom to extent of polygon(s)
+        this.zoomExtent(mapId, values, 3);
+    }
+
+    /**
+     * zoom in the polygon in the viewer
+     * @param {string} mapId the id of the map in the viewer
+     * @param {[]} coords the coordinates of the polygon
+     * @param {number} [expand=1] the zoom 
+     * @memberof User
+     */
+    zoomExtent (mapId: string, coords: [], expand: number = 1): void {
+        const myMap = (<any>window).RAMP.mapById(mapId);
+        const ramp = (<any>window).RAMP;
+        let x = [];
+        let y = [];
+        //set coordinates of the polygons
+        coords.forEach(item => {
+            x.push(item[0]);
+            y.push(item[1]);
+        })
+        //set the coordinates for the windows
+        let ext = ramp.GAPI.proj.projectEsriExtent({
+            'xmin': Math.min(...x), 'ymin': Math.min(...y), 'xmax': Math.max(...x), 'ymax': Math.max(...y),
+            'spatialReference': { 'wkid': 4326 } }, myMap.esriMap.spatialReference);
+        //the zoom on the polygon
+        myMap.setExtent(ext.expand(expand));
+    }
+
+    /*************** Accessors ***********************/
     /*Username */
     getusername(): string {
         return this._username;

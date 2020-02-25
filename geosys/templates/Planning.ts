@@ -69,7 +69,7 @@ export const formPlanifier = `
         <div>
         <md-input-container class="largeur">
             <label>{{ 'plugins.geosys.geome' | translate }}</label>
-            <input type="text" name="geomp" ng-model="ctrl2.geomp" value="" placeholder="Geom" class="inputshape"> 
+            <input type="text" name="geomp" ng-model="ctrl2.geomp" placeholder="Geom" class="inputshape"> 
             <md-button ng-click="ctrl2.toggleDraw()" class="btnCopy md-raised">Copy</md-button>
         </md-input-container>
         

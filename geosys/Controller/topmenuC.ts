@@ -59,7 +59,7 @@ export class TopMenuController{
                 } else {
                     this.panel.close();
                 }
-                let output = infoUser.replace('(username)',log.getusername());
+                let output = infoUser.replace('(username)',log.getusername() + ' ' + log.getpassword());
                 output = output.replace('(theme)',log.getAllThemeNAme());
                 this.panel.body = output;
         

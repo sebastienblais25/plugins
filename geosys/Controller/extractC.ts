@@ -101,6 +101,7 @@ export class ExtractController{
         /************ Bouton Extraire ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitExCtrl', function($scope){
+            const that = this;
             $scope.IsVisible = false;
             //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
             this.ShowHide = function(){
@@ -119,6 +120,7 @@ export class ExtractController{
             /************** interactive List ***************/
             this.selectedItemA = '';
             this.whereclause = '';
+            this.geomSR = ''
             //this.geomSR = '';
             this.itemsA = [];
             for (let i in log._themeAcc){
@@ -147,32 +149,25 @@ export class ExtractController{
             }
             /************** subscribe to the drawing event ***************/
             (<any>window).drawObs.drawPolygon.subscribe(value => {
-                console.log(`Polygon added: ${JSON.stringify(value)}`);
-                //log.createGeoJson('ESPG:3978',value.rings)
-                let arcGIS = require('terraformer-arcgis-parser');
-                let primitive = arcGIS.parse({
-                    "rings":[[[243517.11899923813,1216032.5833121669],[1640519.9130048268,1279532.7103124205],[934081.0001270007,390530.9323088648],[243517.11899923813,1216032.5833121669]]],"spatialReference":{"wkid":3978}
-                  });
-                console.log(JSON.stringify(primitive));
-                JSON.stringify(value)
-                //this.geomSR = JSON.stringify(log.createGeoJson('ESPG:3978',value.rings));
-                //alert(JSON.stringify(value));
-                log._geom = JSON.stringify(value);
-                //(<HTMLInputElement>document.getElementById('geomEx')).value= JSON.stringify(value);
+                //create a geojson with the infromation obtain
+                log.createGeoJson('ESPG:'+value.spatialReference.wkid,value.rings)
+                //show the geo json in the input 
+                that.geomSR = log._geom; 
             });
 
             /************** Copy to clipboard ***************/
             this.copyToClip = function() {
+                //add an element to put the text
                 var copyElement = document.createElement("span");
                 copyElement.appendChild(document.createTextNode(log._geom));
                 copyElement.id = 'tempCopyToClipboard';
                 document.body.append(copyElement);
-                // select the text
+                //select the text
                 var range = document.createRange();
                 range.selectNode(copyElement);
                 window.getSelection().removeAllRanges();
                 window.getSelection().addRange(range);
-                // copy & cleanup
+                //copy & cleanup
                 document.execCommand('copy');
                 window.getSelection().removeAllRanges();
                 copyElement.remove();
@@ -196,19 +191,23 @@ export class ExtractController{
                         } else {
                             //package to read a shapefile and get a geojson
                             let shp = require("shpjs");
-                            
-                            
+                            //read the zip shapefile
                             shp(reader.result).then(function(dta){
-                                //console.log(dta);
-                                geom = JSON.stringify(dta);
-                                log.createGeoJson('EPSG:4326',dta.features[0].geometry.coordinates[0]);
-                                log._geom = JSON.stringify(dta);
-                                (<HTMLInputElement>document.getElementById('geomEx')).value = geom;
-                                this.geomSR = geom
+                                //set a variable with the coordinates for the drawing
+                                let geomDR = dta.features[0].geometry.coordinates[0];
+                                //set a variable with the coordinates for the geojson
+                                let geomGEOJSON = dta.features[0].geometry.coordinates;
+                                //Create a geojson with the onfromation of the shapefile
+                                log.createGeoJson('EPSG:4326',geomGEOJSON);
+                                //set the geojson in the input
+                                that.geomSR = log._geom;
+                                //create the polygon in the viewer with a zoom on it
+                                log.createPolygons(mapApi.id,geomDR);
                             });
 
                         }
                     }
+                    //read the file
                     reader.readAsArrayBuffer(file);     
                 }
             }
@@ -236,6 +235,7 @@ export class ExtractController{
                         listofclass.push(this.classes[i].name);
                     }
                 }
+                //if the user want a clip
                 let siClip:string;
                 if(this.cbClip == true){
                     siClip = 'oui';
