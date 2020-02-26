@@ -5,7 +5,7 @@ import { planifier } from '../operation/planifier';
 import { Livraison } from '../operation/livraison';
 import { Cleaning } from '../operation/nettoyer';
 
-
+/***************************** To Delete *********************************/
 export class manageController{
 
 

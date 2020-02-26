@@ -64,7 +64,7 @@ export class ValidateController{
                 let vali:Valider = new Valider();
                 let api:any = vali.submitForm(formdata,log);
                 if (api != undefined){
-                    alert(api + ' 4');
+                    alert(api);
                     console.log(api);
                     $scope.SelectedMenuV = {
                         "background-color" : "red", 

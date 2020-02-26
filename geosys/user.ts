@@ -258,11 +258,11 @@ export class User{
         for(let i in this._classeslist){
             listS.push( { name: this._classeslist[i] , wanted: false });
         }
-        return listS
+        return listS;
     }
 
     /**
-     *Création d'un geoJson pour envoyer la geométrie d'un polygone
+     *Create a geojson for a drawing geometry or the imported geometry
      * @memberof planifier
      */
     createGeoJson(crs:string,coord:string){
@@ -300,7 +300,7 @@ export class User{
         //add the geometry in the layer created
         shpUpload.addGeometry([polyAll]);
         //zoom to extent of polygon(s)
-        this.zoomExtent(mapId, values, 3);
+        this.zoomExtent(mapId, values, 2);
     }
 
     /**
@@ -379,7 +379,7 @@ export class User{
 
     /* RightRead*/
     getrightRead(): string {
-        return this._rightRead._nom;
+        return this._rightRead._id;
     }
     setrightRead(value: string) {
         this._rightRead._nom = value;
@@ -387,7 +387,7 @@ export class User{
 
     /*RightWrite */
     getrightWrite(): string {
-        return this._rightWrite._nom;
+        return this._rightWrite._id;
     }
     setrightWrite(value: string) {
         this._rightWrite._nom = value;

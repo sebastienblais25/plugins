@@ -35,7 +35,7 @@ export class connexion{
                     //console.log(outputValue); 
                 },
                 error: function(xhr){
-                    alert(xhr.statusText);
+                    //alert(xhr.statusText);
                     outputValue = xhr;
                 }
             })
@@ -100,7 +100,7 @@ export class connexion{
                         }  
                     },
                     error: function(xhr){
-                        alert(xhr.statusText);
+                        //alert(xhr.statusText);
                         outputValue = xhr;
                         //console.log($('#recommandation').val());
                     }

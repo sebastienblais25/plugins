@@ -179,7 +179,7 @@ export class ExtractController{
                 let files:any = (<HTMLInputElement>document.getElementById('fileshpEX')).files
                 //if there is no file
                 if(files.length == 0){
-                    alert('hello');
+                    alert('No files');
                 }else{
                     let file:any = files[0];
                     //A file reader

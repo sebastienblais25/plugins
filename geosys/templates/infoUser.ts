@@ -6,13 +6,16 @@ export const infoUser:String = `
         {{ 'plugins.geosys.username' | translate }} : (username)
     </div>
     <div>
-        {{ 'plugins.geosys.themet' | translate }} (theme)
+        {{ 'plugins.geosys.themeI' | translate }} : (theme)
     </div>
     <div>
-        {{ 'plugins.geosys.username' | translate }} (right)
+        {{ 'plugins.geosys.right' | translate }} : (right)
     </div>
     <div>
-        {{ 'plugins.geosys.username' | translate }} (equipe)
+        {{ 'plugins.geosys.equipe' | translate }} : (equipe)
+    </div>
+    <div>
+        {{ 'plugins.geosys.enviro' | translate }} : (envir)
     </div>
 </div>
 `;

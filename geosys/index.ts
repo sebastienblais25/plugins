@@ -189,14 +189,19 @@ Geosys.prototype.translations = {
         nettoyage : 'Cleaning - 6',
         //Annuler seulement
         annuler : 'Cancel - 0',
+        //Info user
+        themeI : 'Theme',
+        right : 'Right',
+        equipe : 'Team',
+        enviro : 'Environnement',
 
     },
 
     'fr-CA': {
         
         //Commun
-        envir: 'Environnement :',
-        themet: 'Theme :',
+        envir: 'Sélectionne un Environnement :',
+        themet: 'Sélectionne un Theme :',
         idUT: 'Selectionne un identifiant d unité de travail :',
         geome: 'Ajouter votre Géométrie :',
         submit: 'Soumettre',
@@ -236,6 +241,11 @@ Geosys.prototype.translations = {
         nettoyage : 'Nettoyage - 6',
         //Annuler seulement
         annuler : 'Annuler - 0',
+        //Info user
+        themeI : 'Thème',
+        right : 'Droit',
+        equipe : 'Equipe',
+        enviro : 'Environnement',
     }
 };
 

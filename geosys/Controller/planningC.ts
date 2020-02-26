@@ -119,7 +119,7 @@ export class PlanningController{
                 
                 let files:any = (<HTMLInputElement>document.getElementById('fileshp')).files
                 if(files.length == 0){
-                    alert('hello');
+                    alert('No file');
                 }else{
                     
                     let file:any = files[0];

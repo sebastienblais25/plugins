@@ -43,3 +43,6 @@ export const urlDeleteClean:string = `http://127.0.0.1:4010/suivi-prod/unite-tra
 
 //url for cancelling for step for a theme (/suivi-prod/etape-ut/{identifiant}) Delete
 export const urlCancelStep:string = `http://127.0.0.1:4010/suivi-prod/etape-ut/`;
+
+//url for testing a file manager 
+export const urlListFile:string = `http://127.0.0.1:4010/test/file/`;

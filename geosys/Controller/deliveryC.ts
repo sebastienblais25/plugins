@@ -75,8 +75,8 @@ export class DeliveryController{
                 livre.setOptionnalEnvironnement(this.selectedItemENT);
                 let apireturn:any = livre.submitForm(formdata,log);     
                 if (apireturn != undefined){
-                    alert(apireturn + ' 4');
-                    console.log(apireturn);
+                    alert(apireturn);
+                    //console.log(apireturn);
                     $scope.SelectedMenuD = {
                         "background-color" : "red", 
                     }
