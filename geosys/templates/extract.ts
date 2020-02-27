@@ -3,10 +3,10 @@
 
 export const formExtraireP:string = 
 `<div ng-controller="SubmitCtrl as ctrl3">
-    <div ng-style="SelectedMenuE" class="divButton" ng-click="ctrl3.ShowHide()">
+    <div ng-style="SelectedMenuE" class="divButton" ng-click="ctrl1.ShowHideEX()">
         <h2>{{ 'plugins.geosys.extrac' | translate }}</h2>
     </div>
-    <div ng-show="IsVisible" ng-style="bgEnv" class="extractspace">
+    <div ng-show="IsVisibleEP" ng-style="bgEnv" class="extractspace">
         <div class="rv-subsection">
             <md-input-container class="ddlshowEX">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>
@@ -66,10 +66,10 @@ export const formExtraireP:string =
 
 export const formExtraireSR:string = 
 `<div ng-controller="SubmitExCtrl as ctrl4">
-    <div ng-style="SelectedMenuEU" class="divButton" ng-click="ctrl4.ShowHide()">
+    <div ng-style="SelectedMenuEU" class="divButton" ng-click="ctrl1.ShowHideEXSR()">
         <h2>{{ 'plugins.geosys.extract' | translate }}</h2>
     </div>
-    <div ng-show="IsVisible" ng-style="bgEnv">
+    <div ng-show="IsVisibleSR" ng-style="bgEnv">
         <div class="rv-subsection">
             <md-input-container class="ddlshowEX">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>

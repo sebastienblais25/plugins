@@ -30,6 +30,7 @@
   height: 40px;
 }
 
+
 //block environnement of the topmenu
 .envDiv{
   width: 60%;
@@ -221,6 +222,64 @@
 .inputshape{
   max-width: 250px;
 }
+
+
+/********** File Manager **********/
+.breadclass{
+  width: 96%;
+  margin-top: 10px;
+  padding: 10px 0px 10px 5px;
+  background-color: aliceblue;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: lightgrey;
+}
+
+.folderBtn {
+  
+  padding: 0px 95% 0px 10px;
+  width: 300px;
+  text-align: center;
+  font-size: 15px;
+  //margin: 5px 0px;
+  opacity: 0.6;
+  transition: 0.4s;
+  
+}
+
+// lors du hover du bouton du menu
+.folderBtn:hover {
+  opacity: 1;
+  background-color: #e7e6e6;
+  //border-style: solid;
+  //border-width: 2px;
+  //border-radius: 5px;
+  //border-color: lightgray;
+}
+
+.fileBtn {
+  
+  padding: 0px 95% 0px 10px;
+  width: 300px;
+  text-align: center;
+  font-size: 15px;
+  //margin: 5px 0px;
+  opacity: 0.6;
+  transition: 0.3s;
+  //border-style: solid;
+  //border-width: 2px;
+  //border-radius: 5px;
+  //border-color: darken($color: #000000, $amount: 1);
+}
+
+// lors du hover du bouton du menu
+.fileBtn:hover {
+  opacity: 1;
+  background-color: #f7f5f5;
+}
+
+
 
 /******* Arrow down **********/
 .arrow {

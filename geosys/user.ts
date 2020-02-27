@@ -172,10 +172,10 @@ export class User{
         let json:string ='';
         let data:any;
         data = this._conn.connexionAPI(this.gettoken(),json,this.constructUrl(urlGetCode,theme),'Get');
+        //set outside of this function
         this._themeAcc[rank].setRemaining(data.id_liste_code,data.nom,data.desc_en,data.desc_fr);
     }
 
-    //build the list of working unit 
     /**
      * build the object for the working unit id and setting the theme in front for the mocking
      * and set a list for the dropdown list int the forms.
@@ -225,6 +225,7 @@ export class User{
         return list;
     }
 
+    /**************** Reading Ressources files *********************/
     /**
      * create a json file for getting a list of classes 
      * mostly hardcoded.
@@ -261,11 +262,42 @@ export class User{
         return listS;
     }
 
+
+    /************************* For Geometry ******************************/
+    /**
+     * Work arount for a follow-up duplicates
+     * @param {*} coord coordinates with a follow-up duplicates
+     * @returns {*} reyurn the coordinates with no folow-up duplicates
+     * @memberof User
+     */
+    eliminateFollowUpDuplicate(coord:any):any{
+        //create a list to push the non-duplicates
+        let nodupes = [];
+        //search the array
+        for(let i in coord[0]){
+            let j = +i;
+            //check the postion is not 0(for no previous)
+            if(j != 0){
+                //check if not duplicates with the previous one
+                if(coord[0][i][0] !== coord[0][j-1][0] && coord[0][i][1] !== coord[0][j-1][1]){
+                    //push in the non-duplicates array
+                    nodupes.push(coord[0][i])
+                }
+            }else{
+                //always push the first into the non-duplicates array
+                nodupes.push(coord[0][i])
+            }
+        }
+        let newCoord:any = [nodupes];
+        return newCoord;
+    }
+
     /**
      *Create a geojson for a drawing geometry or the imported geometry
      * @memberof planifier
      */
-    createGeoJson(crs:string,coord:string){
+    createGeoJson(crs:string,coord:any){
+        coord = this.eliminateFollowUpDuplicate(coord);
         let geojson:any = {
             "type" : 'Polygon',
             "crs" : {

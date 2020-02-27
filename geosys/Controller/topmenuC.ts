@@ -13,10 +13,9 @@ export class TopMenuController{
      * @param {*} mapApi need the mapApi for setting the controller.
      * @memberof manageController
      */
-    topmenuControl(log:User, mapApi:any){
-        mapApi.agControllerRegister('topmenuCtrl', function($scope){
-            /**************** From Submission ***************/
-
+    topmenuControl(log:User, mapApi:any, panel:any){
+        mapApi.agControllerRegister('topmenuCtrl', function($scope, $location, $anchorScroll){
+            
             /************** interactive List ***************/
             this.selectedItemENT = '';
             this.itemsENT = [];
@@ -69,6 +68,261 @@ export class TopMenuController{
                 this.panel.open();
                 
             }
+
+            /**************** form opening handler ***************/
+            $scope.IsVisibleP = false;
+            $scope.IsVisibleEP = false;
+            $scope.IsVisibleSR = false;
+            $scope.IsVisibleCR = false;
+            $scope.IsVisibleV = false;
+            $scope.IsVisibleD = false;
+            $scope.IsVisibleCL = false;
+            $scope.IsVisibleCA = false;
+
+            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
+            this.ShowHide = function(){ 
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleP = $scope.IsVisibleP ? false : true;
+                    if($scope.IsVisibleP == true){
+                        //hide non-selected
+                        $scope.IsVisibleEP = false;
+                        $scope.IsVisibleSR = false;
+                        $scope.IsVisibleCR = false;
+                        $scope.IsVisibleV = false;
+                        $scope.IsVisibleD = false;
+                        $scope.IsVisibleCL = false;
+                        $scope.IsVisibleCA = false;
+                        //highlight
+                        $scope.SelectedMenuP = {
+                            "opacity" : "1", 
+                        };
+                        $scope.SelectedMenuE = {};
+                        $scope.SelectedMenuEU = {};
+                        $scope.SelectedMenuCr = {};
+                        $scope.SelectedMenuV = {};
+                        $scope.SelectedMenuD = {};
+                        $scope.SelectedMenuC = {};
+                        $scope.SelectedMenuCa = {};
+                    }else{
+                        $scope.SelectedMenuP = {};
+                    }
+                }    
+            };
+            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
+            this.ShowHideEX = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleEP = $scope.IsVisibleEP ? false : true; 
+                    if($scope.IsVisibleEP == true){
+                        //hide non-selected
+                        $scope.IsVisibleP = false;
+                        $scope.IsVisibleSR = false;
+                        $scope.IsVisibleCR = false;
+                        $scope.IsVisibleV = false;
+                        $scope.IsVisibleD = false;
+                        $scope.IsVisibleCL = false;
+                        $scope.IsVisibleCA = false;
+                        //highlight
+                        $scope.SelectedMenuE = {
+                            "opacity" : "1", 
+                        };
+                        $scope.SelectedMenuP = {};
+                        $scope.SelectedMenuEU = {};
+                        $scope.SelectedMenuCr = {};
+                        $scope.SelectedMenuV = {};
+                        $scope.SelectedMenuD = {};
+                        $scope.SelectedMenuC = {};
+                        $scope.SelectedMenuCa = {};
+                    }else{
+                        $scope.SelectedMenuE = {};
+                    }
+                }  
+            };
+            
+            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
+            this.ShowHideEXSR = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleSR = $scope.IsVisibleSR ? false : true;
+                    if($scope.IsVisibleSR == true){
+                        //hide non-selected
+                        $scope.IsVisibleP = false;
+                        $scope.IsVisibleEP = false;
+                        $scope.IsVisibleCR = false;
+                        $scope.IsVisibleV = false;
+                        $scope.IsVisibleD = false;
+                        $scope.IsVisibleCL = false;
+                        $scope.IsVisibleCA = false;
+                        //highlight
+                        $scope.SelectedMenuEU = {
+                            "opacity" : "1", 
+                        }
+                        $scope.SelectedMenuE = {};
+                        $scope.SelectedMenuP = {};
+                        $scope.SelectedMenuCr = {};
+                        $scope.SelectedMenuV = {};
+                        $scope.SelectedMenuD = {};
+                        $scope.SelectedMenuC = {};
+                        $scope.SelectedMenuCa = {};
+                    }else{
+                        $scope.SelectedMenuEU = {}
+                    }
+                }  
+            };
+
+            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
+            this.ShowHideCr = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleCR = $scope.IsVisibleCR ? false : true;
+                    if($scope.IsVisibleCR == true){
+                        //$location.hash('create');
+                        //$anchorScroll();
+                        let myElement = document.getElementById('create');
+                        let topPos = myElement.offsetTop;
+                        console.log(panel.body);
+                        document.getElementById('hello').scrollTop = topPos;
+                        //hide non-selected
+                        $scope.IsVisibleP = false;
+                        $scope.IsVisibleEP = false;
+                        $scope.IsVisibleSR = false;
+                        $scope.IsVisibleV = false;
+                        $scope.IsVisibleD = false;
+                        $scope.IsVisibleCL = false;
+                        $scope.IsVisibleCA = false;
+                        //highlight
+                        $scope.SelectedMenuCr = {
+                            "opacity" : "1", 
+                        }
+                        $scope.SelectedMenuEU = {}
+                        $scope.SelectedMenuE = {};
+                        $scope.SelectedMenuP = {};
+                        $scope.SelectedMenuV = {};
+                        $scope.SelectedMenuD = {};
+                        $scope.SelectedMenuC = {};
+                        $scope.SelectedMenuCa = {};
+                    }else{
+                        $scope.SelectedMenuCr = {};
+                    } 
+                }    
+            };
+            
+            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
+            this.ShowHideV = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleV = $scope.IsVisibleV ? false : true;
+                    if($scope.IsVisibleV == true){
+                        //hide non-selected
+                        $scope.IsVisibleP = false;
+                        $scope.IsVisibleEP = false;
+                        $scope.IsVisibleSR = false;
+                        $scope.IsVisibleCR = false;
+                        $scope.IsVisibleD = false;
+                        $scope.IsVisibleCL = false;
+                        $scope.IsVisibleCA = false;
+                        //highlight
+                        $scope.SelectedMenuV = {
+                            "opacity" : "1", 
+                        };
+                        $scope.SelectedMenuCr = {};
+                        $scope.SelectedMenuEU = {};
+                        $scope.SelectedMenuE = {};
+                        $scope.SelectedMenuP = {};
+                        $scope.SelectedMenuD = {};
+                        $scope.SelectedMenuC = {};
+                        $scope.SelectedMenuCa = {};
+                    }else{
+                        $scope.SelectedMenuV = {};
+                    } 
+                }    
+            };
+            
+            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
+            this.ShowHideD = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleD = $scope.IsVisibleD ? false : true;
+                    if($scope.IsVisibleD == true){
+                        //hide non-selected
+                        $scope.IsVisibleP = false;
+                        $scope.IsVisibleEP = false;
+                        $scope.IsVisibleSR = false;
+                        $scope.IsVisibleCR = false;
+                        $scope.IsVisibleV = false;
+                        $scope.IsVisibleCL = false;
+                        $scope.IsVisibleCA = false;
+                        //highlight
+                        $scope.SelectedMenuD = {
+                            "opacity" : "1", 
+                        }
+                        $scope.SelectedMenuP = {};
+                        $scope.SelectedMenuE = {};
+                        $scope.SelectedMenuEU = {};
+                        $scope.SelectedMenuCr = {};
+                        $scope.SelectedMenuV = {};
+                        $scope.SelectedMenuC = {};
+                        $scope.SelectedMenuCa = {};
+                    }else{
+                        $scope.SelectedMenuD = {};
+                    } 
+                }    
+            };
+            
+            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
+            this.ShowHideCl = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleCL = $scope.IsVisibleCL ? false : true; 
+                    if($scope.IsVisibleCL == true){
+                        //hide non-selected
+                        $scope.IsVisibleP = false;
+                        $scope.IsVisibleEP = false;
+                        $scope.IsVisibleSR = false;
+                        $scope.IsVisibleCR = false;
+                        $scope.IsVisibleV = false;
+                        $scope.IsVisibleD = false;
+                        $scope.IsVisibleCA = false;
+                        //highlight
+                        $scope.SelectedMenuC = {
+                            "opacity" : "1", 
+                        }
+                        $scope.SelectedMenuD = {};
+                        $scope.SelectedMenuP = {};
+                        $scope.SelectedMenuE = {};
+                        $scope.SelectedMenuEU = {};
+                        $scope.SelectedMenuCr = {};
+                        $scope.SelectedMenuV = {};
+                        $scope.SelectedMenuCa = {};
+                    }else{
+                        $scope.SelectedMenuC = {};
+                    }
+                }  
+            };
+            
+            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
+            this.ShowHideCa = function(){
+                if(log._environnementSel!= ''){
+                    $scope.IsVisibleCA = $scope.IsVisibleCA ? false : true; 
+                    if($scope.IsVisibleCA == true){
+                        //hide non-selected
+                        $scope.IsVisibleP = false;
+                        $scope.IsVisibleEP = false;
+                        $scope.IsVisibleSR = false;
+                        $scope.IsVisibleCR = false;
+                        $scope.IsVisibleV = false;
+                        $scope.IsVisibleD = false;
+                        $scope.IsVisibleCL = false;
+                        //highlight
+                        $scope.SelectedMenuCa = {
+                            "opacity" : "1", 
+                        }
+                        $scope.SelectedMenuC = {};
+                        $scope.SelectedMenuD = {};
+                        $scope.SelectedMenuP = {};
+                        $scope.SelectedMenuE = {};
+                        $scope.SelectedMenuEU = {};
+                        $scope.SelectedMenuCr = {};
+                        $scope.SelectedMenuV = {};
+                    }else{
+                        $scope.SelectedMenuCa = {};
+                    }
+                }  
+            };
             
         });
     }

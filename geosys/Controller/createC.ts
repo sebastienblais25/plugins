@@ -14,21 +14,7 @@ export class CreateController{
      */
     creerControl(log:User, mapApi:any):void{
         mapApi.agControllerRegister('submitFromC', function($scope){
-            $scope.IsVisible = false;
-            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
-            this.ShowHide = function(){
-                if(log._environnementSel!= ''){
-                    $scope.IsVisible = $scope.IsVisible ? false : true;
-                    if($scope.IsVisible == true){
-                        $scope.SelectedMenuCr = {
-                            "opacity" : "1", 
-                        }
-                    }else{
-                        $scope.SelectedMenuCr = {
-                        }
-                    } 
-                }    
-            };
+            
             /************** interactive List ***************/
             this.typeOper = '';
             this.selectedItemE = '';

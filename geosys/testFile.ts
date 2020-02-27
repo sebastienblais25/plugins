@@ -76,14 +76,14 @@ export class TestFile{
         this._breadcrumbs += '/'+ this._liveFolder
         let output:string = `
         <div ng-controller="fileManagerPanelCtrl as ctrl11">
-            <span>`+ this._breadcrumbs +`</span>
+            <div class="breadclass">`+ this._breadcrumbs +`</div>
             
-            <md-list-item ng-repeat="folder in ctrl11.folders">
-                <div class="divButton" ng-click="ctrl11.openFolder(folder)">{{ folder.name }}</div>
+            <md-list-item ng-click="ctrl11.openFolder(folder)" class="folderBtn" ng-repeat="folder in ctrl11.folders">
+                <div class="" >(folder){{ folder.name }}</div>
             </md-list-item>
 
-            <md-list-item class="itemlist" ng-repeat="file in ctrl11.files">
-                <div class="largeurlist">{{ file.name }}</div>
+            <md-list-item class="fileBtn" ng-repeat="file in ctrl11.files">
+                <div class="">(file){{ file.name }}</div>
                 
             </md-list-item>
 
@@ -92,8 +92,6 @@ export class TestFile{
 
         return output;
     }
-
-
 
     setNextFolder(next:string):void{
         this._nextFolder = next ;

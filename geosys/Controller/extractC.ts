@@ -15,22 +15,7 @@ export class ExtractController{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitCtrl', function($scope){ 
-            $scope.IsVisible = false;
-            $scope.ISVisibleASP = false;
-            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
-            this.ShowHide = function(){
-                if(log._environnementSel!= ''){
-                    $scope.IsVisible = $scope.IsVisible ? false : true; 
-                    if($scope.IsVisible == true){
-                        $scope.SelectedMenuE = {
-                            "opacity" : "1", 
-                        }
-                    }else{
-                        $scope.SelectedMenuE = {
-                        }
-                    }
-                }  
-            };
+            
             /************** interactive List ***************/
             this.selectedItemA = '';
             this.selectedItemB = '';
@@ -82,7 +67,7 @@ export class ExtractController{
                         "background-color" : "red", 
                     }
                 }else{
-                    $scope.IsVisible = false;
+                    $scope.IsVisibleEP = false;
                     $scope.SelectedMenuE = {
                         "background-color" : "green", 
                     }
@@ -102,21 +87,7 @@ export class ExtractController{
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitExCtrl', function($scope){
             const that = this;
-            $scope.IsVisible = false;
-            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
-            this.ShowHide = function(){
-                if(log._environnementSel!= ''){
-                    $scope.IsVisible = $scope.IsVisible ? false : true;
-                    if($scope.IsVisible == true){
-                        $scope.SelectedMenuEU = {
-                            "opacity" : "1", 
-                        }
-                    }else{
-                        $scope.SelectedMenuEU = {
-                        }
-                    }
-                }  
-            };
+            
             /************** interactive List ***************/
             this.selectedItemA = '';
             this.whereclause = '';
@@ -258,7 +229,7 @@ export class ExtractController{
                         "background-color" : "red", 
                     }
                 }else{
-                    $scope.IsVisible = false;
+                    $scope.IsVisibleSR = false;
                     $scope.SelectedMenuEU = {
                         "background-color" : "green", 
                     }

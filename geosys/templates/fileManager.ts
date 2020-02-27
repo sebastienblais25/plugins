@@ -6,4 +6,5 @@ export const menuFileExplorer:string = `
         <h2>File Manager (Alpha)</h2>
     </div>
 </div>
+</div>
 `;

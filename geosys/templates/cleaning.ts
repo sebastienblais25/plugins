@@ -4,10 +4,10 @@
 
 export const formNettoyage:string = 
 `<div ng-controller="SubmitNetCtrl as ctrl7">
-    <div ng-style="SelectedMenuC" class="divButton" ng-click="ctrl7.ShowHide()">
+    <div ng-style="SelectedMenuC" class="divButton" ng-click="ctrl1.ShowHideCl()">
         <h2>{{ 'plugins.geosys.nettoyage' | translate }}</h2>
     </div>
-    <div ng-show="IsVisible" ng-style="bgEnv" class="extractspace">
+    <div ng-show="IsVisibleCL" ng-style="bgEnv" class="extractspace">
         <div class="rv-subsection">
             <md-input-container class="ddlshowEX">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>

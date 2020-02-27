@@ -1,9 +1,9 @@
 export const formPlanifier = `
 <div ng-controller="submitFromP as ctrl2">
-    <div ng-style="SelectedMenuP" class="divButton" ng-click="ctrl2.ShowHide()">
+    <div ng-style="SelectedMenuP" class="divButton" ng-click="ctrl1.ShowHide()">
         <h2>{{ 'plugins.geosys.planif' | translate }}</h2>
     </div>
-    <div ng-show="IsVisible" ng-style="bgEnv">
+    <div ng-show="IsVisibleP" ng-style="bgEnv">
         <div>
             <md-input-container class="ddlshow">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>

@@ -67,7 +67,7 @@ export class menuManager{
         let outputCreer:string = this.creerMDManager(log,mapApi);
         let outputNettoyage:string = this.nettoyageManager(log,mapApi);
         let outputCancel:string = this.cancelManager(log,mapApi);
-        let outputTopmenu:string = this.topMenuManager(log,mapApi);
+        let outputTopmenu:string = this.topMenuManager(log,mapApi,panel);
         let outputFileManager:string = this.fileExplorerManager(log,mapApi);
         
         let menuprincipal:string;
@@ -139,9 +139,9 @@ export class menuManager{
      * @returns {string} the compile output
      * @memberof menuManager
      */
-    topMenuManager(log:User, mapApi:any):string{
+    topMenuManager(log:User, mapApi:any, panel:any):string{
 
-        this._compiler.topmenuControl(log, mapApi);
+        this._compiler.topmenuControl(log, mapApi,panel);
 
         let output = topmenu;
         //mb.compileTemplate(output,mapApi);

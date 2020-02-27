@@ -2,7 +2,7 @@
 
 export const topmenu:string= `
 <div ng-controller="topmenuCtrl as ctrl1"> 
-    <div class="topmenu">
+    <div class="topmenu" id="topmenu">
         <div class="envDiv">
             <md-select 
             class="envSelect"
@@ -21,5 +21,5 @@ export const topmenu:string= `
         <div class="helpDiv">
             <span>Help</span>
         </div>
-    </div>   
+    </div> 
 `;

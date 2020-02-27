@@ -16,21 +16,7 @@ export class CancelController{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('cancelStep', function($scope){ 
-            $scope.IsVisible = false;
-            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
-            this.ShowHide = function(){
-                if(log._environnementSel!= ''){
-                    $scope.IsVisible = $scope.IsVisible ? false : true; 
-                    if($scope.IsVisible == true){
-                        $scope.SelectedMenu = {
-                            "opacity" : "1", 
-                        }
-                    }else{
-                        $scope.SelectedMenu = {
-                        }
-                    }
-                }  
-            };
+            
             /************** interactive List ***************/
             this.selectedItemA = '';
             this.selectedItemB = '';
@@ -63,7 +49,7 @@ export class CancelController{
                         "background-color" : "red", 
                     }
                 }else{
-                    $scope.IsVisible = false;
+                    $scope.IsVisibleCA = false;
                     console.log(log._token);
                     $scope.SelectedMenu = {
                         "background-color" : "green", 

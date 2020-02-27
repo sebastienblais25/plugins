@@ -64,9 +64,10 @@ export default class Geosys{
         let output:string = loginmenu;
 
         //creating the panel with the dimension and a title for the application
-        this.panel = this.mapApi.panels.create('Test Login');
+        this.panel = this.mapApi.panels.create('geosys');
         this.panel.element.css({bottom: '0em', width: '400px', top: '50px'})
         this.panel.header.title = 'Generic Title';
+        this.panel.body.id = 'hello'
 
         //add control for the login button
         this.connexionControls(this.panel,this.mapApi,this.config);

@@ -3,10 +3,10 @@
 
 export const formCancel:string = `
 <div ng-controller="cancelStep as ctrl8">
-    <div ng-style="SelectedMenuCa" class="divButton" ng-click="ctrl8.ShowHide()">
+    <div ng-style="SelectedMenuCa" class="divButton" ng-click="ctrl1.ShowHideCa()">
         <h2>{{ 'plugins.geosys.annuler' | translate }}</h2>
     </div>
-    <div ng-show="IsVisible" ng-style="bgEnv" class="extractspace">
+    <div ng-show="IsVisibleCA" ng-style="bgEnv" class="extractspace">
         <div class="rv-subsection">
             <md-input-container class="ddlshowEX">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>
@@ -55,6 +55,5 @@ export const formCancel:string = `
             </md-input-container>
         </div>
     </div>    
-</div>
 </div>
 `;

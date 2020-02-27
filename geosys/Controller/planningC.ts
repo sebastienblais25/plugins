@@ -15,21 +15,7 @@ export class PlanningController{
     planControl(log:User, mapApi:any, config:any):void{
         mapApi.agControllerRegister('submitFromP', function($scope){
             const that = this;
-            $scope.IsVisible = false;
-            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
-            this.ShowHide = function(){
-                if(log._environnementSel!= ''){
-                    $scope.IsVisible = $scope.IsVisible ? false : true;
-                    if($scope.IsVisible == true){
-                        $scope.SelectedMenuP = {
-                            "opacity" : "1", 
-                        }
-                    }else{
-                        $scope.SelectedMenuP = {
-                        }
-                    }
-                }    
-            };
+            
             /************** interactive List ***************/
             this.selectedItemC = '';
             this.selectedItemD = '';
@@ -93,6 +79,7 @@ export class PlanningController{
             //subscribe for the drawing
             (<any>window).drawObs.drawPolygon.subscribe(value => {
                 //create a geojson with the infromation obtain
+                console.log(value.rings)
                 log.createGeoJson('ESPG:'+value.spatialReference.wkid,value.rings)
                 //show the geo json in the input 
                 this.geomp = log._geom;
@@ -179,7 +166,7 @@ export class PlanningController{
                         "background-color" : "red", 
                     }
                 }else{
-                    $scope.IsVisible = false;
+                    $scope.IsVisibleP = false;
                     $scope.SelectedMenuP = {
                         "background-color" : "green", 
                     }

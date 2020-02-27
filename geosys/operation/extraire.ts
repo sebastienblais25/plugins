@@ -116,7 +116,11 @@ export class Extraire{
         this._json = JSON.stringify(output)
     }
 
-    //put a json string into a blob and export into a json file in download file
+    /**
+     *put a json string into a blob and export into a json file in download file
+     * @param {*} output the file to save
+     * @memberof Extraire
+     */
     saveJson(output:any):void{
         let blob = new Blob([output],{type:"application/json"});
         FileSaver.saveAs(blob,'export.json');

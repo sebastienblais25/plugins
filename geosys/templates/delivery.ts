@@ -2,10 +2,10 @@
 
 export const formDelivery = `
 <div ng-controller="submitFromD as ctrl5">
-    <div ng-style="SelectedMenuD" class="divButton" ng-click="ctrl5.ShowHide()">
+    <div ng-style="SelectedMenuD" class="divButton" ng-click="ctrl1.ShowHideD()">
         <h2>{{ 'plugins.geosys.delivery' | translate }}</h2>
     </div>
-    <div ng-show="IsVisible" ng-style="bgEnv">
+    <div ng-show="IsVisibleD" ng-style="bgEnv">
         <div class="rv-subsection">
             
             <md-input-container class="ddlshowEX">

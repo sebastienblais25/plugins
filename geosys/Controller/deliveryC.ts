@@ -15,21 +15,7 @@ export class DeliveryController{
     deliControl(log:User, mapApi:any):void{
         //mapApi.agDirectiveRegister()
         mapApi.agControllerRegister('submitFromD', function($scope){
-            $scope.IsVisible = false;
-            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
-            this.ShowHide = function(){
-                if(log._environnementSel!= ''){
-                    $scope.IsVisible = $scope.IsVisible ? false : true;
-                    if($scope.IsVisible == true){
-                        $scope.SelectedMenuD = {
-                            "opacity" : "1", 
-                        }
-                    }else{
-                        $scope.SelectedMenuD = {
-                        }
-                    } 
-                }    
-            };
+            
             /************** interactive List ***************/
             this.typeOper = '';
             this.selectedItemE = '';
@@ -82,6 +68,7 @@ export class DeliveryController{
                     }
                 }else{
                     console.log(log.gettoken());
+                    $scope.IsVisibleD = false;
                     $scope.SelectedMenuD = {
                         "background-color" : "green", 
                     }

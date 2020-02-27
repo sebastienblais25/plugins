@@ -16,21 +16,7 @@ export class CleaningController{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitNetCtrl', function($scope){
-            $scope.IsVisible = false;
-            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
-            this.ShowHide = function(){
-                if(log._environnementSel!= ''){
-                    $scope.IsVisible = $scope.IsVisible ? false : true; 
-                    if($scope.IsVisible == true){
-                        $scope.SelectedMenuC = {
-                            "opacity" : "1", 
-                        }
-                    }else{
-                        $scope.SelectedMenuC = {
-                        }
-                    }
-                }  
-            };
+            
             /************** interactive List ***************/
             this.selectedItemA = '';
             this.selectedItemB = '';
@@ -65,7 +51,7 @@ export class CleaningController{
                     }
                     }else{
 
-                        $scope.IsVisible = false;
+                        $scope.IsVisibleCL = false;
                         //console.log(log._token);
                         alert("Deleted")
                         $scope.SelectedMenuC = {

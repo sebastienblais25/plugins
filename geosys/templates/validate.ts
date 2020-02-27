@@ -1,9 +1,9 @@
 export const validateform:string = `
 <div ng-controller="submitFromV as ctrl9">
-    <div ng-style="SelectedMenuV" class="divButton" ng-click="ctrl9.ShowHide()">
+    <div ng-style="SelectedMenuV" class="divButton" ng-click="ctrl1.ShowHideV()">
         <h2>{{ 'plugins.geosys.valider' | translate }}</h2>
     </div>
-    <div ng-show="IsVisible" ng-style="bgEnv">
+    <div ng-show="IsVisibleV" ng-style="bgEnv">
         <div class="rv-subsection">
             <md-input-container class="ddlshowEX">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>

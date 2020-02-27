@@ -3,10 +3,10 @@
 
 export const formCreerMD:string = `
 <div ng-controller="submitFromC as ctrl6">
-    <div ng-style="SelectedMenuCr" class="divButton" ng-click="ctrl6.ShowHide()">
+    <div id="create" ng-style="SelectedMenuCr" class="divButton" ng-click="ctrl1.ShowHideCr()">
         <h2>{{ 'plugins.geosys.creer' | translate }}</h2>
     </div>
-    <div ng-show="IsVisible" ng-style="bgEnv">
+    <div ng-show="IsVisibleCR" ng-style="bgEnv">
         <div class="rv-subsection">
 
             <md-input-container class="ddlshowEX">

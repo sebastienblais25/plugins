@@ -31,7 +31,7 @@ export class FileManagerController{
                         this.panel.element.css({top: '0px;', margin: '100px 50px 100px 450px'});
             
                         let closeBtn = this.panel.header.closeButton;
-                        this.panel.header.title = `File Manager`;
+                        this.panel.header.title = `File Manager (Alpha testing)`;
                     } else {
                         this.panel.close();
                     }

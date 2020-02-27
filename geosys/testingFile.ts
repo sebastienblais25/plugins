@@ -10,12 +10,14 @@ export class TestingFile{
         this._path = path;
     }
 
+
+    /*************** Accessors ***********************/
     getName(){
         return this._name;
     }
 
     setName(name:string){
-        this._name =name;
+        this._name = name;
     }
 
     getPath(){
