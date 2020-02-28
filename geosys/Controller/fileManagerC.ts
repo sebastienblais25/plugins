@@ -59,7 +59,7 @@ export class FileManagerController{
             this.files = tfm.buildFileList();
 
             this.openFolder = (folder) => {
-                console.log(folder.name);
+                //console.log(folder.name);
                 tfm.setNextFolder(folder.name);
                 
                 let fmc:FileManagerController = new FileManagerController();

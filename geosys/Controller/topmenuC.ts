@@ -14,7 +14,7 @@ export class TopMenuController{
      * @memberof manageController
      */
     topmenuControl(log:User, mapApi:any, panel:any){
-        mapApi.agControllerRegister('topmenuCtrl', function($scope, $location, $anchorScroll){
+        mapApi.agControllerRegister('topmenuCtrl', function($scope/*, $location, $anchorScroll*/){
             
             /************** interactive List ***************/
             this.selectedItemENT = '';
@@ -173,12 +173,13 @@ export class TopMenuController{
                 if(log._environnementSel!= ''){
                     $scope.IsVisibleCR = $scope.IsVisibleCR ? false : true;
                     if($scope.IsVisibleCR == true){
-                        //$location.hash('create');
-                        //$anchorScroll();
+                        
+                        document.getElementsByClassName('panel-body')[7].setAttribute('id','scrolling')
                         let myElement = document.getElementById('create');
+
                         let topPos = myElement.offsetTop;
                         console.log(panel.body);
-                        document.getElementById('hello').scrollTop = topPos;
+                        document.getElementById('scrolling').scrollTop = topPos;
                         //hide non-selected
                         $scope.IsVisibleP = false;
                         $scope.IsVisibleEP = false;

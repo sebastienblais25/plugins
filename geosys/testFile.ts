@@ -27,6 +27,10 @@ export class TestFile{
             new Promise(resolve =>{
                 $.ajax({
                     url: urlListFile + this._nextFolder,
+                    headers: {
+                        'Authorization': `Bearer ${log.gettoken()}`,
+                        'contentType': 'application/json'   
+                    },
                     type: 'Get',
                     async: false,
                     //cache:false,
@@ -36,7 +40,7 @@ export class TestFile{
                     success: //data => resolve()
                     
                     function(response,jqXHR){
-                        console.log(response)
+                        //console.log(response)
                         outputValue = response;
                         
                     },
@@ -58,7 +62,7 @@ export class TestFile{
     buildFolderList(){
         let listFo = [];
         for(let i in this._value.list_folder){
-            listFo.push( { name: this._value.list_folder[i].name , wanted: false });
+            listFo.push( { name: this._value.list_folder[i].name, modified:this._value.list_folder[i].last_modified, wanted: false });
         }
         return listFo;
     }
@@ -66,7 +70,7 @@ export class TestFile{
     buildFileList(){
         let listFi = [];
         for(let i in this._value.list_file){
-            listFi.push( { name: this._value.list_file[i].name , wanted: false });
+            listFi.push( { name: this._value.list_file[i].name , size:this._value.list_file[i].size, modified:this._value.list_file[i].last_modified, wanted: false });
         }
         return listFi;
     }
@@ -77,19 +81,37 @@ export class TestFile{
         let output:string = `
         <div ng-controller="fileManagerPanelCtrl as ctrl11">
             <div class="breadclass">`+ this._breadcrumbs +`</div>
-            
+            <div class="headerFile">
+                <span class="nameFileFolderHeader">Name</span> 
+                <span class="modifiedFileFolderHeader">Date modified</span>
+                <span class="sizeFileFolderHeader">Size</span>
+            </div>
             <md-list-item ng-click="ctrl11.openFolder(folder)" class="folderBtn" ng-repeat="folder in ctrl11.folders">
-                <div class="" >(folder){{ folder.name }}</div>
+                <div>
+                    <md-icon>
+                        <i class="material-icons">
+                            folder
+                        </i>
+                    </md-icon>
+                    <span class="nameFileFolder">{{ folder.name }}</span>
+                    <span class="modifiedFileFolder">{{ folder.modified }}</span>
+                </div>
             </md-list-item>
-
+            
             <md-list-item class="fileBtn" ng-repeat="file in ctrl11.files">
-                <div class="">(file){{ file.name }}</div>
-                
+                <div>
+                    <md-icon>
+                        <i class="material-icons">
+                            insert_drive_file
+                        </i>
+                    </md-icon>
+                    <span class="nameFileFolder">{{ file.name }}</span> 
+                    <span class="modifiedFileFolder">{{ file.modified }}</span>
+                    <span class="sizeFileFolder">{{ file.size }} KB</span></div>
             </md-list-item>
 
         </div>
         `
-
         return output;
     }
 

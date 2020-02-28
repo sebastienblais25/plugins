@@ -191,7 +191,6 @@
 }
 
 
-
 //For teh submit button
 .submitbtn{
   margin-top: 15px;
@@ -225,6 +224,7 @@
 
 
 /********** File Manager **********/
+/**** breadcrumbs ****/
 .breadclass{
   width: 96%;
   margin-top: 10px;
@@ -235,12 +235,47 @@
   border-radius: 5px;
   border-color: lightgrey;
 }
+/**** breadcrumbs ****/
+/**** Header ****/
+.headerFile{
+  width: 96%;
+  margin-top: 3px;
+  border-style: solid;
+  border-width: 2px;
+  //border-radius: 5px;
+  border-color: lightgrey;
+  margin-bottom: 3px;
+}
 
+.nameFileFolderHeader{
+  width:200px;
+  display: inline-flex;
+  padding-left: 2px;
+}
+
+.modifiedFileFolderHeader{
+  width:200px;
+  display: inline-block;
+  border-left: 2px solid;
+  border-color: lightgrey;
+  padding-left: 2px;
+}
+
+.sizeFileFolderHeader{
+  width:150px;
+  display: inline-block;
+  border-left: 2px solid;
+  border-color: lightgrey;
+  padding-left: 2px;
+}
+/**** Header ****/
+
+/**** Folder ****/
 .folderBtn {
+  width: 96%;
+  padding: 0px 0px 0px 10px;
   
-  padding: 0px 95% 0px 10px;
-  width: 300px;
-  text-align: center;
+  //text-align: center;
   font-size: 15px;
   //margin: 5px 0px;
   opacity: 0.6;
@@ -252,25 +287,20 @@
 .folderBtn:hover {
   opacity: 1;
   background-color: #e7e6e6;
-  //border-style: solid;
-  //border-width: 2px;
-  //border-radius: 5px;
-  //border-color: lightgray;
 }
+/**** Folder ****/
 
+/**** Files ****/
 .fileBtn {
+  width: 96%;
+  padding: 0px 0px 0px 10px;
   
-  padding: 0px 95% 0px 10px;
-  width: 300px;
-  text-align: center;
+  //text-align: center;
   font-size: 15px;
   //margin: 5px 0px;
   opacity: 0.6;
   transition: 0.3s;
-  //border-style: solid;
-  //border-width: 2px;
-  //border-radius: 5px;
-  //border-color: darken($color: #000000, $amount: 1);
+  
 }
 
 // lors du hover du bouton du menu
@@ -278,23 +308,21 @@
   opacity: 1;
   background-color: #f7f5f5;
 }
+/**** Files ****/
 
+/**** Folder and Files ****/
+.nameFileFolder{
+  width:200px;
+  display: inline-flex;
+}
 
-
-/******* Arrow down **********/
-.arrow {
-  border: solid black;
-  border-width: 0 3px 3px 0;
+.modifiedFileFolder{
+  width:200px;
   display: inline-block;
-  padding: 3px;
 }
 
-.up {
-  transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
+.sizeFileFolder{
+  width:150px;
+  display: inline-block;
 }
-
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-}
+/**** Folder and Files ****/

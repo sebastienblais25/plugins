@@ -45,4 +45,4 @@ export const urlDeleteClean:string = `http://127.0.0.1:4010/suivi-prod/unite-tra
 export const urlCancelStep:string = `http://127.0.0.1:4010/suivi-prod/etape-ut/`;
 
 //url for testing a file manager 
-export const urlListFile:string = `http://127.0.0.1:4010/test/file/`;
+export const urlListFile:string = `http://127.0.0.1:4010/systeme/liste-contenants-fichiers?contenant_url=`;
