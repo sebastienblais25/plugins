@@ -18,6 +18,9 @@ export default class Geosys{
 
         //set _RV
         this.config = this._RV.getConfig('plugins').geosys;
+        this.config.base_theme = 'corint_250K'
+
+        //alert(this.config.base_theme)
         //set la langue pour le plugin
         this.config.language = this._RV.getCurrentLang();
         //set la config pour la geometry
@@ -134,7 +137,7 @@ export default class Geosys{
     }
 };
 
-//Inteface pour avoir accèes au element du viewer
+//Inteface pour avoir accès au element du viewer
 export default interface Geosys{
     mapApi: any,
     _RV: any,
@@ -158,38 +161,38 @@ Geosys.prototype.translations = {
         where: 'Enter a Where Clause :',
         shp: 'Download Shapefile (.zip)',
         //Extraction seulement
-        extrac: 'Planned Extract - 2',
-        extract: 'Unplanned Extract - 2.1',
+        extrac: 'Extract',
+        extract: 'Extract',
         clip: 'If clip',
         //Planifier seulement
         testbutton: 'GeoSys',
-        planif: 'Planning - 1',
+        planif: 'Planning',
         typeTrv: 'working type :',
-        classe: 'Select a class :',
+        classe: 'Select class(es) :',
         datefinprv: 'Final date planned',
         //Login seulement
         login: 'Login',
         username : "username",
         password : 'password',
         //Livraison seulement
-        delivery : 'Delivery - 5',
+        delivery : 'Delivery',
         postput : 'Select an operation :',
-        insert : 'Insert',
+        insert : 'Overwrite',
         update : 'Update',
         fileMD : 'File metadata : ',
         fileGDB : 'File geodatabase : ',
         //CréerMD seulement
-        creer : 'CreateMD - 3',
+        creer : 'CreateMD',
         source : 'Select the sources ID : ',
         precision : 'Select the precision ID : ',
         contrainte : 'Select the legal contraint ID : ',
         //ValiderMd seulement
-        valider : 'ValidateMD - 4',
+        valider : 'ValidateMD',
         filejson: 'fichier JSON à valider : ',
         //Nettoyage seulement
-        nettoyage : 'Cleaning - 6',
+        nettoyage : 'Cleaning',
         //Annuler seulement
-        annuler : 'Cancel - 0',
+        annuler : 'Cancel',
         //Info user
         themeI : 'Theme',
         right : 'Right',
@@ -210,38 +213,38 @@ Geosys.prototype.translations = {
         where: 'Entrer une Where Clause :',
         shp: 'Téléchargement Shapefile (.zip)',
         //Extraction seulement
-        extrac: 'Extraction Planifié - 2',
-        extract: 'Extraction Sans Retour - 2.1',
+        extrac: 'Extraction',
+        extract: 'Extraction',
         clip: 'Si clip',
         //Planifier seulement
         testbutton: 'GeoSys',
-        planif: 'Planifier - 1',
+        planif: 'Planifier',
         typeTrv: 'Type de travail :',
-        classe: 'selectionne une classe :',
+        classe: 'selectionne une ou des classe(s) :',
         datefinprv: 'Date fin prévue',
         //Login seulement
         login: 'connexion :',
         username : "nom d'usager",
         password : 'mot de passe', 
         //Livraison seulement 
-        delivery : 'Livraison - 5',
+        delivery : 'Livraison',
         postput : 'Sélectionne une opération :',
-        insert : 'Insérer',
+        insert : 'Écraser',
         update : 'Mise à jour', 
         fileMD : 'Fichier métadonnée : ',
-        fileGDB : 'Fichier géo base de donnée',
+        fileGDB : 'Fichier géo base de donnée : ',
         //CréerMD seulement
-        creer : 'CreerMD - 3',
+        creer : 'CreerMD',
         source : 'Sélectionner les identifiants des sources : ',
         precision : 'Sélectionner les identifiant de précison : ',
         contrainte : 'Sélectionner les identifiants de contraintes légales : ',
         //ValiderMD seulement
-        valider : 'ValiderMD - 4',
+        valider : 'ValiderMD',
         filejson: 'fichier JSON à valider : ',
         //Nettoyage seulement
-        nettoyage : 'Nettoyage - 6',
+        nettoyage : 'Nettoyage',
         //Annuler seulement
-        annuler : 'Annuler - 0',
+        annuler : 'Annuler',
         //Info user
         themeI : 'Thème',
         right : 'Droit',

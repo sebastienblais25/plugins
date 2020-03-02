@@ -26,7 +26,7 @@ export class TestFile{
         promises.push(
             new Promise(resolve =>{
                 $.ajax({
-                    url: urlListFile + this._nextFolder,
+                    url: 'http://127.0.0.1:4010/' + urlListFile + this._breadcrumbs + this._nextFolder,
                     headers: {
                         'Authorization': `Bearer ${log.gettoken()}`,
                         'contentType': 'application/json'   

@@ -66,16 +66,27 @@ export const formPlanifier = `
         </md-input-container>
         </div>
 
-        <div>
-        <md-input-container class="largeur">
-            <label>{{ 'plugins.geosys.geome' | translate }}</label>
-            <input type="text" name="geomp" ng-model="ctrl2.geomp" placeholder="Geom" class="inputshape"> 
-            <md-button ng-click="ctrl2.toggleDraw()" class="btnCopy md-raised">Copy</md-button>
-        </md-input-container>
-        
-        <label class="advanced">Shapefile(.zip)</label>
-        <input  type="file" id="fileshp" ng-model="ctrl2.filshp" accept=".zip" class="inputshape"/>
-        <md-button ng-click="ctrl2.loadshp()" class="btnShape md-raised">add shp</md-button>
+        <div class='geomMenu'>
+            <md-radio-group ng-model="data.group1">
+                <ul>
+                <li><md-radio-button value="Apple" class="md-primary">Apple</md-radio-button></li>
+                <li><md-radio-button value="Banana"> Banana </md-radio-button></li>
+                <li><md-radio-button value="Mango">Mango</md-radio-button></li>
+                </ul>
+            </md-radio-group> 
+                    <md-input-container class="">
+                        
+                            <label>{{ 'plugins.geosys.geome' | translate }}</label>
+                            <input type="text" name="geomp" ng-model="ctrl2.geomp" placeholder="Geom"> 
+                        
+                    </md-input-container>
+                
+            
+                <label class="advanced">Shapefile(.zip)</label>
+                <input  type="file" id="fileshp" ng-model="ctrl2.filshp" accept=".zip" class="inputshape"/>
+                <md-button ng-click="ctrl2.loadshp()" class="btnShape md-raised">Import</md-button>
+            
+        </div>
         
         <div>
         <md-input-container class="submitbtn">

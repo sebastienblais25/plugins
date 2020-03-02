@@ -51,7 +51,7 @@ export class CleaningController{
                     }
                     }else{
 
-                        $scope.IsVisibleCL = false;
+                        //$scope.IsVisibleCL = false;
                         //console.log(log._token);
                         alert("Deleted")
                         $scope.SelectedMenuC = {

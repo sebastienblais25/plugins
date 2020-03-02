@@ -53,7 +53,7 @@ export class PlanningController{
                     }
                 }
                 //Populate the input of the working unit
-                this.idut = slectedthem + '_'+ dd + mm + yyyy + '_';
+                this.idut = slectedthem + '_'+ yyyy + mm + dd +  '_';
                 //populate the working type list
                 this.itemsD.length = 0;
                 this.itemsD = log.setworkingtype(this.selectedItemC);
@@ -84,22 +84,6 @@ export class PlanningController{
                 //show the geo json in the input 
                 this.geomp = log._geom;
             });
-            this.toggleDraw = function() {
-                //add an element to put the text
-                var copyElement = document.createElement("span");
-                copyElement.appendChild(document.createTextNode(this.geomp));
-                copyElement.id = 'tempCopyToClipboard';
-                document.body.append(copyElement);
-                //select the text
-                var range = document.createRange();
-                range.selectNode(copyElement);
-                window.getSelection().removeAllRanges();
-                window.getSelection().addRange(range);
-                //copy & cleanup
-                document.execCommand('copy');
-                window.getSelection().removeAllRanges();
-                copyElement.remove();
-            }
             
             /************** Shapefile Load ***************/
             this.loadshp = () => {
@@ -166,7 +150,7 @@ export class PlanningController{
                         "background-color" : "red", 
                     }
                 }else{
-                    $scope.IsVisibleP = false;
+                    //$scope.IsVisibleP = false;
                     $scope.SelectedMenuP = {
                         "background-color" : "green", 
                     }

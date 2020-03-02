@@ -1,48 +1,48 @@
  
 //Url for Extract sans retour(/geodata) Get
-export const urlgeoDataGet:string = `http://127.0.0.1:4010/geodata?__dynamic=true`;
+export const urlgeoDataGet:string = `geodata?__dynamic=true`;
 
 //Url for planned extract(/geodata/{identifiant}) Get
-export const urlgeoDatGetId:string = `http://127.0.0.1:4010/geodata/`;
+export const urlgeoDatGetId:string = `geodata/`;
 
 //url for the login(/securite/login) Get
-export const urlLoginGet:string = `http://127.0.0.1:4010/securite/login`;
+export const urlLoginGet:string = `securite/login`;
 
 //url for the id working unit(/suivi-prod/unite-travail/id/theme/actif/{theme}) Get
-export const urlgetidWu:string = `http://127.0.0.1:4010/suivi-prod/unite-travail/id/theme/actif/`;
+export const urlgetidWu:string = `suivi-prod/unite-travail/id/theme/actif/`;
 
 //Send planning to the API(/suivi-prod/planification) Post
-export const urlPlaniPost:string = `http://127.0.0.1:4010/suivi-prod/planification?__dynamic=true`;
+export const urlPlaniPost:string = `suivi-prod/planification?__dynamic=true`;
 
 //url getting environnement(/systeme/envs) Get
-export const urlEnvList:string = `http://127.0.0.1:4010/systeme/envs`;
+export const urlEnvList:string = `systeme/envs`;
 
 //url getting list of classes(/systeme/ressources) Get
-export const urlClassesList:string = `http://127.0.0.1:4010/systeme/ressources`;
+export const urlClassesList:string = `systeme/ressources`;
 
 //url getting the list of working type for theme(/suivi-prod/type-travail/theme/{theme}) Get
-export const urlWorkingType:string = `http://127.0.0.1:4010/suivi-prod/type-travail/theme/`;
+export const urlWorkingType:string = `suivi-prod/type-travail/theme/`;
 
 //url for delivery(Insert)(/geodata/{identifiant}) Post
-export const urlDeliveryInsert:string = `http://127.0.0.1:4010/geodata/`;
+export const urlDeliveryInsert:string = `geodata/`;
 
 //url for delivery(Update)(/geodata/{identifiant}) Put
-export const urlDeliveryUpdate:string = `http://127.0.0.1:4010/geodata/`;
+export const urlDeliveryUpdate:string = `geodata/`;
 
 //url for creating MD(/geosys/creer-md) Post
-export const urlCreateMD:string = `http://127.0.0.1:4010/geosys/creer-md`;
+export const urlCreateMD:string = `geosys/creer-md`;
 
 //url for validating MD(/geosys/valider-md) Post
-export const urlValidateMD:string = `http://127.0.0.1:4010/geosys/valider-md`;
+export const urlValidateMD:string = `geosys/valider-md`;
 
 //url for getting all the info for a code(/suivi-prod/codes/{code}) Get
-export const urlGetCode:string = `http://127.0.0.1:4010/suivi-prod/codes/`;
+export const urlGetCode:string = `suivi-prod/codes/`;
 
 //url for cleaning a working unit id (/suivi-prod/unite-travail/{identifiant}) Delete
-export const urlDeleteClean:string = `http://127.0.0.1:4010/suivi-prod/unite-travail/`
+export const urlDeleteClean:string = `suivi-prod/unite-travail/`
 
 //url for cancelling for step for a theme (/suivi-prod/etape-ut/{identifiant}) Delete
-export const urlCancelStep:string = `http://127.0.0.1:4010/suivi-prod/etape-ut/`;
+export const urlCancelStep:string = `suivi-prod/etape-ut/`;
 
 //url for testing a file manager 
-export const urlListFile:string = `http://127.0.0.1:4010/systeme/liste-contenants-fichiers?contenant_url=`;
+export const urlListFile:string = `systeme/liste-contenants-fichiers?contenant_url=`;

@@ -8,7 +8,7 @@ export class FileManagerController{
     constructor(){}
 
 
-    fileManagercontrols(log:User, mapApi:any):void{
+    fileManagercontrols(log:User, mapApi:any, tfm:TestFile):void{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('FileManagerCtrl', function($scope){
@@ -32,10 +32,10 @@ export class FileManagerController{
             
                         let closeBtn = this.panel.header.closeButton;
                         this.panel.header.title = `File Manager (Alpha testing)`;
-                    } else {
+                    }else {
                         this.panel.close();
                     }
-                    let tfm:TestFile = new TestFile();
+                    
                     let fmc:FileManagerController = new FileManagerController();
                     
                     let output = tfm.buildUI();
@@ -45,7 +45,7 @@ export class FileManagerController{
             
                     this.panel.open();
                     
-                }  
+                }
             };
         });
     };

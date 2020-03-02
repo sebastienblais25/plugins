@@ -62,7 +62,7 @@ export class TopMenuController{
                 output = output.replace('(theme)',log.getAllThemeNAme());
                 output = output.replace('(right)',log.getrightRead() + ' ' + log.getrightWrite());
                 output = output.replace('(equipe)',log._equipe._id);
-                output = output.replace('(envir)', log._environnementSel + '  URL : ' + log._urlEnvselected);
+                output = output.replace('(envir)', log._environnementSel + '  </br>URL : ' + log._urlEnvselected);
                 this.panel.body = output;
         
                 this.panel.open();
@@ -81,7 +81,9 @@ export class TopMenuController{
 
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.ShowHide = function(){ 
+                
                 if(log._environnementSel!= ''){
+                   
                     $scope.IsVisibleP = $scope.IsVisibleP ? false : true;
                     if($scope.IsVisibleP == true){
                         //hide non-selected
@@ -176,10 +178,15 @@ export class TopMenuController{
                         
                         document.getElementsByClassName('panel-body')[7].setAttribute('id','scrolling')
                         let myElement = document.getElementById('create');
+                        /*$( "#create" ).click(function() {
+                            var container = document.getElementById('scrolling'); 
+                            var scrollTo = document.getElementById('create');
+                            container.scrollTop = scrollTo.offsetTop - 30;
+                        });*/
 
-                        let topPos = myElement.offsetTop;
-                        console.log(panel.body);
-                        document.getElementById('scrolling').scrollTop = topPos;
+                        //let topPos = myElement.offsetTop;
+                        //console.log(panel.body);
+                        //document.getElementById('scrolling').scrollTop = topPos;
                         //hide non-selected
                         $scope.IsVisibleP = false;
                         $scope.IsVisibleEP = false;
@@ -339,7 +346,18 @@ export class TopMenuController{
         let temp = $(template);
         mapApi.$compile(temp);
         return temp;
-    } 
+    }
+
+    /**
+     * Scroll to a DOM element
+     * @function  scrollToElement
+     * @param {Number} id element id
+     */
+    scrollToElement(id) {
+        //$timeout(() => {
+            $(`#${id}`)[0].scrollIntoView();
+        //}, constants.delayScrollToElement);
+    }
 
     
 }

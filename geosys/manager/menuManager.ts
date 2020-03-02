@@ -23,6 +23,7 @@ import { CancelController } from '../controller/cancelC';
 import { TopMenuController } from '../controller/topmenuC';
 import { ValidateController } from '../controller/validateC';
 import { FileManagerController } from '../controller/fileManagerC'
+import { TestFile } from '../testFile';
 
 
 export class menuManager{
@@ -73,7 +74,21 @@ export class menuManager{
         let menuprincipal:string;
 
         //compile the form together
-        menuprincipal = "<div>" + outputTopmenu + outputPlan + outputExt + outputExtSR + outputCreer + outputVali + outputDeli + outputNettoyage + outputCancel + outputFileManager + "</div>";
+        menuprincipal = "<div>"
+                            + outputTopmenu
+                            + `<div class="section">Processus Geosys</div>`
+                            + outputPlan 
+                            + outputExt
+                            + outputDeli  
+                            + outputNettoyage 
+                            + `<div class="section">Utilitaire</div>`
+                            + outputExtSR 
+                            + outputCreer 
+                            + outputVali
+                            + outputCancel 
+                            + outputFileManager 
+                        + "</div>";
+        
         this._compiler.compileTemplate(menuprincipal,mapApi);
         
         //put the form in the panel
@@ -232,7 +247,8 @@ export class menuManager{
      * @memberof menuManager
      */
     fileExplorerManager(log:User, mapApi:any):string{
-        this._fileManager.fileManagercontrols(log, mapApi);
+        let tfm:TestFile = new TestFile();
+        this._fileManager.fileManagercontrols(log, mapApi,tfm);
         let output = menuFileExplorer;
         return output;
     }

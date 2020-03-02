@@ -68,7 +68,7 @@ export class DeliveryController{
                     }
                 }else{
                     console.log(log.gettoken());
-                    $scope.IsVisibleD = false;
+                    //$scope.IsVisibleD = false;
                     $scope.SelectedMenuD = {
                         "background-color" : "green", 
                     }

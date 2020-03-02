@@ -51,7 +51,7 @@ export const formDelivery = `
                 <input type="file" id="filefgdb"/>
             </div>
             
-            <div ng-click="ctrl5.ShowHideAdvanced()" class="advanced">
+            <!--<div ng-click="ctrl5.ShowHideAdvanced()" class="advanced">
                 <span>Advanced Settings</span>
             </div>
             <div ng-show="IsVisibleASP">
@@ -67,7 +67,7 @@ export const formDelivery = `
                         </md-option>
                     </md-select>
                 </md-input-container>
-            </div>
+            </div>-->
             
             <md-input-container class="submitbtn">
                 <md-button class="md-primary md-raised" style="float: right;"

@@ -67,7 +67,7 @@ export class ExtractController{
                         "background-color" : "red", 
                     }
                 }else{
-                    $scope.IsVisibleEP = false;
+                    //$scope.IsVisibleEP = false;
                     $scope.SelectedMenuE = {
                         "background-color" : "green", 
                     }
@@ -125,24 +125,6 @@ export class ExtractController{
                 //show the geo json in the input 
                 that.geomSR = log._geom; 
             });
-
-            /************** Copy to clipboard ***************/
-            this.copyToClip = function() {
-                //add an element to put the text
-                var copyElement = document.createElement("span");
-                copyElement.appendChild(document.createTextNode(log._geom));
-                copyElement.id = 'tempCopyToClipboard';
-                document.body.append(copyElement);
-                //select the text
-                var range = document.createRange();
-                range.selectNode(copyElement);
-                window.getSelection().removeAllRanges();
-                window.getSelection().addRange(range);
-                //copy & cleanup
-                document.execCommand('copy');
-                window.getSelection().removeAllRanges();
-                copyElement.remove();
-            }
             /************** Shapefile load ***************/
             this.loadshpEX = () => {
                 let geom:any;
@@ -229,7 +211,7 @@ export class ExtractController{
                         "background-color" : "red", 
                     }
                 }else{
-                    $scope.IsVisibleSR = false;
+                    //$scope.IsVisibleSR = false;
                     $scope.SelectedMenuEU = {
                         "background-color" : "green", 
                     }

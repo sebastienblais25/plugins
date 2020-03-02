@@ -33,7 +33,7 @@ export const formExtraireP:string =
                 </md-select>
             </md-input-container>
 
-            <div ng-click="ctrl3.ShowHideAdvanced()" class="advanced">
+            <!--<div ng-click="ctrl3.ShowHideAdvanced()" class="advanced">
                 <span>Advanced Settings</span>
             </div>
             <div ng-show="IsVisibleASP">
@@ -49,7 +49,7 @@ export const formExtraireP:string =
                         </md-option>
                     </md-select>
                 </md-input-container>
-            </div>
+            </div>-->
             
 
             <md-input-container class="submitbtn">
@@ -66,7 +66,7 @@ export const formExtraireP:string =
 
 export const formExtraireSR:string = 
 `<div ng-controller="SubmitExCtrl as ctrl4">
-    <div ng-style="SelectedMenuEU" class="divButton" ng-click="ctrl1.ShowHideEXSR()">
+    <div ng-style="SelectedMenuEU" class="divButtonUti" ng-click="ctrl1.ShowHideEXSR()">
         <h2>{{ 'plugins.geosys.extract' | translate }}</h2>
     </div>
     <div ng-show="IsVisibleSR" ng-style="bgEnv">
@@ -105,15 +105,14 @@ export const formExtraireSR:string =
         
             <md-input-container class="largeur">
                 <label>{{ 'plugins.geosys.geome' | translate }}</label>
-                <div><input type="text" id="geomEx" ng-model="ctrl4.geomSR " placeholder="geom" class="inputshape"/></div>
-                <md-button ng-click="ctrl4.copyToClip()" class="btnCopy md-raised">Copy</md-button>
+                <div><input type="text" id="geomEx" ng-model="ctrl4.geomSR " placeholder="geom"/></div>
             </md-input-container>
 
             <label>Shapefile(.zip)</label>
             <input  type="file" id="fileshpEX" ng-model="ctrl4.filshp" accept=".zip" class="inputshape"/>
             <md-button ng-click="ctrl4.loadshpEX()" class="btnShape md-raised">add shp</md-button>
 
-            <div ng-click="ctrl4.ShowHideAdvanced()" class="advanced">
+            <!--<div ng-click="ctrl4.ShowHideAdvanced()" class="advanced">
                 <span>Advanced Settings</span>
             </div>
             <div ng-show="IsVisibleASP">
@@ -129,7 +128,7 @@ export const formExtraireSR:string =
                         </md-option>
                     </md-select>
                 </md-input-container>
-            </div>
+            </div>-->
 
             <md-input-container class="submitbtn">
                 <md-button class="md-primary md-raised" style="float: right;"

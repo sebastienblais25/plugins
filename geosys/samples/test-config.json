@@ -262,9 +262,10 @@
     },
     "plugins": {
       "geosys": {
+        "base_theme": "1005"
       },
       "draw": {  
-        "tools": ["picker", "point", "polyline", "polygon", "measure", "extent"]
+        "tools": ["picker", "polygon", "measure", "extent"]
       }
     }
   }

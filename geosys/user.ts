@@ -58,7 +58,7 @@ export class User{
      * @memberof User
      */
     constructUrl(url:string, adding:string=''):string{
-        return /*this._urlEnvselected*/ url + adding
+        return /*this._urlEnvselected*/'http://127.0.0.1:4010/' + url + adding
     }
 
     /**

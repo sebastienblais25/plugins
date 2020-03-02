@@ -3,7 +3,7 @@
 
 export const formCancel:string = `
 <div ng-controller="cancelStep as ctrl8">
-    <div ng-style="SelectedMenuCa" class="divButton" ng-click="ctrl1.ShowHideCa()">
+    <div ng-style="SelectedMenuCa" class="divButtonUti" ng-click="ctrl1.ShowHideCa()">
         <h2>{{ 'plugins.geosys.annuler' | translate }}</h2>
     </div>
     <div ng-show="IsVisibleCA" ng-style="bgEnv" class="extractspace">

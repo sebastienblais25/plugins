@@ -1,11 +1,21 @@
 
+//Section title
+.section{
+  padding: 4px 16px;
+  text-align: left;
+  font-size: 20px;
+  margin: 0px 0px;
+  border-bottom: solid;
+  border-color: black;
+}
+
 //Bouton du menu
 .divButton {
-  background-color: #969696;
+  background-color: #7cdaeb;
   border: none;
   padding: 4px 16px;
-  text-align: center;
-  font-size: 12px;
+  text-align: left;
+  font-size: 10px;
   margin: 0px 0px;
   opacity: 0.6;
   transition: 0.3s;
@@ -13,6 +23,21 @@
 
 // lors du hover du bouton du menu
 .divButton:hover {opacity: 1}
+
+//Bouton du menu
+.divButtonUti {
+  background-color: #8797dd;
+  border: none;
+  padding: 4px 16px;
+  text-align: left;
+  font-size: 10px;
+  margin: 0px 0px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+// lors du hover du bouton du menu
+.divButtonUti:hover {opacity: 1}
 
 
 // class for thw witdh of input
@@ -22,6 +47,15 @@
   margin: 0px 0px 0px 0px;
   max-height: 50px;
   
+}
+
+.geomMenu{
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: #ECE7E6;
+  padding-top: 20px;
+
 }
 
 //for the top menu
