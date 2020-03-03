@@ -76,13 +76,32 @@ export class PlanningController{
                     }
                 }
             }
+
+            this.inputchck = () => {
+                //this.geomp = '';
+                this.drawingchecked = false;
+                this.filechecked = false;
+            }
+            this.drawchck = () => {
+                this.geomp = '';
+                this.inputchecked = false;
+                this.filechecked = false;
+            }
+            this.importchck = () =>{
+                this.geomp = '';
+                this.drawingchecked = false;
+                this.inputchecked = false;
+            }
             //subscribe for the drawing
+            
             (<any>window).drawObs.drawPolygon.subscribe(value => {
-                //create a geojson with the infromation obtain
-                console.log(value.rings)
-                log.createGeoJson('ESPG:'+value.spatialReference.wkid,value.rings)
-                //show the geo json in the input 
-                this.geomp = log._geom;
+                    //create a geojson with the infromation obtain
+                if(this.drawingchecked == true){
+                    console.log(value.rings)
+                    log.createGeoJson('ESPG:'+value.spatialReference.wkid,value.rings)
+                    //show the geo json in the input 
+                    this.geomp = log._geom;
+                }
             });
             
             /************** Shapefile Load ***************/

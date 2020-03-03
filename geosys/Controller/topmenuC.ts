@@ -15,7 +15,7 @@ export class TopMenuController{
      */
     topmenuControl(log:User, mapApi:any, panel:any){
         mapApi.agControllerRegister('topmenuCtrl', function($scope/*, $location, $anchorScroll*/){
-            
+            const that = this;
             /************** interactive List ***************/
             this.selectedItemENT = '';
             this.itemsENT = [];
@@ -40,6 +40,7 @@ export class TopMenuController{
                     }
                 }
             }
+            
             /*********** Info User Panel *************/
             this.openInfoUser = () =>{
                 if (!this.panel) {
@@ -63,12 +64,13 @@ export class TopMenuController{
                 output = output.replace('(right)',log.getrightRead() + ' ' + log.getrightWrite());
                 output = output.replace('(equipe)',log._equipe._id);
                 output = output.replace('(envir)', log._environnementSel + '  </br>URL : ' + log._urlEnvselected);
+                let paneluser:TopMenuController =  new TopMenuController()
+                paneluser.controlUserInfo(log,mapApi);
                 this.panel.body = output;
-        
-                this.panel.open();
                 
+                this.panel.open();     
             }
-
+            
             /**************** form opening handler ***************/
             $scope.IsVisibleP = false;
             $scope.IsVisibleEP = false;
@@ -332,6 +334,21 @@ export class TopMenuController{
                 }  
             };
             
+        });
+    }
+
+    controlUserInfo(log:User, mapApi:any){
+        mapApi.agControllerRegister('infoUserCtrl', function($scope/*, $location, $anchorScroll*/){
+            this.emailUser = 'jean-sebastien.bruneau-blais@canada.ca';
+            this.checkAdvanced = log._advanced;
+            this.changeEmail = () =>{
+                alert('hello');
+            };
+
+            this.checkingAdvanced = () => {
+                log._advanced = log._advanced ? false : true;
+                //console.log(log._advanced);
+            }
         });
     }
 

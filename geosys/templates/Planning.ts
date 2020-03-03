@@ -65,27 +65,26 @@ export const formPlanifier = `
             <input type="text" name="wherep" ng-model="ctrl2.wherep" value="" placeholder="Where ...">
         </md-input-container>
         </div>
-
+        <span style="margin-top: 0px;" class="advanced">{{ 'plugins.geosys.geome' | translate }}</span>
         <div class='geomMenu'>
-            <md-radio-group ng-model="data.group1">
-                <ul>
-                <li><md-radio-button value="Apple" class="md-primary">Apple</md-radio-button></li>
-                <li><md-radio-button value="Banana"> Banana </md-radio-button></li>
-                <li><md-radio-button value="Mango">Mango</md-radio-button></li>
-                </ul>
-            </md-radio-group> 
-                    <md-input-container class="">
-                        
-                            <label>{{ 'plugins.geosys.geome' | translate }}</label>
-                            <input type="text" name="geomp" ng-model="ctrl2.geomp" placeholder="Geom"> 
-                        
-                    </md-input-container>
-                
-            
-                <label class="advanced">Shapefile(.zip)</label>
-                <input  type="file" id="fileshp" ng-model="ctrl2.filshp" accept=".zip" class="inputshape"/>
-                <md-button ng-click="ctrl2.loadshp()" class="btnShape md-raised">Import</md-button>
-            
+            <div class="geomDivIn1">
+                <md-checkbox class="geomCB" ng-model="ctrl2.inputchecked" aria-label="inputchk" ng-click='ctrl2.inputchck()'></md-checkbox>
+                <md-input-container class="containerclass1"> 
+                    <input type="text" name="geomp" ng-model="ctrl2.geomp" class="geominput" aria-label="geometry" ng-disabled="!(ctrl2.inputchecked)"> 
+                </md-input-container>
+            </div>
+            <div class="geomDivIn1">
+                <md-checkbox class="geomCB" ng-model="ctrl2.drawingchecked" aria-label="drwchk" ng-click='ctrl2.drawchck()'></md-checkbox>
+                <div style="padding-top: 10px;" ">Drawing</div>
+                <div style="margin-left:35px; padding-top:5px;margin-top: 0px;" class="advanced"> Shapefile(.zip)</div>
+            </div>
+            <div class="geomDivIn">
+                <div class="containerclass"> 
+                    <md-checkbox class="geomCB" ng-model="ctrl2.filechecked" aria-label="mptchk" ng-click='ctrl2.importchck()'></md-checkbox>
+                    <input  type="file" id="fileshp" ng-model="ctrl2.filshp" accept=".zip" class="inputshape" ng-disabled="!(ctrl2.filechecked)"/>
+                    <md-button ng-click="ctrl2.loadshp()" class="btnShape md-raised" ng-disabled="!(ctrl2.filechecked)">Import</md-button>
+                </div>
+            </div>
         </div>
         
         <div>

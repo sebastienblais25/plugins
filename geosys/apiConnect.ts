@@ -19,7 +19,7 @@ export class connexion{
     promises.push(
         new Promise(resolve =>{
             $.ajax({
-                url: urlgoto,
+                url: /*'http://132.156.9.78:8080/geosys-api/v1/securite/login',*/ urlgoto,
                 headers: {
                     header
                 },
@@ -32,24 +32,17 @@ export class connexion{
                 
                 function(response){
                     outputValue = response;
-                    //console.log(outputValue); 
+                    console.log(outputValue); 
                 },
                 error: function(xhr){
-                    //alert(xhr.statusText);
+                    alert(xhr.statusText);
                     outputValue = xhr;
                 }
             })
-            /*.done(function(data){
-                console.log('success', data)
-                outputValue = data;
-            })
-            .fail(function(xhr){
-                console.log('error',xhr)
-            });*/
        })
         );
     Promise.all(promises).then(values => {
-            //console.log(values);
+            console.log(values);
         });
         //alert(outputValue)
         return outputValue;     
@@ -127,34 +120,33 @@ export class connexion{
     let outputValue:any;
     /********* API CALL **********/
     //no promise still
+   /*let cors = require('cors')
+
+    app.use(cors())*/
     const promises = [];
     promises.push(
         new Promise(resolve =>{
             $.ajax({
-                url: urlgoto,
+                url: 'http://132.156.9.78:8080/geosys-api/v1/geodata/toto',//urlgoto,
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     optEnv
                 },
-                type: typeConn,
+                type: 'POST',
                 async: false,
-                //cache:false,
-                mimeType: "multipart/form-data",
-                contentType: false,
                 data: formdata,
+                cache: false,
+                contentType: false,
                 processData: false,
                 success: //data => resolve()
-                
-                function(response,jqXHR){
-                    
+                function(response,jqXHR){     
                     if (response.message != undefined){
                         //alert(response.message + ' 123')
                         outputValue = jqXHR;
                     }else{
                         //alert(response + ' 2')
                         outputValue = response;
-                    }
-                    
+                    }  
                 },
                 error: function(xhr){
                     alert(xhr.statusText);
@@ -162,13 +154,6 @@ export class connexion{
                     //console.log($('#recommandation').val());
                 }
             })
-            /*.done(function(data){
-                console.log('success', data)
-                outputValue = data;
-            })
-            .fail(function(xhr){
-                console.log('error',xhr)
-            });*/
             })
         );
         Promise.all(promises).then(values => {

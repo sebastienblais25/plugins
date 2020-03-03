@@ -103,32 +103,29 @@ export const formExtraireSR:string =
                 <div><input type="text" ng-model="ctrl4.whereclause" value="" placeholder="Where ..."/></div>
             </md-input-container>
         
-            <md-input-container class="largeur">
-                <label>{{ 'plugins.geosys.geome' | translate }}</label>
-                <div><input type="text" id="geomEx" ng-model="ctrl4.geomSR " placeholder="geom"/></div>
-            </md-input-container>
-
-            <label>Shapefile(.zip)</label>
-            <input  type="file" id="fileshpEX" ng-model="ctrl4.filshp" accept=".zip" class="inputshape"/>
-            <md-button ng-click="ctrl4.loadshpEX()" class="btnShape md-raised">add shp</md-button>
-
-            <!--<div ng-click="ctrl4.ShowHideAdvanced()" class="advanced">
-                <span>Advanced Settings</span>
+            <span style="margin-top: 0px;" class="advanced">{{ 'plugins.geosys.geome' | translate }}</span>
+            <div class='geomMenu'>
+                <div class="geomDivIn1">
+                    <md-checkbox class="geomCB" ng-model="ctrl4.inputchecked" aria-label="inputchk" ng-click='ctrl4.inputchck()'></md-checkbox>
+                    <md-input-container class="containerclass1"> 
+                        <input type="text" name="geomp" ng-model="ctrl4.geomSR" class="geominput" aria-label="geometry" ng-disabled="!(ctrl4.inputchecked)"> 
+                    </md-input-container>
+                </div>
+                <div class="geomDivIn1">
+                    <md-checkbox class="geomCB" ng-model="ctrl4.drawingchecked" aria-label="drwchk" ng-click='ctrl4.drawchck()'></md-checkbox>
+                    <div style="padding-top: 10px;" ">Drawing</div>
+                    <div style="margin-left:35px; padding-top:5px;margin-top: 0px;" class="advanced"> Shapefile(.zip)</div>
+                </div>
+                <div class="geomDivIn">
+                    <div class="containerclass"> 
+                        <md-checkbox class="geomCB" ng-model="ctrl4.filechecked" aria-label="mptchk" ng-click='ctrl4.importchck()'></md-checkbox>
+                        <input  type="file" id="fileshp" ng-model="ctrl4.filshp" accept=".zip" class="inputshape" ng-disabled="!(filechecked)"/>
+                        <md-button ng-click="ctrl4.loadshp()" class="btnShape md-raised" ng-disabled="!(ctrl4.filechecked)">Import</md-button>
+                    </div>
+                </div>
             </div>
-            <div ng-show="IsVisibleASP">
-                <md-input-container class="ddlshowEX">
-                    <label>{{ 'plugins.geosys.envir' | translate }}</label>
-                    <md-select 
-                    class="envSelect"
-                    ng-model="ctrl4.selectedItemENT" 
-                    id="envE" 
-                    placeholder="{{ 'plugins.geosys.envir' | translate }}">
-                        <md-option ng-repeat="item in ctrl4.itemsENT" ng-value="item.value">
-                            {{ item.name }}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-            </div>-->
+
+            <div ng-model="advancedform"></div>
 
             <md-input-container class="submitbtn">
                 <md-button class="md-primary md-raised" style="float: right;"
@@ -140,3 +137,23 @@ export const formExtraireSR:string =
         </div>
     </div>        
 </div>`;
+
+
+
+export const advancedTemp:string = `<!--<div ng-click="ctrl4.ShowHideAdvanced()" class="advanced">
+<span>Advanced Settings</span>
+</div>
+<div ng-show="IsVisibleASP">
+<md-input-container class="ddlshowEX">
+    <label>{{ 'plugins.geosys.envir' | translate }}</label>
+    <md-select 
+    class="envSelect"
+    ng-model="ctrl4.selectedItemENT" 
+    id="envE" 
+    placeholder="{{ 'plugins.geosys.envir' | translate }}">
+        <md-option ng-repeat="item in ctrl4.itemsENT" ng-value="item.value">
+            {{ item.name }}
+        </md-option>
+    </md-select>
+</md-input-container>
+</div>-->`

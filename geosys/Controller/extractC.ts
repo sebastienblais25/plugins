@@ -1,5 +1,6 @@
 import { User } from "../user";
 import { Extraire } from "../operation/extraire";
+import { advancedTemp } from "../templates/extract";
 
 
 export class ExtractController{
@@ -87,7 +88,9 @@ export class ExtractController{
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitExCtrl', function($scope){
             const that = this;
-            
+            if(log._advanced == true){
+                this.advancedform = advancedTemp;
+            }
             /************** interactive List ***************/
             this.selectedItemA = '';
             this.whereclause = '';
@@ -118,12 +121,29 @@ export class ExtractController{
                     }
                 }
             }
+            this.inputchck = () => {
+                //this.geomp = '';
+                this.drawingchecked = false;
+                this.filechecked = false;
+            }
+            this.drawchck = () => {
+                this.geomp = '';
+                this.inputchecked = false;
+                this.filechecked = false;
+            }
+            this.importchck = () =>{
+                this.geomp = '';
+                this.drawingchecked = false;
+                this.inputchecked = false;
+            }
             /************** subscribe to the drawing event ***************/
             (<any>window).drawObs.drawPolygon.subscribe(value => {
                 //create a geojson with the infromation obtain
-                log.createGeoJson('ESPG:'+value.spatialReference.wkid,value.rings)
-                //show the geo json in the input 
-                that.geomSR = log._geom; 
+                if(this.drawingchecked == true){
+                    log.createGeoJson('ESPG:'+value.spatialReference.wkid,value.rings)
+                    //show the geo json in the input 
+                    that.geomSR = log._geom; 
+                }
             });
             /************** Shapefile load ***************/
             this.loadshpEX = () => {

@@ -49,21 +49,11 @@
   
 }
 
-.geomMenu{
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 5px;
-  border-color: #ECE7E6;
-  padding-top: 20px;
-
-}
-
 //for the top menu
 .topmenu{
   width: 380px;
   height: 40px;
 }
-
 
 //block environnement of the topmenu
 .envDiv{
@@ -75,7 +65,6 @@
   background-color: rgb(247, 247, 247);
   
 }
-
 
 //set a space between dropdown dans header
 .envSelect{
@@ -138,17 +127,19 @@
 }
 
 .divclasse{
-  height:100px;
+  height:95px;
   width: 354px;
   overflow-y:scroll;
   border-style: solid;
   border-width: 2px;
   border-radius: 5px;
   border-color: #ECE7E6;
+  resize: vertical;
+  min-height: 30px;
 }
 
 .planning{
-  height:100px;
+  height:95px;
   width: 354px;
   overflow-y:scroll;
   border-style: solid;
@@ -156,11 +147,13 @@
   border-radius: 5px;
   border-color: #ECE7E6;
   margin-left: 5px;
+  resize: vertical;
+  min-height: 30px;
 }
 
 .itemlist{
-  padding:0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
+  padding:0px;
+  margin: 0px;
   max-height: 30px;
   min-height: 30px;
   width: 325px;
@@ -245,6 +238,7 @@
 .btnShape{
   margin: 0px 0px 0px 0px;
   padding: 0px;
+  float: right;
 }
 
 .btnCopy{
@@ -253,7 +247,8 @@
 }
 
 .inputshape{
-  max-width: 250px;
+  max-width: 200px;
+  padding-top: 10px;
 }
 
 
@@ -360,3 +355,46 @@
   display: inline-block;
 }
 /**** Folder and Files ****/
+
+/******* Geometry *******/
+.geomMenu{
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: #ECE7E6;
+
+}
+
+.geominput{
+  margin-bottom: 0px;
+  width:250px;
+}
+
+.geomDivIn{
+  height:50px;
+  
+}
+
+.geomDivIn1{
+  height:50px;
+}
+
+.geomCB{
+  padding-top: 20px;
+  float: left;
+  margin-bottom: 0px;
+}
+
+.containerclass1{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 300px;
+  height : 40px
+}
+
+.containerclass{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 340px;
+}
+

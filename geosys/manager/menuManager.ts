@@ -2,7 +2,7 @@
 
 import { formPlanifier } from '../templates/planning';
 
-import { formExtraireSR, formExtraireP } from '../templates/extract';
+import { formExtraireSR, formExtraireP, advancedTemp } from '../templates/extract';
 import { formCreerMD } from '../templates/create';
 import {  formDelivery } from '../templates/delivery';
 import {  topmenu } from '../templates/topmenu';
@@ -172,8 +172,9 @@ export class menuManager{
      */
     extractSRManager(log:User, mapApi:any):string{
         this._extract.extraireSRcontrols(log, mapApi);
-
         let output = formExtraireSR;
+        
+       
         return output;
 
     }
