@@ -86,30 +86,32 @@ export class TestFile{
                 <span class="modifiedFileFolderHeader">Date modified</span>
                 <span class="sizeFileFolderHeader">Size</span>
             </div>
-            <md-list-item ng-click="ctrl11.openFolder(folder)" class="folderBtn" ng-repeat="folder in ctrl11.folders">
-                <div>
-                    <md-icon>
-                        <i class="material-icons">
-                            folder
-                        </i>
-                    </md-icon>
-                    <span class="nameFileFolder">{{ folder.name }}</span>
-                    <span class="modifiedFileFolder">{{ folder.modified }}</span>
-                </div>
-            </md-list-item>
-            
-            <md-list-item class="fileBtn" ng-repeat="file in ctrl11.files">
-                <div>
-                    <md-icon>
-                        <i class="material-icons">
-                            insert_drive_file
-                        </i>
-                    </md-icon>
-                    <span class="nameFileFolder">{{ file.name }}</span> 
-                    <span class="modifiedFileFolder">{{ file.modified }}</span>
-                    <span class="sizeFileFolder">{{ file.size }} KB</span></div>
-            </md-list-item>
-
+            <div>
+                <md-list-item ng-click="ctrl11.openFolder(folder)" class="folderBtn" ng-repeat="folder in ctrl11.folders">
+                    <div>
+                        <md-icon>
+                            <i class="material-icons">
+                                folder
+                            </i>
+                        </md-icon>
+                        <span class="nameFileFolder">{{ folder.name }}</span>
+                        <span class="modifiedFileFolder">{{ folder.modified }}</span>
+                    </div>
+                </md-list-item>
+                
+                <md-list-item class="fileBtn" ng-repeat="file in ctrl11.files">
+                    <div>
+                        <md-icon>
+                            <i class="material-icons">
+                                insert_drive_file
+                            </i>
+                        </md-icon>
+                        <span class="nameFileFolder">{{ file.name }}</span> 
+                        <span class="modifiedFileFolder">{{ file.modified }}</span>
+                        <span class="sizeFileFolder">{{ file.size }} KB</span></div>
+                </md-list-item>
+              
+            </div>
         </div>
         `
         return output;

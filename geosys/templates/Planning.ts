@@ -4,6 +4,7 @@ export const formPlanifier = `
         <h2>{{ 'plugins.geosys.planif' | translate }}</h2>
     </div>
     <div ng-show="IsVisibleP" ng-style="bgEnv">
+    <form name="planning">
         <div>
             <md-input-container class="ddlshow">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>
@@ -12,8 +13,8 @@ export const formPlanifier = `
                 ng-model="ctrl2.selectedItemC" 
                 ng-change="ctrl2.setList()" 
                 id="theme" 
-                placeholder="{{ 'plugins.geosys.themet' | translate }}">
-                    <md-option ng-repeat="item in ctrl2.itemsC" ng-value="item.value">
+                placeholder="{{ 'plugins.geosys.themet' | translate }}" >
+                    <md-option ng-repeat="item in ctrl2.itemsC" ng-value="item.value" ng-selected="ctrl2.itemsC.indexOf(item) == 0">
                         {{ item.name }}
                     </md-option>
                 </md-select>
@@ -31,7 +32,7 @@ export const formPlanifier = `
             <md-input-container class="largeur">
                 <label>{{ 'plugins.geosys.typeTrv' | translate }}</label>
                 <md-select 
-                
+                name="typetrv"
                 ng-model="ctrl2.selectedItemD" 
                 id="theme" 
                 placeholder="{{ 'plugins.geosys.typeTrv' | translate }}">
@@ -55,7 +56,7 @@ export const formPlanifier = `
         <div>
         <md-input-container class="datfinfield">
             <label>{{ 'plugins.geosys.datefinprv' | translate }}</label>
-            <md-datepicker type="date" name="dfp" ng-model="ctrl2.dfp" placeholder="{{ 'plugins.geosys.datefinprv' | translate }}"></md-datepicker>
+            <md-datepicker name="dfp" ng-model="ctrl2.dfp"></md-datepicker>
         </md-input-container>
         </div>
 
@@ -70,7 +71,7 @@ export const formPlanifier = `
             <div class="geomDivIn1">
                 <md-checkbox class="geomCB" ng-model="ctrl2.inputchecked" aria-label="inputchk" ng-click='ctrl2.inputchck()'></md-checkbox>
                 <md-input-container class="containerclass1"> 
-                    <input type="text" name="geomp" ng-model="ctrl2.geomp" class="geominput" aria-label="geometry" ng-disabled="!(ctrl2.inputchecked)"> 
+                    <input type="text" name="geomp" ng-model="ctrl2.geomp" class="geominput" aria-label="geometry" ng-disabled="!(ctrl2.inputchecked)" required> 
                 </md-input-container>
             </div>
             <div class="geomDivIn1">
@@ -90,11 +91,12 @@ export const formPlanifier = `
         <div>
         <md-input-container class="submitbtn">
             <md-button class="md-primary md-raised" style="float: right;"
-            ng-click="ctrl2.submitFormP()">
+            ng-click="ctrl2.submitFormP()" ng-disabled="planning.geomp.$invalid">
                 {{ 'plugins.geosys.submit' | translate }}
                 <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
             </md-button>
         </md-input-container>
         </div>
+    </form>
     </div>
 </div>`;

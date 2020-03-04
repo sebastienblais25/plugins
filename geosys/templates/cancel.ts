@@ -15,7 +15,7 @@ export const formCancel:string = `
                 ng-change="ctrl8.setList()" 
                 id="theme" 
                 placeholder="{{ 'plugins.geosys.themet' | translate }}">
-                    <md-option ng-repeat="item in ctrl8.itemsA" ng-value="item.value">
+                    <md-option ng-repeat="item in ctrl8.itemsA" ng-value="item.value" ng-selected="ctrl8.itemsA.indexOf(item) == 0">
                         {{ item.name }}
                     </md-option>
                 </md-select>

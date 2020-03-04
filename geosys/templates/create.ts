@@ -16,7 +16,7 @@ export const formCreerMD:string = `
                 ng-change="ctrl6.setList()" 
                 id="theme" 
                 placeholder="{{ 'plugins.geosys.themet' | translate }}">
-                    <md-option ng-repeat="item in ctrl6.itemsE" ng-value="item.value">
+                    <md-option ng-repeat="item in ctrl6.itemsE" ng-value="item.value" ng-selected="ctrl6.itemsE.indexOf(item) == 0">
                         {{ item.name }}
                     </md-option>
                 </md-select>

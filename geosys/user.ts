@@ -70,7 +70,7 @@ export class User{
      * @returns {*} the data from the API. we dont know the return of the API so ANY.
      * @memberof User
      */
-    submitForm():any{
+    submitForm(config:any):any{
         //To Change
              //create a json and save the file in the download folder 
         let json = '';
@@ -81,7 +81,7 @@ export class User{
 
          //alert(data.access_token);
          if (!data.code){
-            this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe);
+            this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe,config);
         }else{
             alert(data.code)
         }
@@ -151,7 +151,7 @@ export class User{
      * @param {string} equipe
      * @memberof User
      */
-    setDataFromAPI(token:string,token_type:string,expired:number, scope:string[], theme:string[] , equipe:string){
+    setDataFromAPI(token:string,token_type:string,expired:number, scope:string[], theme:string[] , equipe:string,config:any){
         this._token = token;
         this._tokentype = token_type;
         this._expired = expired;
@@ -159,12 +159,38 @@ export class User{
         this._rightWrite = new Apireturn(scope[1]);
         this._equipe = new Apireturn(equipe);
         //alert(this._rightRead + " " + this._rightWrite);
-        for (let i in theme){
-            this._themeAcc.push(new Apireturn(theme[i]));
-            this.getinfoForCode(theme[i],i)
+        let ordertheme:any =this.orderThemeList(theme,config);
+        for (let i in ordertheme){
+            this._themeAcc.push(new Apireturn(ordertheme[i]));
+            this.getinfoForCode(ordertheme[i],i)
         }
     }
 
+
+    
+    /**
+     *
+     *
+     * @param {string[]} theme
+     * @param {*} config
+     * @returns
+     * @memberof User
+     */
+    orderThemeList(theme:string[],config:any){
+        let newtheme:string[] = [];
+        for (let i in theme){
+            if(theme[i] === config.base_theme){
+                newtheme.push(theme[i]);
+                break;
+            } 
+        }
+        for (let i in theme){
+            if(theme[i]!= config.base_theme){
+                newtheme.push(theme[i]);
+            }  
+        }
+        return newtheme
+    }
     /**
      * Get all the information of a code into the properties _themeAcc
      * @param {string} theme the code of the theme to get all of his info
@@ -216,7 +242,7 @@ export class User{
         let json:string = "";
         //set the new url and get the connection
         let output:any =this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlWorkingType + theme), 'Get');
-        
+        this._workinType = [];
         for(let j in output){
             this._workinType.push(new Apireturn(output[j].id));
             this._workinType[j].setRemaining(output[j].id_list_code, output[j].nom,output[j].desc_en, output[j].desc_fr);

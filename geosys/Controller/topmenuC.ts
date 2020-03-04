@@ -14,7 +14,7 @@ export class TopMenuController{
      * @memberof manageController
      */
     topmenuControl(log:User, mapApi:any, panel:any){
-        mapApi.agControllerRegister('topmenuCtrl', function($scope/*, $location, $anchorScroll*/){
+        mapApi.agControllerRegister('topmenuCtrl', function($scope, $rootScope/*, $location, $anchorScroll*/){
             const that = this;
             /************** interactive List ***************/
             this.selectedItemENT = '';
@@ -117,6 +117,12 @@ export class TopMenuController{
                 if(log._environnementSel!= ''){
                     $scope.IsVisibleEP = $scope.IsVisibleEP ? false : true; 
                     if($scope.IsVisibleEP == true){
+                        //Advanced Setting
+                        if(log._advanced == true){
+                            $scope.AdvancedVisible = true;
+                        }else{
+                            $scope.AdvancedVisible = false;
+                        }
                         //hide non-selected
                         $scope.IsVisibleP = false;
                         $scope.IsVisibleSR = false;
@@ -147,6 +153,12 @@ export class TopMenuController{
                 if(log._environnementSel!= ''){
                     $scope.IsVisibleSR = $scope.IsVisibleSR ? false : true;
                     if($scope.IsVisibleSR == true){
+                        //Advanced Setting
+                        if(log._advanced == true){
+                            $scope.AdvancedVisible = true;
+                        }else{
+                            $scope.AdvancedVisible = false;
+                        }
                         //hide non-selected
                         $scope.IsVisibleP = false;
                         $scope.IsVisibleEP = false;
@@ -249,6 +261,12 @@ export class TopMenuController{
                 if(log._environnementSel!= ''){
                     $scope.IsVisibleD = $scope.IsVisibleD ? false : true;
                     if($scope.IsVisibleD == true){
+                        //Advanced Setting
+                        if(log._advanced == true){
+                            $scope.AdvancedVisible = true;
+                        }else{
+                            $scope.AdvancedVisible = false;
+                        }
                         //hide non-selected
                         $scope.IsVisibleP = false;
                         $scope.IsVisibleEP = false;
@@ -337,6 +355,14 @@ export class TopMenuController{
         });
     }
 
+
+    /**
+     *
+     *
+     * @param {User} log
+     * @param {*} mapApi
+     * @memberof TopMenuController
+     */
     controlUserInfo(log:User, mapApi:any){
         mapApi.agControllerRegister('infoUserCtrl', function($scope/*, $location, $anchorScroll*/){
             this.emailUser = 'jean-sebastien.bruneau-blais@canada.ca';
@@ -364,19 +390,6 @@ export class TopMenuController{
         mapApi.$compile(temp);
         return temp;
     }
-
-    /**
-     * Scroll to a DOM element
-     * @function  scrollToElement
-     * @param {Number} id element id
-     */
-    scrollToElement(id) {
-        //$timeout(() => {
-            $(`#${id}`)[0].scrollIntoView();
-        //}, constants.delayScrollToElement);
-    }
-
-    
 }
 
 export interface TopMenuController {

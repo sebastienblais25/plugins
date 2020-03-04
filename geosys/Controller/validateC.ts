@@ -18,7 +18,6 @@ export class ValidateController{
         mapApi.agControllerRegister('submitFromV', function($scope){
             
             /************** interactive List ***************/
-            this.typeOper = '';
             this.selectedItemE = '';
             this.selectedItemF = '';
             this.itemsE = [];
@@ -27,8 +26,6 @@ export class ValidateController{
             }
             this.itemsF = [];
             this.setList = () => {
-                console.log(`set: ${this.selectedItemE}`);
-                console.log(`set: ${this.typeOper}`);
                 // populate list b with new items
                 this.itemsF.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemE)
@@ -41,24 +38,30 @@ export class ValidateController{
             }
             //Envoie le fromulaire a l'API
             this.submitFormD = function(element) { 
-                //get all the information of the form into the class
-                let formdata = new FormData();
-                formdata.append('theme', this.selectedItemE);
-                formdata.append('id_ut', this.selectedItemF)
-                formdata.append('fichier_json', (<HTMLInputElement>document.getElementById('fileJSON')).files[0])
-                formdata.append('logfile','blahblahblah')
-                let vali:Valider = new Valider();
-                let api:any = vali.submitForm(formdata,log);
-                if (api != undefined){
-                    alert(api);
-                    console.log(api);
-                    $scope.SelectedMenuV = {
-                        "background-color" : "red", 
-                    }
+                if(this.selectedItemF == ''){
+                    alert("Sélectionner un identifiant d'unité de travail")
+                }else if((<HTMLInputElement>document.getElementById('fileJSON')).files.length == 0){
+                    alert("Ajoute un fichier de métadonnée")
                 }else{
-                    console.log(log.gettoken());
-                    $scope.SelectedMenuV = {
-                        "background-color" : "green", 
+                    //get all the information of the form into the class
+                    let formdata = new FormData();
+                    formdata.append('theme', this.selectedItemE);
+                    formdata.append('id_ut', this.selectedItemF)
+                    formdata.append('fichier_json', (<HTMLInputElement>document.getElementById('fileJSON')).files[0])
+                    formdata.append('logfile','blahblahblah')
+                    let vali:Valider = new Valider();
+                    let api:any = vali.submitForm(formdata,log);
+                    if (api != undefined){
+                        alert(api);
+                        console.log(api);
+                        $scope.SelectedMenuV = {
+                            "background-color" : "red", 
+                        }
+                    }else{
+                        console.log(log.gettoken());
+                        $scope.SelectedMenuV = {
+                            "background-color" : "green", 
+                        }
                     }
                 }
             };

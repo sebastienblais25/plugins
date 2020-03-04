@@ -26,8 +26,6 @@ export class DeliveryController{
             }
             this.itemsF = [];
             this.setList = () => {
-                console.log(`set: ${this.selectedItemE}`);
-                console.log(`set: ${this.typeOper}`);
                 // populate list b with new items
                 this.itemsF.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemE)
@@ -54,23 +52,31 @@ export class DeliveryController{
             //Envoie le fromulaire a l'API
             this.submitFormD = function(element) { 
                 //get all the information of the form into the class
-                let formdata = new FormData();
-                formdata.append('fichier_data',(<HTMLInputElement>document.getElementById('fileMD')).files[0]);
-                formdata.append('fichier_meta',(<HTMLInputElement>document.getElementById('filefgdb')).files[0]);
-                let livre:Livraison = new Livraison(this.selectedItemF,this.selectedItemE,this.typeOper);
-                livre.setOptionnalEnvironnement(this.selectedItemENT);
-                let apireturn:any = livre.submitForm(formdata,log);     
-                if (apireturn != undefined){
-                    alert(apireturn);
-                    //console.log(apireturn);
-                    $scope.SelectedMenuD = {
-                        "background-color" : "red", 
-                    }
+                if(this.selectedItemF == ''){
+                    alert("Sélectionne un identifiant d'unité de travail")
+                }else if((<HTMLInputElement>document.getElementById('fileMD')).files.length == 0){
+                    alert("Ajoute un fichier de métadonnée")
+                }else if((<HTMLInputElement>document.getElementById('filefgdb')).files.length == 0){
+                    alert("Ajout un fichier de geodatabase")
                 }else{
-                    console.log(log.gettoken());
-                    //$scope.IsVisibleD = false;
-                    $scope.SelectedMenuD = {
-                        "background-color" : "green", 
+                    let formdata = new FormData();
+                    formdata.append('fichier_data',(<HTMLInputElement>document.getElementById('fileMD')).files[0]);
+                    formdata.append('fichier_meta',(<HTMLInputElement>document.getElementById('filefgdb')).files[0]);
+                    let livre:Livraison = new Livraison(this.selectedItemF,this.selectedItemE,this.typeOper);
+                    livre.setOptionnalEnvironnement(this.selectedItemENT);
+                    let apireturn:any = livre.submitForm(formdata,log);     
+                    if (apireturn != undefined){
+                        alert(apireturn);
+                        //console.log(apireturn);
+                        $scope.SelectedMenuD = {
+                            "background-color" : "red", 
+                        }
+                    }else{
+                        console.log(log.gettoken());
+                        //$scope.IsVisibleD = false;
+                        $scope.SelectedMenuD = {
+                            "background-color" : "green", 
+                        }
                     }
                 }
             };

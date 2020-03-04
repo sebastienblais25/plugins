@@ -32,7 +32,7 @@ export class connexion{
                 
                 function(response){
                     outputValue = response;
-                    console.log(outputValue); 
+                    //console.log(outputValue); 
                 },
                 error: function(xhr){
                     alert(xhr.statusText);

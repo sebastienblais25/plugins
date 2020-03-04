@@ -18,7 +18,7 @@ export default class Geosys{
 
         //set _RV
         this.config = this._RV.getConfig('plugins').geosys;
-        this.config.base_theme = 'corint_250K'
+        
 
         //alert(this.config.base_theme)
         //set la langue pour le plugin
@@ -107,7 +107,7 @@ export default class Geosys{
                 let log:User = new User(this.usernam
                 ,this.passwrd);
                 //Envoie le formulaire a l API
-                let loginfo:any = log.submitForm();
+                let loginfo:any = log.submitForm(config);
                 //si le retour ne contient pas de code d'erreur continue
                 if (loginfo.status != 401){
                     //alert('Connected'); 

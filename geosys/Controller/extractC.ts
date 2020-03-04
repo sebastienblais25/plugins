@@ -1,6 +1,6 @@
 import { User } from "../user";
 import { Extraire } from "../operation/extraire";
-import { advancedTemp } from "../templates/extract";
+
 
 
 export class ExtractController{
@@ -15,7 +15,7 @@ export class ExtractController{
     extrairecontrols(log:User, mapApi:any):void{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
-        mapApi.agControllerRegister('SubmitCtrl', function($scope){ 
+        mapApi.agControllerRegister('SubmitCtrl', function($scope, $rootScope){ 
             
             /************** interactive List ***************/
             this.selectedItemA = '';
@@ -56,23 +56,27 @@ export class ExtractController{
             /**************** From Submission ***************/
              this.submitForm = function() { 
                 //get all the information of the form into the class
-                let ext = new Extraire(
-                     this.selectedItemA
-                    ,this.selectedItemB);
-                ext.setOptionnalEnvironnement(this.selectedItemENT);
-                let apireturn:any = ext.submitForm(log);
-                //if the conection to the API is a success
-                if (apireturn != 'success'){
-                    alert(apireturn.statusText)
-                    $scope.SelectedMenuE = {
-                        "background-color" : "red", 
-                    }
+                if(this.selectedItemB == ''){
+                    alert('Sélectionnez un identifiant de travail')
                 }else{
-                    //$scope.IsVisibleEP = false;
-                    $scope.SelectedMenuE = {
-                        "background-color" : "green", 
-                    }
-                } 
+                    let ext = new Extraire(
+                        this.selectedItemA
+                        ,this.selectedItemB);
+                    ext.setOptionnalEnvironnement(this.selectedItemENT);
+                    let apireturn:any = ext.submitForm(log);
+                    //if the conection to the API is a success
+                    if (apireturn != 'success'){
+                        alert(apireturn.statusText)
+                        $scope.SelectedMenuE = {
+                            "background-color" : "red", 
+                        }
+                    }else{
+                        //$scope.IsVisibleEP = false;
+                        $scope.SelectedMenuE = {
+                            "background-color" : "green", 
+                        }
+                    } 
+                }
             };
         });
     }
@@ -88,9 +92,6 @@ export class ExtractController{
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitExCtrl', function($scope){
             const that = this;
-            if(log._advanced == true){
-                this.advancedform = advancedTemp;
-            }
             /************** interactive List ***************/
             this.selectedItemA = '';
             this.whereclause = '';
@@ -215,27 +216,35 @@ export class ExtractController{
                 }else{
                     siClip = 'non';
                 }
-                //console.log(this.geomSR)
-                let extsr = new Extraire(
-                     this.selectedItemA);
-                    extsr.setInfoForSR(listofclass,
-                    siClip,
-                    this.whereclause,
-                    this.geomSR)
-                extsr.setOptionnalEnvironnement(this.selectedItemENT);
-                //If the connection to the API is a Success
-                let apireturn:any = extsr.submitForm(log);
-                if (apireturn != 'success'){
-                    alert(apireturn.statusText)
-                    $scope.SelectedMenuEU = {
-                        "background-color" : "red", 
-                    }
+                if(this.idut == ''){
+                    alert(`plugins.geosys.themet`);
+                }else if(this.selectedItemD == ''){
+                    alert(`plugins.geosys.themet`)
+                }else if( listofclass.length < 1){
+                    alert('plugins.geosys.themet')
                 }else{
-                    //$scope.IsVisibleSR = false;
-                    $scope.SelectedMenuEU = {
-                        "background-color" : "green", 
-                    }
-                }   
+                    //console.log(this.geomSR)
+                    let extsr = new Extraire(
+                        this.selectedItemA);
+                        extsr.setInfoForSR(listofclass,
+                        siClip,
+                        this.whereclause,
+                        this.geomSR)
+                    extsr.setOptionnalEnvironnement(this.selectedItemENT);
+                    //If the connection to the API is a Success
+                    let apireturn:any = extsr.submitForm(log);
+                    if (apireturn != 'success'){
+                        alert(apireturn.statusText)
+                        $scope.SelectedMenuEU = {
+                            "background-color" : "red", 
+                        }
+                    }else{
+                        //$scope.IsVisibleSR = false;
+                        $scope.SelectedMenuEU = {
+                            "background-color" : "green", 
+                        }
+                    } 
+                }  
             };
         });
     }

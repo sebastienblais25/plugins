@@ -2,7 +2,7 @@
 
 import { formPlanifier } from '../templates/planning';
 
-import { formExtraireSR, formExtraireP, advancedTemp } from '../templates/extract';
+import { formExtraireSR, formExtraireP } from '../templates/extract';
 import { formCreerMD } from '../templates/create';
 import {  formDelivery } from '../templates/delivery';
 import {  topmenu } from '../templates/topmenu';

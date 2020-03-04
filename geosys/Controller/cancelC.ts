@@ -28,7 +28,6 @@ export class CancelController{
             this.itemsB = [];
             //création de la liste pour les unité de travail
             this.setList = () => {
-                console.log(`set: ${this.selectedItemA}`);
                 // populate list of working unit id
                 this.itemsB.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemA)

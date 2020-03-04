@@ -13,7 +13,7 @@ export class PlanningController{
      * @memberof manageController
      */
     planControl(log:User, mapApi:any, config:any):void{
-        mapApi.agControllerRegister('submitFromP', function($scope){
+        mapApi.agControllerRegister('submitFromP', function($scope, $rootScope){
             const that = this;
             
             /************** interactive List ***************/
@@ -33,7 +33,6 @@ export class PlanningController{
             this.classes = [];
             //function ng-chage of the theme list
             this.setList = () => {
-                console.log(`set: ${this.selectedItemC}`);
                 //set the today's date
                 let today = new Date();
                 let dd:string = String(today.getDate());
@@ -55,14 +54,16 @@ export class PlanningController{
                 //Populate the input of the working unit
                 this.idut = slectedthem + '_'+ yyyy + mm + dd +  '_';
                 //populate the working type list
-                this.itemsD.length = 0;
-                this.itemsD = log.setworkingtype(this.selectedItemC);
+                let listTT = [];
+                listTT= log.setworkingtype(this.selectedItemC);
                 /** liste de classes **/
                 let list= [];
                 list = log.getlistofclasses(this.selectedItemC);
                 this.classes.length = 0;
+                this.itemsD.length = 0;
                 //add the new list in list for the template
-                this.classes=list
+                this.classes=list;
+                this.itemsD = listTT;
             }
             //for claases list select all the info
             this.toggleAll = () => {
@@ -132,9 +133,9 @@ export class PlanningController{
                                 log.createGeoJson('EPSG:4326',geomGEOJSON);
                                 //set the geojson in the input
                                 that.geomp = log._geom;
+                                
                                 //create the polygon in the viewer with a zoom on it
                                 log.createPolygons(mapApi.id,geomDR);
-                                
                             }); 
                         }
                         
@@ -152,26 +153,34 @@ export class PlanningController{
                         listofclass.push(this.classes[i].name);
                     }
                 }
-                //set the information in the the json 
-                let plan:planifier = new planifier(
-                    this.selectedItemC,
-                    (<HTMLInputElement>document.getElementById("idUt")).value,
-                    this.selectedItemD,
-                    listofclass,
-                    this.dfp,
-                    this.geomp,
-                    this.wherep);
-                //submit the form to the API
-                let apireturn:any = plan.submitForm(log);
-                //If the return isn't a succes
-                if (apireturn != 'success'){
-                    $scope.SelectedMenuP = {
-                        "background-color" : "red", 
-                    }
+                if(this.idut == ''){
+                    alert(`plugins.geosys.themet`);
+                }else if(this.selectedItemD == ''){
+                    alert(`plugins.geosys.themet`)
+                }else if( listofclass.length < 1){
+                    alert('plugins.geosys.themet')
                 }else{
-                    //$scope.IsVisibleP = false;
-                    $scope.SelectedMenuP = {
-                        "background-color" : "green", 
+                    //set the information in the the json 
+                    let plan:planifier = new planifier(
+                        this.selectedItemC,
+                        (<HTMLInputElement>document.getElementById("idUt")).value,
+                        this.selectedItemD,
+                        listofclass,
+                        this.dfp,
+                        this.geomp,
+                        this.wherep);
+                    //submit the form to the API
+                    let apireturn:any = plan.submitForm(log);
+                    //If the return isn't a succes
+                    if (apireturn != 'success'){
+                        $scope.SelectedMenuP = {
+                            "background-color" : "red", 
+                        }
+                    }else{
+                        //$rootScope.IsVisibleP = false;
+                        $scope.SelectedMenuP = {
+                            "background-color" : "green", 
+                        }
                     }
                 }
             };
