@@ -166,8 +166,6 @@ export class User{
         }
     }
 
-
-    
     /**
      *
      *

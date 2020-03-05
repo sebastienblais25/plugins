@@ -10,7 +10,6 @@ export class planifier{
     /*********** Properties ***********/
     _conn: connexion = new connexion();
 
-    _environnement: string;
     _theme: string;
     _idUT: string;
     _typetravail: string;
@@ -118,14 +117,6 @@ export class planifier{
     }
     setconn(value: connexion) {
         this._conn = value;
-    }
-
-    //Environnement
-    getenvironnement(): string {
-        return this._environnement;
-    }
-    setenvironnement(value: string) {
-        this._environnement = value;
     }
 
     //theme

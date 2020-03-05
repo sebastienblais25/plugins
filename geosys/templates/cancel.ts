@@ -48,7 +48,7 @@ export const formCancel:string = `
 
             <md-input-container class="submitbtn">
                 <md-button class="md-primary md-raised" style="float: right;"
-                ng-click="ctrl8.submitCan()">
+                ng-click="ctrl8.submitCan(); ctrl1.ShowHideCa()">
                     {{ 'plugins.geosys.submit' | translate }}
                     <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                 </md-button>

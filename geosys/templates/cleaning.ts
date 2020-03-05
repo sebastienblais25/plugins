@@ -37,7 +37,7 @@ export const formNettoyage:string =
 
                 <md-input-container class="submitbtn">
                     <md-button class="md-primary md-raised" style="float: right;"
-                    ng-click="ctrl7.submitNett()" ng-disabled="cleaningform.$invalid">
+                    ng-click="ctrl7.submitNett(); ctrl1.ShowHideCl()" ng-disabled="cleaningform.$invalid">
                         {{ 'plugins.geosys.submit' | translate }}
                         <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                     </md-button>

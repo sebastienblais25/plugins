@@ -277,13 +277,13 @@
 }
 
 .nameFileFolderHeader{
-  width:200px;
+  width:225px;
   display: inline-flex;
   padding-left: 2px;
 }
 
 .modifiedFileFolderHeader{
-  width:200px;
+  width:150px;
   display: inline-block;
   border-left: 2px solid;
   border-color: lightgrey;
@@ -291,7 +291,7 @@
 }
 
 .sizeFileFolderHeader{
-  width:150px;
+  width:100px;
   display: inline-block;
   border-left: 2px solid;
   border-color: lightgrey;
@@ -340,19 +340,40 @@
 /**** Files ****/
 
 /**** Folder and Files ****/
+.groupingInfo{
+  width: 100%;
+}
+
 .nameFileFolder{
   width:200px;
   display: inline-flex;
 }
 
 .modifiedFileFolder{
-  width:200px;
+  width:150px;
   display: inline-block;
 }
 
 .sizeFileFolder{
-  width:150px;
+  width:100px;
   display: inline-block;
+}
+
+.downloadbtn{
+  padding-top: 10px;
+  padding-left: 8px;
+  width:40px;
+  height: 45px;
+  float: right;
+  transition: 0.4s;
+}
+
+.downloadbtn:hover{
+  background-color:rgb(204, 203, 203);
+}
+
+.lilPad{
+  padding-top: 10px;
 }
 /**** Folder and Files ****/
 

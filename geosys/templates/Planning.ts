@@ -91,7 +91,7 @@ export const formPlanifier = `
         <div>
         <md-input-container class="submitbtn">
             <md-button class="md-primary md-raised" style="float: right;"
-            ng-click="ctrl2.submitFormP()" ng-disabled="planning.geomp.$invalid">
+            ng-click="ctrl2.submitFormP(); ctrl1.ShowHide()" ng-disabled="planning.geomp.$invalid">
                 {{ 'plugins.geosys.submit' | translate }}
                 <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
             </md-button>

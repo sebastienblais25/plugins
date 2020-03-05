@@ -36,7 +36,7 @@ export const validateform:string = `
                 
                 <md-input-container class="submitbtn">
                     <md-button class="md-primary md-raised" style="float: right;"
-                    ng-click="ctrl9.submitFormD()" ng-disabled="valiform.$invalid">
+                    ng-click="ctrl9.submitFormV(); ctrl1.ShowHideV()" ng-disabled="valiform.$invalid">
                         {{ 'plugins.geosys.submit' | translate }}
                         <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                     </md-button>

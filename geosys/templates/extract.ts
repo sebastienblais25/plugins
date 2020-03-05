@@ -55,7 +55,7 @@ export const formExtraireP:string =
 
                 <md-input-container class="submitbtn">
                     <md-button class="md-primary md-raised" style="float: right;"
-                    ng-click="ctrl3.submitForm()" ng-disabled="extractGeosys.$invalid">
+                    ng-click="ctrl3.submitForm(); ctrl1.ShowHideEX()" ng-disabled="extractGeosys.$invalid">
                         {{ 'plugins.geosys.submit' | translate }}
                         <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                     </md-button>
@@ -122,13 +122,13 @@ export const formExtraireSR:string =
                     <div class="geomDivIn">
                         <div class="containerclass"> 
                             <md-checkbox class="geomCB" ng-model="ctrl4.filechecked" aria-label="mptchk" ng-click='ctrl4.importchck()'></md-checkbox>
-                            <input  type="file" id="fileshp" ng-model="ctrl4.filshp" accept=".zip" class="inputshape" ng-disabled="!(filechecked)"/>
-                            <md-button ng-click="ctrl4.loadshp()" class="btnShape md-raised" ng-disabled="!(ctrl4.filechecked)">Import</md-button>
+                            <input  type="file" id="fileshp" ng-model="ctrl4.filshp" accept=".zip" class="inputshape" ng-disabled="!(ctrl4.filechecked)"/>
+                            <md-button ng-click="ctrl4.loadshpEX()" class="btnShape md-raised" ng-disabled="!(ctrl4.filechecked)">Import</md-button>
                         </div>
                     </div>
                 </div>
 
-                <div ng-show="AdvancedVisible" ng-click="ctrl3.ShowHideAdvanced()" class="advanced">
+                <div ng-show="AdvancedVisible" ng-click="ctrl4.ShowHideAdvanced()" class="advanced">
                     <span>Advanced Settings</span>
                 </div>
                 <div ng-show="IsVisibleASP">
@@ -136,10 +136,10 @@ export const formExtraireSR:string =
                         <label>{{ 'plugins.geosys.envir' | translate }}</label>
                         <md-select 
                         class="envSelect"
-                        ng-model="ctrl3.selectedItemENT" 
+                        ng-model="ctrl4.selectedItemENT" 
                         id="envE" 
                         placeholder="{{ 'plugins.geosys.envir' | translate }}">
-                            <md-option ng-repeat="item in ctrl3.itemsENT" ng-value="item.value">
+                            <md-option ng-repeat="item in ctrl4.itemsENT" ng-value="item.value">
                                 {{ item.name }}
                             </md-option>
                         </md-select>
@@ -148,7 +148,7 @@ export const formExtraireSR:string =
 
                 <md-input-container class="submitbtn">
                     <md-button class="md-primary md-raised" style="float: right;"
-                    ng-click="ctrl4.submitSRForm()" ng-disabled="exSRform.geomSR.$invalid">
+                    ng-click="ctrl4.submitSRForm(); ctrl1.ShowHideEXSR()" ng-disabled="exSRform.geomSR.$invalid">
                         {{ 'plugins.geosys.submit' | translate }}
                         <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                     </md-button>

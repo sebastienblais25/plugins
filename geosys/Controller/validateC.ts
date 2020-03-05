@@ -33,11 +33,9 @@ export class ValidateController{
                     this.itemsF.push(list[i])
                 }
             }
-            this.filechanged = () => {
-                this.fileSelect.trigger('click');
-            }
+    
             //Envoie le fromulaire a l'API
-            this.submitFormD = function(element) { 
+            this.submitFormV = function(element) { 
                 if(this.selectedItemF == ''){
                     alert("Sélectionner un identifiant d'unité de travail")
                 }else if((<HTMLInputElement>document.getElementById('fileJSON')).files.length == 0){

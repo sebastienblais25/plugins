@@ -1,4 +1,4 @@
-import { TestingFile } from './testingFile';
+
 import { User } from './user';
 import { urlListFile } from './config/url';
 
@@ -7,7 +7,6 @@ import { urlListFile } from './config/url';
 export class TestFile{
 
     _breadcrumbs:string = '';
-    _files:TestingFile[];
     _lastFolder:string;
     _liveFolder:string
     _nextFolder:string;
@@ -16,6 +15,7 @@ export class TestFile{
     constructor(nextFolder:string = 'root'){
         //this._breadcrumbs = 'root';
         this._nextFolder = nextFolder
+        this._breadcrumbs= '...';
     }
 
     obtainArbo(log:User){
@@ -76,8 +76,10 @@ export class TestFile{
     }
 
     buildUI():string{
-        this._liveFolder = this._nextFolder;
-        this._breadcrumbs += '/'+ this._liveFolder
+        if(this._nextFolder != 'root'){
+            this._liveFolder = this._nextFolder;
+            this._breadcrumbs += '/'+ this._liveFolder
+        }
         let output:string = `
         <div ng-controller="fileManagerPanelCtrl as ctrl11">
             <div class="breadclass">`+ this._breadcrumbs +`</div>
@@ -86,9 +88,9 @@ export class TestFile{
                 <span class="modifiedFileFolderHeader">Date modified</span>
                 <span class="sizeFileFolderHeader">Size</span>
             </div>
-            <div>
+            <div id="dropTarget">
                 <md-list-item ng-click="ctrl11.openFolder(folder)" class="folderBtn" ng-repeat="folder in ctrl11.folders">
-                    <div>
+                    <div class="groupingInfo">
                         <md-icon>
                             <i class="material-icons">
                                 folder
@@ -100,15 +102,18 @@ export class TestFile{
                 </md-list-item>
                 
                 <md-list-item class="fileBtn" ng-repeat="file in ctrl11.files">
-                    <div>
+                    <div class="groupingInfo">
                         <md-icon>
                             <i class="material-icons">
                                 insert_drive_file
                             </i>
                         </md-icon>
-                        <span class="nameFileFolder">{{ file.name }}</span> 
-                        <span class="modifiedFileFolder">{{ file.modified }}</span>
-                        <span class="sizeFileFolder">{{ file.size }} KB</span></div>
+                        <span class="nameFileFolder lilPad">{{ file.name }}</span> 
+                        <span class="modifiedFileFolder lilPad">{{ file.modified }}</span>
+                        <span class="sizeFileFolder lilPad">{{ file.size }} KB</span>
+                        <div class="downloadbtn" ng-click="ctrl11.deleteFile(file)"><i class="material-icons">delete</i></div>
+                        <div class="downloadbtn" ng-click="ctrl11.downloadFile(file)"><i class="material-icons">vertical_align_bottom</i></div>
+                    </div>       
                 </md-list-item>
               
             </div>

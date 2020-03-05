@@ -66,7 +66,7 @@ export const formCreerMD:string = `
             
             <md-input-container class="submitbtn">
                 <md-button class="md-primary md-raised" style="float: right;"
-                ng-click="ctrl6.submitFormC()">
+                ng-click="ctrl6.submitFormC(); ctrl1.ShowHideCr()">
                     {{ 'plugins.geosys.submit' | translate }}
                     <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                 </md-button>

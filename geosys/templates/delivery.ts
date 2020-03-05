@@ -72,7 +72,7 @@ export const formDelivery = `
                 
                 <md-input-container class="submitbtn">
                     <md-button class="md-primary md-raised" style="float: right;"
-                    ng-click="ctrl5.submitFormD()" ng-disabled="deliform.$invalid">
+                    ng-click="ctrl5.submitFormD(); ctrl1.ShowHideD()" ng-disabled="deliform.$invalid">
                         {{ 'plugins.geosys.submit' | translate }}
                         <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                     </md-button>
