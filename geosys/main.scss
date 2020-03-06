@@ -18,11 +18,11 @@
   font-size: 10px;
   margin: 0px 0px;
   opacity: 0.6;
-  transition: 0.3s;
+  
 }
 
 // lors du hover du bouton du menu
-.divButton:hover {opacity: 1}
+.divButton:hover {opacity: 1;transition: 0.3s;}
 
 //Bouton du menu
 .divButtonUti {
@@ -33,11 +33,11 @@
   font-size: 10px;
   margin: 0px 0px;
   opacity: 0.6;
-  transition: 0.3s;
+  
 }
 
 // lors du hover du bouton du menu
-.divButtonUti:hover {opacity: 1}
+.divButtonUti:hover {opacity: 1;transition: 0.3s;}
 
 
 // class for thw witdh of input
@@ -308,7 +308,7 @@
   font-size: 15px;
   //margin: 5px 0px;
   opacity: 0.6;
-  transition: 0.4s;
+  //transition: 0.4s;
   
 }
 
@@ -316,6 +316,7 @@
 .folderBtn:hover {
   opacity: 1;
   background-color: #e7e6e6;
+  transition: 0.4s;
 }
 /**** Folder ****/
 
@@ -328,7 +329,7 @@
   font-size: 15px;
   //margin: 5px 0px;
   opacity: 0.6;
-  transition: 0.3s;
+  //transition: 0.3s;
   
 }
 
@@ -336,6 +337,7 @@
 .fileBtn:hover {
   opacity: 1;
   background-color: #f7f5f5;
+  transition: 0.3s;
 }
 /**** Files ****/
 
@@ -365,17 +367,23 @@
   width:40px;
   height: 45px;
   float: right;
-  transition: 0.4s;
+  //transition: 0.4s;
 }
 
 .downloadbtn:hover{
   background-color:rgb(204, 203, 203);
+  transition: 0.4s;
 }
 
 .lilPad{
   padding-top: 10px;
 }
 /**** Folder and Files ****/
+
+/******* Dropzone *******/
+.dropTarget{
+  background-color: antiquewhite;
+}
 
 /******* Geometry *******/
 .geomMenu{

@@ -29,8 +29,10 @@ export class FileManagerController{
                         });
             
                         this.panel.element.css({top: '0px;', margin: '100px 50px 100px 450px'});
-            
-                        let closeBtn = this.panel.header.closeButton;
+                        this.panel.header.toggleButton;
+                        this.panel.header.closeButton;
+                        
+
                         this.panel.header.title = `File Manager (Alpha testing)`;
                         let fmc:FileManagerController = new FileManagerController();
                     
@@ -40,12 +42,12 @@ export class FileManagerController{
                             fmc.testFileManager(log,mapApi, tfm, this.panel);
                             this.panel.body = output;
                         }
-                        this.panel.open();
+                        
                     }else {
                         this.panel.close();
                     }
                     
-                    
+                    this.panel.open();
                     
                 }
             };
@@ -59,14 +61,9 @@ export class FileManagerController{
             this.breadcrumbs = tfm._breadcrumbs;
             this.folders = tfm.buildFolderList();
             this.files = tfm.buildFileList();
-            const dragDrop = require('drag-drop')
- 
-            /*dragDrop('#dropTarget', (files, pos, fileList, directories) => {
-                console.log('Here are the dropped files', files) // Array of File objects
-                console.log('Dropped at coordinates', pos.x, pos.y)
-                console.log('Here is the raw FileList object if you need it:', fileList)
-                console.log('Here is the list of directories:', directories)
-            })*/
+            
+
+            
 
             this.openFolder = (folder) => {
                 //console.log(folder.name);
@@ -87,6 +84,9 @@ export class FileManagerController{
             this.deleteFile = (file) => {
                 alert(file.name + ' deleted from ' + tfm._breadcrumbs)
             }
+
+            //upload in JQuery
+
         });
     }
 

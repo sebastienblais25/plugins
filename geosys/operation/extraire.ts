@@ -17,7 +17,6 @@ export class Extraire{
     _whereClause: string;
     _geom: string;
     _json:string;
-    _optEnv:string;
     //data from API
     _data:any;
     _envopt:string = '';

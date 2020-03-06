@@ -5,10 +5,10 @@ import { urlDeliveryUpdate } from "../config/url";
 
 export class Livraison{
 
+    _conn :connexion= new connexion();
     _theme:string;
     _idUt:string;
     _typeConn:string;
-    _conn :connexion= new connexion();
     _envopt:string = '';
 
     constructor(idut:string,theme:string, typeconn:string){

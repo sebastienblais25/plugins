@@ -90,24 +90,7 @@
         }
       },
       "layers": [
-        {
-          "id": "0",
-          "name": "Power Plant 100MW or more (hydro)",
-          "layerType": "esriFeature",
-          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/20"
-        },
-        {
-          "id": "1",
-          "name": "Power Plant 1MW or more (hydro)",
-          "layerType": "esriFeature",
-          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/32"
-        },
-        {
-            "id": "2",
-            "name": "Power Plant 100MW or more (petroleum)",
-            "layerType": "esriFeature",
-            "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/24"
-          }
+        
       ],
       "extentSets": [
         {

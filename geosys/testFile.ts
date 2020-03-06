@@ -88,7 +88,7 @@ export class TestFile{
                 <span class="modifiedFileFolderHeader">Date modified</span>
                 <span class="sizeFileFolderHeader">Size</span>
             </div>
-            <div id="dropTarget">
+            <div class="rv-loader-file ng-scope">
                 <md-list-item ng-click="ctrl11.openFolder(folder)" class="folderBtn" ng-repeat="folder in ctrl11.folders">
                     <div class="groupingInfo">
                         <md-icon>
@@ -115,7 +115,11 @@ export class TestFile{
                         <div class="downloadbtn" ng-click="ctrl11.downloadFile(file)"><i class="material-icons">vertical_align_bottom</i></div>
                     </div>       
                 </md-list-item>
-              
+                <div class="form-group">
+                    <label for="file">Choose File</label>
+                    <input type="file"
+                        id="file">
+                </div>
             </div>
         </div>
         `
