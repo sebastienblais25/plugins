@@ -427,3 +427,34 @@
   width: 340px;
 }
 
+/*********************** Portail CSS **************************/
+.titleportail{
+  color: blue;
+  padding-left: 5%;
+}
+
+.sideMenu{
+  background-color: #72f6fa54;
+  width: 30%;
+  border-style: double;
+  border-color: black;
+  border-radius: 10px;
+}
+
+.teampage{
+  padding-left: 80px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.teampage:hover{
+  text-decoration: underline;
+  color:purple;
+}
+
+.noref{
+  color: black;
+  text-decoration: none;
+}

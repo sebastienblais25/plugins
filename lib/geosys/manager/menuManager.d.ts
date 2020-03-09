@@ -1,13 +1,13 @@
 /****** Import ******/
 import { User } from '../user';
-import { PlanningController } from '../Controller/planningC';
-import { ExtractController } from '../Controller/extractC';
-import { CreateController } from '../Controller/createC';
-import { DeliveryController } from '../Controller/deliveryC';
-import { CleaningController } from '../Controller/cleaningC';
-import { CancelController } from '../Controller/cancelC';
-import { TopMenuController } from '../Controller/topmenuC';
-import { ValidateController } from '../Controller/validateC';
+import { PlanningController } from '../controller/planningC';
+import { ExtractController } from '../controller/extractC';
+import { CreateController } from '../controller/createC';
+import { DeliveryController } from '../controller/deliveryC';
+import { CleaningController } from '../controller/cleaningC';
+import { CancelController } from '../controller/cancelC';
+import { TopMenuController } from '../controller/topmenuC';
+import { ValidateController } from '../controller/validateC';
 import { FileManagerController } from '../controller/fileManagerC';
 export declare class menuManager {
     _compiler: TopMenuController;
@@ -60,7 +60,7 @@ export declare class menuManager {
      * @returns {string} the compile output
      * @memberof menuManager
      */
-    topMenuManager(log: User, mapApi: any): string;
+    topMenuManager(log: User, mapApi: any, panel: any): string;
     /**
      * Compile the output and the controller for the extraction without planning and return it all compile
      * @param {User} log the user info for the controller
@@ -102,5 +102,13 @@ export declare class menuManager {
      * @memberof menuManager
      */
     validateManager(log: User, mapApi: any): string;
+    /**
+     *
+     *
+     * @param {User} log
+     * @param {*} mapApi
+     * @returns {string}
+     * @memberof menuManager
+     */
     fileExplorerManager(log: User, mapApi: any): string;
 }

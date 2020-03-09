@@ -28,7 +28,7 @@ export class TopMenuController{
                 log.setEnvironnementSelected(this.selectedItemENT);
                 if(log._environnementSel === 'TST')
                     $scope.bgEnv = {
-                        "background-color" : "lightblue", 
+                        "background-color" : "lightgreen", 
                     }
                 else if(log._environnementSel === 'DEV'){
                     $scope.bgEnv = {
@@ -84,7 +84,7 @@ export class TopMenuController{
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.ShowHide = function(){ 
                 
-                if(log._environnementSel!= ''){
+                if(log._environnementSel!= '' && log._closeable == true){
                    
                     $scope.IsVisibleP = $scope.IsVisibleP ? false : true;
                     if($scope.IsVisibleP == true){
@@ -114,7 +114,7 @@ export class TopMenuController{
             };
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.ShowHideEX = function(){
-                if(log._environnementSel!= ''){
+                if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleEP = $scope.IsVisibleEP ? false : true; 
                     if($scope.IsVisibleEP == true){
                         //Advanced Setting
@@ -150,7 +150,7 @@ export class TopMenuController{
             
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.ShowHideEXSR = function(){
-                if(log._environnementSel!= ''){
+                if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleSR = $scope.IsVisibleSR ? false : true;
                     if($scope.IsVisibleSR == true){
                         //Advanced Setting
@@ -186,7 +186,7 @@ export class TopMenuController{
 
             //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
             this.ShowHideCr = function(){
-                if(log._environnementSel!= ''){
+                if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleCR = $scope.IsVisibleCR ? false : true;
                     if($scope.IsVisibleCR == true){
                         
@@ -228,7 +228,7 @@ export class TopMenuController{
             
             //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
             this.ShowHideV = function(){
-                if(log._environnementSel!= ''){
+                if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleV = $scope.IsVisibleV ? false : true;
                     if($scope.IsVisibleV == true){
                         //hide non-selected
@@ -258,7 +258,7 @@ export class TopMenuController{
             
             //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
             this.ShowHideD = function(){
-                if(log._environnementSel!= ''){
+                if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleD = $scope.IsVisibleD ? false : true;
                     if($scope.IsVisibleD == true){
                         //Advanced Setting
@@ -294,7 +294,7 @@ export class TopMenuController{
             
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.ShowHideCl = function(){
-                if(log._environnementSel!= ''){
+                if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleCL = $scope.IsVisibleCL ? false : true; 
                     if($scope.IsVisibleCL == true){
                         //hide non-selected
@@ -324,7 +324,7 @@ export class TopMenuController{
             
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.ShowHideCa = function(){
-                if(log._environnementSel!= ''){
+                if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleCA = $scope.IsVisibleCA ? false : true; 
                     if($scope.IsVisibleCA == true){
                         //hide non-selected

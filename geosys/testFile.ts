@@ -11,6 +11,7 @@ export class TestFile{
     _liveFolder:string
     _nextFolder:string;
     _value:any;
+    _list = [];
 
     constructor(nextFolder:string = 'root'){
         //this._breadcrumbs = 'root';
@@ -26,7 +27,7 @@ export class TestFile{
         promises.push(
             new Promise(resolve =>{
                 $.ajax({
-                    url: 'http://127.0.0.1:4010/' + urlListFile + this._breadcrumbs + this._nextFolder,
+                    url: this.setNavigation(),
                     headers: {
                         'Authorization': `Bearer ${log.gettoken()}`,
                         'contentType': 'application/json'   
@@ -59,6 +60,10 @@ export class TestFile{
         this._value = outputValue;  
     }
 
+    setNavigation():string{
+        return 'http://127.0.0.1:4010/' + urlListFile + this._breadcrumbs + '&__example=' + this._breadcrumbs
+    }
+
     buildFolderList(){
         let listFo = [];
         for(let i in this._value.list_folder){
@@ -76,19 +81,19 @@ export class TestFile{
     }
 
     buildUI():string{
-        if(this._nextFolder != 'root'){
+        /*if(this._nextFolder != 'root'){
             this._liveFolder = this._nextFolder;
             this._breadcrumbs += '/'+ this._liveFolder
-        }
+        }*/
         let output:string = `
         <div ng-controller="fileManagerPanelCtrl as ctrl11">
-            <div class="breadclass">`+ this._breadcrumbs +`</div>
+            <div class="breadclass">`+ this.buildClickablebreadcrumbs() +`</div>
             <div class="headerFile">
                 <span class="nameFileFolderHeader">Name</span> 
                 <span class="modifiedFileFolderHeader">Date modified</span>
                 <span class="sizeFileFolderHeader">Size</span>
             </div>
-            <div class="rv-loader-file ng-scope">
+            <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <md-list-item ng-click="ctrl11.openFolder(folder)" class="folderBtn" ng-repeat="folder in ctrl11.folders">
                     <div class="groupingInfo">
                         <md-icon>
@@ -124,6 +129,30 @@ export class TestFile{
         </div>
         `
         return output;
+    }
+
+    buildClickablebreadcrumbs(){
+        
+        this._list =  this._breadcrumbs.split('/');
+        let bc:string = '';
+        for(let i in this._list){
+            bc += `/<span ng-click="ctrl11.followup('`+ i +`')"><a href="#">`+this._list[i]+`</a></span>`;
+        }
+        return bc;
+    }
+
+    setbreacrumbsForNav(rank:string){
+        
+        this._breadcrumbs = '';
+        for(let i in this._list){
+            if(i < rank){
+                this._breadcrumbs += this._list[i] + '/'
+            }else if(i === rank){
+                this._breadcrumbs += this._list[i]
+            }else{
+                break;
+            }
+        }
     }
 
     setNextFolder(next:string):void{

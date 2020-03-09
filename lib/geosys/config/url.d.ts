@@ -13,3 +13,4 @@ export declare const urlValidateMD: string;
 export declare const urlGetCode: string;
 export declare const urlDeleteClean: string;
 export declare const urlCancelStep: string;
+export declare const urlListFile: string;

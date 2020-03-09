@@ -3,7 +3,6 @@ import { User } from '../user';
 export declare class planifier {
     /*********** Properties ***********/
     _conn: connexion;
-    _environnement: string;
     _theme: string;
     _idUT: string;
     _typetravail: string;
@@ -55,8 +54,6 @@ export declare class planifier {
     setdata(value: any): void;
     getconn(): connexion;
     setconn(value: connexion): void;
-    getenvironnement(): string;
-    setenvironnement(value: string): void;
     gettheme(): string;
     settheme(value: string): void;
     getzonetravail(): string;

@@ -182,7 +182,7 @@ Geosys.prototype.translations = {
         fileMD : 'File metadata : ',
         fileGDB : 'File geodatabase : ',
         //CréerMD seulement
-        creer : 'CreateMD',
+        creer : 'CreateMD (work in progress)',
         source : 'Select the sources ID : ',
         precision : 'Select the precision ID : ',
         contrainte : 'Select the legal contraint ID : ',
@@ -192,7 +192,7 @@ Geosys.prototype.translations = {
         //Nettoyage seulement
         nettoyage : 'Cleaning',
         //Annuler seulement
-        annuler : 'Cancel',
+        annuler : 'Cancel (work in progress)',
         //Info user
         themeI : 'Theme',
         right : 'Right',
@@ -234,7 +234,7 @@ Geosys.prototype.translations = {
         fileMD : 'Fichier métadonnée : ',
         fileGDB : 'Fichier géo base de donnée : ',
         //CréerMD seulement
-        creer : 'CreerMD',
+        creer : 'CreerMD (work in progress)',
         source : 'Sélectionner les identifiants des sources : ',
         precision : 'Sélectionner les identifiant de précison : ',
         contrainte : 'Sélectionner les identifiants de contraintes légales : ',
@@ -244,7 +244,7 @@ Geosys.prototype.translations = {
         //Nettoyage seulement
         nettoyage : 'Nettoyage',
         //Annuler seulement
-        annuler : 'Annuler',
+        annuler : 'Annuler (work in progress)',
         //Info user
         themeI : 'Thème',
         right : 'Droit',

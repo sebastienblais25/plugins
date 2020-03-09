@@ -24,7 +24,10 @@ export declare class User {
     _idUt: idWu;
     _classeslist: string[];
     _workinType: Apireturn[];
+    /** other **/
     _geom: string;
+    _advanced: boolean;
+    _closeable: boolean;
     /**
      *Creates an instance of User. with only the username and a password for the connections
      * @param {string} [username] name of the user
@@ -32,9 +35,6 @@ export declare class User {
      * @memberof User
      */
     constructor(username?: string, password?: string);
-    inputParse(values: string, parseType: string): any;
-    createPolygons(mapId: string, values: string): void;
-    zoomExtent(mapId: string, coords: [], expand?: number): void;
     /**
      *Contruct an url with the environnement selected and the url for the action
      * @param {string} url url of the action
@@ -49,7 +49,7 @@ export declare class User {
      * @returns {*} the data from the API. we dont know the return of the API so ANY.
      * @memberof User
      */
-    submitForm(): any;
+    submitForm(config: any): any;
     /**
      * Create the list of environnement and their url and place the PRO environnment in first
      * @param {*} output its the data from API.
@@ -70,7 +70,6 @@ export declare class User {
     getInformationToHeader(): any;
     /**
      * sett all the info information obtain form a login into the properties of the class
-     *
      * @param {string} token
      * @param {string} token_type
      * @param {number} expired
@@ -79,7 +78,16 @@ export declare class User {
      * @param {string} equipe
      * @memberof User
      */
-    setDataFromAPI(token: string, token_type: string, expired: number, scope: string[], theme: string[], equipe: string): void;
+    setDataFromAPI(token: string, token_type: string, expired: number, scope: string[], theme: string[], equipe: string, config: any): void;
+    /**
+     *
+     *
+     * @param {string[]} theme
+     * @param {*} config
+     * @returns
+     * @memberof User
+     */
+    orderThemeList(theme: string[], config: any): string[];
     /**
      * Get all the information of a code into the properties _themeAcc
      * @param {string} theme the code of the theme to get all of his info
@@ -103,6 +111,7 @@ export declare class User {
      * @memberof User
      */
     setworkingtype(theme: string): any[];
+    /**************** Reading Ressources files *********************/
     /**
      * create a json file for getting a list of classes
      * mostly hardcoded.
@@ -117,11 +126,35 @@ export declare class User {
      * @memberof User
      */
     getlistofclasses(theme: string): any[];
+    /************************* For Geometry ******************************/
     /**
-     *Création d'un geoJson pour envoyer la geométrie d'un polygone
+     * Work arount for a follow-up duplicates
+     * @param {*} coord coordinates with a follow-up duplicates
+     * @returns {*} reyurn the coordinates with no folow-up duplicates
+     * @memberof User
+     */
+    eliminateFollowUpDuplicate(coord: any): any;
+    /**
+     *Create a geojson for a drawing geometry or the imported geometry
      * @memberof planifier
      */
-    createGeoJson(crs: string, coord: string): any;
+    createGeoJson(crs: string, coord: any): void;
+    /**
+     * Create a layer in the viewer to add a polygon in viewer
+     * @param {string} mapId the map ID of the viewer
+     * @param {*} values the coordinates of the drawing
+     * @memberof User
+     */
+    createPolygons(mapId: string, values: any): void;
+    /**
+     * zoom in the polygon in the viewer
+     * @param {string} mapId the id of the map in the viewer
+     * @param {[]} coords the coordinates of the polygon
+     * @param {number} [expand=1] the zoom
+     * @memberof User
+     */
+    zoomExtent(mapId: string, coords: [], expand?: number): void;
+    /*************** Accessors ***********************/
     getusername(): string;
     setusername(value: string): void;
     getpassword(): string;

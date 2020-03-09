@@ -7,7 +7,15 @@ export declare class TopMenuController {
      * @param {*} mapApi need the mapApi for setting the controller.
      * @memberof manageController
      */
-    topmenuControl(log: User, mapApi: any): void;
+    topmenuControl(log: User, mapApi: any, panel: any): void;
+    /**
+     *
+     *
+     * @param {User} log
+     * @param {*} mapApi
+     * @memberof TopMenuController
+     */
+    controlUserInfo(log: User, mapApi: any): void;
     /**
      * Compilateur de HTML avec les variables pour les boutons
      * @param {*} template the template for the form

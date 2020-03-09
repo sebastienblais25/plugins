@@ -58,7 +58,6 @@
         "debounce": "^1.2.0",
         "file-saver": "2.0.0",
         "gh-pages": "^2.2.0",
-        "jsdoc": "^3.6.3",
         "rxjs": "6.3.3",
         "shpjs": "^3.4.3",
         "vanilla-picker": "^2.10.0"

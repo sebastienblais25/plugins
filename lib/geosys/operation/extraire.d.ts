@@ -10,7 +10,6 @@ export declare class Extraire {
     _whereClause: string;
     _geom: string;
     _json: string;
-    _optEnv: string;
     _data: any;
     _envopt: string;
     /************* Constructor *************/
@@ -54,6 +53,11 @@ export declare class Extraire {
      * @memberof Extraire
      */
     getInformationToJsonSR(): void;
+    /**
+     *put a json string into a blob and export into a json file in download file
+     * @param {*} output the file to save
+     * @memberof Extraire
+     */
     saveJson(output: any): void;
     /*************** Accessors ***********************/
     setEnvOpt(env: string): void;

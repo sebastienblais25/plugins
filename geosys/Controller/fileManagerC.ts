@@ -62,13 +62,19 @@ export class FileManagerController{
             this.folders = tfm.buildFolderList();
             this.files = tfm.buildFileList();
             
-
-            
+            this.followup = (folder)  =>{
+                tfm.setbreacrumbsForNav(folder);
+                let fmc:FileManagerController = new FileManagerController();
+                
+                let output = tfm.buildUI();
+                tfm.obtainArbo(log);
+                fmc.testFileManager(log,mapApi, tfm, panel);
+                panel.body = output;
+            }
 
             this.openFolder = (folder) => {
-                //console.log(folder.name);
                 tfm.setNextFolder(folder.name);
-                
+                tfm._breadcrumbs = tfm._breadcrumbs + '/' + tfm._nextFolder;
                 let fmc:FileManagerController = new FileManagerController();
                 
                 let output = tfm.buildUI();

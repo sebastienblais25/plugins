@@ -122,7 +122,7 @@ export const formExtraireSR:string =
                     <div class="geomDivIn">
                         <div class="containerclass"> 
                             <md-checkbox class="geomCB" ng-model="ctrl4.filechecked" aria-label="mptchk" ng-click='ctrl4.importchck()'></md-checkbox>
-                            <input  type="file" id="fileshp" ng-model="ctrl4.filshp" accept=".zip" class="inputshape" ng-disabled="!(ctrl4.filechecked)"/>
+                            <input  type="file" id="fileshpEX" ng-model="ctrl4.filshp" accept=".zip" class="inputshape" ng-disabled="!(ctrl4.filechecked)"/>
                             <md-button ng-click="ctrl4.loadshpEX()" class="btnShape md-raised" ng-disabled="!(ctrl4.filechecked)">Import</md-button>
                         </div>
                     </div>

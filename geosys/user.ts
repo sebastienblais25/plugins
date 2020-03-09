@@ -38,6 +38,7 @@ export class User{
     /** other **/
     _geom:string;
     _advanced:boolean = false;
+    _closeable:boolean = true; 
     
     
     /**
