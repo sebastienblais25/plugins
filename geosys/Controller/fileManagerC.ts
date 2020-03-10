@@ -1,5 +1,5 @@
 import { User } from "../user";
-import { TestFile } from '../testFile';
+import { FileMana } from '../FileMana';
 
 
 export class FileManagerController{
@@ -8,7 +8,7 @@ export class FileManagerController{
     constructor(){}
 
 
-    fileManagercontrols(log:User, mapApi:any, tfm:TestFile):void{
+    fileManagercontrols(log:User, mapApi:any, tfm:FileMana):void{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('FileManagerCtrl', function($scope){
@@ -39,7 +39,7 @@ export class FileManagerController{
                         let output = tfm.buildUI();
                         if (tfm._nextFolder == 'root'){
                             tfm.obtainArbo(log);
-                            fmc.testFileManager(log,mapApi, tfm, this.panel);
+                            fmc.FileManaManager(log,mapApi, tfm, this.panel);
                             this.panel.body = output;
                         }
                         
@@ -54,7 +54,7 @@ export class FileManagerController{
         });
     };
 
-    testFileManager(log:User, mapApi:any, tfm:TestFile, panel:any):void{
+    FileManaManager(log:User, mapApi:any, tfm:FileMana, panel:any):void{
         mapApi.agControllerRegister('fileManagerPanelCtrl', function($scope){
             this.folders = [];
             this.files = [];
@@ -62,13 +62,14 @@ export class FileManagerController{
             this.folders = tfm.buildFolderList();
             this.files = tfm.buildFileList();
             
-            this.followup = (folder)  =>{
+            
+            this.followup = (folder)  => {
                 tfm.setbreacrumbsForNav(folder);
                 let fmc:FileManagerController = new FileManagerController();
                 
                 let output = tfm.buildUI();
                 tfm.obtainArbo(log);
-                fmc.testFileManager(log,mapApi, tfm, panel);
+                fmc.FileManaManager(log,mapApi, tfm, panel);
                 panel.body = output;
             }
 
@@ -79,7 +80,7 @@ export class FileManagerController{
                 
                 let output = tfm.buildUI();
                 tfm.obtainArbo(log);
-                fmc.testFileManager(log,mapApi, tfm, panel);
+                fmc.FileManaManager(log,mapApi, tfm, panel);
                 panel.body = output;
             }
 
@@ -91,7 +92,6 @@ export class FileManagerController{
                 alert(file.name + ' deleted from ' + tfm._breadcrumbs)
             }
 
-            //upload in JQuery
 
         });
     }

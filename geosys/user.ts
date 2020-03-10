@@ -293,7 +293,7 @@ export class User{
 
     /************************* For Geometry ******************************/
     /**
-     * Work arount for a follow-up duplicates
+     * Work around for a follow-up duplicates
      * @param {*} coord coordinates with a follow-up duplicates
      * @returns {*} reyurn the coordinates with no folow-up duplicates
      * @memberof User
@@ -361,6 +361,7 @@ export class User{
         shpUpload.addGeometry([polyAll]);
         //zoom to extent of polygon(s)
         this.zoomExtent(mapId, values, 2);
+        console.log(shpUpload)
     }
 
     /**
@@ -439,7 +440,7 @@ export class User{
 
     /* RightRead*/
     getrightRead(): string {
-        return this._rightRead._id;
+        return this._rightRead._nom;
     }
     setrightRead(value: string) {
         this._rightRead._nom = value;
@@ -447,7 +448,7 @@ export class User{
 
     /*RightWrite */
     getrightWrite(): string {
-        return this._rightWrite._id;
+        return this._rightWrite._nom;
     }
     setrightWrite(value: string) {
         this._rightWrite._nom = value;

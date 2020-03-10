@@ -1,9 +1,9 @@
 import { User } from "../user";
-import { TestFile } from '../testFile';
+import { FileMana } from '../FileMana';
 export declare class FileManagerController {
     constructor();
-    fileManagercontrols(log: User, mapApi: any, tfm: TestFile): void;
-    testFileManager(log: User, mapApi: any, tfm: TestFile, panel: any): void;
+    fileManagercontrols(log: User, mapApi: any, tfm: FileMana): void;
+    FileManaManager(log: User, mapApi: any, tfm: FileMana, panel: any): void;
 }
 export interface FileManagerController {
     panel: any;

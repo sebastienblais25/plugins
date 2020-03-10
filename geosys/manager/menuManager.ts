@@ -23,7 +23,8 @@ import { CancelController } from '../controller/cancelC';
 import { TopMenuController } from '../controller/topmenuC';
 import { ValidateController } from '../controller/validateC';
 import { FileManagerController } from '../controller/fileManagerC'
-import { TestFile } from '../testFile';
+import { FileMana } from '../FileMana';
+import { uniteTravail } from '../templates/unitTravail';
 
 
 export class menuManager{
@@ -54,7 +55,7 @@ export class menuManager{
         this._extract = new ExtractController();
         this._create = new CreateController();
         this._delivery = new DeliveryController();
-        this. _cleaning = new CleaningController();
+        this._cleaning = new CleaningController();
         this._cancel = new CancelController();
         this._validate = new ValidateController();
         this._fileManager = new FileManagerController();
@@ -70,6 +71,7 @@ export class menuManager{
         let outputCancel:string = this.cancelManager(log,mapApi);
         let outputTopmenu:string = this.topMenuManager(log,mapApi,panel);
         let outputFileManager:string = this.fileExplorerManager(log,mapApi);
+        let outputUnit:string = this.UTManager(log,mapApi);
         
         let menuprincipal:string;
 
@@ -86,8 +88,9 @@ export class menuManager{
                             + outputCreer 
                             + outputVali
                             + outputCancel 
+                            + outputUnit
                             + outputFileManager 
-                        + "</div>";
+                        + "</div></div>";
         
         this._compiler.compileTemplate(menuprincipal,mapApi);
         
@@ -248,9 +251,16 @@ export class menuManager{
      * @memberof menuManager
      */
     fileExplorerManager(log:User, mapApi:any):string{
-        let tfm:TestFile = new TestFile();
+        let tfm:FileMana = new FileMana();
         this._fileManager.fileManagercontrols(log, mapApi,tfm);
         let output = menuFileExplorer;
+        return output;
+    }
+
+    UTManager(log:User, mapApi:any):string{
+
+        let output = uniteTravail;
+
         return output;
     }
 }

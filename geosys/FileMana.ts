@@ -1,11 +1,13 @@
 
 import { User } from './user';
 import { urlListFile } from './config/url';
+import { connexion } from './apiConnect';
 
 
 
-export class TestFile{
+export class FileMana{
 
+    _conn:connexion = new connexion();
     _breadcrumbs:string = '';
     _lastFolder:string;
     _liveFolder:string
@@ -93,7 +95,8 @@ export class TestFile{
                 <span class="modifiedFileFolderHeader">Date modified</span>
                 <span class="sizeFileFolderHeader">Size</span>
             </div>
-            <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="div1">
+            <form>
                 <md-list-item ng-click="ctrl11.openFolder(folder)" class="folderBtn" ng-repeat="folder in ctrl11.folders">
                     <div class="groupingInfo">
                         <md-icon>
@@ -125,8 +128,37 @@ export class TestFile{
                     <input type="file"
                         id="file">
                 </div>
+                <div id="div"> drop here</div>
+            </form>
             </div>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function(){ 
+                $("#div").on("dragover", function(event) {
+                    event.preventDefault();  
+                    event.stopPropagation();
+                    $(this).addClass('dragging');
+                });
+                
+                $("#div").on("dragleave", function(event) {
+                    event.preventDefault();  
+                    event.stopPropagation();
+                    $(this).removeClass('dragging');
+                });
+                
+                $('#div').on(
+                    'drop',
+                    function(e){
+                        if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            /*UPLOAD FILES HERE*/
+                            upload(e.originalEvent.dataTransfer.files);
+                        }
+                    }
+                );
+            });
+        </script>
         `
         return output;
     }

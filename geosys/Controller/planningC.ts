@@ -1,9 +1,9 @@
 import { planifier } from "../operation/planifier";
 import { User } from "../user";
 
-export class PlanningController{
+export class PlanningController {
 
-    constructor(){};
+    constructor() { };
 
     /**
      *the controller for all the function in planning templates
@@ -12,10 +12,10 @@ export class PlanningController{
      * @param {*} config the config is for drawing 
      * @memberof manageController
      */
-    planControl(log:User, mapApi:any, config:any):void{
-        mapApi.agControllerRegister('submitFromP', function($scope, $rootScope){
+    planControl(log: User, mapApi: any, config: any): void {
+        mapApi.agControllerRegister('submitFromP', function ($scope, $rootScope) {
             const that = this;
-            
+
             /************** interactive List ***************/
             this.selectedItemC = '';
             this.selectedItemD = '';
@@ -24,8 +24,8 @@ export class PlanningController{
             this.wherep = '';
             this.itemsC = [];
             //theme list
-            for (let i in log._themeAcc){
-                this.itemsC.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
+            for (let i in log._themeAcc) {
+                this.itemsC.push({ name: log._themeAcc[i]._nom, value: log._themeAcc[i]._id });
             }
             //List of working type
             this.itemsD = [];
@@ -35,44 +35,44 @@ export class PlanningController{
             this.setList = () => {
                 //set the today's date
                 let today = new Date();
-                let dd:string = String(today.getDate());
-                let mm:string = String(today.getMonth() + 1); //January is 0!
-                let yyyy:string = String(today.getFullYear());
-                if(dd.length < 2){
-                    dd = '0'+dd;
+                let dd: string = String(today.getDate());
+                let mm: string = String(today.getMonth() + 1); //January is 0!
+                let yyyy: string = String(today.getFullYear());
+                if (dd.length < 2) {
+                    dd = '0' + dd;
                 }
-                if(mm.length < 2){
-                    mm = '0'+mm;
+                if (mm.length < 2) {
+                    mm = '0' + mm;
                 }
                 //add the name of the theme
-                let slectedthem:string;
-                for(let i in this.itemsC){
-                    if(this.itemsC[i].value == this.selectedItemC){
+                let slectedthem: string;
+                for (let i in this.itemsC) {
+                    if (this.itemsC[i].value == this.selectedItemC) {
                         slectedthem = this.itemsC[i].name;
                     }
                 }
                 //Populate the input of the working unit
-                this.idut = slectedthem + '_'+ yyyy + mm + dd +  '_';
+                this.idut = slectedthem + '_' + yyyy + mm + dd + '_';
                 //populate the working type list
                 let listTT = [];
-                listTT= log.setworkingtype(this.selectedItemC);
+                listTT = log.setworkingtype(this.selectedItemC);
                 /** liste de classes **/
-                let list= [];
+                let list = [];
                 list = log.getlistofclasses(this.selectedItemC);
                 this.classes.length = 0;
                 this.itemsD.length = 0;
                 //add the new list in list for the template
-                this.classes=list;
+                this.classes = list;
                 this.itemsD = listTT;
             }
             //for claases list select all the info
             this.toggleAll = () => {
-                if( this.listeclasse == true){
-                    for(let i in this.classes){
+                if (this.listeclasse == true) {
+                    for (let i in this.classes) {
                         this.classes[i].wanted = false;
-                    }  
-                }else{
-                    for(let i in this.classes){
+                    }
+                } else {
+                    for (let i in this.classes) {
                         this.classes[i].wanted = true;
                     }
                 }
@@ -88,80 +88,83 @@ export class PlanningController{
                 this.inputchecked = false;
                 this.filechecked = false;
             }
-            this.importchck = () =>{
+            this.importchck = () => {
                 this.geomp = '';
                 this.drawingchecked = false;
                 this.inputchecked = false;
             }
             //subscribe for the drawing
-            
+
             (<any>window).drawObs.drawPolygon.subscribe(value => {
-                    //create a geojson with the infromation obtain
-                if(this.drawingchecked == true){
+                //create a geojson with the infromation obtain
+                if (this.drawingchecked == true) {
                     console.log(value.rings)
-                    log.createGeoJson('ESPG:'+value.spatialReference.wkid,value.rings)
+                    log.createGeoJson('ESPG:' + value.spatialReference.wkid, value.rings)
                     //show the geo json in the input 
                     this.geomp = log._geom;
                 }
             });
-            
+
             /************** Shapefile Load ***************/
             this.loadshp = () => {
-                
-                let files:any = (<HTMLInputElement>document.getElementById('fileshp')).files
-                if(files.length == 0){
+
+                let files: any = (<HTMLInputElement>document.getElementById('fileshp')).files
+                if (files.length == 0) {
                     alert('No file');
-                }else{
-                    
-                    let file:any = files[0];
-                    
+                } else {
+
+                    let file: any = files[0];
+
                     const reader = new FileReader();
-                    reader.onload = function(e) {
-                        if (reader.readyState != 2 || reader.error){
+                    reader.onload = function (e) {
+                        if (reader.readyState != 2 || reader.error) {
                             alert('Wrong file');
                             return;
                         } else {
                             //package to read a shapefile and get a geojson
                             let shp = require("shpjs");
                             //read the zip shapefile
-                            shp(reader.result).then(function(dta){
+                            shp(reader.result).then(function (dta) {
                                 //set a variable with the coordinates for the drawing
                                 let geomDR = dta.features[0].geometry.coordinates[0];
                                 //set a variable with the coordinates for the geojson
                                 let geomGEOJSON = dta.features[0].geometry.coordinates;
                                 //Create a geojson with the onfromation of the shapefile
-                                log.createGeoJson('EPSG:4326',geomGEOJSON);
+                                log.createGeoJson('EPSG:4326', geomGEOJSON);
                                 //set the geojson in the input
                                 that.geomp = log._geom;
-                                
+
                                 //create the polygon in the viewer with a zoom on it
-                                log.createPolygons(mapApi.id,geomDR);
-                            }); 
+                                log.createPolygons(mapApi.id, geomDR);
+                            });
                         }
-                        
+
                     }
-                    reader.readAsArrayBuffer(file);   
+                    reader.readAsArrayBuffer(file);
                 }
             }
             /********** Form submission ************/
             //Envoie le fromulaire a l'API
-            this.submitFormP = function() { 
+            this.submitFormP = function () {
                 //get all the information of the form into the class
                 let listofclass = []
-                for(let i in this.classes){
-                    if(this.classes[i].wanted ==true){
+                for (let i in this.classes) {
+                    if (this.classes[i].wanted == true) {
                         listofclass.push(this.classes[i].name);
                     }
                 }
-                if(this.idut == ''){
+                if (this.idut == '') {
                     alert(`plugins.geosys.themet`);
-                }else if(this.selectedItemD == ''){
+                    log._closeable = false;
+                } else if (this.selectedItemD == '') {
                     alert(`plugins.geosys.themet`)
-                }else if( listofclass.length < 1){
+                    log._closeable = false;
+                } else if (listofclass.length < 1) {
                     alert('plugins.geosys.themet')
-                }else{
+                    log._closeable = false;
+                } else {
                     //set the information in the the json 
-                    let plan:planifier = new planifier(
+                    let plan: planifier = new planifier(
                         this.selectedItemC,
                         (<HTMLInputElement>document.getElementById("idUt")).value,
                         this.selectedItemD,
@@ -170,17 +173,19 @@ export class PlanningController{
                         this.geomp,
                         this.wherep);
                     //submit the form to the API
-                    let apireturn:any = plan.submitForm(log);
+                    let apireturn: any = plan.submitForm(log);
                     //If the return isn't a succes
-                    if (apireturn != 'success'){
+                    if (apireturn != 'success') {
                         $scope.SelectedMenuP = {
-                            "background-color" : "red", 
+                            "background-color": "red",
                         }
-                    }else{
+                        log._closeable = false;
+                    } else {
                         //$rootScope.IsVisibleP = false;
                         $scope.SelectedMenuP = {
-                            "background-color" : "green", 
+                            "background-color": "green",
                         }
+                        log._closeable = true;
                     }
                 }
             };

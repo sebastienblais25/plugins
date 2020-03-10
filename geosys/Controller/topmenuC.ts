@@ -80,8 +80,9 @@ export class TopMenuController{
             $scope.IsVisibleD = false;
             $scope.IsVisibleCL = false;
             $scope.IsVisibleCA = false;
+            $scope.IsVisibleUT = false;
 
-            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
+            //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHide = function(){ 
                 
                 if(log._environnementSel!= '' && log._closeable == true){
@@ -96,6 +97,7 @@ export class TopMenuController{
                         $scope.IsVisibleD = false;
                         $scope.IsVisibleCL = false;
                         $scope.IsVisibleCA = false;
+                        $scope.IsVisibleUT = false;
                         //highlight
                         $scope.SelectedMenuP = {
                             "opacity" : "1", 
@@ -107,12 +109,16 @@ export class TopMenuController{
                         $scope.SelectedMenuD = {};
                         $scope.SelectedMenuC = {};
                         $scope.SelectedMenuCa = {};
+                        $scope.SelectedMenuUT = {};
                     }else{
                         $scope.SelectedMenuP = {};
                     }
+                }else{
+                    log._closeable = true;
                 }    
             };
-            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
+
+            //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideEX = function(){
                 if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleEP = $scope.IsVisibleEP ? false : true; 
@@ -131,6 +137,7 @@ export class TopMenuController{
                         $scope.IsVisibleD = false;
                         $scope.IsVisibleCL = false;
                         $scope.IsVisibleCA = false;
+                        $scope.IsVisibleUT = false;
                         //highlight
                         $scope.SelectedMenuE = {
                             "opacity" : "1", 
@@ -142,13 +149,16 @@ export class TopMenuController{
                         $scope.SelectedMenuD = {};
                         $scope.SelectedMenuC = {};
                         $scope.SelectedMenuCa = {};
+                        $scope.SelectedMenuUT = {};
                     }else{
                         $scope.SelectedMenuE = {};
                     }
-                }  
+                }else{
+                    log._closeable = true;
+                }   
             };
             
-            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
+            //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideEXSR = function(){
                 if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleSR = $scope.IsVisibleSR ? false : true;
@@ -167,6 +177,7 @@ export class TopMenuController{
                         $scope.IsVisibleD = false;
                         $scope.IsVisibleCL = false;
                         $scope.IsVisibleCA = false;
+                        $scope.IsVisibleUT = false;
                         //highlight
                         $scope.SelectedMenuEU = {
                             "opacity" : "1", 
@@ -178,13 +189,16 @@ export class TopMenuController{
                         $scope.SelectedMenuD = {};
                         $scope.SelectedMenuC = {};
                         $scope.SelectedMenuCa = {};
+                        $scope.SelectedMenuUT = {};
                     }else{
                         $scope.SelectedMenuEU = {}
                     }
-                }  
+                }else{
+                    log._closeable = true;
+                }   
             };
 
-            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
+            //permet d'afficher ou cacher le formulaire en cliquanr sur le titre
             this.ShowHideCr = function(){
                 if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleCR = $scope.IsVisibleCR ? false : true;
@@ -209,6 +223,7 @@ export class TopMenuController{
                         $scope.IsVisibleD = false;
                         $scope.IsVisibleCL = false;
                         $scope.IsVisibleCA = false;
+                        $scope.IsVisibleUT = false;
                         //highlight
                         $scope.SelectedMenuCr = {
                             "opacity" : "1", 
@@ -220,13 +235,16 @@ export class TopMenuController{
                         $scope.SelectedMenuD = {};
                         $scope.SelectedMenuC = {};
                         $scope.SelectedMenuCa = {};
+                        $scope.SelectedMenuUT = {};
                     }else{
                         $scope.SelectedMenuCr = {};
                     } 
-                }    
+                }else{
+                    log._closeable = true;
+                }     
             };
             
-            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
+            //permet d'afficher ou cacher le formulaire en cliquanr sur le titre
             this.ShowHideV = function(){
                 if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleV = $scope.IsVisibleV ? false : true;
@@ -239,6 +257,7 @@ export class TopMenuController{
                         $scope.IsVisibleD = false;
                         $scope.IsVisibleCL = false;
                         $scope.IsVisibleCA = false;
+                        $scope.IsVisibleUT = false;
                         //highlight
                         $scope.SelectedMenuV = {
                             "opacity" : "1", 
@@ -250,13 +269,16 @@ export class TopMenuController{
                         $scope.SelectedMenuD = {};
                         $scope.SelectedMenuC = {};
                         $scope.SelectedMenuCa = {};
+                        $scope.SelectedMenuUT = {};
                     }else{
                         $scope.SelectedMenuV = {};
                     } 
-                }    
+                }else{
+                    log._closeable = true;
+                }     
             };
             
-            //permet d'afficher ou chacher le formulaire en cliquanr sur le titre
+            //permet d'afficher ou cacher le formulaire en cliquanr sur le titre
             this.ShowHideD = function(){
                 if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleD = $scope.IsVisibleD ? false : true;
@@ -275,6 +297,7 @@ export class TopMenuController{
                         $scope.IsVisibleV = false;
                         $scope.IsVisibleCL = false;
                         $scope.IsVisibleCA = false;
+                        $scope.IsVisibleUT = false;
                         //highlight
                         $scope.SelectedMenuD = {
                             "opacity" : "1", 
@@ -286,13 +309,16 @@ export class TopMenuController{
                         $scope.SelectedMenuV = {};
                         $scope.SelectedMenuC = {};
                         $scope.SelectedMenuCa = {};
+                        $scope.SelectedMenuUT = {};
                     }else{
                         $scope.SelectedMenuD = {};
                     } 
-                }    
+                }else{
+                    log._closeable = true;
+                }     
             };
             
-            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
+            //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideCl = function(){
                 if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleCL = $scope.IsVisibleCL ? false : true; 
@@ -305,6 +331,7 @@ export class TopMenuController{
                         $scope.IsVisibleV = false;
                         $scope.IsVisibleD = false;
                         $scope.IsVisibleCA = false;
+                        $scope.IsVisibleUT = false;
                         //highlight
                         $scope.SelectedMenuC = {
                             "opacity" : "1", 
@@ -316,13 +343,16 @@ export class TopMenuController{
                         $scope.SelectedMenuCr = {};
                         $scope.SelectedMenuV = {};
                         $scope.SelectedMenuCa = {};
+                        $scope.SelectedMenuUT = {};
                     }else{
                         $scope.SelectedMenuC = {};
                     }
-                }  
+                }else{
+                    log._closeable = true;
+                }   
             };
             
-            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
+            //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideCa = function(){
                 if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleCA = $scope.IsVisibleCA ? false : true; 
@@ -335,6 +365,7 @@ export class TopMenuController{
                         $scope.IsVisibleV = false;
                         $scope.IsVisibleD = false;
                         $scope.IsVisibleCL = false;
+                        $scope.IsVisibleUT = false;
                         //highlight
                         $scope.SelectedMenuCa = {
                             "opacity" : "1", 
@@ -346,11 +377,49 @@ export class TopMenuController{
                         $scope.SelectedMenuEU = {};
                         $scope.SelectedMenuCr = {};
                         $scope.SelectedMenuV = {};
+                        $scope.SelectedMenuUT = {};
                     }else{
                         $scope.SelectedMenuCa = {};
                     }
-                }  
+                }else{
+                    log._closeable = true;
+                }   
             };
+
+            //permet d'afficher ou cacher le formulaire en cliquant sur le titre
+            this.ShowHideUT = function(){
+                if(log._environnementSel!= '' && log._closeable == true){
+                   
+                    $scope.IsVisibleUT = $scope.IsVisibleUT ? false : true;
+                    if($scope.IsVisibleUT == true){
+                        //hide non-selected
+                        $scope.IsVisibleP = false;
+                        $scope.IsVisibleEP = false;
+                        $scope.IsVisibleSR = false;
+                        $scope.IsVisibleCR = false;
+                        $scope.IsVisibleV = false;
+                        $scope.IsVisibleD = false;
+                        $scope.IsVisibleCL = false;
+                        $scope.IsVisibleCA = false;
+                        //highlight
+                        $scope.SelectedMenuUT = {
+                            "opacity" : "1", 
+                        };
+                        $scope.SelectedMenuE = {};
+                        $scope.SelectedMenuEU = {};
+                        $scope.SelectedMenuP = {};
+                        $scope.SelectedMenuCr = {};
+                        $scope.SelectedMenuV = {};
+                        $scope.SelectedMenuD = {};
+                        $scope.SelectedMenuC = {};
+                        $scope.SelectedMenuCa = {};
+                    }else{
+                        $scope.SelectedMenuUT = {};
+                    }
+                }else{
+                    log._closeable = true;
+                }    
+            }
             
         });
     }

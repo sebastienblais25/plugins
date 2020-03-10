@@ -198,6 +198,9 @@ Geosys.prototype.translations = {
         right : 'Right',
         equipe : 'Team',
         enviro : 'Environnement',
+        //unité de travail
+        unit : 'Working Zone',
+        //file manager
 
     },
 
@@ -250,6 +253,9 @@ Geosys.prototype.translations = {
         right : 'Droit',
         equipe : 'Equipe',
         enviro : 'Environnement',
+        //unité de travail
+        unit : 'Unité de travail',
+        //file manager
     }
 };
 

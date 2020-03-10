@@ -1,5 +1,5 @@
 import { User } from './user';
-export declare class TestFile {
+export declare class FileMana {
     _breadcrumbs: string;
     _lastFolder: string;
     _liveFolder: string;

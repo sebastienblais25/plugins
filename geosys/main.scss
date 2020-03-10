@@ -1,4 +1,5 @@
 
+
 //Section title
 .section{
   padding: 4px 16px;
@@ -264,7 +265,7 @@
   border-radius: 5px;
   border-color: lightgrey;
 }
-/**** breadcrumbs ****/
+
 /**** Header ****/
 .headerFile{
   width: 96%;
@@ -427,6 +428,19 @@
   width: 340px;
 }
 
+.dragging{
+  background-color: gray;
+}
+
+#div{
+  width:300px;
+  height:100px;
+  line-height:100px;
+  border:5px dashed #CCC;
+
+  font-family:Verdana;
+  text-align:center;
+}
 /*********************** Portail CSS **************************/
 .titleportail{
   color: blue;
