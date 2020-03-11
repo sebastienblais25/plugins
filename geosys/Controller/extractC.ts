@@ -16,7 +16,7 @@ export class ExtractController{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitCtrl', function($scope, $rootScope){ 
-            
+            $scope.ErrorEx = false;
             /************** interactive List ***************/
             this.selectedItemA = '';
             this.selectedItemB = '';
@@ -25,8 +25,10 @@ export class ExtractController{
                 this.itemsA.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
             }
             this.itemsB = [];
+            
             //création de la liste pour les unité de travail
             this.setList = () => {
+                this.selectedItemB = '';
                 console.log(`set: ${this.selectedItemA}`);
                 // populate list of working unit id
                 this.itemsB.length = 0;
@@ -39,11 +41,6 @@ export class ExtractController{
             this.ShowHideAdvanced = function(){
                 if(log._environnementSel!= ''){
                     $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
-                    /*if($scope.IsVisibleASP == true){
-                       
-                    }else{
-                        
-                    }*/
                 }  
             };
             /************** interactive List Advanced Setting ***************/
@@ -55,9 +52,10 @@ export class ExtractController{
             }
             /**************** From Submission ***************/
              this.submitForm = function() { 
+                 console.log(this.selectedItemB)
                 //get all the information of the form into the class
                 if(this.selectedItemB == ''){
-                    alert('Sélectionnez un identifiant de travail')
+                    $scope.ErrorEx = true;
                 }else{
                     let ext = new Extraire(
                         this.selectedItemA

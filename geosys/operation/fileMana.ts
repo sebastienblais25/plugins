@@ -1,7 +1,7 @@
 
-import { User } from './user';
-import { urlListFile } from './config/url';
-import { connexion } from './apiConnect';
+import { User } from '../user';
+import { urlListFile } from '../config/url';
+import { connexion } from '../apiConnect';
 
 
 
@@ -15,57 +15,42 @@ export class FileMana{
     _value:any;
     _list = [];
 
+
+    /**
+     *Creates an instance of FileMana.
+     * @param {string} [nextFolder='root']
+     * @memberof FileMana
+     */
     constructor(nextFolder:string = 'root'){
         //this._breadcrumbs = 'root';
         this._nextFolder = nextFolder
         this._breadcrumbs= '...';
     }
 
+    /**
+     * obtain the structure of a folder with a path send
+     * @param {User} log for the token
+     * @memberof FileMana
+     */
     obtainArbo(log:User){
-        let outputValue:any;
-        /********* API CALL **********/
-        //no promise still
-        const promises = [];
-        promises.push(
-            new Promise(resolve =>{
-                $.ajax({
-                    url: this.setNavigation(),
-                    headers: {
-                        'Authorization': `Bearer ${log.gettoken()}`,
-                        'contentType': 'application/json'   
-                    },
-                    type: 'Get',
-                    async: false,
-                    //cache:false,
-                    contentType: "application/json; charset=utf-8",
-                    dataType:'json',
-                    processData: false,
-                    success: //data => resolve()
-                    
-                    function(response,jqXHR){
-                        //console.log(response)
-                        outputValue = response;
-                        
-                    },
-                    error: function(xhr){
-                        alert(xhr.statusText);
-                        outputValue = xhr;
-                    }
-                })
-           })
-        );
-        Promise.all(promises).then(values => {
-            console.log(values);
-        });
-        //alert(outputValue + ' 123')
         this._nextFolder = '';
-        this._value = outputValue;  
+        this._value = this._conn.connexionAPIFileMAnager(log.gettoken(),this.setNavigation());  
     }
 
+    /**
+     * set the url for the navigation in the file manager
+     * @returns {string} return the url needed
+     * @memberof FileMana
+     */
     setNavigation():string{
         return 'http://127.0.0.1:4010/' + urlListFile + this._breadcrumbs + '&__example=' + this._breadcrumbs
     }
 
+    /**
+     * build a list of folder with the return of the API
+     * @returns return a list of folder
+     * @memberof FileMana
+     */
     buildFolderList(){
         let listFo = [];
         for(let i in this._value.list_folder){
@@ -74,6 +59,11 @@ export class FileMana{
         return listFo;
     }
 
+    /**
+     * build a list of file with the return of the API
+     * @returns return a list of file
+     * @memberof FileMana
+     */
     buildFileList(){
         let listFi = [];
         for(let i in this._value.list_file){
@@ -82,11 +72,12 @@ export class FileMana{
         return listFi;
     }
 
+    /**
+     * Build the template for the file manager
+     * @returns {string} return a template
+     * @memberof FileMana
+     */
     buildUI():string{
-        /*if(this._nextFolder != 'root'){
-            this._liveFolder = this._nextFolder;
-            this._breadcrumbs += '/'+ this._liveFolder
-        }*/
         let output:string = `
         <div ng-controller="fileManagerPanelCtrl as ctrl11">
             <div class="breadclass">`+ this.buildClickablebreadcrumbs() +`</div>
@@ -95,7 +86,10 @@ export class FileMana{
                 <span class="modifiedFileFolderHeader">Date modified</span>
                 <span class="sizeFileFolderHeader">Size</span>
             </div>
-            <div id="div1">
+            <div id="div1" ondragenter="onDragEnter(event);"
+            ondragover="onDragOver(event);"
+            ondragleave="onDragLeave(event);"
+            ondrop="onDrop(event);">
             <form>
                 <md-list-item ng-click="ctrl11.openFolder(folder)" class="folderBtn" ng-repeat="folder in ctrl11.folders">
                     <div class="groupingInfo">
@@ -123,48 +117,29 @@ export class FileMana{
                         <div class="downloadbtn" ng-click="ctrl11.downloadFile(file)"><i class="material-icons">vertical_align_bottom</i></div>
                     </div>       
                 </md-list-item>
-                <div class="form-group">
-                    <label for="file">Choose File</label>
-                    <input type="file"
-                        id="file">
+                <div class="hiddenupload">
+                    <input class="hiddenupload" type="file"
+                        id="fileInput">
+                    <md-button id="uploading" ng-click="ctrl11.uploadFile();" class="hiddenupload">Upload</md-button>
                 </div>
-                <div id="div"> drop here</div>
             </form>
             </div>
+            <div class="drop-window">
+                <div class="drop-window-content">
+                    <h3>Drop files to upload</h3>
+                </div>
+            </div>
         </div>
-        <script type="text/javascript">
-            $(document).ready(function(){ 
-                $("#div").on("dragover", function(event) {
-                    event.preventDefault();  
-                    event.stopPropagation();
-                    $(this).addClass('dragging');
-                });
-                
-                $("#div").on("dragleave", function(event) {
-                    event.preventDefault();  
-                    event.stopPropagation();
-                    $(this).removeClass('dragging');
-                });
-                
-                $('#div').on(
-                    'drop',
-                    function(e){
-                        if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            /*UPLOAD FILES HERE*/
-                            upload(e.originalEvent.dataTransfer.files);
-                        }
-                    }
-                );
-            });
-        </script>
         `
         return output;
     }
 
+    /**
+     * build a clickable breacrumbs for the navigations
+     * @returns return a string for the templates
+     * @memberof FileMana
+     */
     buildClickablebreadcrumbs(){
-        
         this._list =  this._breadcrumbs.split('/');
         let bc:string = '';
         for(let i in this._list){
@@ -173,6 +148,11 @@ export class FileMana{
         return bc;
     }
 
+    /**
+     * set the path needed to get into the good folder
+     * @param {string} rank wich folder we want to go in
+     * @memberof FileMana
+     */
     setbreacrumbsForNav(rank:string){
         
         this._breadcrumbs = '';
@@ -187,7 +167,40 @@ export class FileMana{
         }
     }
 
+    /**
+     * set properties next folder
+     * @param {string} next name of the next folder
+     * @memberof FileMana
+     */
     setNextFolder(next:string):void{
         this._nextFolder = next ;
+    }
+
+    /**
+     * set a formdata to the Api to upload a file
+     * @memberof FileMana
+     */
+    uploadfile():void{
+
+    }
+
+    /**
+     * receive a blob dorm the APi to save the file into the download repository
+     * @param {string} nameFile name of the file
+     * @param {string} path the path of the file
+     * @memberof FileMana
+     */
+    downloadFile(nameFile:string, path:string):void{
+
+    }
+
+    /**
+     * to delete a file in the repository S3
+     * @param {string} nameFile name of the file
+     * @param {string} path the path of the file
+     * @memberof FileMana
+     */
+    deleteFile(nameFile:string, path:string):void{
+
     }
 }

@@ -168,6 +168,12 @@
   width: 320px;
 }
 
+.errormess{
+  color: red;
+  opacity: 1;
+  font-size: 10px;
+}
+
 //for extraction
 .classeslistEX{
   max-height: 40px;
@@ -382,9 +388,7 @@
 /**** Folder and Files ****/
 
 /******* Dropzone *******/
-.dropTarget{
-  background-color: antiquewhite;
-}
+
 
 /******* Geometry *******/
 .geomMenu{
@@ -428,18 +432,46 @@
   width: 340px;
 }
 
-.dragging{
-  background-color: gray;
+.drop-window {
+	position: fixed;
+	top: 100px;
+	left: 450px;
+	right: 50px;
+	bottom: 100px;
+	background: rgba(0,86,132,.9);
+	z-index: 250000;
+	display: none;
+	text-align: center;
+	-webkit-transition: opacity 250ms;
+	transition: opacity 250ms;
+  pointer-events:none;
 }
 
-#div{
-  width:300px;
-  height:100px;
-  line-height:100px;
-  border:5px dashed #CCC;
+.drop-window-content {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
+	border: 1px dashed #fff;
+}
 
-  font-family:Verdana;
-  text-align:center;
+.drop-window h3 {
+	margin: -.5em 0 0;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	font-size: 40px;
+	color: #fff;
+	padding: 0;
+}
+
+.hiddenupload{
+  display: none;
 }
 /*********************** Portail CSS **************************/
 .titleportail{

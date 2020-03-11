@@ -55,6 +55,7 @@
     },
     "dependencies": {
         "@flowjs/ng-flow": "^2.7.8",
+        "add-filename-increment": "^1.0.0",
         "ag-grid-community": "19.0.0",
         "debounce": "^1.2.0",
         "drag-drop": "^6.0.0",
@@ -62,6 +63,7 @@
         "gh-pages": "^2.2.0",
         "rxjs": "6.3.3",
         "shpjs": "^3.4.3",
-        "vanilla-picker": "^2.10.0"
+        "vanilla-picker": "^2.10.0",
+        "write": "^2.0.0"
     }
 }

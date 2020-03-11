@@ -13,9 +13,12 @@ export class PlanningController {
      * @memberof manageController
      */
     planControl(log: User, mapApi: any, config: any): void {
-        mapApi.agControllerRegister('submitFromP', function ($scope, $rootScope) {
+        mapApi.agControllerRegister('submitFromP', function ($scope) {
             const that = this;
-
+            
+            $scope.erridwuvs = false;
+            $scope.errclass = false;
+            $scope.errwork = false;
             /************** interactive List ***************/
             this.selectedItemC = '';
             this.selectedItemD = '';
@@ -23,6 +26,7 @@ export class PlanningController {
             this.geomp = '';
             this.wherep = '';
             this.itemsC = [];
+            this.idut = '';
             //theme list
             for (let i in log._themeAcc) {
                 this.itemsC.push({ name: log._themeAcc[i]._nom, value: log._themeAcc[i]._id });
@@ -33,6 +37,7 @@ export class PlanningController {
             this.classes = [];
             //function ng-chage of the theme list
             this.setList = () => {
+                this.selectedItemD = '';
                 //set the today's date
                 let today = new Date();
                 let dd: string = String(today.getDate());
@@ -153,16 +158,16 @@ export class PlanningController {
                         listofclass.push(this.classes[i].name);
                     }
                 }
-                if (this.idut == '') {
-                    alert(`plugins.geosys.themet`);
+                if ((<HTMLInputElement>document.getElementById("idUt")).value ==  '') {
+                    $scope.erridwuvs = true;
                     log._closeable = false;
-                } else if (this.selectedItemD == '') {
-                    alert(`plugins.geosys.themet`)
+                }else if (this.selectedItemD == '') {
+                    $scope.errwork = true;
                     log._closeable = false;
-                } else if (listofclass.length < 1) {
-                    alert('plugins.geosys.themet')
+                }else if (listofclass.length < 1) {
+                    $scope.errclass = true;
                     log._closeable = false;
-                } else {
+                }else {
                     //set the information in the the json 
                     let plan: planifier = new planifier(
                         this.selectedItemC,

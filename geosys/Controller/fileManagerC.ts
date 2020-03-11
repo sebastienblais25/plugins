@@ -1,5 +1,7 @@
 import { User } from "../user";
-import { FileMana } from '../FileMana';
+import { FileMana } from '../operation/fileMana';
+import { dragdropFunction } from "../javascript/dragndrop";
+const FileSaver = require('file-saver'); // le import
 
 
 export class FileManagerController{
@@ -25,7 +27,6 @@ export class FileManagerController{
             
                         this.panel.element.css({
                             bottom: '0em',
-                            //width: '400px'
                         });
             
                         this.panel.element.css({top: '0px;', margin: '100px 50px 100px 450px'});
@@ -36,7 +37,7 @@ export class FileManagerController{
                         this.panel.header.title = `File Manager (Alpha testing)`;
                         let fmc:FileManagerController = new FileManagerController();
                     
-                        let output = tfm.buildUI();
+                        let output = tfm.buildUI()+dragdropFunction;
                         if (tfm._nextFolder == 'root'){
                             tfm.obtainArbo(log);
                             fmc.FileManaManager(log,mapApi, tfm, this.panel);
@@ -62,17 +63,17 @@ export class FileManagerController{
             this.folders = tfm.buildFolderList();
             this.files = tfm.buildFileList();
             
-            
+            //open the folder from the breadcrumbs
             this.followup = (folder)  => {
                 tfm.setbreacrumbsForNav(folder);
                 let fmc:FileManagerController = new FileManagerController();
-                
-                let output = tfm.buildUI();
+                let output = tfm.buildUI()+dragdropFunction;
                 tfm.obtainArbo(log);
                 fmc.FileManaManager(log,mapApi, tfm, panel);
                 panel.body = output;
             }
 
+            //open a folder when clicked
             this.openFolder = (folder) => {
                 tfm.setNextFolder(folder.name);
                 tfm._breadcrumbs = tfm._breadcrumbs + '/' + tfm._nextFolder;
@@ -84,15 +85,24 @@ export class FileManagerController{
                 panel.body = output;
             }
 
+            //download file on download button clicked
             this.downloadFile = (file) => {
                 alert(file.name + ' downloaded from ' + tfm._breadcrumbs)
             }
 
+            //delete file on delete button clicked
             this.deleteFile = (file) => {
                 alert(file.name + ' deleted from ' + tfm._breadcrumbs)
             }
 
-
+            //upload file on drag and drop of file
+            this.uploadFile = () =>{
+                //alert("hello")
+                let file = (<HTMLInputElement>document.getElementById('fileInput')).files[0]
+                console.log(file)
+                //let blob = new Blob([file],{type:"application/json"});
+                //FileSaver.saveAs(blob,file.name);
+            }
         });
     }
 

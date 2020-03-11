@@ -23,8 +23,9 @@ import { CancelController } from '../controller/cancelC';
 import { TopMenuController } from '../controller/topmenuC';
 import { ValidateController } from '../controller/validateC';
 import { FileManagerController } from '../controller/fileManagerC'
-import { FileMana } from '../FileMana';
+import { FileMana } from '../operation/fileMana';
 import { uniteTravail } from '../templates/unitTravail';
+import { UnitTravC } from '../controller/unitTravC';
 
 
 export class menuManager{
@@ -37,7 +38,8 @@ export class menuManager{
     _cleaning:CleaningController;
     _cancel:CancelController;
     _validate: ValidateController;
-    _fileManager:FileManagerController
+    _fileManager:FileManagerController;
+    _workUnit:UnitTravC;
 
 
     /**
@@ -59,6 +61,7 @@ export class menuManager{
         this._cancel = new CancelController();
         this._validate = new ValidateController();
         this._fileManager = new FileManagerController();
+        this._workUnit = new UnitTravC();
 
         //varaible for the form
         let outputExt:string  = this.extractManager(log,mapApi);
@@ -258,7 +261,7 @@ export class menuManager{
     }
 
     UTManager(log:User, mapApi:any):string{
-
+        this._workUnit.unitControl(log, mapApi);
         let output = uniteTravail;
 
         return output;

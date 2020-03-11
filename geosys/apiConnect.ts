@@ -161,4 +161,51 @@ export class connexion{
         });
         return outputValue;
     };
+
+    connexionAPIFileMAnager(token:string, urltogo:string):any{
+        let outputValue:any;
+        /********* API CALL **********/
+        //no promise still
+        const promises = [];
+        promises.push(
+            new Promise(resolve =>{
+                $.ajax({
+                    url: urltogo,
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'contentType': 'application/json'   
+                    },
+                    type: 'Get',
+                    async: false,
+                    //cache:false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType:'json',
+                    processData: false,
+                    success: //data => resolve()
+                    
+                    function(response,jqXHR){
+                        //console.log(response)
+                        outputValue = response;
+                        
+                    },
+                    error: function(xhr){
+                        alert(xhr.statusText);
+                        outputValue = xhr;
+                    }
+                })
+           }) 
+        );
+        Promise.all(promises).then(values => {
+            console.log(values);
+        });
+        return outputValue
+    }
+
+    connexionAPIFileDownloadDelete(token:string, urltogo:string,operatio:string):any{
+
+    }
+
+    connexionAPIFileUplaod(token:string, urltogo:string):any{
+
+    }
 }

@@ -23,7 +23,7 @@ export const formExtraireP:string =
                 </md-input-container>
 
                 <md-input-container class="ddlshowEX">
-                    <label>{{ 'plugins.geosys.idUT' | translate }}</label>
+                    <label>{{ 'plugins.geosys.idUT' | translate }}</label><span class="errormess" ng-show="ErrorEx">you must add a working unit</span>
                     <md-select
                     ng-model="ctrl3.selectedItemB"
                     ng-change="ctrl3.setListB()"
