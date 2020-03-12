@@ -18,9 +18,6 @@ export class FileManagerController{
             this.OpenFileManager = () => {
                 if(log._environnementSel!= ''){
                     
-                    $scope.SelectedMenuFM = {
-                        "background-color" : "blue", 
-                    }
                     if (!this.panel) {
                         // make sure both header and body have a digest cycle run on them
                         this.panel = mapApi.panels.create('FileManager');
@@ -63,6 +60,28 @@ export class FileManagerController{
             this.folders = tfm.buildFolderList();
             this.files = tfm.buildFileList();
             
+            this.precedent = () =>{
+                let rank = tfm._list.length - 2
+                if(rank >= 0){
+                    tfm.setbreacrumbsForNav(rank.toString());
+                    let fmc:FileManagerController = new FileManagerController();
+                    let output = tfm.buildUI()+dragdropFunction;
+                    tfm.obtainArbo(log);
+                    fmc.FileManaManager(log,mapApi, tfm, panel);
+                    panel.body = output; 
+                }
+                
+            }
+
+            this.refresh = () =>{
+                let fmc:FileManagerController = new FileManagerController();
+                
+                let output = tfm.buildUI();
+                tfm.obtainArbo(log);
+                fmc.FileManaManager(log,mapApi, tfm, panel);
+                panel.body = output;
+            }
+
             //open the folder from the breadcrumbs
             this.followup = (folder)  => {
                 tfm.setbreacrumbsForNav(folder);
@@ -87,12 +106,12 @@ export class FileManagerController{
 
             //download file on download button clicked
             this.downloadFile = (file) => {
-                alert(file.name + ' downloaded from ' + tfm._breadcrumbs)
+                tfm.downloadFile(file.name,tfm._breadcrumbs,log.gettoken());
             }
 
             //delete file on delete button clicked
             this.deleteFile = (file) => {
-                alert(file.name + ' deleted from ' + tfm._breadcrumbs)
+                tfm.deleteFile(file.name,tfm._breadcrumbs,log.gettoken());
             }
 
             //upload file on drag and drop of file
@@ -102,6 +121,19 @@ export class FileManagerController{
                 console.log(file)
                 //let blob = new Blob([file],{type:"application/json"});
                 //FileSaver.saveAs(blob,file.name);
+                const myMap = (<any>window).RAMP.mapById(mapApi.id);
+
+                // If you want to add a layer by configuration you can use this
+                const objURL = URL.createObjectURL(file);
+                const layerJSON = {
+                    "id": "0",
+                    "name": file.name,
+                    "layerType": "esriFeature",
+                    "fileType": "geojson",
+                    "url": objURL
+                };
+                const myConfigLayer = myMap.layers.addLayer(layerJSON);
+
             }
         });
     }

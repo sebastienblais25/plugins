@@ -27,7 +27,6 @@ export const formNettoyage:string =
                     <label>{{ 'plugins.geosys.idUT' | translate }}</label>
                     <md-select
                     ng-model="ctrl7.selectedItemB"
-                    ng-change="ctrl7.setListB()"
                     required>
                         <md-option ng-repeat="item in ctrl7.itemsB" ng-value="item.value">
                             {{ item.name }}

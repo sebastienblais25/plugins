@@ -2,6 +2,7 @@
 import { User } from '../user';
 import { urlListFile } from '../config/url';
 import { connexion } from '../apiConnect';
+const FileSaver = require('file-saver'); // le import
 
 
 
@@ -80,11 +81,15 @@ export class FileMana{
     buildUI():string{
         let output:string = `
         <div ng-controller="fileManagerPanelCtrl as ctrl11">
-            <div class="breadclass">`+ this.buildClickablebreadcrumbs() +`</div>
-            <div class="headerFile">
-                <span class="nameFileFolderHeader">Name</span> 
-                <span class="modifiedFileFolderHeader">Date modified</span>
-                <span class="sizeFileFolderHeader">Size</span>
+            <div>
+                <div class="backing" ng-click="ctrl11.precedent()"><i class="material-icons">arrow_back</i></div>
+                <div class="backing" ng-click="ctrl11.refresh()"><i class="material-icons">refresh</i></div>
+                <div class="breadclass">`+ this.buildClickablebreadcrumbs() +`</div>
+                <div class="headerFile">
+                    <span class="nameFileFolderHeader">Name</span> 
+                    <span class="modifiedFileFolderHeader">Date modified</span>
+                    <span class="sizeFileFolderHeader">Size</span>
+                </div>
             </div>
             <div id="div1" ondragenter="onDragEnter(event);"
             ondragover="onDragOver(event);"
@@ -142,8 +147,14 @@ export class FileMana{
     buildClickablebreadcrumbs(){
         this._list =  this._breadcrumbs.split('/');
         let bc:string = '';
+        let lenght = this._list.length - 1;
         for(let i in this._list){
-            bc += `/<span ng-click="ctrl11.followup('`+ i +`')"><a href="#">`+this._list[i]+`</a></span>`;
+            if(i === lenght.toString()){
+                bc += `&nbsp;/<span class="breadClick">`+this._list[i]+`</span>`;
+            }else{
+                bc += `&nbsp/<span class="breadClick" ng-click="ctrl11.followup('`+ i +`')">`+this._list[i]+`</span>`;
+            }
+            
         }
         return bc;
     }
@@ -178,9 +189,11 @@ export class FileMana{
 
     /**
      * set a formdata to the Api to upload a file
+     * @param {string} path the path of the file
+     * @param {string} token the token for the connection
      * @memberof FileMana
      */
-    uploadfile():void{
+    uploadfile(path:string, token:string):void{
 
     }
 
@@ -188,19 +201,28 @@ export class FileMana{
      * receive a blob dorm the APi to save the file into the download repository
      * @param {string} nameFile name of the file
      * @param {string} path the path of the file
+     * @param {string} token the token for the connection
      * @memberof FileMana
      */
-    downloadFile(nameFile:string, path:string):void{
-
+    downloadFile(nameFile:string, path:string, token:string):void{
+        /***** API Call *****/
+        //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Get')
+        /***** Download *****/
+        alert(nameFile + ' downloaded from ' + path)
+        let blob = new Blob([`"name":"j-s"`],{type:"application/json"});
+        FileSaver.saveAs(blob,nameFile);
     }
 
     /**
      * to delete a file in the repository S3
      * @param {string} nameFile name of the file
      * @param {string} path the path of the file
+     * @param {string} token the token for the connection
      * @memberof FileMana
      */
-    deleteFile(nameFile:string, path:string):void{
-
+    deleteFile(nameFile:string, path:string,token:string):void{
+        /***** API Call *****/
+        //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Delete')
+        alert(nameFile + ' deleted from ' + path)
     }
 }

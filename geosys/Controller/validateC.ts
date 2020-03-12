@@ -16,7 +16,7 @@ export class ValidateController{
     valiControl(log:User, mapApi:any):void{
         //mapApi.agDirectiveRegister()
         mapApi.agControllerRegister('submitFromV', function($scope){
-            
+            $scope.errJSON = false;
             /************** interactive List ***************/
             this.selectedItemE = '';
             this.selectedItemF = '';
@@ -26,6 +26,7 @@ export class ValidateController{
             }
             this.itemsF = [];
             this.setList = () => {
+                this.selectedItemF = '';
                 // populate list b with new items
                 this.itemsF.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemE)
@@ -36,10 +37,9 @@ export class ValidateController{
     
             //Envoie le fromulaire a l'API
             this.submitFormV = function(element) { 
-                if(this.selectedItemF == ''){
-                    alert("Sélectionner un identifiant d'unité de travail")
-                }else if((<HTMLInputElement>document.getElementById('fileJSON')).files.length == 0){
-                    alert("Ajoute un fichier de métadonnée")
+                if((<HTMLInputElement>document.getElementById('fileJSON')).files.length == 0){
+                    $scope.errJSON = true;
+                    log._closeable =false;
                 }else{
                     //get all the information of the form into the class
                     let formdata = new FormData();
@@ -52,6 +52,7 @@ export class ValidateController{
                     if (api != undefined){
                         alert(api);
                         console.log(api);
+                        log._closeable =false;
                         $scope.SelectedMenuV = {
                             "background-color" : "red", 
                         }

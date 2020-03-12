@@ -33,8 +33,7 @@ export const formPlanifier = `
                 <label>{{ 'plugins.geosys.typeTrv' | translate }}<span class="errormess" ng-show="errwork"> *you must choose a working type</span></label>
                 <md-select 
                 name="typetrv"
-                ng-model="ctrl2.selectedItemD" 
-                id="theme" 
+                ng-model="ctrl2.selectedItemD"  
                 placeholder="{{ 'plugins.geosys.typeTrv' | translate }}">
                     <md-option ng-repeat="item in ctrl2.itemsD" ng-value="item.value">
                         {{ item.name }}
@@ -44,7 +43,7 @@ export const formPlanifier = `
         </div>
 
         <div>
-                <span class="classeslist"><span class="advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="errormess" ng-show="errclass"> *you must choose at least one class</span></span><md-checkbox ng-model="ctrl2.listeclasse" aria-label="checkall" class="md-secondary checklist" ng-click="ctrl2.toggleAll()"></md-checkbox>
+                <span class="classeslist"><span class="advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="errormess sizeerror" ng-show="errclass"> *you must choose at least one class</span></span><md-checkbox ng-model="ctrl2.listeclasse" aria-label="checkall" class="md-secondary checklist" ng-click="ctrl2.toggleAll()"></md-checkbox>
                 <div class="planning">
                     <md-list-item class="itemlist" ng-repeat="class in ctrl2.classes">
                         <span class="largeurlist">{{ class.name }}</span>

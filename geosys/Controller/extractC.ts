@@ -29,7 +29,6 @@ export class ExtractController{
             //création de la liste pour les unité de travail
             this.setList = () => {
                 this.selectedItemB = '';
-                console.log(`set: ${this.selectedItemA}`);
                 // populate list of working unit id
                 this.itemsB.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemA)
@@ -65,6 +64,7 @@ export class ExtractController{
                     //if the conection to the API is a success
                     if (apireturn != 'success'){
                         alert(apireturn.statusText)
+                        log._closeable =false;
                         $scope.SelectedMenuE = {
                             "background-color" : "red", 
                         }
@@ -90,6 +90,7 @@ export class ExtractController{
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitExCtrl', function($scope){
             const that = this;
+            $scope.errclassEX = false;
             /************** interactive List ***************/
             this.selectedItemA = '';
             this.whereclause = '';
@@ -198,6 +199,7 @@ export class ExtractController{
             }
             /**************** From Submission ***************/
             //Envoie le formulaire a l'Api
+            
             this.submitSRForm = function() { 
                 //get all the information of the form into the class
                 this.geomSR = log._geom;
@@ -214,12 +216,9 @@ export class ExtractController{
                 }else{
                     siClip = 'non';
                 }
-                if(this.idut == ''){
-                    alert(`plugins.geosys.themet`);
-                }else if(this.selectedItemD == ''){
-                    alert(`plugins.geosys.themet`)
-                }else if( listofclass.length < 1){
-                    alert('plugins.geosys.themet')
+                if( listofclass.length < 1){
+                    $scope.errclassEX = true;
+                    log._closeable = false;
                 }else{
                     //console.log(this.geomSR)
                     let extsr = new Extraire(
@@ -233,6 +232,7 @@ export class ExtractController{
                     let apireturn:any = extsr.submitForm(log);
                     if (apireturn != 'success'){
                         alert(apireturn.statusText)
+                        log._closeable = false;
                         $scope.SelectedMenuEU = {
                             "background-color" : "red", 
                         }

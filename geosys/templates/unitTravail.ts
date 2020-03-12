@@ -8,7 +8,7 @@ export const uniteTravail:string = `
     <div ng-show="IsVisibleUT" ng-style="bgEnv" class="extractspace">
         <md-input-container>
             <label>Testing</label>
-            <input type="text"/>
+            <input type="text" ng-model="ctrl14.query"/>
             <md-button ng-click="ctrl14.addGeom()">Add</md-button>
         </md-input-container>
     </div>

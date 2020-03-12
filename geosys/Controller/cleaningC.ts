@@ -28,6 +28,7 @@ export class CleaningController{
             this.itemsB = [];
             //création de la liste pour les unité de travail
             this.setList = () => {
+                this.selectedItemB = '';
                 // populate list of working unit id
                 this.itemsB.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemA)
@@ -37,29 +38,26 @@ export class CleaningController{
             }
             /**************** From Submission ***************/
             this.submitNett = function() { 
-                if(this.selectedItemB == ''){
-                    alert("Sélectionner un identifiant d'unité de travail")
-                }else{
-                    let deleted = confirm('Confirmez le nettoyage ? / Confirm the cleaning ? ');
-                    if(deleted){
-                        let nettoyage:Cleaning = new Cleaning(this.selectedItemA ,this.selectedItemB)
-                        let renet= nettoyage.submitForm(log);
-                        if (renet != 'success'){
+                
+                let deleted = confirm('Confirmez le nettoyage ? / Confirm the cleaning ? ');
+                if(deleted){
+                    let nettoyage:Cleaning = new Cleaning(this.selectedItemA ,this.selectedItemB)
+                    let renet= nettoyage.submitForm(log);
+                    if (renet != 'success'){
 
-                            alert(renet.statusText)
-                            $scope.SelectedMenuC = {
-                            "background-color" : "red", 
-                            }
-                        }else{
-                            //$scope.IsVisibleCL = false;
-                            //console.log(log._token);
-                            alert("Deleted")
-                            $scope.SelectedMenuC = {
-                                "background-color" : "green", 
-                            }
+                        alert(renet.statusText)
+                        $scope.SelectedMenuC = {
+                        "background-color" : "red", 
                         }
-                    }   
-                } 
+                    }else{
+                        //$scope.IsVisibleCL = false;
+                        //console.log(log._token);
+                        alert("Deleted")
+                        $scope.SelectedMenuC = {
+                            "background-color" : "green", 
+                        }
+                    }
+                }   
             };
         });
     }

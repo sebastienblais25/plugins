@@ -22,7 +22,6 @@ export const validateform:string = `
                     <label>{{ 'plugins.geosys.idUT' | translate }}</label>
                     <md-select
                     ng-model="ctrl9.selectedItemF"
-                    ng-change="ctrl9.setList()"
                     required>
                         <md-option ng-repeat="item in ctrl9.itemsF" ng-value="item.value">
                             {{ item.name }}
@@ -31,7 +30,7 @@ export const validateform:string = `
                 </md-input-container>
 
                 
-                    <label class="advanced">{{ 'plugins.geosys.filejson' | translate }}</label>
+                <span><span class="advanced">{{ 'plugins.geosys.filejson' | translate }}</span><span class="errormess sizeerror" ng-show="errJSON"> *you must choose at least one class</span></span>
                     <input  type="file" id="fileJSON" accept=".json"/>
                 
                 <md-input-container class="submitbtn">

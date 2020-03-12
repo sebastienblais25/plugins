@@ -35,7 +35,6 @@ export const formDelivery = `
                     <label>{{ 'plugins.geosys.idUT' | translate }}</label>
                     <md-select
                     ng-model="ctrl5.selectedItemF"
-                    ng-change="ctrl5.setList()"
                     required>
                         <md-option ng-repeat="item in ctrl5.itemsF" ng-value="item.value">
                             {{ item.name }}
@@ -44,12 +43,12 @@ export const formDelivery = `
                 </md-input-container>
 
                 <div>
-                    <label class="advanced">{{ 'plugins.geosys.fileMD' | translate }}</label>
-                    <input  type="file" id="fileMD"/>
+                    <span><span class="advanced">{{ 'plugins.geosys.fileMD' | translate }}</span><span class="errormess sizeerror" ng-show="errMD"> *you must choose at least one class</span></span>
+                    <input  type="file" id="fileMD" accept="json"/>
                 </div>
                 <div>
-                    <label class="advanced">{{ 'plugins.geosys.fileGDB' | translate }}</label>
-                    <input type="file" id="filefgdb"/>
+                    <span><span class="advanced">{{ 'plugins.geosys.fileGDB' | translate }}</span><span class="errormess sizeerror" ng-show="errFGDB"> *you must choose at least one class</span></span>
+                    <input type="file" id="filefgdb" accept="zip"/>
                 </div>
                 
                 <div ng-show="AdvancedVisible" ng-click="ctrl5.ShowHideAdvanced()" class="advanced">

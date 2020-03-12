@@ -88,7 +88,7 @@ export const formExtraireSR:string =
                 </md-input-container>
                 
                 <div>
-                    <span class="classeslistEX">{{ 'plugins.geosys.classe' | translate }}</span><md-checkbox aria-label="checkall" ng-model="ctrl4.listeclasse" class="md-secondary checklist" ng-click="ctrl4.toggleAll()"></md-checkbox>
+                <span class="classeslist"><span class="advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="errormess sizeerror" ng-show="errclassEX"> *you must choose at least one class</span></span><md-checkbox aria-label="checkall" ng-model="ctrl4.listeclasse" class="md-secondary checklist" ng-click="ctrl4.toggleAll()"></md-checkbox>
                     <div class="divclasse">
                         <md-list-item class="itemlist" ng-repeat="class in ctrl4.classes">
                             <span class="largeurlist">{{ class.name }}</span>

@@ -15,7 +15,8 @@ export class DeliveryController{
     deliControl(log:User, mapApi:any):void{
         //mapApi.agDirectiveRegister()
         mapApi.agControllerRegister('submitFromD', function($scope){
-            
+            $scope.errMD = false;
+            $scope.errFGDB =false;
             /************** interactive List ***************/
             this.typeOper = '';
             this.selectedItemE = '';
@@ -27,6 +28,7 @@ export class DeliveryController{
             this.itemsF = [];
             this.setList = () => {
                 // populate list b with new items
+                this.selectedItemF = '';
                 this.itemsF.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemE)
                 for (let i in list){
@@ -52,12 +54,12 @@ export class DeliveryController{
             //Envoie le fromulaire a l'API
             this.submitFormD = function(element) { 
                 //get all the information of the form into the class
-                if(this.selectedItemF == ''){
-                    alert("Sélectionne un identifiant d'unité de travail")
-                }else if((<HTMLInputElement>document.getElementById('fileMD')).files.length == 0){
-                    alert("Ajoute un fichier de métadonnée")
+                if((<HTMLInputElement>document.getElementById('fileMD')).files.length == 0){
+                    $scope.errMD = true;
+                    log._closeable = false;
                 }else if((<HTMLInputElement>document.getElementById('filefgdb')).files.length == 0){
-                    alert("Ajout un fichier de geodatabase")
+                    $scope.errFGDB = true;
+                    log._closeable = false;
                 }else{
                     let formdata = new FormData();
                     formdata.append('fichier_data',(<HTMLInputElement>document.getElementById('fileMD')).files[0]);
