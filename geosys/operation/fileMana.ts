@@ -81,7 +81,8 @@ export class FileMana{
     buildUI():string{
         let output:string = `
         <div ng-controller="fileManagerPanelCtrl as ctrl11">
-            <div>
+            <div class="topcover"></div>
+            <div class="stickyHeader">
                 <div class="backing" ng-click="ctrl11.precedent()"><i class="material-icons">arrow_back</i></div>
                 <div class="backing" ng-click="ctrl11.refresh()"><i class="material-icons">refresh</i></div>
                 <div class="breadclass">`+ this.buildClickablebreadcrumbs() +`</div>
@@ -119,7 +120,7 @@ export class FileMana{
                         <span class="modifiedFileFolder lilPad">{{ file.modified }}</span>
                         <span class="sizeFileFolder lilPad">{{ file.size }} KB</span>
                         <div class="downloadbtn" ng-click="ctrl11.deleteFile(file)"><i class="material-icons">delete</i></div>
-                        <div class="downloadbtn" ng-click="ctrl11.downloadFile(file)"><i class="material-icons">vertical_align_bottom</i></div>
+                        <div class="downloadbtn" ng-click="ctrl11.downloadFile(file)"><i style="padding-top: 2px;" class="material-icons">get_app</i></div>
                     </div>       
                 </md-list-item>
                 <div class="hiddenupload">

@@ -35,18 +35,21 @@ export class CreateController{
             this.setList = () => {
                 /******changer pour sources********/
                 let listS= [];
+                
                 listS = log.getlistofclasses(this.selectedItemE);
                 this.sources.length = 0;
                 //add the new list in list for the template
                 this.sources = listS
                 /******changer pour precision********/
                 let listP= [];
+                
                 listP = log.getlistofclasses(this.selectedItemE);
                 this.precisions.length = 0;
                 //create the list with name and varaible for the checkbox
                 this.precisions= listP
                 /******changer pour contraintes********/
                 let listCo= [];
+                
                 listCo = log.getlistofclasses(this.selectedItemE);
                 this.contraintes.length = 0;
                 //create the list with name and varaible for the checkbox

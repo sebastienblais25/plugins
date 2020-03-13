@@ -75,7 +75,7 @@ export const formPlanifier = `
             </div>
             <div class="geomDivIn1">
                 <md-checkbox class="geomCB" ng-model="ctrl2.drawingchecked" aria-label="drwchk" ng-click='ctrl2.drawchck()'></md-checkbox>
-                <div style="padding-top: 10px;" ">Drawing</div>
+                <div style="padding-top: 10px;" class="opac">Drawing</div>
                 <div style="margin-left:35px; padding-top:5px;margin-top: 0px;" class="advanced"> Shapefile(.zip)</div>
             </div>
             <div class="geomDivIn">

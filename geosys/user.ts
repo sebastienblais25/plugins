@@ -11,11 +11,11 @@ export class User{
     /** Send to APi **/
     _username: string;
     _password: string;
-    
 
     /** Environnement **/
     _environnementSel: string;
     _urlEnvselected:string;
+    _basetheme:string;
 
     /** Connexion **/
     _conn: connexion = new connexion();
@@ -141,7 +141,6 @@ export class User{
         return output
     }
 
-    //Ajoute le reste des données obtenu par le login
     /**
      * sett all the info information obtain form a login into the properties of the class
      * @param {string} token
@@ -159,19 +158,66 @@ export class User{
         this._rightRead = new Apireturn(scope[0]);
         this._rightWrite = new Apireturn(scope[1]);
         this._equipe = new Apireturn(equipe);
+        this._basetheme = config.base_theme;
         //alert(this._rightRead + " " + this._rightWrite);
         let ordertheme:any =this.orderThemeList(theme,config);
         for (let i in ordertheme){
             this._themeAcc.push(new Apireturn(ordertheme[i]));
             this.getinfoForCode(ordertheme[i],i)
         }
+        this.callAPIWorkingUnit(this._basetheme);
+        this.callAPIListeClasse(this._basetheme);
+        this.callAPIWorkingType(this._basetheme);   
+    }
+
+
+    /**
+     * call Api for a list of working unit 
+     * @param {string} theme the theme related to the working unit
+     * @memberof User
+     */
+    callAPIWorkingUnit(theme:string){
+        let json = '';
+        let output:any =this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlgetidWu + theme), 'Get');
+        this._idUt = new idWu(theme,output.value);
+        //À enlever Mocking Only
+        for(let j in this._idUt._wUnit){
+            this._idUt._wUnit[j] = this._idUt._theme + ' - ' + this._idUt._wUnit[j];
+        }
     }
 
     /**
-     *
-     *
-     * @param {string[]} theme
-     * @param {*} config
+     * call the API for a list of classes
+     * @param {string} theme the theme related to the list of classes
+     * @memberof User
+     */
+    callAPIListeClasse(theme:string){
+        let json = '';
+        let resstheme = theme + ':ress.json'
+        let ressjson = this.createJsonRessources(resstheme/*,path */);
+        let data:any = this._conn.connexionAPI(this.gettoken(), ressjson , this.constructUrl(urlClassesList),'GET');
+        this._classeslist = data.value.liste_classe;
+    }
+
+    /**
+     * call the API for a list of working type
+     * @param {string} theme the theme related to the working type
+     * @memberof User
+     */
+    callAPIWorkingType(theme:string){
+        let json = '';
+        let ttoutput:any =this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlWorkingType + theme), 'Get');
+        this._workinType = [];
+        for(let j in ttoutput){
+            this._workinType.push(new Apireturn(ttoutput[j].id));
+            this._workinType[j].setRemaining(ttoutput[j].id_list_code, ttoutput[j].nom,ttoutput[j].desc_en, ttoutput[j].desc_fr);
+        }
+    }
+
+    /**
+     * ordering the list to set the base theme in first place
+     * @param {string[]} theme list of theme
+     * @param {*} config the base theme
      * @returns
      * @memberof User
      */
@@ -212,14 +258,9 @@ export class User{
      * @memberof User
      */
     setidUTtheme(theme:string){
-        //json file
-        let json:string = "";
-        //set the new url and get the connection 
-        let output:any =this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlgetidWu + theme), 'Get');
-        this._idUt = new idWu(theme,output.value);
-        //À enlever Mocking Only
-        for(let j in this._idUt._wUnit){
-            this._idUt._wUnit[j] = this._idUt._theme + ' - ' + this._idUt._wUnit[j];
+        //set the new url and get the connection
+        if(theme.toString() != this._basetheme.toString()){
+            this.callAPIWorkingUnit(theme)
         }
         let list=[];
         for(let j in this._idUt._wUnit){
@@ -237,15 +278,11 @@ export class User{
      * @memberof User
      */
     setworkingtype(theme:string){
-        //json file
-        let json:string = "";
         //set the new url and get the connection
-        let output:any =this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlWorkingType + theme), 'Get');
-        this._workinType = [];
-        for(let j in output){
-            this._workinType.push(new Apireturn(output[j].id));
-            this._workinType[j].setRemaining(output[j].id_list_code, output[j].nom,output[j].desc_en, output[j].desc_fr);
+        if(theme != this._basetheme){
+            this.callAPIWorkingType(theme); 
         }
+        
         let list=[];
         for(let j in this._workinType){
             list.push( { name: this._workinType[j]._nom, value: this._workinType[j]._id});
@@ -280,10 +317,10 @@ export class User{
      */
     getlistofclasses(theme:string/*,path:string*/){
         let listS = [];
-        theme = theme + ':ress.json'
-        let json = this.createJsonRessources(theme/*,path */);
-        let data:any = this._conn.connexionAPI(this.gettoken(), json , this.constructUrl(urlClassesList),'GET');
-        this._classeslist = data.value.liste_classe;
+        if(theme != this._basetheme){
+            this.callAPIListeClasse(theme);
+        }
+        
         for(let i in this._classeslist){
             listS.push( { name: this._classeslist[i] , wanted: false });
         }

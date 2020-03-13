@@ -69,7 +69,7 @@ export default class Geosys{
         //creating the panel with the dimension and a title for the application
         this.panel = this.mapApi.panels.create('geosys');
         this.panel.element.css({bottom: '0em', width: '400px', top: '50px'})
-        this.panel.header.title = 'Generic Title';
+        this.panel.header.title = 'Geosys (Alpha)';
         this.panel.body.id = 'hello'
 
         //add control for the login button
@@ -201,6 +201,16 @@ Geosys.prototype.translations = {
         //unité de travail
         unit : 'Working Zone',
         //file manager
+        //errormessage
+        errorWT: '',
+        errorClass : '',
+        errorFMD : '',
+        errorFGDB: '',
+        errorWU: '',
+        errorSources: '',
+        errorPrecision: '',
+        errorContr: '',
+        errorTooMany: '',
 
     },
 
@@ -256,6 +266,16 @@ Geosys.prototype.translations = {
         //unité de travail
         unit : 'Unité de travail',
         //file manager
+        //errormessage
+        errorWT: '',
+        errorClass : '',
+        errorFMD : '',
+        errorFGDB: '',
+        errorWU: '',
+        errorSources: '',
+        errorPrecision: '',
+        errorContr: '',
+        errorTooMany: '',
     }
 };
 

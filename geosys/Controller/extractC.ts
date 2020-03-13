@@ -104,7 +104,7 @@ export class ExtractController{
             //création de la liste pour les unité de travail
             this.setList = () => {
                 let list= [];
-                list = log.getlistofclasses(this.selectedItemC);
+                list = log.getlistofclasses(this.selectedItemA);
                 this.classes.length = 0;
                 //add the new list in list for the template
                 this.classes = list 
