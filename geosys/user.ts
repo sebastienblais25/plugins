@@ -192,10 +192,17 @@ export class User{
      * @memberof User
      */
     callAPIListeClasse(theme:string){
-        let json = '';
-        let resstheme = theme + ':ress.json'
+        let resstheme:string = theme + ':ress.json'
         let ressjson = this.createJsonRessources(resstheme/*,path */);
-        let data:any = this._conn.connexionAPI(this.gettoken(), ressjson , this.constructUrl(urlClassesList),'GET');
+        let data:any = /*{
+            "value": {
+                "liste_classe": [
+                    "waterbody_2",
+                    "water_linear_flow_1",
+                    "dam_2"
+                ]
+            }
+        };*/this._conn.connexionAPI(this.gettoken(), ressjson , this.constructUrl(urlClassesList),'Get');
         this._classeslist = data.value.liste_classe;
     }
 
@@ -300,13 +307,22 @@ export class User{
      */
     createJsonRessources(theme:string/*, path:string */):string{
         let output:any = {
-            "fichiers" : theme,
+            "fichiers": [
+              "hydro_50k:ress_hydro.json",
+              "general:ress.json"
+            ],
+            "chemin_recherche": [
+              "ressources/liste_classes"
+            ]
+          } /*{
+            "fichiers" : [theme],
             "chemin_recherche":[
                 "ressources/liste_classes"
             ] 
-        };
+        };*/
 
         let json:any = JSON.stringify(output)
+
         return json 
     }
 

@@ -7,10 +7,14 @@ export const uniteTravail:string = `
     </div>
     <div ng-show="IsVisibleUT" ng-style="bgEnv" class="extractspace">
         <md-input-container>
-            <label>Testing</label>
-            <input type="text" ng-model="ctrl14.query"/>
-            <md-button ng-click="ctrl14.addGeom()">Add</md-button>
+            <label>Query to add a working zone in the map</label>
+            <textarea type="text" style="height: 30px; width: 354px;" ng-model="ctrl14.query"></textarea>
+            <md-button class="md-raised md-primary" ng-click="ctrl14.addGeom()">Add</md-button>
         </md-input-container>
+        <div>
+        
+        
+        </div>
     </div>
 <div>
 `

@@ -74,7 +74,7 @@ export class connexion{
                     type: typeConn,
                     async: false,
                     //cache:false,
-                    contentType: "application/json; charset=utf-8",
+                    //contentType: "application/json; charset=utf-8",
                     data: jsonstring,
                     dataType:'json',
                     processData: false,
@@ -98,14 +98,14 @@ export class connexion{
                         //console.log($('#recommandation').val());
                     }
                 })
-           })
+            })
         );
         Promise.all(promises).then(values => {
             console.log(values);
         });
         //alert(outputValue + ' 123')
         return outputValue;       
-   };
+    };
 
    /**
      * connection to the Api with ajax and promises for files
