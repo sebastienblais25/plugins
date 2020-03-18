@@ -1,5 +1,6 @@
 import { User } from "../user";
 import { infoUser } from '../templates/infoUser';
+import { helpDoc } from "../Documentation/helpDoc";
 
 
 export class TopMenuController{
@@ -68,6 +69,27 @@ export class TopMenuController{
                 this.panel.body = output;
                 
                 this.panel.open();     
+            }
+
+            this.openHelpUser = () =>{
+                if (!this.panel1) {
+                    // make sure both header and body have a digest cycle run on them
+                    this.panel1 = mapApi.panels.create('help');
+        
+                    this.panel1.element.css({
+                        bottom: '0em'
+                    });
+        
+                    this.panel1.element.css({top: '0px;', left : '410px;', bottom: '50%;', margin: '100px 50px 100px 450px'});
+        
+                    this.panel1.header.closeButton;
+                    this.panel1.header.title = `Help`;
+                } else {
+                    this.panel1.close();
+                }
+                
+                this.panel1.body = helpDoc;
+                this.panel1.open(); 
             }
             
             /**************** form opening handler ***************/
@@ -463,5 +485,6 @@ export class TopMenuController{
 export interface TopMenuController {
     
     panel: any;
+    panel1:any;
     
 }

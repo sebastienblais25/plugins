@@ -104,9 +104,9 @@ export class PlanningController {
                 //create a geojson with the infromation obtain
                 if (this.drawingchecked == true) {
                     console.log(value.rings)
-                    log.createGeoJson('ESPG:' + value.spatialReference.wkid, value.rings)
                     //show the geo json in the input 
-                    this.geomp = log._geom;
+                    this.geomp = JSON.stringify(value.rings);
+                    this.geomESPG = value.spatialReference.wkid;
                 }
             });
 
@@ -135,9 +135,10 @@ export class PlanningController {
                                 //set a variable with the coordinates for the geojson
                                 let geomGEOJSON = dta.features[0].geometry.coordinates;
                                 //Create a geojson with the onfromation of the shapefile
-                                log.createGeoJson('EPSG:4326', geomGEOJSON);
+                                //log.createGeoJson('EPSG:4326', geomGEOJSON);
                                 //set the geojson in the input
-                                that.geomp = log._geom;
+                                that.geomp = JSON.stringify(geomGEOJSON);
+                                that.geomESPG = '4326'
 
                                 //create the polygon in the viewer with a zoom on it
                                 log.createPolygons(mapApi.id, geomDR);
@@ -169,13 +170,15 @@ export class PlanningController {
                     log._closeable = false;
                 }else {
                     //set the information in the the json 
+                    log.createGeoJson('ESPG:' + this.geomESPG, this.geomp)
+                    alert(log._geom)
                     let plan: planifier = new planifier(
                         this.selectedItemC,
                         (<HTMLInputElement>document.getElementById("idUt")).value,
                         this.selectedItemD,
                         listofclass,
                         this.dfp,
-                        this.geomp,
+                        log._geom,
                         this.wherep);
                     //submit the form to the API
                     let apireturn: any = plan.submitForm(log);

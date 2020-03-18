@@ -70,7 +70,12 @@ export const formPlanifier = `
             <div class="geomDivIn1">
                 <md-checkbox class="geomCB" ng-model="ctrl2.inputchecked" aria-label="inputchk" ng-click='ctrl2.inputchck()'></md-checkbox>
                 <md-input-container class="containerclass1"> 
-                    <input type="text" name="geomp" ng-model="ctrl2.geomp" class="geominput" aria-label="geometry" ng-disabled="!(ctrl2.inputchecked)" required> 
+                    <label>Coordinates</label>
+                    <input type="text" name="geomp" ng-model="ctrl2.geomp" class="geominput" aria-label="geometry" ng-disabled="!(ctrl2.inputchecked)"> 
+                </md-input-container>
+                <md-input-container class="containerclass12"> 
+                    <label>ESPG</label>
+                    <input type="text" name="geomp" ng-model="ctrl2.geomESPG" class="espginput" aria-label="geometry" ng-disabled="!(ctrl2.inputchecked)"> 
                 </md-input-container>
             </div>
             <div class="geomDivIn1">

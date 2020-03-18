@@ -414,7 +414,7 @@ export class User{
         shpUpload.addGeometry([polyAll]);
         //zoom to extent of polygon(s)
         this.zoomExtent(mapId, values, 2);
-        console.log(shpUpload)
+        //console.log(shpUpload)
     }
 
     /**

@@ -18,7 +18,7 @@ export const topmenu:string= `
         <div class="infoDiv" ng-click="ctrl1.openInfoUser()">
             <span>info user</span>
         </div>
-        <div class="helpDiv">
+        <div class="helpDiv" ng-click="ctrl1.openHelpUser()">
             <span>Help</span>
         </div>
     </div> 

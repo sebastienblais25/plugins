@@ -141,7 +141,5 @@ export class FileManagerController{
 }
 
 export interface FileManagerController {
-    
-    panel: any;
-    
+    panel: any; 
 }
