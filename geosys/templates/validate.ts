@@ -30,7 +30,7 @@ export const validateform:string = `
                 </md-input-container>
 
                 
-                <span><span class="advanced">{{ 'plugins.geosys.filejson' | translate }}</span><span class="errormess sizeerror" ng-show="errJSON"> *you must choose at least one class</span></span>
+                <span><span class="advanced">{{ 'plugins.geosys.filejson' | translate }}</span><span class="errormess sizeerror" ng-show="errJSON">{{ 'plugins.geosys.errorFMD' | translate }}</span></span>
                     <input  type="file" id="fileJSON" accept=".json"/>
                 
                 <md-input-container class="submitbtn">

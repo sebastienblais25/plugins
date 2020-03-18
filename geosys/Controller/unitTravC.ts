@@ -20,7 +20,16 @@ export class UnitTravC{
                     if( query.search(regexA) == -1){
                         if( query.search(regexU) == -1){
                             if(query.search(regexI) == -1){
-                                alert('good')
+                                alert('good');
+                                const myMap = (<any>window).RAMP.mapById(mapApi.id);
+                                const layerJSON = {
+                                    "id": "0",
+                                    "name": "Graphics",
+                                    "layerType": "esriFeature",
+                                    "fileType": "geojson",
+                                    "url": "http://localhost:6001/geosys/tempgeojson/geojson.json"
+                                };
+                                const myConfigLayer = myMap.layers.addLayer(layerJSON);
                             }else{
                                 alert('no good')
                             }

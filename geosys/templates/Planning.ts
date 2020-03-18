@@ -23,14 +23,14 @@ export const formPlanifier = `
 
         <div>
         <md-input-container class="largeur">
-            <label>{{ 'plugins.geosys.idUT' | translate }}<span class="errormess" ng-show="erridwuvs"> *you must add a working unit</span></label>
+            <label>{{ 'plugins.geosys.idUT' | translate }}<span class="errormess" ng-show="erridwuvs">{{ 'plugins.geosys.errorWU' | translate }}</span></label>
             <input type="text" name="idUt" id="idUt" ng-value="ctrl2.idut" placeholder="Where ...">
         </md-input-container>
         </div>
 
         <div>
             <md-input-container class="largeur">
-                <label>{{ 'plugins.geosys.typeTrv' | translate }}<span class="errormess" ng-show="errwork"> *you must choose a working type</span></label>
+                <label>{{ 'plugins.geosys.typeTrv' | translate }}<span class="errormess" ng-show="errwork">{{ 'plugins.geosys.errorWT' | translate }}</span></label>
                 <md-select 
                 name="typetrv"
                 ng-model="ctrl2.selectedItemD"  
@@ -43,7 +43,7 @@ export const formPlanifier = `
         </div>
 
         <div>
-                <span class="classeslist"><span class="advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="errormess sizeerror" ng-show="errclass"> *you must choose at least one class</span></span><md-checkbox ng-model="ctrl2.listeclasse" aria-label="checkall" class="md-secondary checklist" ng-click="ctrl2.toggleAll()"></md-checkbox>
+                <span class="classeslist"><span class="advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="errormess sizeerror" ng-show="errclass">{{ 'plugins.geosys.errorClass' | translate }}</span></span><md-checkbox ng-model="ctrl2.listeclasse" aria-label="checkall" class="md-secondary checklist" ng-click="ctrl2.toggleAll()"></md-checkbox>
                 <div class="planning">
                     <md-list-item class="itemlist" ng-repeat="class in ctrl2.classes">
                         <span class="largeurlist">{{ class.name }}</span>
@@ -71,11 +71,11 @@ export const formPlanifier = `
                 <md-checkbox class="geomCB" ng-model="ctrl2.inputchecked" aria-label="inputchk" ng-click='ctrl2.inputchck()'></md-checkbox>
                 <md-input-container class="containerclass1"> 
                     <label>Coordinates</label>
-                    <input type="text" name="geomp" ng-model="ctrl2.geomp" class="geominput" aria-label="geometry" ng-disabled="!(ctrl2.inputchecked)"> 
+                    <input type="text" name="geomp" ng-model="ctrl2.geomp" class="geominput" aria-label="geometry" ng-disabled="!(ctrl2.inputchecked)" required> 
                 </md-input-container>
                 <md-input-container class="containerclass12"> 
-                    <label>ESPG</label>
-                    <input type="text" name="geomp" ng-model="ctrl2.geomESPG" class="espginput" aria-label="geometry" ng-disabled="!(ctrl2.inputchecked)"> 
+                    <label>EPSG</label>
+                    <input type="text" name="geomES" ng-model="ctrl2.geomEPSG" class="espginput" aria-label="geometry" ng-disabled="!(ctrl2.inputchecked)" required> 
                 </md-input-container>
             </div>
             <div class="geomDivIn1">
@@ -95,7 +95,7 @@ export const formPlanifier = `
         <div>
         <md-input-container class="submitbtn">
             <md-button class="md-primary md-raised" style="float: right;"
-            ng-click="ctrl2.submitFormP(); ctrl1.ShowHide()" ng-disabled="planning.geomp.$invalid">
+            ng-click="ctrl2.submitFormP(); ctrl1.ShowHide()" ng-disabled="planning.geomp.$invalid && planning.geomES.$invalid">
                 {{ 'plugins.geosys.submit' | translate }}
                 <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
             </md-button>

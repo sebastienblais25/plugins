@@ -43,11 +43,11 @@ export const formDelivery = `
                 </md-input-container>
 
                 <div>
-                    <span><span class="advanced">{{ 'plugins.geosys.fileMD' | translate }}</span><span class="errormess sizeerror" ng-show="errMD"> *you must choose at least one class</span></span>
+                    <span><span class="advanced">{{ 'plugins.geosys.fileMD' | translate }}</span><span class="errormess sizeerror" ng-show="errMD">{{ 'plugins.geosys.errorFMD' | translate }}</span></span>
                     <input  type="file" id="fileMD" accept="json"/>
                 </div>
                 <div>
-                    <span><span class="advanced">{{ 'plugins.geosys.fileGDB' | translate }}</span><span class="errormess sizeerror" ng-show="errFGDB"> *you must choose at least one class</span></span>
+                    <span><span class="advanced">{{ 'plugins.geosys.fileGDB' | translate }}</span><span class="errormess sizeerror" ng-show="errFGDB">{{ 'plugins.geosys.errorFGDB' | translate }}</span></span>
                     <input type="file" id="filefgdb" accept="zip"/>
                 </div>
                 

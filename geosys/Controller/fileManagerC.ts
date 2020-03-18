@@ -114,6 +114,53 @@ export class FileManagerController{
                 tfm.deleteFile(file.name,tfm._breadcrumbs,log.gettoken());
             }
 
+            //download file on download button clicked
+            this.downloadFolder = (folder) => {
+                tfm.downloadFolder(folder.name,tfm._breadcrumbs,log.gettoken());
+            }
+
+            //delete file on delete button clicked
+            this.deleteFolder = (folder) => {
+                tfm.deleteFolder(folder.name,tfm._breadcrumbs,log.gettoken());
+            }
+
+            this.createFolder = () =>{
+                //alert('creating new folder')
+                if (!this.panel1) {
+                    // make sure both header and body have a digest cycle run on them
+                    this.panel1 = mapApi.panels.create('AddFolder');
+        
+                    this.panel1.element.css({
+                        bottom: '0em',
+                        width: '300px',
+                        height: '200px'
+                    });
+        
+                    this.panel1.element.css({top: '0px;', margin: '200px 50px 100px 650px'});
+                    this.panel1.header.closeButton;
+                    this.panel1.header.title = `Add Folder`;
+                    let fmc:FileManagerController = new FileManagerController();
+                    fmc.addingFolder(log,tfm, mapApi);
+                    let output:string = `<div ng-controller="folderCtrl as ctrl16">
+                    <md-input-container style="margin-bottom: 0px;height: 34px; width:275px; ">
+                        <label>Name the folder</label>
+                        <input type="text" ng-model="ctrl16.nameFolder"/>
+                    </md-input-container>
+                    <md-input-container style="float:right;">
+                        <md-button class="md-raised" ng-click="ctrl16.addfolder()">
+                            add Folder
+                        </md-button>
+                    </md-input-container>
+                    </div>`;
+                    this.panel1.body = output;
+                    
+                }else {
+                    this.panel1.close();
+                }
+                
+                this.panel1.open();
+            }
+
             //upload file on drag and drop of file
             this.uploadFile = () =>{
                 //alert("hello")
@@ -138,8 +185,17 @@ export class FileManagerController{
         });
     }
 
+    addingFolder(log:User, tfm:FileMana, mapApi:any){
+        mapApi.agControllerRegister('folderCtrl', function($scope){
+            this.addfolder = () =>{
+                tfm.createFolder(tfm._breadcrumbs, log.gettoken(),this.nameFolder)
+            }
+        });
+    }
+
 }
 
 export interface FileManagerController {
-    panel: any; 
+    panel: any;
+    panel1:any; 
 }

@@ -85,6 +85,7 @@ export class FileMana{
             <div class="stickyHeader">
                 <div class="backing" ng-click="ctrl11.precedent()"><i class="material-icons">arrow_back</i></div>
                 <div class="backing" ng-click="ctrl11.refresh()"><i class="material-icons">refresh</i></div>
+                <div class="backing" ng-click="ctrl11.createFolder()"><i class="material-icons">create_new_folder</i></div>
                 <div class="breadclass">`+ this.buildClickablebreadcrumbs() +`</div>
                 <div class="headerFile">
                     <span class="nameFileFolderHeader">Name</span> 
@@ -97,15 +98,20 @@ export class FileMana{
             ondragleave="onDragLeave(event);"
             ondrop="onDrop(event);">
             <form>
-                <md-list-item ng-click="ctrl11.openFolder(folder)" class="folderBtn" ng-repeat="folder in ctrl11.folders">
+                <md-list-item class="folderBtn" ng-repeat="folder in ctrl11.folders">
                     <div class="groupingInfo">
-                        <md-icon>
-                            <i class="material-icons">
-                                folder
-                            </i>
-                        </md-icon>
-                        <span class="nameFileFolder">{{ folder.name }}</span>
-                        <span class="modifiedFileFolder">{{ folder.modified }}</span>
+                        <div ng-click="ctrl11.openFolder(folder)" style="width: 90%;margin: 0;float: left;">
+                            <md-icon>
+                                <i class="material-icons">
+                                    folder
+                                </i>
+                            </md-icon>
+                            
+                            <span class="nameFileFolder lilPad">{{ folder.name }}</span>
+                            <span class="modifiedFileFolder lilPad">{{ folder.modified }}</span>
+                        </div>
+                        <div class="downloadbtn" ng-click="ctrl11.deleteFolder(folder)"><i class="material-icons">delete</i></div>
+                        <div class="downloadbtn" ng-click="ctrl11.downloadFolder(folder)"><i style="padding-top: 2px;" class="material-icons">get_app</i></div>
                     </div>
                 </md-list-item>
                 
@@ -225,5 +231,30 @@ export class FileMana{
         /***** API Call *****/
         //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Delete')
         alert(nameFile + ' deleted from ' + path)
+    }
+
+    downloadFolder(nameFolder:string,path:string,token:string){
+         /***** API Call *****/
+        //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Get')
+        /***** Download *****/
+        alert(nameFolder + ' downloaded from ' + path)
+        let blob = new Blob([`"name":"j-s"`]/*,{type:"application/json"}*/);
+        FileSaver.saveAs(blob,nameFolder+'.zip');
+    }
+
+    deleteFolder(nameFolder:string,path:string,token:string){
+        /***** API Call *****/
+        //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Delete')
+        alert(nameFolder + ' deleted from ' + path)
+    }
+
+    createFolder(pathforfolder:string, token:string, foldername:string){
+        /***** API Call *****/
+        //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Delete')
+        alert("the new folder " + foldername + " will be created in " + pathforfolder)
+    }
+
+    uploadFolder(){
+
     }
 }

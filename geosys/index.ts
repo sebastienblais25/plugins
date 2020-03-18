@@ -71,6 +71,7 @@ export default class Geosys{
         this.panel.element.css({bottom: '0em', width: '400px', top: '50px'})
         this.panel.header.title = 'Geosys (Alpha)';
         this.panel.body.id = 'hello'
+        this.panel.allowUnderlay = true;
 
         //add control for the login button
         this.connexionControls(this.panel,this.mapApi,this.config);
@@ -202,16 +203,15 @@ Geosys.prototype.translations = {
         unit : 'Working Zone',
         //file manager
         //errormessage
-        errorWT: '',
-        errorClass : '',
-        errorFMD : '',
-        errorFGDB: '',
-        errorWU: '',
-        errorSources: '',
-        errorPrecision: '',
-        errorContr: '',
-        errorTooMany: '',
-
+        errorWT: 'Add a working unit',
+        errorClass : 'you must choose 1 class',
+        errorFMD : 'Add a metadata file',
+        errorFGDB: 'Add a FGDB',
+        errorWU: 'Add a working unit',
+        errorSources: 'You must choose 1 sources',
+        errorPrecision: 'You must add 1 precision',
+        errorContr: 'You must add 1 contraint',
+        errorTooMany: 'Too many options',
     },
 
     'fr-CA': {
@@ -267,15 +267,15 @@ Geosys.prototype.translations = {
         unit : 'Unité de travail',
         //file manager
         //errormessage
-        errorWT: '',
-        errorClass : '',
-        errorFMD : '',
-        errorFGDB: '',
-        errorWU: '',
-        errorSources: '',
-        errorPrecision: '',
-        errorContr: '',
-        errorTooMany: '',
+        errorWT: 'Ajoute un type de travail',
+        errorClass : 'Ajoute 1 classe',
+        errorFMD : 'Ajoute un fichier MD',
+        errorFGDB: 'Ajoute un FGDB',
+        errorWU: 'Ajout un unité de travail',
+        errorSources: 'Ajoute 1 sources',
+        errorPrecision: 'Ajoute 1 precision',
+        errorContr: 'Ajoute 1 contrainte',
+        errorTooMany: 'Trop d option',
     }
 };
 

@@ -24,6 +24,7 @@ export class PlanningController {
             this.selectedItemD = '';
             this.dfp = '';
             this.geomp = '';
+            this.geomEPSG  = '';
             this.wherep = '';
             this.itemsC = [];
             this.idut = '';
@@ -106,7 +107,7 @@ export class PlanningController {
                     console.log(value.rings)
                     //show the geo json in the input 
                     this.geomp = JSON.stringify(value.rings);
-                    this.geomESPG = value.spatialReference.wkid;
+                    this.geomEPSG = value.spatialReference.wkid;
                 }
             });
 
@@ -138,7 +139,7 @@ export class PlanningController {
                                 //log.createGeoJson('EPSG:4326', geomGEOJSON);
                                 //set the geojson in the input
                                 that.geomp = JSON.stringify(geomGEOJSON);
-                                that.geomESPG = '4326'
+                                that.geomEPSG = '4326'
 
                                 //create the polygon in the viewer with a zoom on it
                                 log.createPolygons(mapApi.id, geomDR);
@@ -170,7 +171,7 @@ export class PlanningController {
                     log._closeable = false;
                 }else {
                     //set the information in the the json 
-                    log.createGeoJson('ESPG:' + this.geomESPG, this.geomp)
+                    log.createGeoJson('EPSG:' + this.geomEPSG, JSON.parse(this.geomp))
                     alert(log._geom)
                     let plan: planifier = new planifier(
                         this.selectedItemC,

@@ -23,7 +23,7 @@ export const formExtraireP:string =
                 </md-input-container>
 
                 <md-input-container class="ddlshowEX">
-                    <label>{{ 'plugins.geosys.idUT' | translate }}</label><span class="errormess" ng-show="ErrorEx">you must add a working unit</span>
+                    <label>{{ 'plugins.geosys.idUT' | translate }}</label><span class="errormess" ng-show="ErrorEx">{{ 'plugins.geosys.errorWU' | translate }}</span>
                     <md-select
                     ng-model="ctrl3.selectedItemB"
                     ng-change="ctrl3.setListB()"
@@ -88,7 +88,7 @@ export const formExtraireSR:string =
                 </md-input-container>
                 
                 <div>
-                <span class="classeslist"><span class="advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="errormess sizeerror" ng-show="errclassEX"> *you must choose at least one class</span></span><md-checkbox aria-label="checkall" ng-model="ctrl4.listeclasse" class="md-secondary checklist" ng-click="ctrl4.toggleAll()"></md-checkbox>
+                <span class="classeslist"><span class="advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="errormess sizeerror" ng-show="errclassEX">{{ 'plugins.geosys.errorClass' | translate }}</span></span><md-checkbox aria-label="checkall" ng-model="ctrl4.listeclasse" class="md-secondary checklist" ng-click="ctrl4.toggleAll()"></md-checkbox>
                     <div class="divclasse">
                         <md-list-item class="itemlist" ng-repeat="class in ctrl4.classes">
                             <span class="largeurlist">{{ class.name }}</span>
