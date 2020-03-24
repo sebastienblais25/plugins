@@ -9,6 +9,7 @@ export declare class User {
     /** Environnement **/
     _environnementSel: string;
     _urlEnvselected: string;
+    _basetheme: string;
     /** Connexion **/
     _conn: connexion;
     /** Return of login **/
@@ -80,10 +81,27 @@ export declare class User {
      */
     setDataFromAPI(token: string, token_type: string, expired: number, scope: string[], theme: string[], equipe: string, config: any): void;
     /**
-     *
-     *
-     * @param {string[]} theme
-     * @param {*} config
+     * call Api for a list of working unit
+     * @param {string} theme the theme related to the working unit
+     * @memberof User
+     */
+    callAPIWorkingUnit(theme: string): void;
+    /**
+     * call the API for a list of classes
+     * @param {string} theme the theme related to the list of classes
+     * @memberof User
+     */
+    callAPIListeClasse(theme: string): void;
+    /**
+     * call the API for a list of working type
+     * @param {string} theme the theme related to the working type
+     * @memberof User
+     */
+    callAPIWorkingType(theme: string): void;
+    /**
+     * ordering the list to set the base theme in first place
+     * @param {string[]} theme list of theme
+     * @param {*} config the base theme
      * @returns
      * @memberof User
      */
@@ -128,7 +146,7 @@ export declare class User {
     getlistofclasses(theme: string): any[];
     /************************* For Geometry ******************************/
     /**
-     * Work arount for a follow-up duplicates
+     * Work around for a follow-up duplicates
      * @param {*} coord coordinates with a follow-up duplicates
      * @returns {*} reyurn the coordinates with no folow-up duplicates
      * @memberof User

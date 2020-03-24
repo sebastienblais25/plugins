@@ -28,4 +28,7 @@ export declare class connexion {
      * @memberof connexion
      */
     connexionAPIFormData(token: string, formdata: any, urlgoto: string, typeConn: string, optEnv?: string): any;
+    connexionAPIFileMAnager(token: string, urltogo: string): any;
+    connexionAPIFileDownloadDelete(token: string, urltogo: string, operatio: string, content: string): any;
+    connexionAPIFileUplaod(token: string, urltogo: string, file: File): any;
 }

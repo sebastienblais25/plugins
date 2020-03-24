@@ -27,4 +27,5 @@ export declare class TopMenuController {
 }
 export interface TopMenuController {
     panel: any;
+    panel1: any;
 }

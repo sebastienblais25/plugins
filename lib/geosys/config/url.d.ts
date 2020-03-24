@@ -14,3 +14,5 @@ export declare const urlGetCode: string;
 export declare const urlDeleteClean: string;
 export declare const urlCancelStep: string;
 export declare const urlListFile: string;
+export declare const urlFileAction: string;
+export declare const urlFolderAction: string;
