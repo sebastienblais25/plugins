@@ -16,9 +16,13 @@ export class CreateController{
         mapApi.agControllerRegister('submitFromC', function($scope){
             
             /************** interactive List ***************/
+            //operation type on the DB
             this.typeOper = '';
+            //theme
             this.selectedItemE = '';
+            //Working unit ID
             this.selectedItemF = '';
+            //set up theme list
             this.itemsE = [];
             for (let i in log._themeAcc){
                 this.itemsE.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
@@ -35,21 +39,18 @@ export class CreateController{
             this.setList = () => {
                 /******changer pour sources********/
                 let listS= [];
-                
                 listS = log.getlistofclasses(this.selectedItemE);
                 this.sources.length = 0;
                 //add the new list in list for the template
                 this.sources = listS
                 /******changer pour precision********/
                 let listP= [];
-                
                 listP = log.getlistofclasses(this.selectedItemE);
                 this.precisions.length = 0;
                 //create the list with name and varaible for the checkbox
                 this.precisions= listP
                 /******changer pour contraintes********/
-                let listCo= [];
-                
+                let listCo= []; 
                 listCo = log.getlistofclasses(this.selectedItemE);
                 this.contraintes.length = 0;
                 //create the list with name and varaible for the checkbox
@@ -73,7 +74,7 @@ export class CreateController{
                     }
                 }
             }
-            //for claases list select all the info
+            //for classes list select all the info
             this.toggleAllP = () => {
                 if( this.listePrecision == true){
                     for(let i in this.precisions){

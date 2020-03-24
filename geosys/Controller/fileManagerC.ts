@@ -17,23 +17,20 @@ export class FileManagerController{
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.OpenFileManager = () => {
                 if(log._environnementSel!= ''){
-                    
+                    //if the panel already exist
                     if (!this.panel) {
                         // make sure both header and body have a digest cycle run on them
                         this.panel = mapApi.panels.create('FileManager');
-            
-                        this.panel.element.css({
-                            bottom: '0em',
-                        });
-            
+                        //Size of the panel
                         this.panel.element.css({top: '0px;', margin: '100px 50px 100px 450px'});
+                        //button in the header of the panel
                         this.panel.header.toggleButton;
                         this.panel.header.closeButton;
                         
-
+                        //title on the panel
                         this.panel.header.title = `File Manager (Alpha testing)`;
                         let fmc:FileManagerController = new FileManagerController();
-                    
+                        //build the UI for the file manager
                         let output = tfm.buildUI()+dragdropFunction;
                         if (tfm._nextFolder == 'root'){
                             tfm.obtainArbo(log);
@@ -54,12 +51,14 @@ export class FileManagerController{
 
     FileManaManager(log:User, mapApi:any, tfm:FileMana, panel:any):void{
         mapApi.agControllerRegister('fileManagerPanelCtrl', function($scope){
+            //building the list of folder and file
             this.folders = [];
             this.files = [];
             this.breadcrumbs = tfm._breadcrumbs;
             this.folders = tfm.buildFolderList();
             this.files = tfm.buildFileList();
             
+            //click on the left arrow to back one folder
             this.precedent = () =>{
                 let rank = tfm._list.length - 2
                 if(rank >= 0){
@@ -72,7 +71,7 @@ export class FileManagerController{
                 }
                 
             }
-
+            //refresh the folder 
             this.refresh = () =>{
                 let fmc:FileManagerController = new FileManagerController();
                 
@@ -106,24 +105,24 @@ export class FileManagerController{
 
             //download file on download button clicked
             this.downloadFile = (file) => {
-                tfm.downloadFile(file.name,tfm._breadcrumbs,log.gettoken());
+                tfm.downloadFile(file.name,tfm._breadcrumbs,log);
             }
 
             //delete file on delete button clicked
             this.deleteFile = (file) => {
-                tfm.deleteFile(file.name,tfm._breadcrumbs,log.gettoken());
+                tfm.deleteFile(file.name,tfm._breadcrumbs,log);
             }
 
             //download file on download button clicked
             this.downloadFolder = (folder) => {
-                tfm.downloadFolder(folder.name,tfm._breadcrumbs,log.gettoken());
+                tfm.downloadFolder(folder.name,tfm._breadcrumbs,log);
             }
 
             //delete file on delete button clicked
             this.deleteFolder = (folder) => {
-                tfm.deleteFolder(folder.name,tfm._breadcrumbs,log.gettoken());
+                tfm.deleteFolder(folder.name,tfm._breadcrumbs,log);
             }
-
+            //create a new folder
             this.createFolder = () =>{
                 //alert('creating new folder')
                 if (!this.panel1) {
@@ -165,30 +164,18 @@ export class FileManagerController{
             this.uploadFile = () =>{
                 //alert("hello")
                 let file = (<HTMLInputElement>document.getElementById('fileInput')).files[0]
-                console.log(file)
+                tfm.uploadfile(tfm._breadcrumbs,log,file)
                 //let blob = new Blob([file],{type:"application/json"});
                 //FileSaver.saveAs(blob,file.name);
-                const myMap = (<any>window).RAMP.mapById(mapApi.id);
-
-                // If you want to add a layer by configuration you can use this
-                const objURL = URL.createObjectURL(file);
-                const layerJSON = {
-                    "id": "0",
-                    "name": file.name,
-                    "layerType": "esriFeature",
-                    "fileType": "geojson",
-                    "url": objURL
-                };
-                const myConfigLayer = myMap.layers.addLayer(layerJSON);
-
             }
         });
     }
 
+    //the panel to name the new folder and add the new folder in thje directory
     addingFolder(log:User, tfm:FileMana, mapApi:any){
         mapApi.agControllerRegister('folderCtrl', function($scope){
             this.addfolder = () =>{
-                tfm.createFolder(tfm._breadcrumbs, log.gettoken(),this.nameFolder)
+                tfm.createFolder(tfm._breadcrumbs, log,this.nameFolder)
             }
         });
     }

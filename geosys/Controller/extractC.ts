@@ -16,10 +16,14 @@ export class ExtractController{
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitCtrl', function($scope, $rootScope){ 
+            //error message if problem with the slect working unit ID
             $scope.ErrorEx = false;
             /************** interactive List ***************/
+            //theme
             this.selectedItemA = '';
+            //Working unit ID
             this.selectedItemB = '';
+            //set up the theme list
             this.itemsA = [];
             for (let i in log._themeAcc){
                 this.itemsA.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
@@ -89,17 +93,23 @@ export class ExtractController{
         /************ Bouton Extraire ***********/
         // TODO: creer la directive avant de compiler le code
         mapApi.agControllerRegister('SubmitExCtrl', function($scope){
+            // to acces elemnent in the reader file
             const that = this;
+            //error message for the list of the classes
             $scope.errclassEX = false;
             /************** interactive List ***************/
+            //theme
             this.selectedItemA = '';
+            //Where Clause
             this.whereclause = '';
+            //Geom Coordinates
             this.geomSR = ''
-            //this.geomSR = '';
+            //set up the list of theme
             this.itemsA = [];
             for (let i in log._themeAcc){
                 this.itemsA.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
             }
+            //set of a list of classes
             this.classes = [];
             //création de la liste pour les unité de travail
             this.setList = () => {
@@ -122,7 +132,6 @@ export class ExtractController{
                 }
             }
             this.inputchck = () => {
-                //this.geomp = '';
                 this.drawingchecked = false;
                 this.filechecked = false;
             }
@@ -138,9 +147,9 @@ export class ExtractController{
             }
             /************** subscribe to the drawing event ***************/
             (<any>window).drawObs.drawPolygon.subscribe(value => {
-                //create a geojson with the infromation obtain
+                //create a geojson with the information obtain if the checkbox for drawinf is check
                 if(this.drawingchecked == true){
-                    log.createGeoJson('ESPG:'+value.spatialReference.wkid,value.rings)
+                    log.createGeoJson('ESPG:'+ value.spatialReference.wkid,value.rings)
                     //show the geo json in the input 
                     that.geomSR = log._geom; 
                 }

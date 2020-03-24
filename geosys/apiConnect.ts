@@ -201,11 +201,100 @@ export class connexion{
         return outputValue
     }
 
-    connexionAPIFileDownloadDelete(token:string, urltogo:string,operatio:string):any{
-
+    connexionAPIFileDownloadDelete(token:string, urltogo:string,operatio:string,content:string):any{
+        let outputValue:any;
+        /********* API CALL **********/
+        //no promise still
+        const promises = [];
+        promises.push(
+            new Promise(resolve =>{
+                $.ajax({
+                    url: urltogo,
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'contentType': content
+                    },
+                    type: operatio,
+                    async: false,
+                    //cache:false,
+                    //contentType: "application/json; charset=utf-8",
+                    //dataType:'json',
+                    processData: false,
+                    success: //data => resolve()
+                    
+                    function(response,jqXHR){
+                        if(response == undefined){
+                            outputValue = 'success';
+                        }else{
+                            if (response.message != undefined){
+                                outputValue = jqXHR;
+                            }else{
+                                //alert(response + ' 2')
+                                outputValue = response;
+                            }  
+                        }  
+                    },
+                    error: function(xhr){
+                        //alert(xhr.statusText);
+                        outputValue = xhr;
+                        //console.log($('#recommandation').val());
+                    }
+                })
+            })
+        );
+        Promise.all(promises).then(values => {
+            console.log(values);
+        });
+        //alert(outputValue + ' 123')
+        return outputValue;    
     }
 
-    connexionAPIFileUplaod(token:string, urltogo:string):any{
-
+    connexionAPIFileUplaod(token:string, urltogo:string,file:File):any{
+        let outputValue:any;
+        /********* API CALL **********/
+        //no promise still
+        const promises = [];
+        promises.push(
+            new Promise(resolve =>{
+                $.ajax({
+                    url: urltogo,
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'contentType': 'application/json'
+                    },
+                    type: 'POST',
+                    async: false,
+                    //cache:false,
+                    //contentType: "application/json; charset=utf-8",
+                    dataType:'application/octet-stream',
+                    data : file,
+                    processData: false,
+                    success: //data => resolve()
+                    
+                    function(response,jqXHR){
+                        if(response == undefined){
+                            outputValue = 'success';
+                        }else{
+                            if (response.message != undefined){
+                                outputValue = jqXHR;
+                            }else{
+                                //alert(response + ' 2')
+                                outputValue = response;
+                            }  
+                        }  
+                    },
+                    error: function(xhr){
+                        //alert(xhr.statusText);
+                        outputValue = xhr;
+                        //console.log($('#recommandation').val());
+                    }
+                })
+            })
+        );
+        Promise.all(promises).then(values => {
+            console.log(values);
+        });
+        //alert(outputValue + ' 123')
+        return outputValue;  
     }
 }

@@ -200,8 +200,9 @@ Geosys.prototype.translations = {
         equipe : 'Team',
         enviro : 'Environnement',
         //unité de travail
-        unit : 'Working Zone',
+        unit : 'Additionnal tools',
         //file manager
+        filem : 'File manager (Alpha)',
         //errormessage
         errorWT: 'Add a working unit',
         errorClass : 'you must choose 1 class',
@@ -264,8 +265,9 @@ Geosys.prototype.translations = {
         equipe : 'Equipe',
         enviro : 'Environnement',
         //unité de travail
-        unit : 'Unité de travail',
+        unit : 'Outils additionnel',
         //file manager
+        filem : 'Explrateur de fichier (Alpha)',
         //errormessage
         errorWT: 'Ajoute un type de travail',
         errorClass : 'Ajoute 1 classe',

@@ -1,6 +1,6 @@
  
 //Url for Extract sans retour(/geodata) Get
-export const urlgeoDataGet:string = `geodata?__dynamic=true`;
+export const urlgeoDataGet:string = `geodata`;
 
 //Url for planned extract(/geodata/{identifiant}) Get
 export const urlgeoDatGetId:string = `geodata/`;
@@ -12,7 +12,7 @@ export const urlLoginGet:string = `securite/login`;
 export const urlgetidWu:string = `suivi-prod/unite-travail/id/theme/actif/`;
 
 //Send planning to the API(/suivi-prod/planification) Post
-export const urlPlaniPost:string = `suivi-prod/planification?__dynamic=true`;
+export const urlPlaniPost:string = `suivi-prod/planification`;
 
 //url getting environnement(/systeme/envs) Get
 export const urlEnvList:string = `systeme/envs`;
@@ -46,3 +46,9 @@ export const urlCancelStep:string = `suivi-prod/etape-ut/`;
 
 //url for testing a file manager 
 export const urlListFile:string = `systeme/liste-contenants-fichiers?contenant_url=`;
+
+//url Download/Delete/Upload File
+export const urlFileAction:string = `systeme/fichiers?fichier_url=`;
+
+//url Create/Download/Delete Folder
+export const urlFolderAction:string = `systeme/contenants?contenant_url=`;

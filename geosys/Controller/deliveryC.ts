@@ -15,12 +15,18 @@ export class DeliveryController{
     deliControl(log:User, mapApi:any):void{
         //mapApi.agDirectiveRegister()
         mapApi.agControllerRegister('submitFromD', function($scope){
+            //error message for the metadata file
             $scope.errMD = false;
+            //error message for the fgbd
             $scope.errFGDB =false;
             /************** interactive List ***************/
+            //operation type on the DB
             this.typeOper = '';
+            //theme
             this.selectedItemE = '';
+            //Working unit ID
             this.selectedItemF = '';
+            //set up theme list
             this.itemsE = [];
             for (let i in log._themeAcc){
                 this.itemsE.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
@@ -51,7 +57,7 @@ export class DeliveryController{
                 this.itemsENT.push({name : log._envAcc[i]._env , value: log._envAcc[i]._env});
             }
 
-            //Envoie le fromulaire a l'API
+            //Envoie le formulaire a l'API
             this.submitFormD = function(element) { 
                 //get all the information of the form into the class
                 if((<HTMLInputElement>document.getElementById('fileMD')).files.length == 0){
@@ -66,16 +72,15 @@ export class DeliveryController{
                     formdata.append('fichier_meta',(<HTMLInputElement>document.getElementById('filefgdb')).files[0]);
                     let livre:Livraison = new Livraison(this.selectedItemF,this.selectedItemE,this.typeOper);
                     livre.setOptionnalEnvironnement(this.selectedItemENT);
+                    //submit form
                     let apireturn:any = livre.submitForm(formdata,log);     
                     if (apireturn != undefined){
                         alert(apireturn);
-                        //console.log(apireturn);
                         $scope.SelectedMenuD = {
                             "background-color" : "red", 
                         }
                     }else{
                         console.log(log.gettoken());
-                        //$scope.IsVisibleD = false;
                         $scope.SelectedMenuD = {
                             "background-color" : "green", 
                         }

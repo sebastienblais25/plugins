@@ -18,9 +18,13 @@ export class CancelController{
         mapApi.agControllerRegister('cancelStep', function($scope){ 
             
             /************** interactive List ***************/
+            //theme
             this.selectedItemA = '';
+            //working unit ID
             this.selectedItemB = '';
+            //Step for the cancel
             this.stepCan = '';
+            //Set up for the list of theme
             this.itemsA = [];
             for (let i in log._themeAcc){
                 this.itemsA.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});

@@ -1,6 +1,6 @@
 
 import { User } from '../user';
-import { urlListFile } from '../config/url';
+import { urlListFile, urlFileAction } from '../config/url';
 import { connexion } from '../apiConnect';
 const FileSaver = require('file-saver'); // le import
 
@@ -200,8 +200,11 @@ export class FileMana{
      * @param {string} token the token for the connection
      * @memberof FileMana
      */
-    uploadfile(path:string, token:string):void{
+    uploadfile(path:string, log:User,file:File):void{
+        alert(path + ' ' + log.gettoken())
 
+        console.log(file);
+        this._conn.connexionAPIFileUplaod(log.gettoken(),log.constructUrl(urlFileAction,path), file)
     }
 
     /**
@@ -211,10 +214,11 @@ export class FileMana{
      * @param {string} token the token for the connection
      * @memberof FileMana
      */
-    downloadFile(nameFile:string, path:string, token:string):void{
+    downloadFile(nameFile:string, path:string, log:User):void{
         /***** API Call *****/
-        //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Get')
+        let dlFile = this._conn.connexionAPIFileDownloadDelete(log.gettoken(), log.constructUrl(urlFileAction,this._breadcrumbs + '/' + nameFile),'Get','application/octet-stream')
         /***** Download *****/
+        console.log(dlFile);
         alert(nameFile + ' downloaded from ' + path)
         let blob = new Blob([`"name":"j-s"`],{type:"application/json"});
         FileSaver.saveAs(blob,nameFile);
@@ -227,28 +231,51 @@ export class FileMana{
      * @param {string} token the token for the connection
      * @memberof FileMana
      */
-    deleteFile(nameFile:string, path:string,token:string):void{
+    deleteFile(nameFile:string, path:string,log:User):void{
         /***** API Call *****/
-        //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Delete')
+        let dlFile = this._conn.connexionAPIFileDownloadDelete(log.gettoken(), log.constructUrl(urlFileAction,this._breadcrumbs + '/' + nameFile),'Delete','application/json')
+        console.log(dlFile)
         alert(nameFile + ' deleted from ' + path)
     }
 
-    downloadFolder(nameFolder:string,path:string,token:string){
+    /**
+     * Download a folder with an API call and a zip file
+     * @param {string} nameFolder take the name of the folder
+     * @param {string} path take the path of the folder
+     * @param {string} token put the token for the API
+     * @memberof FileMana
+     */
+    downloadFolder(nameFolder:string,path:string,log:User){
          /***** API Call *****/
-        //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Get')
+        //let dlFile = this._conn.connexionAPIFileDownloadDelete(log.gettoken(), log.constructUrl('blah'),'Get')
         /***** Download *****/
         alert(nameFolder + ' downloaded from ' + path)
         let blob = new Blob([`"name":"j-s"`]/*,{type:"application/json"}*/);
         FileSaver.saveAs(blob,nameFolder+'.zip');
     }
 
-    deleteFolder(nameFolder:string,path:string,token:string){
+    /**
+     * Delete a folder in S/ with an API call
+     * @param {string} nameFolder the name of the folder to delete
+     * @param {string} path
+     * @param {string} token
+     * @memberof FileMana
+     */
+    deleteFolder(nameFolder:string,path:string,log:User){
         /***** API Call *****/
-        //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Delete')
+        //let dlFile = this._conn.connexionAPIFileDownloadDelete(log.gettoken(), log.constructUrl('blah'),'Delete')
         alert(nameFolder + ' deleted from ' + path)
     }
 
-    createFolder(pathforfolder:string, token:string, foldername:string){
+
+    /**
+     * Create a folder in S3 with an API call
+     * @param {string} pathforfolder the path to add a folder
+     * @param {string} token the token for the API
+     * @param {string} foldername the new folder name
+     * @memberof FileMana
+     */
+    createFolder(pathforfolder:string, log:User, foldername:string){
         /***** API Call *****/
         //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Delete')
         alert("the new folder " + foldername + " will be created in " + pathforfolder)

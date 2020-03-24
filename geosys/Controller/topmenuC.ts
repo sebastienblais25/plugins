@@ -14,7 +14,7 @@ export class TopMenuController{
      * @memberof manageController
      */
     topmenuControl(log:User, mapApi:any, panel:any){
-        mapApi.agControllerRegister('topmenuCtrl', function($scope, $rootScope/*, $location, $anchorScroll*/){
+        mapApi.agControllerRegister('topmenuCtrl', function($scope){
             const that = this;
             /************** interactive List ***************/
             this.selectedItemENT = '';
@@ -219,7 +219,7 @@ export class TopMenuController{
                 }   
             };
 
-            //permet d'afficher ou cacher le formulaire en cliquanr sur le titre
+            //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideCr = function(){
                 if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleCR = $scope.IsVisibleCR ? false : true;
@@ -265,7 +265,7 @@ export class TopMenuController{
                 }     
             };
             
-            //permet d'afficher ou cacher le formulaire en cliquanr sur le titre
+            //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideV = function(){
                 if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleV = $scope.IsVisibleV ? false : true;
@@ -299,7 +299,7 @@ export class TopMenuController{
                 }     
             };
             
-            //permet d'afficher ou cacher le formulaire en cliquanr sur le titre
+            //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideD = function(){
                 if(log._environnementSel!= '' && log._closeable == true){
                     $scope.IsVisibleD = $scope.IsVisibleD ? false : true;

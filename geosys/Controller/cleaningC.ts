@@ -18,10 +18,13 @@ export class CleaningController{
         mapApi.agControllerRegister('SubmitNetCtrl', function($scope){
             
             /************** interactive List ***************/
+            //theme
             this.selectedItemA = '';
+            //working unit ID
             this.selectedItemB = '';
-            this.itemsA = [];
 
+            //set up the theme list
+            this.itemsA = [];
             for (let i in log._themeAcc){
                 this.itemsA.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
             }
@@ -38,7 +41,7 @@ export class CleaningController{
             }
             /**************** From Submission ***************/
             this.submitNett = function() { 
-                
+                //Double confirmation
                 let deleted = confirm('Confirmez le nettoyage ? / Confirm the cleaning ? ');
                 if(deleted){
                     let nettoyage:Cleaning = new Cleaning(this.selectedItemA ,this.selectedItemB)
