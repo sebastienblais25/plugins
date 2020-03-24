@@ -1,0 +1,509 @@
+.section {
+  padding: 4px 16px;
+  text-align: left;
+  font-size: 20px;
+  margin: 0px 0px;
+  border-bottom: solid;
+  border-color: black; }
+
+.divButton {
+  background-color: #7cdaeb;
+  border: none;
+  padding: 4px 16px;
+  text-align: left;
+  font-size: 10px;
+  margin: 0px 0px;
+  opacity: 0.6;
+  cursor: pointer; }
+
+.divButton:hover {
+  opacity: 1;
+  transition: 0.3s; }
+
+.divButtonUti {
+  background-color: #8797dd;
+  border: none;
+  padding: 4px 16px;
+  text-align: left;
+  font-size: 10px;
+  margin: 0px 0px;
+  opacity: 0.6;
+  cursor: pointer; }
+
+.divButtonUti:hover {
+  opacity: 1;
+  transition: 0.3s; }
+
+.largeur {
+  width: 350px;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  max-height: 50px; }
+
+.topmenu {
+  width: 380px;
+  height: 40px; }
+
+.envDiv {
+  width: 60%;
+  height: 40px;
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  background-color: #f7f7f7; }
+
+.envSelect {
+  margin-top: 5px; }
+
+.infoDiv {
+  width: 20%;
+  height: 40px;
+  float: left;
+  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #ECE7E6;
+  opacity: 0.4; }
+
+.infoDiv:hover {
+  opacity: 1;
+  transition: 0.3s; }
+
+.helpDiv {
+  width: 20%;
+  height: 40px;
+  float: left;
+  text-align: center;
+  padding-top: 10px;
+  margin-left: 0px;
+  padding-left: 0px;
+  background-color: #ECE7E6;
+  opacity: 0.4; }
+
+.helpDiv:hover {
+  opacity: 1;
+  transition: 0.3s; }
+
+.ddlshow {
+  padding-bottom: 4px;
+  width: 350px; }
+
+.ddlshowEX {
+  padding-bottom: 4px;
+  width: 350px;
+  margin-bottom: 0px; }
+
+/** CSS for the field classes  **/
+.listClasses {
+  height: 30px;
+  width: 330px; }
+
+.divclasse {
+  height: 95px;
+  width: 354px;
+  overflow-y: scroll;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: #ECE7E6;
+  resize: vertical;
+  min-height: 30px; }
+
+.planning {
+  height: 95px;
+  width: 354px;
+  overflow-y: scroll;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: #ECE7E6;
+  margin-left: 5px;
+  resize: vertical;
+  min-height: 30px; }
+
+.itemlist {
+  padding: 0px;
+  margin: 0px;
+  max-height: 30px;
+  min-height: 30px;
+  width: 325px; }
+
+.classeslist {
+  max-height: 40px;
+  padding: 0px 0px 0px 0px;
+  margin: 10px 0px 10px 0px;
+  display: inline-block;
+  width: 320px; }
+
+.errormess {
+  color: red;
+  opacity: 1; }
+
+.sizeerror {
+  font-size: 12px; }
+
+.classeslistEX {
+  max-height: 40px;
+  padding: 0px 0px 0px 0px;
+  margin: 10px 0px 10px 0px;
+  display: inline-block;
+  width: 320px; }
+
+.largeurlist {
+  max-height: 30px;
+  padding: 0px 0px 0px 10px;
+  margin: 0px 0px 0px 0px;
+  display: inline-block;
+  width: 295px; }
+
+.checklist {
+  max-height: 30px;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  text-align: right; }
+
+.cbAlone {
+  margin: 10px 0px 10px 0px;
+  width: 350px;
+  padding: 0px 0px 0px 0px;
+  max-height: 50px; }
+
+.advanced {
+  margin-top: 10px;
+  opacity: 0.5; }
+
+/***** ********/
+.datfinfield {
+  width: 350px;
+  padding: 0px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
+  max-height: 50px; }
+
+.md-datepicker-input-container {
+  width: 280px; }
+
+.submitbtn {
+  margin-top: 15px;
+  margin-bottom: 0px;
+  height: 50px;
+  width: 352px; }
+
+.centerText {
+  text-align: center; }
+
+.extractspace {
+  min-height: 150px; }
+
+.btnShape {
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+  float: right; }
+
+.btnCopy {
+  margin: 0px 0px 0px 5px;
+  padding: 0px; }
+
+.inputshape {
+  max-width: 200px;
+  padding-top: 10px; }
+
+.query {
+  min-height: 60px;
+  width: 350px; }
+
+/********** File Manager **********/
+/**** breadcrumbs ****/
+.topcover {
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  opacity: 1;
+  height: 10px;
+  width: 100%;
+  z-index: 200; }
+
+.stickyHeader {
+  position: sticky;
+  top: 10px;
+  background-color: white;
+  opacity: 1;
+  z-index: 300; }
+
+.backing {
+  margin-left: 0px;
+  float: left;
+  padding-top: 10px;
+  padding-left: 3px;
+  padding-right: 2px;
+  border-right: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: lightgrey;
+  padding-bottom: 5px;
+  cursor: pointer; }
+
+.backing:hover {
+  transition: 0.5s;
+  background-color: silver; }
+
+.breadclass {
+  width: 99%;
+  padding: 10px 0px 10px 5px;
+  background-color: aliceblue;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: lightgrey; }
+
+.breadClick {
+  background-color: aliceblue;
+  padding-top: 11px;
+  padding-bottom: 12px;
+  border-radius: 2px;
+  cursor: pointer; }
+
+.breadClick:hover {
+  transition: 0.5s;
+  background-color: silver;
+  text-decoration: underline; }
+
+/**** Header ****/
+.headerFile {
+  width: 99%;
+  margin-top: 3px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: lightgrey;
+  margin-bottom: 3px; }
+
+.nameFileFolderHeader {
+  width: 225px;
+  display: inline-flex;
+  padding-left: 2px; }
+
+.modifiedFileFolderHeader {
+  width: 150px;
+  display: inline-block;
+  border-left: 2px solid;
+  border-color: lightgrey;
+  padding-left: 2px; }
+
+.sizeFileFolderHeader {
+  width: 100px;
+  display: inline-block;
+  border-left: 2px solid;
+  border-color: lightgrey;
+  padding-left: 2px; }
+
+/**** Folder ****/
+.folderBtn {
+  width: 99%;
+  padding: 0px 0px 0px 10px;
+  font-size: 15px;
+  opacity: 0.6;
+  cursor: pointer; }
+
+.folderBtn:hover {
+  opacity: 1;
+  background-color: #e7e6e6;
+  transition: 0.4s; }
+
+/**** Files ****/
+.fileBtn {
+  width: 99%;
+  padding: 0px 0px 0px 10px;
+  cursor: pointer;
+  font-size: 15px;
+  opacity: 0.6; }
+
+.fileBtn:hover {
+  opacity: 1;
+  background-color: #f7f5f5;
+  transition: 0.3s; }
+
+/**** Folder and Files ****/
+.groupingInfo {
+  width: 100%; }
+
+.nameFileFolder {
+  width: 200px;
+  display: inline-flex; }
+
+.modifiedFileFolder {
+  width: 150px;
+  display: inline-block; }
+
+.sizeFileFolder {
+  width: 100px;
+  display: inline-block; }
+
+.downloadbtn {
+  padding-top: 10px;
+  padding-left: 8px;
+  width: 40px;
+  height: 45px;
+  float: right;
+  cursor: pointer; }
+
+.downloadbtn:hover {
+  background-color: #cccbcb;
+  transition: 0.4s; }
+
+.lilPad {
+  padding-top: 10px; }
+
+/******* Geometry *******/
+.geomMenu {
+  padding-top: 13px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: #ECE7E6; }
+
+.geominput {
+  margin-bottom: 0px;
+  width: 150px; }
+
+.espginput {
+  margin-bottom: 0px;
+  width: 50px; }
+
+.geomDivIn {
+  height: 50px; }
+
+.geomDivIn1 {
+  height: 50px; }
+
+.geomCB {
+  padding-top: 20px;
+  float: left;
+  margin-bottom: 0px; }
+
+.containerclass1 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 250px;
+  height: 40px; }
+
+.containerclass12 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 50px;
+  height: 40px; }
+
+.containerclass {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 340px; }
+
+.drop-window {
+  position: fixed;
+  top: 100px;
+  left: 450px;
+  right: 50px;
+  bottom: 100px;
+  background: rgba(0, 86, 132, 0.9);
+  z-index: 250000;
+  display: none;
+  text-align: center;
+  -webkit-transition: opacity 250ms;
+  transition: opacity 250ms;
+  pointer-events: none; }
+
+.drop-window-content {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px dashed #fff; }
+
+.drop-window h3 {
+  margin: -.5em 0 0;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 40px;
+  color: #fff;
+  padding: 0; }
+
+.hiddenupload {
+  display: none; }
+
+/*********************** Portail CSS **************************/
+.titleportail {
+  color: blue;
+  padding-left: 5%; }
+
+.sideMenu {
+  background-color: #72f6fa54;
+  width: 30%;
+  border-style: double;
+  border-color: black;
+  border-radius: 10px; }
+
+.teampage {
+  padding-left: 80px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.teampage:hover {
+  text-decoration: underline;
+  color: purple; }
+
+.noref {
+  color: black;
+  text-decoration: none; }
+
+.opac {
+  opacity: 0.5; }
+
+/*************************** help doc CSS ************************************/
+.clicksectionTitle {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 10px;
+  opacity: 0.5; }
+
+.clicksectionTitle:hover {
+  opacity: 1;
+  background-color: ivory;
+  transition: 0.4s; }
+
+.clicksectionSection {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 10px;
+  opacity: 0.5; }
+
+.clicksectionSection:hover {
+  opacity: 1;
+  background-color: ivory;
+  transition: 0.4s; }
+
+.clicksectionForm {
+  margin-left: 20px;
+  padding-left: 10px;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 10px;
+  opacity: 0.5; }
+
+.clicksectionForm:hover {
+  opacity: 1;
+  background-color: ivory;
+  transition: 0.4s; }
+
