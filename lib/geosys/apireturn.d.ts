@@ -1,13 +1,13 @@
-export declare class Apireturn {
+export declare class ApiReturn {
     _id: string;
     _idListeCode: string;
     _nom: string;
     _descEn: string;
     _descFr: string;
     /**
-     *Creates an instance of Apireturn with only an id
+     *Creates an instance of ApiReturn with only an id
      * @param {string} id id of the response of the API
-     * @memberof Apireturn
+     * @memberof ApiReturn
      */
     constructor(id: string);
     /**
@@ -16,7 +16,7 @@ export declare class Apireturn {
      * @param {string} nom the name in the db
      * @param {string} descEn english description
      * @param {string} descFr french description
-     * @memberof Apireturn
+     * @memberof ApiReturn
      */
     setRemaining(idListCode: string, nom: string, descEn: string, descFr: string): void;
 }

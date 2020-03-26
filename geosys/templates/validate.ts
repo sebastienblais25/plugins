@@ -1,12 +1,12 @@
 export const validateform:string = `
 <div ng-controller="submitFromV as ctrl9">
-    <div ng-style="SelectedMenuV" class="divButtonUti" ng-click="ctrl1.ShowHideV()">
+    <div ng-style="SelectedMenuV" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideV()">
         <h2>{{ 'plugins.geosys.valider' | translate }}</h2>
     </div>
     <div ng-show="IsVisibleV" ng-style="bgEnv">
         <form name="valiform">
             <div class="rv-subsection">
-                <md-input-container class="ddlshowEX">
+                <md-input-container class="Geosys-ddlshowEX">
                     <label>{{ 'plugins.geosys.themet' | translate }}</label>
                     <md-select 
                     ng-model="ctrl9.selectedItemE" 
@@ -18,7 +18,7 @@ export const validateform:string = `
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container class="ddlshowEX">
+                <md-input-container class="Geosys-ddlshowEX">
                     <label>{{ 'plugins.geosys.idUT' | translate }}</label>
                     <md-select
                     ng-model="ctrl9.selectedItemF"
@@ -30,10 +30,10 @@ export const validateform:string = `
                 </md-input-container>
 
                 
-                <span><span class="advanced">{{ 'plugins.geosys.filejson' | translate }}</span><span class="errormess sizeerror" ng-show="errJSON">{{ 'plugins.geosys.errorFMD' | translate }}</span></span>
+                <span><span class="Geosys-advanced">{{ 'plugins.geosys.filejson' | translate }}</span><span class="Geosys-errormess Geosys-sizeerror" ng-show="errJSON">{{ 'plugins.geosys.errorFMD' | translate }}</span></span>
                     <input  type="file" id="fileJSON" accept=".json"/>
                 
-                <md-input-container class="submitbtn">
+                <md-input-container class="Geosys-submitbtn">
                     <md-button class="md-primary md-raised" style="float: right;"
                     ng-click="ctrl9.submitFormV(); ctrl1.ShowHideV()" ng-disabled="valiform.$invalid">
                         {{ 'plugins.geosys.submit' | translate }}

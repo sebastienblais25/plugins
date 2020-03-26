@@ -1,12 +1,12 @@
 import { User } from '../user';
-import { connexion } from '../apiConnect';
+import { Connexion } from '../apiConnect';
 import { urlDeleteClean } from '../config/url';
 export class Cleaning{
 
     _theme:string;
     _idUt:string;
     _json:string = '';
-    _conn:connexion = new connexion();
+    _conn:Connexion = new Connexion();
     _data:any;
 
     constructor(theme:string, idut:string){

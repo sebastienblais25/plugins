@@ -1,11 +1,11 @@
-import { connexion } from "../apiConnect";
+import { Connexion } from "../apiConnect";
 import { User } from '../user';
 import { urlDeliveryUpdate } from "../config/url";
 
 
 export class Livraison{
 
-    _conn :connexion= new connexion();
+    _conn :Connexion= new Connexion();
     _theme:string;
     _idUt:string;
     _typeConn:string;

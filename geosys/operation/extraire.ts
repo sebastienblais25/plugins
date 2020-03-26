@@ -2,14 +2,14 @@
 
 const FileSaver = require('file-saver'); // le import
 import {urlgeoDataGet,urlgeoDatGetId} from '../config/url';
-import { connexion } from '../apiConnect';
+import { Connexion } from '../apiConnect';
 import { User } from '../user';
 
 export class Extraire{
 
     /*********** Properties ***********/
 
-    _conn :connexion= new connexion();
+    _conn :Connexion= new Connexion();
     _theme: string;
     _idUT: string;
     _listClasses:string[];

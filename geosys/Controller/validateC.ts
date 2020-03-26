@@ -22,7 +22,7 @@ export class ValidateController{
             this.selectedItemF = '';
             this.itemsE = [];
             for (let i in log._themeAcc){
-                this.itemsE.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
+                this.itemsE.push({name : log._themeAcc[i].getnom() , value: log._themeAcc[i].getId()});
             }
             this.itemsF = [];
             this.setList = () => {

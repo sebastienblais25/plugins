@@ -1,11 +1,11 @@
-import { connexion } from "../apiConnect";
+import { Connexion } from "../apiConnect";
 import { User } from '../user';
 import { urlValidateMD } from "../config/url";
 
 
 export class Valider{
 
-    _conn :connexion= new connexion();
+    _conn :Connexion= new Connexion();
 
     constructor(){  
     };

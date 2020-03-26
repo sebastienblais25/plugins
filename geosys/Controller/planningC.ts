@@ -30,7 +30,7 @@ export class PlanningController {
             this.idut = '';
             //theme list
             for (let i in log._themeAcc) {
-                this.itemsC.push({ name: log._themeAcc[i]._nom, value: log._themeAcc[i]._id });
+                this.itemsC.push({ name: log._themeAcc[i].getnom(), value: log._themeAcc[i].getId()});
             }
             //List of working type
             this.itemsD = [];
@@ -182,9 +182,9 @@ export class PlanningController {
                         log._geom,
                         this.wherep);
                     //submit the form to the API
-                    let apireturn: any = plan.submitForm(log);
+                    let ApiReturn: any = plan.submitForm(log);
                     //If the return isn't a succes
-                    if (apireturn != 'success') {
+                    if (ApiReturn != 'success') {
                         $scope.SelectedMenuP = {
                             "background-color": "red",
                         }

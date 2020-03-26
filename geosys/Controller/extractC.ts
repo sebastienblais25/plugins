@@ -26,7 +26,7 @@ export class ExtractController{
             //set up the theme list
             this.itemsA = [];
             for (let i in log._themeAcc){
-                this.itemsA.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
+                this.itemsA.push({name : log._themeAcc[i].getnom() , value: log._themeAcc[i].getId()});
             }
             this.itemsB = [];
             
@@ -64,10 +64,10 @@ export class ExtractController{
                         this.selectedItemA
                         ,this.selectedItemB);
                     ext.setOptionnalEnvironnement(this.selectedItemENT);
-                    let apireturn:any = ext.submitForm(log);
+                    let ApiReturn:any = ext.submitForm(log);
                     //if the conection to the API is a success
-                    if (apireturn != 'success'){
-                        alert(apireturn.statusText)
+                    if (ApiReturn != 'success'){
+                        alert(ApiReturn.statusText)
                         log._closeable =false;
                         $scope.SelectedMenuE = {
                             "background-color" : "red", 
@@ -107,7 +107,7 @@ export class ExtractController{
             //set up the list of theme
             this.itemsA = [];
             for (let i in log._themeAcc){
-                this.itemsA.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
+                this.itemsA.push({name : log._themeAcc[i].getnom() , value: log._themeAcc[i].getId()});
             }
             //set of a list of classes
             this.classes = [];
@@ -238,9 +238,9 @@ export class ExtractController{
                         this.geomSR)
                     extsr.setOptionnalEnvironnement(this.selectedItemENT);
                     //If the connection to the API is a Success
-                    let apireturn:any = extsr.submitForm(log);
-                    if (apireturn != 'success'){
-                        alert(apireturn.statusText)
+                    let ApiReturn:any = extsr.submitForm(log);
+                    if (ApiReturn != 'success'){
+                        alert(ApiReturn.statusText)
                         log._closeable = false;
                         $scope.SelectedMenuEU = {
                             "background-color" : "red", 

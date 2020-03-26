@@ -3,12 +3,12 @@
 
 export const formCancel:string = `
 <div ng-controller="cancelStep as ctrl8">
-    <div ng-style="SelectedMenuCa" class="divButtonUti" ng-click="ctrl1.ShowHideCa()">
+    <div ng-style="SelectedMenuCa" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideCa()">
         <h2>{{ 'plugins.geosys.annuler' | translate }}</h2>
     </div>
-    <div ng-show="IsVisibleCA" ng-style="bgEnv" class="extractspace">
+    <div ng-show="IsVisibleCA" ng-style="bgEnv" class="Geosys-extractspace">
         <div class="rv-subsection">
-            <md-input-container class="ddlshowEX">
+            <md-input-container class="Geosys-ddlshowEX">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>
                 <md-select 
                 ng-model="ctrl8.selectedItemA" 
@@ -21,7 +21,7 @@ export const formCancel:string = `
                 </md-select>
             </md-input-container>
 
-            <md-input-container class="ddlshowEX">
+            <md-input-container class="Geosys-ddlshowEX">
                 <label>{{ 'plugins.geosys.idUT' | translate }}</label>
                 <md-select
                 ng-model="ctrl8.selectedItemB"
@@ -33,7 +33,7 @@ export const formCancel:string = `
                 </md-select>
             </md-input-container>
 
-            <md-input-container class="ddlshowEX">
+            <md-input-container class="Geosys-ddlshowEX">
                 <label>{{ 'plugins.geosys.postput' | translate }}</label>
                 <md-select
                 ng-model="ctrl8.stepCan"
@@ -46,7 +46,7 @@ export const formCancel:string = `
                 </md-select>
             </md-input-container>
 
-            <md-input-container class="submitbtn">
+            <md-input-container class="Geosys-submitbtn">
                 <md-button class="md-primary md-raised" style="float: right;"
                 ng-click="ctrl8.submitCan(); ctrl1.ShowHideCa()">
                     {{ 'plugins.geosys.submit' | translate }}

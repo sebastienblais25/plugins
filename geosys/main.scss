@@ -1,7 +1,7 @@
 
 
-//Section title
-.section{
+// Geosys-section title
+.Geosys-section {
   padding: 4px 16px;
   text-align: left;
   font-size: 20px;
@@ -10,8 +10,8 @@
   border-color: black;
 }
 
-//Bouton du menu
-.divButton {
+// Bouton du menu
+.Geosys-div-Button {
   background-color: #7cdaeb;
   border: none;
   padding: 4px 16px;
@@ -23,11 +23,13 @@
   
 }
 
-// lors du hover du bouton du menu
-.divButton:hover {opacity: 1;transition: 0.3s;}
+// Lors du hover du bouton du menu
+.Geosys-div-Button:hover {
+  opacity: 1;transition: 0.3s;
+}
 
 //Bouton du menu
-.divButtonUti {
+.Geosys-div-Button-Uti {
   background-color: #8797dd;
   border: none;
   padding: 4px 16px;
@@ -39,12 +41,12 @@
   
 }
 
-// lors du hover du bouton du menu
-.divButtonUti:hover {opacity: 1;transition: 0.3s;}
+// Lors du hover du bouton du menu
+.Geosys-div-Button-Uti:hover {opacity: 1;transition: 0.3s;}
 
 
-// class for thw witdh of input
-.largeur{
+// Class for thw witdh of input
+.Geosys-largeur {
   width:350px;
   padding: 0px 0px 0px 0px;
   margin: 0px 0px 0px 0px;
@@ -52,14 +54,14 @@
   
 }
 
-//for the top menu
-.topmenu{
+// For the top menu
+.Geosys-topmenu {
   width: 380px;
   height: 40px;
 }
 
-//block environnement of the topmenu
-.envDiv{
+// Block environnement of the Geosys-topmenu
+.Geosys-envDiv {
   width: 60%;
   height: 40px;
   float: left;
@@ -69,13 +71,13 @@
   
 }
 
-//set a space between dropdown dans header
-.envSelect{
+// Set a space between dropdown dans header
+.Geosys-envSelect {
   margin-top: 5px;
 }
 
-//button for the info user
-.infoDiv{
+// Button for the info user
+.Geosys-infoDiv {
   width: 20%;
   height: 40px;
   float: left;
@@ -86,14 +88,14 @@
   opacity: 0.4;
 }
 
-//hover of button info user
-.infoDiv:hover{
+// Hover of button info user
+.Geosys-infoDiv:hover {
   opacity: 1;
   transition: 0.3s;
 }
 
-//button for help 
-.helpDiv{
+// Button for help 
+.Geosys-helpDiv {
   width: 20%;
   height: 40px;
   float: left;
@@ -105,31 +107,31 @@
   opacity: 0.4;
 }
 
-.helpDiv:hover{
+.Geosys-helpDiv:hover {
   opacity: 1;
   transition: 0.3s;
 }
 
-//set a space for de dropdown of angular
-.ddlshow{
+// Set a space for de dropdown of angular
+.Geosys-ddlshow {
   padding-bottom: 4px;
   width:350px;
 }
 
-// set space for the dropdown of extract
-.ddlshowEX{
+// Set space for the dropdown of extract
+.Geosys-ddlshowEX {
   padding-bottom: 4px;
   width:350px;
   margin-bottom: 0px;
 }
 
 /** CSS for the field classes  **/
-.listClasses{
+.Geosys-list-classes {
   height : 30px;
   width : 330px;
 }
 
-.divclasse{
+.Geosys-div-classe {
   height:95px;
   width: 354px;
   overflow-y:scroll;
@@ -141,7 +143,7 @@
   min-height: 30px;
 }
 
-.planning{
+.Geosys-planning {
   height:95px;
   width: 354px;
   overflow-y:scroll;
@@ -154,7 +156,7 @@
   min-height: 30px;
 }
 
-.itemlist{
+.Geosys-itemlist {
   padding:0px;
   margin: 0px;
   max-height: 30px;
@@ -162,7 +164,7 @@
   width: 325px;
  }
 
-.classeslist{
+.Geosys-classeslist {
   max-height: 40px;
   padding:0px 0px 0px 0px;
   margin: 10px 0px 10px 0px;
@@ -170,18 +172,18 @@
   width: 320px;
 }
 
-.errormess{
+.Geosys-errormess {
   color: red;
   opacity: 1;
   
 }
 
-.sizeerror{
+.Geosys-sizeerror {
   font-size: 12px;
 }
 
-//for extraction
-.classeslistEX{
+// For extraction
+.Geosys-classeslistEX {
   max-height: 40px;
   padding:0px 0px 0px 0px;
   margin: 10px 0px 10px 0px;
@@ -189,7 +191,7 @@
   width: 320px;
 }
 
-.largeurlist{
+.Geosys-largeurlist {
   max-height: 30px;
   padding:0px 0px 0px 10px;
   margin: 0px 0px 0px 0px;
@@ -197,81 +199,68 @@
   width: 295px;
 }
 
-.checklist{
+.Geosys-checklist {
   max-height: 30px;
   padding:0px 0px 0px 0px;
   margin: 0px 0px 0px 0px;
   text-align: right ;
 }
 
-.cbAlone{
+.Geosys-cbAlone {
   margin: 10px 0px 10px 0px;
   width:350px;
   padding: 0px 0px 0px 0px;
   max-height: 50px;
 }
 
-.advanced{
+.Geosys-advanced {
   margin-top: 10px;
   opacity: 0.5;
 }
-
-/***** ********/
-
-//For the field of the date
-.datfinfield {
+// For the field of the date
+.Geosys-datfinfield {
   width:350px;
   padding: 0px 0px 0px 0px;
   margin: 15px 0px 0px 0px;
   max-height: 50px;
 }
-
 .md-datepicker-input-container {
   width: 280px;
 }
-
-
-//For teh submit button
-.submitbtn{
+// For teh submit button
+.Geosys-submitbtn {
   margin-top: 15px;
   margin-bottom: 0px;
   height: 50px;
   width: 352px;
 }
-
-.centerText{
+.Geosys-centerText {
   text-align: center;
 }
-
 //set a minimum height for the form
-.extractspace{
+.Geosys-extractspace {
   min-height: 150px;
 }
-
-.btnShape{
+.Geosys-btnShape {
   margin: 0px 0px 0px 0px;
   padding: 0px;
   float: right;
 }
-
-.btnCopy{
+.Geosys-btnCopy {
   margin: 0px 0px 0px 5px;
   padding: 0px;
 }
-
-.inputshape{
+.Geosys-inputshape {
   max-width: 200px;
   padding-top: 10px;
 }
-
-.query{
+.Geosys-query {
   min-height: 60px;
   width: 350px;
 }
-
 /********** File Manager **********/
 /**** breadcrumbs ****/
-.topcover{
+.Geosys-topcover {
   position: sticky;
   top: 0px;
   background-color: white;
@@ -280,16 +269,14 @@
   width: 100%;
   z-index:200;
 }
-
-.stickyHeader{
+.Geosys-sticky-Header {
   position: sticky;
   top: 10px;
   background-color: white;
   opacity: 1;
   z-index:300;
 }
-
-.backing{
+.Geosys-backing {
   margin-left: 0px;
   float: left;
   padding-top: 10px;
@@ -302,15 +289,12 @@
   padding-bottom: 5px;
   cursor:pointer;
 }
-
-.backing:hover{
+.Geosys-backing:hover {
   transition: 0.5s;
   background-color: silver;
 }
-
-.breadclass{
+.Geosys-breadclass {
   width: 99%;
-  //margin-top: 10px;
   padding: 10px 0px 10px 5px;
   background-color: aliceblue;
   border-style: solid;
@@ -318,23 +302,20 @@
   border-radius: 5px;
   border-color: lightgrey;
 }
-
-.breadClick{
+.Geosys-breadClick {
   background-color: aliceblue;
   padding-top: 11px;
   padding-bottom: 12px;
   border-radius: 2px; 
   cursor:pointer;
 }
-
-.breadClick:hover{
+.Geosys-breadClick:hover {
   transition: 0.5s;
   background-color: silver;
   text-decoration: underline;
 }
-
 /**** Header ****/
-.headerFile{
+.Geosys-header-File {
   width: 99%;
   margin-top: 3px;
   border-style: solid;
@@ -343,168 +324,130 @@
   border-color: lightgrey;
   margin-bottom: 3px;
 }
-
-.nameFileFolderHeader{
+.Geosys-name-File-Folder-Header {
   width:225px;
   display: inline-flex;
   padding-left: 2px;
 }
-
-.modifiedFileFolderHeader{
+.Geosys-modified-File-Folder-Header {
   width:150px;
   display: inline-block;
   border-left: 2px solid;
   border-color: lightgrey;
   padding-left: 2px;
 }
-
-.sizeFileFolderHeader{
+.Geosys-size-File-Folder-Header {
   width:100px;
   display: inline-block;
   border-left: 2px solid;
   border-color: lightgrey;
   padding-left: 2px;
 }
-
-
 /**** Folder ****/
-.folderBtn {
+.Geosys-folderBtn {
   width: 99%;
   padding: 0px 0px 0px 10px;
-  
-  //text-align: center;
   font-size: 15px;
-  //margin: 5px 0px;
   opacity: 0.6;
   cursor:pointer;
-  //transition: 0.4s;
-  
 }
-
 // lors du hover du bouton du menu
-.folderBtn:hover {
+.Geosys-folderBtn:hover {
   opacity: 1;
   background-color: #e7e6e6;
   transition: 0.4s;
 }
-
-
 /**** Files ****/
-.fileBtn {
+.Geosys-fileBtn {
   width: 99%;
   padding: 0px 0px 0px 10px;
   cursor:pointer;
-  
-  //text-align: center;
   font-size: 15px;
-  //margin: 5px 0px;
   opacity: 0.6;
-  //transition: 0.3s;
-  
 }
-
 // lors du hover du bouton du menu
-.fileBtn:hover {
+.Geosys-fileBtn:hover {
   opacity: 1;
   background-color: #f7f5f5;
   transition: 0.3s;
 }
-
 /**** Folder and Files ****/
-.groupingInfo{
+.Geosys-groupingInfo {
   width: 100%;
 }
-
-.nameFileFolder{
-  width:200px;
+.Geosys-name-File-Folder {
+  width: 200px;
   display: inline-flex;
 }
-
-.modifiedFileFolder{
-  width:150px;
+.Geosys-modified-File-Folder {
+  width: 150px;
   display: inline-block;
 }
-
-.sizeFileFolder{
+.Geosys-size-File-Folder {
   width:100px;
   display: inline-block;
 }
-
-.downloadbtn{
+.Geosys-downloadbtn {
   padding-top: 10px;
   padding-left: 8px;
-  width:40px;
+  width: 40px;
   height: 45px;
   float: right;
   cursor:pointer;
   //transition: 0.4s;
 }
-
-.downloadbtn:hover{
-  background-color:rgb(204, 203, 203);
+.Geosys-downloadbtn:hover {
+  background-color: rgb(204, 203, 203);
   transition: 0.4s;
 }
-
-.lilPad{
+.Geosys-lilPad{
   padding-top: 10px;
 }
-
-
 /******* Geometry *******/
-.geomMenu{
+.Geosys-geom-Menu {
   padding-top: 13px;
   border-style: solid;
   border-width: 2px;
   border-radius: 5px;
   border-color: #ECE7E6;
-
 }
-
-.geominput{
+.Geosys-geom-input {
   margin-bottom: 0px;
-  width:150px;
+  width: 150px;
 }
-
-.espginput{
+.Geosys-espg-input {
   margin-bottom: 0px;
-  width:50px;
+  width: 50px;
 }
-
-.geomDivIn{
-  height:50px;
-  
+.Geosys-geom-DivIn {
+  height: 50px;
 }
-
-.geomDivIn1{
-  height:50px;
+.Geosys-geom-DivIn1 {
+  height: 50px;
 }
-
-.geomCB{
+.Geosys-geom-CB {
   padding-top: 20px;
   float: left;
   margin-bottom: 0px;
 }
-
-.containerclass1{
+.Geosys-containerclass1 {
   margin-top: 0px;
   margin-bottom: 0px;
   width: 250px;
   height : 40px
 }
-.containerclass12{
+.Geosys-containerclass12 {
   margin-top: 0px;
   margin-bottom: 0px;
   width: 50px;
   height : 40px
 }
-
-.containerclass{
+.Geosys-containerclass{
   margin-top: 0px;
   margin-bottom: 0px;
   width: 340px;
 }
-
-.drop-window {
+.Geosys-drop-window {
 	position: fixed;
 	top: 100px;
 	left: 450px;
@@ -516,10 +459,9 @@
 	text-align: center;
 	-webkit-transition: opacity 250ms;
 	transition: opacity 250ms;
-  pointer-events:none;
+  pointer-events: none;
 }
-
-.drop-window-content {
+.Geosys-drop-window-content {
 	position: absolute;
 	top: 10px;
 	left: 10px;
@@ -527,8 +469,7 @@
 	bottom: 10px;
 	border: 1px dashed #fff;
 }
-
-.drop-window h3 {
+.Geosys-drop-window h3 {
 	margin: -.5em 0 0;
 	position: absolute;
 	top: 50%;
@@ -541,47 +482,39 @@
 	color: #fff;
 	padding: 0;
 }
-
-.hiddenupload{
+.Geosys-hidden-upload {
   display: none;
 }
 /*********************** Portail CSS **************************/
-.titleportail{
+.titleportail {
   color: blue;
   padding-left: 5%;
 }
-
-.sideMenu{
+.sideMenu {
   background-color: #72f6fa54;
   width: 30%;
   border-style: double;
   border-color: black;
   border-radius: 10px;
 }
-
-.teampage{
+.teampage {
   padding-left: 80px;
   margin-bottom: 10px;
   margin-top: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
-.teampage:hover{
+.teampage:hover {
   text-decoration: underline;
-  color:purple;
+  color: purple;
 }
-
-.noref{
+.noref {
   color: black;
   text-decoration: none;
 }
-
-.opac{
-  opacity:0.5;
+.opac {
+  opacity: 0.5;
 }
-
-
 /*************************** help doc CSS ************************************/
 .clicksectionTitle{
   padding-top: 15px;
@@ -592,13 +525,11 @@
   border-radius: 10px;
   opacity: 0.5;
 }
-
 .clicksectionTitle:hover{
   opacity: 1;
   background-color: ivory;
   transition: 0.4s;
 }
-
 .clicksectionSection{
   padding-top: 5px;
   padding-bottom: 5px;
@@ -609,13 +540,11 @@
   border-radius: 10px;
   opacity: 0.5;
 }
-
 .clicksectionSection:hover{
   opacity: 1;
   background-color: ivory;
   transition: 0.4s;
 }
-
 .clicksectionForm{
   margin-left:20px;
   padding-left:10px;
@@ -624,7 +553,6 @@
   border-radius: 10px;
   opacity: 0.5;
 }
-
 .clicksectionForm:hover{
   opacity: 1;
   background-color: ivory;

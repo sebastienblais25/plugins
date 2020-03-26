@@ -1,6 +1,6 @@
 /****** Import ******/
 const FileSaver = require('file-saver'); // le import
-import { connexion } from "../apiConnect";
+import { Connexion } from "../apiConnect";
 import { urlPlaniPost } from "../config/url";
 import { User } from '../user';
 
@@ -8,7 +8,7 @@ import { User } from '../user';
 export class planifier{
 
     /*********** Properties ***********/
-    _conn: connexion = new connexion();
+    _conn: Connexion = new Connexion();
 
     _theme: string;
     _idUT: string;
@@ -112,10 +112,10 @@ export class planifier{
     }
 
     //Connexion a l'API
-    getconn(): connexion {
+    getconn(): Connexion {
         return this._conn;
     }
-    setconn(value: connexion) {
+    setconn(value: Connexion) {
         this._conn = value;
     }
 

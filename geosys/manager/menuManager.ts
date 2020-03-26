@@ -81,12 +81,12 @@ export class menuManager{
         //compile the form together
         menuprincipal = "<div>"
                             + outputTopmenu
-                            + `<div class="section">Processus Geosys</div>`
+                            + `<div class="Geosys-section">Processus Geosys</div>`
                             + outputPlan 
                             + outputExt
                             + outputDeli  
                             + outputNettoyage 
-                            + `<div class="section">Utilitaire</div>`
+                            + `<div class="Geosys-section">Utilitaire</div>`
                             + outputExtSR 
                             + outputCreer 
                             + outputVali

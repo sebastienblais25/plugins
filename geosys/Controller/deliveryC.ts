@@ -29,7 +29,7 @@ export class DeliveryController{
             //set up theme list
             this.itemsE = [];
             for (let i in log._themeAcc){
-                this.itemsE.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
+                this.itemsE.push({name : log._themeAcc[i].getnom() , value: log._themeAcc[i].getId()});
             }
             this.itemsF = [];
             this.setList = () => {
@@ -73,9 +73,9 @@ export class DeliveryController{
                     let livre:Livraison = new Livraison(this.selectedItemF,this.selectedItemE,this.typeOper);
                     livre.setOptionnalEnvironnement(this.selectedItemENT);
                     //submit form
-                    let apireturn:any = livre.submitForm(formdata,log);     
-                    if (apireturn != undefined){
-                        alert(apireturn);
+                    let ApiReturn:any = livre.submitForm(formdata,log);     
+                    if (ApiReturn != undefined){
+                        alert(ApiReturn);
                         $scope.SelectedMenuD = {
                             "background-color" : "red", 
                         }

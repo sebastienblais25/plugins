@@ -27,7 +27,7 @@ export class CancelController{
             //Set up for the list of theme
             this.itemsA = [];
             for (let i in log._themeAcc){
-                this.itemsA.push({name : log._themeAcc[i]._nom , value: log._themeAcc[i]._id});
+                this.itemsA.push({name : log._themeAcc[i].getId() , value: log._themeAcc[i].getId()});
             }
             this.itemsB = [];
             //création de la liste pour les unité de travail
@@ -45,9 +45,9 @@ export class CancelController{
                 /*let ext = new Extraire(
                      this.selectedItemA
                     ,this.selectedItemB);     
-                let apireturn:any = ext.submitForm(log);
-                if (apireturn != 'success'){
-                    alert(apireturn.statusText)
+                let ApiReturn:any = ext.submitForm(log);
+                if (ApiReturn != 'success'){
+                    alert(ApiReturn.statusText)
                     $scope.SelectedMenu = {
                         "background-color" : "red", 
                     }
@@ -58,7 +58,7 @@ export class CancelController{
                         "background-color" : "green", 
                     }
                 }*/
-                //alert(this._apireturn.value);    
+                //alert(this._ApiReturn.value);    
             };
         });
     }

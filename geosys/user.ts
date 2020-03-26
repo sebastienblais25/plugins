@@ -1,9 +1,9 @@
 import { urlLoginGet, urlgetidWu, urlEnvList,
      urlClassesList,urlWorkingType, urlGetCode } from './config/url';
-import { connexion } from './apiConnect';
+import { Connexion } from './apiConnect';
 import { idWu } from './manager/idWU';
 import { Environnement } from './manager/environnement';
-import { Apireturn } from './apireturn';
+import { ApiReturn } from './ApiReturn';
 
 
 export class User{
@@ -18,22 +18,22 @@ export class User{
     _basetheme:string;
 
     /** Connexion **/
-    _conn: connexion = new connexion();
+    _conn: Connexion = new Connexion();
     
     /** Return of login **/
     _token: string;
     _tokentype: string;
     _expired: number = 3600;
-    _rightRead:Apireturn;
-    _rightWrite:Apireturn;
+    _rightRead:ApiReturn;
+    _rightWrite:ApiReturn;
 
     /** List **/
-    _themeAcc:Apireturn[] = [];
+    _themeAcc:ApiReturn[] = [];
     _envAcc: Environnement[] = [];
-    _equipe:Apireturn;
+    _equipe:ApiReturn;
     _idUt:idWu;
     _classeslist:string[];
-    _workinType:Apireturn[] = [];
+    _workinType:ApiReturn[] = [];
 
     /** other **/
     _geom:string;
@@ -75,18 +75,20 @@ export class User{
         //To Change
              //create a json and save the file in the download folder 
         let json = '';
+        let data: any;
         let header:any = this.getInformationToHeader();
-        let data:any = this._conn.connexionAPILogin(this.constructUrl(urlLoginGet),header);
+        data = this._conn.connexionAPILogin(this.constructUrl(urlLoginGet),header);
+        //console.log(data);
         //Getting the list of environnement and their URL
         this.setListEnv(this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlEnvList), 'Get'));
 
          //alert(data.access_token);
-         if (!data.code){
+        if (!data.code){
             this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe,config);
         }else{
             alert(data.code)
         }
-         return data;
+        return data;
              
     };
 
@@ -155,14 +157,14 @@ export class User{
         this._token = token;
         this._tokentype = token_type;
         this._expired = expired;
-        this._rightRead = new Apireturn(scope[0]);
-        this._rightWrite = new Apireturn(scope[1]);
-        this._equipe = new Apireturn(equipe);
+        this._rightRead = new ApiReturn(scope[0]);
+        this._rightWrite = new ApiReturn(scope[1]);
+        this._equipe = new ApiReturn(equipe);
         this._basetheme = config.base_theme;
         //alert(this._rightRead + " " + this._rightWrite);
         let ordertheme:any =this.orderThemeList(theme,config);
         for (let i in ordertheme){
-            this._themeAcc.push(new Apireturn(ordertheme[i]));
+            this._themeAcc.push(new ApiReturn(ordertheme[i]));
             this.getinfoForCode(ordertheme[i],i)
         }
         this.callAPIWorkingUnit(this._basetheme);
@@ -216,7 +218,7 @@ export class User{
         let ttoutput:any =this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlWorkingType + theme), 'Get');
         this._workinType = [];
         for(let j in ttoutput){
-            this._workinType.push(new Apireturn(ttoutput[j].id));
+            this._workinType.push(new ApiReturn(ttoutput[j].id));
             this._workinType[j].setRemaining(ttoutput[j].id_list_code, ttoutput[j].nom,ttoutput[j].desc_en, ttoutput[j].desc_fr);
         }
     }
@@ -292,7 +294,7 @@ export class User{
         
         let list=[];
         for(let j in this._workinType){
-            list.push( { name: this._workinType[j]._nom, value: this._workinType[j]._id});
+            list.push( { name: this._workinType[j].getnom(), value: this._workinType[j].getId()});
         }
         return list;
     }
@@ -460,10 +462,10 @@ export class User{
     }
 
     /*Conn */
-    getconn(): connexion {
+    getconn(): Connexion {
         return this._conn;
     }
-    setconn(value: connexion) {
+    setconn(value: Connexion) {
         this._conn = value;
     }
 
@@ -493,36 +495,36 @@ export class User{
 
     /* RightRead*/
     getrightRead(): string {
-        return this._rightRead._nom;
+        return this._rightRead.getnom();
     }
     setrightRead(value: string) {
-        this._rightRead._nom = value;
+        this._rightRead.setnom(value);
     }
 
     /*RightWrite */
     getrightWrite(): string {
-        return this._rightWrite._nom;
+        return this._rightWrite.getnom();
     }
     setrightWrite(value: string) {
-        this._rightWrite._nom = value;
+        this._rightWrite.setnom(value);
     }
     //List de theme
-    getthemeAcc(): Apireturn[] {
+    getthemeAcc(): ApiReturn[] {
         return this._themeAcc;
     }
 
     getAllThemeNAme():string{
         let output:string;
-        output = this.getthemeAcc()[0]._nom;
+        output = this.getthemeAcc()[0].getnom();
         for(let i in this.getthemeAcc()){
             if( i != '0')
-            output += '<div>' +this.getthemeAcc()[i]._nom + '</div>'
+            output += '<div>' +this.getthemeAcc()[i].getnom() + '</div>'
         }
         return output;
     }
 
     setthemeAcc(value: string) {
-        this._themeAcc[0]._nom = value;
+        this._themeAcc[0].setnom(value);
     }
 
     //liste d' environnement

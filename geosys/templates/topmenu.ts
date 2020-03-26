@@ -2,10 +2,10 @@
 
 export const topmenu:string= `
 <div ng-controller="topmenuCtrl as ctrl1"> 
-    <div class="topmenu" id="topmenu">
-        <div class="envDiv">
+    <div class="Geosys-topmenu" id="topmenu">
+        <div class="Geosys-envDiv">
             <md-select 
-            class="envSelect"
+            class="Geosys-envSelect"
             ng-change="ctrl1.setEnv()" 
             ng-model="ctrl1.selectedItemENT" 
             id="env" 
@@ -15,10 +15,10 @@ export const topmenu:string= `
                 </md-option>
             </md-select>
         </div>
-        <div class="infoDiv" ng-click="ctrl1.openInfoUser()">
+        <div class="Geosys-infoDiv" ng-click="ctrl1.openInfoUser()">
             <span>info user</span>
         </div>
-        <div class="helpDiv" ng-click="ctrl1.openHelpUser()">
+        <div class="Geosys-helpDiv" ng-click="ctrl1.openHelpUser()">
             <span>Help</span>
         </div>
     </div> 

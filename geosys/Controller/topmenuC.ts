@@ -62,7 +62,7 @@ export class TopMenuController{
                 let output = infoUser.replace('(username)',log.getusername() + ' ' + log.getpassword());
                 output = output.replace('(theme)',log.getAllThemeNAme());
                 output = output.replace('(right)',log.getrightRead() + ' ' + log.getrightWrite());
-                output = output.replace('(equipe)',log._equipe._id);
+                output = output.replace('(equipe)',log._equipe.getId());
                 output = output.replace('(envir)', log._environnementSel + '  </br>URL : ' + log._urlEnvselected);
                 let paneluser:TopMenuController =  new TopMenuController()
                 paneluser.controlUserInfo(log,mapApi);

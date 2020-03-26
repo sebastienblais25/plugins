@@ -1,7 +1,7 @@
 import { connexion } from './apiConnect';
 import { idWu } from './manager/idWU';
 import { Environnement } from './manager/environnement';
-import { Apireturn } from './apireturn';
+import { ApiReturn } from './ApiReturn';
 export declare class User {
     /** Send to APi **/
     _username: string;
@@ -16,15 +16,15 @@ export declare class User {
     _token: string;
     _tokentype: string;
     _expired: number;
-    _rightRead: Apireturn;
-    _rightWrite: Apireturn;
+    _rightRead: ApiReturn;
+    _rightWrite: ApiReturn;
     /** List **/
-    _themeAcc: Apireturn[];
+    _themeAcc: ApiReturn[];
     _envAcc: Environnement[];
-    _equipe: Apireturn;
+    _equipe: ApiReturn;
     _idUt: idWu;
     _classeslist: string[];
-    _workinType: Apireturn[];
+    _workinType: ApiReturn[];
     /** other **/
     _geom: string;
     _advanced: boolean;
@@ -189,7 +189,7 @@ export declare class User {
     setrightRead(value: string): void;
     getrightWrite(): string;
     setrightWrite(value: string): void;
-    getthemeAcc(): Apireturn[];
+    getthemeAcc(): ApiReturn[];
     getAllThemeNAme(): string;
     setthemeAcc(value: string): void;
     getenvAcc(): Environnement[];

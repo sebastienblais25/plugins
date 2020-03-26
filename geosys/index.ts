@@ -110,9 +110,8 @@ export default class Geosys{
                 //Envoie le formulaire a l API
                 let loginfo:any = log.submitForm(config);
                 //si le retour ne contient pas de code d'erreur continue
-                if (loginfo.status != 401){
+                if (loginfo.status == undefined){
                     //alert('Connected'); 
-                    
                     let menu:menuManager =  new menuManager(log,panel,mapApi,config);
                 //si le retour de l'API contient un code d'erreur et le message
                 }else{
