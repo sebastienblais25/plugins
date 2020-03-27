@@ -1,9 +1,7 @@
 import { User } from "../user";
 import { Extraire } from "../operation/extraire";
 
-
-
-export class ExtractController{
+export class ExtractController {
 
     constructor(){};
     /**
@@ -12,10 +10,9 @@ export class ExtractController{
      * @param {*} mapApi the api of of the viewer to set the controller
      * @memberof manageController
      */
-    extrairecontrols(log:User, mapApi:any):void{
+    extrairecontrols(log: User, mapApi: any): void {
         /************ À placer en fonction ou class ***********/
-        // TODO: creer la directive avant de compiler le code
-        mapApi.agControllerRegister('SubmitCtrl', function($scope, $rootScope){ 
+        mapApi.agControllerRegister('SubmitCtrl', function($scope) { 
             //error message if problem with the slect working unit ID
             $scope.ErrorEx = false;
             /************** interactive List ***************/
@@ -25,24 +22,23 @@ export class ExtractController{
             this.selectedItemB = '';
             //set up the theme list
             this.itemsA = [];
-            for (let i in log._themeAcc){
-                this.itemsA.push({name : log._themeAcc[i].getnom() , value: log._themeAcc[i].getId()});
+            for (let i in log.getthemeAcc()) {
+                this.itemsA.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
             }
             this.itemsB = [];
-            
             //création de la liste pour les unité de travail
             this.setList = () => {
                 this.selectedItemB = '';
                 // populate list of working unit id
                 this.itemsB.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemA)
-                for (let i in list){
+                for (let i in list) {
                     this.itemsB.push(list[i])
                 }
             }
             /************** Advanced Setting ***************/
-            this.ShowHideAdvanced = function(){
-                if(log._environnementSel!= ''){
+            this.ShowHideAdvanced = () => {
+                if (log.getenvironnementSel() !== '') {
                     $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
                 }  
             };
@@ -50,29 +46,29 @@ export class ExtractController{
             this.selectedItemENT = '';
             this.itemsENT = [];
             //changement
-            for (let i in log._envAcc){
-                this.itemsENT.push({name : log._envAcc[i]._env , value: log._envAcc[i]._env});
+            for (let i in log.getenvAcc()) {
+                this.itemsENT.push({name : log.getenvAcc()[i]._env , value: log.getenvAcc()[i]._env});
             }
             /**************** From Submission ***************/
-             this.submitForm = function() { 
+             this.submitForm = () => { 
                  console.log(this.selectedItemB)
                 //get all the information of the form into the class
-                if(this.selectedItemB == ''){
+                if (this.selectedItemB == '') {
                     $scope.ErrorEx = true;
-                }else{
+                } else {
                     let ext = new Extraire(
                         this.selectedItemA
                         ,this.selectedItemB);
                     ext.setOptionnalEnvironnement(this.selectedItemENT);
                     let ApiReturn:any = ext.submitForm(log);
                     //if the conection to the API is a success
-                    if (ApiReturn != 'success'){
+                    if (ApiReturn != 'success') {
                         alert(ApiReturn.statusText)
-                        log._closeable =false;
+                        log.setcloseable(false)
                         $scope.SelectedMenuE = {
                             "background-color" : "red", 
                         }
-                    }else{
+                    } else {
                         //$scope.IsVisibleEP = false;
                         $scope.SelectedMenuE = {
                             "background-color" : "green", 
@@ -89,10 +85,9 @@ export class ExtractController{
      * @param {*} mapApi the api of of the viewer to set the controller
      * @memberof manageController
      */
-    extraireSRcontrols(log:User, mapApi:any):void{
+    extraireSRcontrols(log: User, mapApi: any): void {
         /************ Bouton Extraire ***********/
-        // TODO: creer la directive avant de compiler le code
-        mapApi.agControllerRegister('SubmitExCtrl', function($scope){
+        mapApi.agControllerRegister('SubmitExCtrl', function($scope) {
             // to acces elemnent in the reader file
             const that = this;
             //error message for the list of the classes
@@ -106,8 +101,8 @@ export class ExtractController{
             this.geomSR = ''
             //set up the list of theme
             this.itemsA = [];
-            for (let i in log._themeAcc){
-                this.itemsA.push({name : log._themeAcc[i].getnom() , value: log._themeAcc[i].getId()});
+            for (let i in log.getthemeAcc()) {
+                this.itemsA.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
             }
             //set of a list of classes
             this.classes = [];
@@ -121,12 +116,12 @@ export class ExtractController{
             }
             //select all the classes in the list
             this.toggleAll = () => {
-                if( this.listeclasse == true){
-                    for(let i in this.classes){
+                if (this.listeclasse == true) {
+                    for (let i in this.classes) {
                         this.classes[i].wanted = false;
                     }  
-                }else{
-                    for(let i in this.classes){
+                } else {
+                    for (let i in this.classes) {
                         this.classes[i].wanted = true;
                     }
                 }
@@ -140,7 +135,7 @@ export class ExtractController{
                 this.inputchecked = false;
                 this.filechecked = false;
             }
-            this.importchck = () =>{
+            this.importchck = () => {
                 this.geomp = '';
                 this.drawingchecked = false;
                 this.inputchecked = false;
@@ -148,10 +143,10 @@ export class ExtractController{
             /************** subscribe to the drawing event ***************/
             (<any>window).drawObs.drawPolygon.subscribe(value => {
                 //create a geojson with the information obtain if the checkbox for drawinf is check
-                if(this.drawingchecked == true){
+                if (this.drawingchecked == true) {
                     log.createGeoJson('ESPG:'+ value.spatialReference.wkid,value.rings)
                     //show the geo json in the input 
-                    that.geomSR = log._geom; 
+                    that.geomSR = log.getgeom(); 
                 }
             });
             /************** Shapefile load ***************/
@@ -160,15 +155,15 @@ export class ExtractController{
                 //get the files in the input
                 let files:any = (<HTMLInputElement>document.getElementById('fileshpEX')).files
                 //if there is no file
-                if(files.length == 0){
+                if (files.length == 0) {
                     alert('No files');
-                }else{
+                } else {
                     let file:any = files[0];
                     //A file reader
                     const reader = new FileReader();
                     //fonction for the file reader
                     reader.onload = (e) => {
-                        if (reader.readyState != 2 || reader.error){
+                        if (reader.readyState != 2 || reader.error) {
                             return;
                         } else {
                             //package to read a shapefile and get a geojson
@@ -182,7 +177,7 @@ export class ExtractController{
                                 //Create a geojson with the onfromation of the shapefile
                                 log.createGeoJson('EPSG:4326',geomGEOJSON);
                                 //set the geojson in the input
-                                that.geomSR = log._geom;
+                                that.geomSR = log.getgeom();
                                 //create the polygon in the viewer with a zoom on it
                                 log.createPolygons(mapApi.id,geomDR);
                             });
@@ -194,8 +189,8 @@ export class ExtractController{
                 }
             }
             /************** Advanced Setting ***************/
-            this.ShowHideAdvanced = function(){
-                if(log._environnementSel!= ''){
+            this.ShowHideAdvanced = () => {
+                if(log.getenvironnementSel() !== ''){
                     $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
                 }  
             };
@@ -203,15 +198,14 @@ export class ExtractController{
             this.selectedItemENT = '';
             this.itemsENT = [];
             //changement
-            for (let i in log._envAcc){
-                this.itemsENT.push({name : log._envAcc[i]._env , value: log._envAcc[i]._env});
+            for (let i in log.getenvAcc()){
+                this.itemsENT.push({name : log.getenvAcc()[i]._env , value: log.getenvAcc()[i]._env});
             }
             /**************** From Submission ***************/
             //Envoie le formulaire a l'Api
-            
-            this.submitSRForm = function() { 
+            this.submitSRForm = () => { 
                 //get all the information of the form into the class
-                this.geomSR = log._geom;
+                this.geomSR = log.getgeom();
                 let listofclass = []
                 for(let i in this.classes){
                     if(this.classes[i].wanted ==true){
@@ -227,7 +221,7 @@ export class ExtractController{
                 }
                 if( listofclass.length < 1){
                     $scope.errclassEX = true;
-                    log._closeable = false;
+                    log.setcloseable(false);
                 }else{
                     //console.log(this.geomSR)
                     let extsr = new Extraire(
@@ -241,7 +235,7 @@ export class ExtractController{
                     let ApiReturn:any = extsr.submitForm(log);
                     if (ApiReturn != 'success'){
                         alert(ApiReturn.statusText)
-                        log._closeable = false;
+                        log.setcloseable(false);
                         $scope.SelectedMenuEU = {
                             "background-color" : "red", 
                         }

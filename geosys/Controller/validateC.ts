@@ -3,26 +3,25 @@ import { Valider } from '../operation/valider';
 
 
 
-export class ValidateController{
+export class ValidateController {
 
     constructor(){};
-
       /**
-     *the controller for all the function in the delivery templates
+     * The controller for all the function in the delivery templates
      * @param {User} log All the information of the user
-     * @param {*} mapApi the api of of the viewer to set the controller
+     * @param {*} mapApi The api of of the viewer to set the controller
      * @memberof manageController
      */
-    valiControl(log:User, mapApi:any):void{
+    valiControl(log: User, mapApi: any): void {
         //mapApi.agDirectiveRegister()
-        mapApi.agControllerRegister('submitFromV', function($scope){
+        mapApi.agControllerRegister('submitFromV', function($scope) {
             $scope.errJSON = false;
             /************** interactive List ***************/
             this.selectedItemE = '';
             this.selectedItemF = '';
             this.itemsE = [];
-            for (let i in log._themeAcc){
-                this.itemsE.push({name : log._themeAcc[i].getnom() , value: log._themeAcc[i].getId()});
+            for (let i in log.getthemeAcc()) {
+                this.itemsE.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
             }
             this.itemsF = [];
             this.setList = () => {
@@ -34,13 +33,12 @@ export class ValidateController{
                     this.itemsF.push(list[i])
                 }
             }
-    
             //Envoie le fromulaire a l'API
-            this.submitFormV = function(element) { 
-                if((<HTMLInputElement>document.getElementById('fileJSON')).files.length == 0){
+            this.submitFormV = () => { 
+                if ((<HTMLInputElement>document.getElementById('fileJSON')).files.length == 0) {
                     $scope.errJSON = true;
-                    log._closeable =false;
-                }else{
+                    log.setcloseable(false);
+                } else {
                     //get all the information of the form into the class
                     let formdata = new FormData();
                     formdata.append('theme', this.selectedItemE);
@@ -49,14 +47,14 @@ export class ValidateController{
                     formdata.append('logfile','blahblahblah')
                     let vali:Valider = new Valider();
                     let api:any = vali.submitForm(formdata,log);
-                    if (api != undefined){
+                    if (api != undefined) {
                         alert(api);
                         console.log(api);
-                        log._closeable =false;
+                        log.setcloseable(false);
                         $scope.SelectedMenuV = {
                             "background-color" : "red", 
                         }
-                    }else{
+                    } else {
                         console.log(log.gettoken());
                         $scope.SelectedMenuV = {
                             "background-color" : "green", 

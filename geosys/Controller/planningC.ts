@@ -15,7 +15,6 @@ export class PlanningController {
     planControl(log: User, mapApi: any, config: any): void {
         mapApi.agControllerRegister('submitFromP', function ($scope) {
             const that = this;
-            
             $scope.erridwuvs = false;
             $scope.errclass = false;
             $scope.errwork = false;
@@ -29,8 +28,8 @@ export class PlanningController {
             this.itemsC = [];
             this.idut = '';
             //theme list
-            for (let i in log._themeAcc) {
-                this.itemsC.push({ name: log._themeAcc[i].getnom(), value: log._themeAcc[i].getId()});
+            for (let i in log.getthemeAcc()) {
+                this.itemsC.push({ name: log.getthemeAcc()[i].getnom(), value: log.getthemeAcc()[i].getId()});
             }
             //List of working type
             this.itemsD = [];
@@ -85,7 +84,6 @@ export class PlanningController {
             }
 
             this.inputchck = () => {
-                //this.geomp = '';
                 this.drawingchecked = false;
                 this.filechecked = false;
             }
@@ -100,7 +98,6 @@ export class PlanningController {
                 this.inputchecked = false;
             }
             //subscribe for the drawing
-
             (<any>window).drawObs.drawPolygon.subscribe(value => {
                 //create a geojson with the infromation obtain
                 if (this.drawingchecked == true) {
@@ -110,17 +107,13 @@ export class PlanningController {
                     this.geomEPSG = value.spatialReference.wkid;
                 }
             });
-
             /************** Shapefile Load ***************/
             this.loadshp = () => {
-
                 let files: any = (<HTMLInputElement>document.getElementById('fileshp')).files
                 if (files.length == 0) {
                     alert('No file');
                 } else {
-
                     let file: any = files[0];
-
                     const reader = new FileReader();
                     reader.onload = function (e) {
                         if (reader.readyState != 2 || reader.error) {
@@ -135,24 +128,20 @@ export class PlanningController {
                                 let geomDR = dta.features[0].geometry.coordinates[0];
                                 //set a variable with the coordinates for the geojson
                                 let geomGEOJSON = dta.features[0].geometry.coordinates;
-                                //Create a geojson with the onfromation of the shapefile
-                                //log.createGeoJson('EPSG:4326', geomGEOJSON);
                                 //set the geojson in the input
                                 that.geomp = JSON.stringify(geomGEOJSON);
                                 that.geomEPSG = '4326'
-
                                 //create the polygon in the viewer with a zoom on it
                                 log.createPolygons(mapApi.id, geomDR);
                             });
                         }
-
                     }
                     reader.readAsArrayBuffer(file);
                 }
             }
             /********** Form submission ************/
             //Envoie le fromulaire a l'API
-            this.submitFormP = function () {
+            this.submitFormP =  () => {
                 //get all the information of the form into the class
                 let listofclass = []
                 for (let i in this.classes) {
@@ -162,24 +151,24 @@ export class PlanningController {
                 }
                 if ((<HTMLInputElement>document.getElementById("idUt")).value ==  '') {
                     $scope.erridwuvs = true;
-                    log._closeable = false;
-                }else if (this.selectedItemD == '') {
+                    log.setcloseable(false);
+                } else if (this.selectedItemD == '') {
                     $scope.errwork = true;
-                    log._closeable = false;
-                }else if (listofclass.length < 1) {
+                    log.setcloseable(false);
+                } else if (listofclass.length < 1) {
                     $scope.errclass = true;
-                    log._closeable = false;
-                }else {
+                    log.setcloseable(false);
+                } else {
                     //set the information in the the json 
                     log.createGeoJson('EPSG:' + this.geomEPSG, JSON.parse(this.geomp))
-                    alert(log._geom)
+                    alert(log.getgeom())
                     let plan: planifier = new planifier(
                         this.selectedItemC,
                         (<HTMLInputElement>document.getElementById("idUt")).value,
                         this.selectedItemD,
                         listofclass,
                         this.dfp,
-                        log._geom,
+                        log.getgeom(),
                         this.wherep);
                     //submit the form to the API
                     let ApiReturn: any = plan.submitForm(log);
@@ -188,13 +177,13 @@ export class PlanningController {
                         $scope.SelectedMenuP = {
                             "background-color": "red",
                         }
-                        log._closeable = false;
+                        log.setcloseable(false);
                     } else {
                         //$rootScope.IsVisibleP = false;
                         $scope.SelectedMenuP = {
                             "background-color": "green",
                         }
-                        log._closeable = true;
+                        log.setcloseable(false);
                     }
                 }
             };

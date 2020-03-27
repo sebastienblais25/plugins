@@ -55,7 +55,7 @@ export class Connexion {
         const promises = [];
         promises.push(
             new Promise(resolve =>{
-                $.ajax({
+                $.ajax( {
                     url: urlgoto,
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -105,7 +105,7 @@ export class Connexion {
         const promises = [];
         promises.push(
             new Promise(resolve => {
-                $.ajax({
+                $.ajax( {
                     url: urlgoto,
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -149,7 +149,7 @@ export class Connexion {
         const promises = [];
         promises.push(
             new Promise(resolve => {
-                $.ajax({
+                $.ajax( {
                     url: urltogo,
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -190,7 +190,7 @@ export class Connexion {
         const promises = [];
         promises.push(
             new Promise(resolve => {
-                $.ajax({
+                $.ajax( {
                     url: urltogo,
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -236,7 +236,7 @@ export class Connexion {
         const promises = [];
         promises.push(
             new Promise(resolve => {
-                $.ajax({
+                $.ajax( {
                     url: urltogo,
                     headers: {
                         'Authorization': `Bearer ${token}`,

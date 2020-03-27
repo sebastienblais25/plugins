@@ -2,7 +2,7 @@ import { User } from "../user";
 import { Cleaning } from "../operation/nettoyer";
 
 
-export class CleaningController{
+export class CleaningController {
 
     constructor(){};
 
@@ -12,10 +12,10 @@ export class CleaningController{
      * @param {*} mapApi need the mapApi for setting the controller.
      * @memberof manageController
      */
-    nettoyagecontrols(log:User, mapApi:any):void{
+    nettoyagecontrols(log: User, mapApi: any): void {
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
-        mapApi.agControllerRegister('SubmitNetCtrl', function($scope){
+        mapApi.agControllerRegister('SubmitNetCtrl', function($scope) {
             
             /************** interactive List ***************/
             //theme
@@ -25,8 +25,8 @@ export class CleaningController{
 
             //set up the theme list
             this.itemsA = [];
-            for (let i in log._themeAcc){
-                this.itemsA.push({name : log._themeAcc[i].getnom() , value: log._themeAcc[i].getId()});
+            for (let i in log.getthemeAcc()) {
+                this.itemsA.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
             }
             this.itemsB = [];
             //création de la liste pour les unité de travail
@@ -35,26 +35,24 @@ export class CleaningController{
                 // populate list of working unit id
                 this.itemsB.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemA)
-                for (let i in list){
+                for (let i in list) {
                     this.itemsB.push(list[i])
                 }
             }
             /**************** From Submission ***************/
-            this.submitNett = function() { 
+            this.submitNett = () => { 
                 //Double confirmation
                 let deleted = confirm('Confirmez le nettoyage ? / Confirm the cleaning ? ');
-                if(deleted){
-                    let nettoyage:Cleaning = new Cleaning(this.selectedItemA ,this.selectedItemB)
+                if (deleted) {
+                    let nettoyage: Cleaning = new Cleaning(this.selectedItemA ,this.selectedItemB)
                     let renet= nettoyage.submitForm(log);
-                    if (renet != 'success'){
+                    if (renet != 'success') {
 
                         alert(renet.statusText)
                         $scope.SelectedMenuC = {
                         "background-color" : "red", 
                         }
-                    }else{
-                        //$scope.IsVisibleCL = false;
-                        //console.log(log._token);
+                    } else {
                         alert("Deleted")
                         $scope.SelectedMenuC = {
                             "background-color" : "green", 

@@ -2,7 +2,7 @@ import { User } from "../user";
 import { Creer } from "../operation/creer";
 
 
-export class CreateController{
+export class CreateController {
 
     constructor(){};
 
@@ -12,9 +12,8 @@ export class CreateController{
      * @param {*} mapApi need the mapApi for setting the controller.
      * @memberof manageController
      */
-    creerControl(log:User, mapApi:any):void{
-        mapApi.agControllerRegister('submitFromC', function($scope){
-            
+    creerControl(log: User, mapApi: any): void {
+        mapApi.agControllerRegister('submitFromC', function($scope) {
             /************** interactive List ***************/
             //operation type on the DB
             this.typeOper = '';
@@ -24,8 +23,8 @@ export class CreateController{
             this.selectedItemF = '';
             //set up theme list
             this.itemsE = [];
-            for (let i in log._themeAcc){
-                this.itemsE.push({name : log._themeAcc[i].getnom() , value: log._themeAcc[i].getId()});
+            for (let i in log.getthemeAcc()) {
+                this.itemsE.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
             }
             //List working unit ID
             this.itemsF = [];
@@ -58,42 +57,42 @@ export class CreateController{
                 // populate list b with new items
                 this.itemsF.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemE)
-                for (let i in list){
+                for (let i in list) {
                     this.itemsF.push(list[i])
                 }
             }
             //for claases list select all the info
             this.toggleAllS = () => {
                 if( this.listeSources == true){
-                    for(let i in this.sources){
+                    for (let i in this.sources) {
                         this.sources[i].wanted = false;
                     }  
                 }else{
-                    for(let i in this.sources){
+                    for (let i in this.sources) {
                         this.sources[i].wanted = true;
                     }
                 }
             }
             //for classes list select all the info
             this.toggleAllP = () => {
-                if( this.listePrecision == true){
-                    for(let i in this.precisions){
+                if ( this.listePrecision == true) {
+                    for (let i in this.precisions) {
                         this.precisions[i].wanted = false;
                     }  
-                }else{
-                    for(let i in this.precisions){
+                } else {
+                    for (let i in this.precisions) {
                         this.precisions[i].wanted = true;
                     }
                 }
             }
             //for claases list select all the info
             this.toggleAllC = () => {
-                if( this.listeContrainte == true){
-                    for(let i in this.contraintes){
+                if (this.listeContrainte == true) {
+                    for (let i in this.contraintes) {
                         this.contraintes[i].wanted = false;
                     }  
-                }else{
-                    for(let i in this.contraintes){
+                } else {
+                    for (let i in this.contraintes) {
                         this.contraintes[i].wanted = true;
                     }
                 }

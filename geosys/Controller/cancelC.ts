@@ -2,7 +2,7 @@ import { User } from "../user";
 //import { Cancel } from "../operation/cancel";
 
 
-export class CancelController{
+export class CancelController {
 
     constructor(){};
 
@@ -12,11 +12,10 @@ export class CancelController{
      * @param {*} mapApi need the mapApi for setting the controller.
      * @memberof manageController
      */
-    cancelcontrols(log:User, mapApi:any):void{
+    cancelcontrols(log: User, mapApi: any): void {
         /************ À placer en fonction ou class ***********/
         // TODO: creer la directive avant de compiler le code
-        mapApi.agControllerRegister('cancelStep', function($scope){ 
-            
+        mapApi.agControllerRegister('cancelStep', function($scope) { 
             /************** interactive List ***************/
             //theme
             this.selectedItemA = '';
@@ -26,8 +25,8 @@ export class CancelController{
             this.stepCan = '';
             //Set up for the list of theme
             this.itemsA = [];
-            for (let i in log._themeAcc){
-                this.itemsA.push({name : log._themeAcc[i].getId() , value: log._themeAcc[i].getId()});
+            for (let i in log.getthemeAcc()) {
+                this.itemsA.push({name : log.getthemeAcc()[i].getId() , value: log.getthemeAcc()[i].getId()});
             }
             this.itemsB = [];
             //création de la liste pour les unité de travail
@@ -35,12 +34,12 @@ export class CancelController{
                 // populate list of working unit id
                 this.itemsB.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemA)
-                for (let i in list){
+                for (let i in list) {
                     this.itemsB.push(list[i])
                 }
             }
             /**************** From Submission ***************/
-             this.submitCan = function() { 
+             this.submitCan = () => { 
                 //get all the information of the form into the class
                 /*let ext = new Extraire(
                      this.selectedItemA

@@ -9,7 +9,7 @@ export declare class User {
     /** Environnement **/
     _environnementSel: string;
     _urlEnvselected: string;
-    _basetheme: string;
+    _baseTheme: string;
     /** Connexion **/
     _conn: connexion;
     /** Return of login **/

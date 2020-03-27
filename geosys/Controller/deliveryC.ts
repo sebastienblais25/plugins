@@ -12,9 +12,9 @@ export class DeliveryController{
      * @param {*} mapApi the api of of the viewer to set the controller
      * @memberof manageController
      */
-    deliControl(log:User, mapApi:any):void{
+    deliControl(log: User, mapApi: any): void {
         //mapApi.agDirectiveRegister()
-        mapApi.agControllerRegister('submitFromD', function($scope){
+        mapApi.agControllerRegister('submitFromD', function($scope) {
             //error message for the metadata file
             $scope.errMD = false;
             //error message for the fgbd
@@ -28,8 +28,8 @@ export class DeliveryController{
             this.selectedItemF = '';
             //set up theme list
             this.itemsE = [];
-            for (let i in log._themeAcc){
-                this.itemsE.push({name : log._themeAcc[i].getnom() , value: log._themeAcc[i].getId()});
+            for (let i in log.getthemeAcc()) {
+                this.itemsE.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
             }
             this.itemsF = [];
             this.setList = () => {
@@ -41,11 +41,9 @@ export class DeliveryController{
                     this.itemsF.push(list[i])
                 }
             }
-            
-
             /************** Advanced Setting ***************/
-            this.ShowHideAdvanced = function(){
-                if(log._environnementSel!= ''){
+            this.ShowHideAdvanced = function() {
+                if (log.getenvironnementSel() !== '') {
                     $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
                 }  
             };
@@ -53,20 +51,19 @@ export class DeliveryController{
             this.selectedItemENT = '';
             this.itemsENT = [];
             //changement
-            for (let i in log._envAcc){
-                this.itemsENT.push({name : log._envAcc[i]._env , value: log._envAcc[i]._env});
+            for (let i in log.getenvAcc()) {
+                this.itemsENT.push({name : log.getenvAcc()[i]._env , value: log.getenvAcc()[i]._env});
             }
-
             //Envoie le formulaire a l'API
             this.submitFormD = function(element) { 
                 //get all the information of the form into the class
-                if((<HTMLInputElement>document.getElementById('fileMD')).files.length == 0){
+                if ((<HTMLInputElement>document.getElementById('fileMD')).files.length == 0) {
                     $scope.errMD = true;
-                    log._closeable = false;
-                }else if((<HTMLInputElement>document.getElementById('filefgdb')).files.length == 0){
+                    log.setcloseable(false);
+                } else if ((<HTMLInputElement>document.getElementById('filefgdb')).files.length == 0) {
                     $scope.errFGDB = true;
-                    log._closeable = false;
-                }else{
+                    log.setcloseable(false);
+                } else {
                     let formdata = new FormData();
                     formdata.append('fichier_data',(<HTMLInputElement>document.getElementById('fileMD')).files[0]);
                     formdata.append('fichier_meta',(<HTMLInputElement>document.getElementById('filefgdb')).files[0]);
@@ -74,15 +71,14 @@ export class DeliveryController{
                     livre.setOptionnalEnvironnement(this.selectedItemENT);
                     //submit form
                     let ApiReturn:any = livre.submitForm(formdata,log);     
-                    if (ApiReturn != undefined){
+                    if (ApiReturn != undefined) {
                         alert(ApiReturn);
                         $scope.SelectedMenuD = {
-                            "background-color" : "red", 
+                            'background-color': 'red', 
                         }
-                    }else{
-                        console.log(log.gettoken());
+                    } else {
                         $scope.SelectedMenuD = {
-                            "background-color" : "green", 
+                            'background-color': 'green', 
                         }
                     }
                 }
