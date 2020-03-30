@@ -22,8 +22,8 @@ export class ExtractController {
             this.selectedItemB = '';
             //set up the theme list
             this.itemsA = [];
-            for (let i in log.getthemeAcc()) {
-                this.itemsA.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
+            for (let i in log.getThemeAcc()) {
+                this.itemsA.push({name : log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()});
             }
             this.itemsB = [];
             //création de la liste pour les unité de travail
@@ -38,7 +38,7 @@ export class ExtractController {
             }
             /************** Advanced Setting ***************/
             this.ShowHideAdvanced = () => {
-                if (log.getenvironnementSel() !== '') {
+                if (log.getEnvironnementSel() !== '') {
                     $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
                 }  
             };
@@ -46,8 +46,8 @@ export class ExtractController {
             this.selectedItemENT = '';
             this.itemsENT = [];
             //changement
-            for (let i in log.getenvAcc()) {
-                this.itemsENT.push({name : log.getenvAcc()[i]._env , value: log.getenvAcc()[i]._env});
+            for (let i in log.getEnvAcc()) {
+                this.itemsENT.push({name : log.getEnvAcc()[i]._env , value: log.getEnvAcc()[i]._env});
             }
             /**************** From Submission ***************/
              this.submitForm = () => { 
@@ -64,7 +64,7 @@ export class ExtractController {
                     //if the conection to the API is a success
                     if (ApiReturn != 'success') {
                         alert(ApiReturn.statusText)
-                        log.setcloseable(false)
+                        log.setCloseable(false)
                         $scope.SelectedMenuE = {
                             "background-color" : "red", 
                         }
@@ -101,8 +101,8 @@ export class ExtractController {
             this.geomSR = ''
             //set up the list of theme
             this.itemsA = [];
-            for (let i in log.getthemeAcc()) {
-                this.itemsA.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
+            for (let i in log.getThemeAcc()) {
+                this.itemsA.push({name : log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()});
             }
             //set of a list of classes
             this.classes = [];
@@ -146,7 +146,7 @@ export class ExtractController {
                 if (this.drawingchecked == true) {
                     log.createGeoJson('ESPG:'+ value.spatialReference.wkid,value.rings)
                     //show the geo json in the input 
-                    that.geomSR = log.getgeom(); 
+                    that.geomSR = log.getGeom(); 
                 }
             });
             /************** Shapefile load ***************/
@@ -177,7 +177,7 @@ export class ExtractController {
                                 //Create a geojson with the onfromation of the shapefile
                                 log.createGeoJson('EPSG:4326',geomGEOJSON);
                                 //set the geojson in the input
-                                that.geomSR = log.getgeom();
+                                that.geomSR = log.getGeom();
                                 //create the polygon in the viewer with a zoom on it
                                 log.createPolygons(mapApi.id,geomDR);
                             });
@@ -190,7 +190,7 @@ export class ExtractController {
             }
             /************** Advanced Setting ***************/
             this.ShowHideAdvanced = () => {
-                if(log.getenvironnementSel() !== ''){
+                if(log.getEnvironnementSel() !== ''){
                     $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
                 }  
             };
@@ -198,14 +198,14 @@ export class ExtractController {
             this.selectedItemENT = '';
             this.itemsENT = [];
             //changement
-            for (let i in log.getenvAcc()){
-                this.itemsENT.push({name : log.getenvAcc()[i]._env , value: log.getenvAcc()[i]._env});
+            for (let i in log.getEnvAcc()){
+                this.itemsENT.push({name : log.getEnvAcc()[i]._env , value: log.getEnvAcc()[i]._env});
             }
             /**************** From Submission ***************/
             //Envoie le formulaire a l'Api
             this.submitSRForm = () => { 
                 //get all the information of the form into the class
-                this.geomSR = log.getgeom();
+                this.geomSR = log.getGeom();
                 let listofclass = []
                 for(let i in this.classes){
                     if(this.classes[i].wanted ==true){
@@ -221,7 +221,7 @@ export class ExtractController {
                 }
                 if( listofclass.length < 1){
                     $scope.errclassEX = true;
-                    log.setcloseable(false);
+                    log.setCloseable(false);
                 }else{
                     //console.log(this.geomSR)
                     let extsr = new Extraire(
@@ -235,7 +235,7 @@ export class ExtractController {
                     let ApiReturn:any = extsr.submitForm(log);
                     if (ApiReturn != 'success'){
                         alert(ApiReturn.statusText)
-                        log.setcloseable(false);
+                        log.setCloseable(false);
                         $scope.SelectedMenuEU = {
                             "background-color" : "red", 
                         }

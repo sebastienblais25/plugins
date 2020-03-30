@@ -173,13 +173,13 @@ export declare class User {
      */
     zoomExtent(mapId: string, coords: [], expand?: number): void;
     /*************** Accessors ***********************/
-    getusername(): string;
-    setusername(value: string): void;
+    getUsername(): string;
+    setUsername(value: string): void;
     getpassword(): string;
     setpassword(value: string): void;
     getconn(): connexion;
     setconn(value: connexion): void;
-    gettoken(): string;
+    getToken(): string;
     settoken(value: string): void;
     gettokentype(): string;
     settokentype(value: string): void;

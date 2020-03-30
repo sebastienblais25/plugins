@@ -1,7 +1,7 @@
 import { urlLoginGet, urlgetidWu, urlEnvList,
      urlClassesList,urlWorkingType, urlGetCode } from './config/url';
 import { Connexion } from './apiConnect';
-import { idWu } from './manager/idWU';
+import { IdWu } from './manager/idWU';
 import { Environnement } from './manager/environnement';
 import { ApiReturn } from './ApiReturn';
 
@@ -26,7 +26,7 @@ export class User{
     private _themeAcc:ApiReturn[] = [];
     private _envAcc: Environnement[] = [];
     private _equipe: ApiReturn;
-    private _idUt:idWu;
+    private _idUt:IdWu;
     private _classeslist:string[];
     private _workinType:ApiReturn[] = [];
     /** other **/
@@ -65,7 +65,7 @@ export class User{
         let data: any;
         let header: any = this.getInformationToHeader();
         data = this._conn.connexionAPILogin(this.constructUrl(urlLoginGet),header);
-        this.setListEnv(this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlEnvList), 'Get'));
+        this.setListEnv(this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlEnvList), 'Get'));
         if (!data.code) {
             this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe,config);
         } else {
@@ -154,10 +154,10 @@ export class User{
      * @param {string} theme The theme related to the working unit
      * @memberof User
      */
-    callAPIWorkingUnit(theme: string) {
+    callAPIWorkingUnit(theme: string): void {
         let json = '';
-        let output: any =this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlgetidWu + theme), 'Get');
-        this._idUt = new idWu(theme,output.value);
+        let output: any =this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlgetidWu + theme), 'Get');
+        this._idUt = new IdWu(theme,output.value);
         //À enlever Mocking Only
         for (let j in this._idUt._wUnit) {
             this._idUt._wUnit[j] = this._idUt._theme + ' - ' + this._idUt._wUnit[j];
@@ -171,7 +171,7 @@ export class User{
     callAPIListeClasse(theme: string) {
         let resstheme: string = theme + ':ress.json'
         let ressjson = this.createJsonRessources(resstheme/*,path*/);
-        let data: any = this._conn.connexionAPI(this.gettoken(), ressjson , this.constructUrl(urlClassesList),'Get');
+        let data: any = this._conn.connexionAPI(this.getToken(), ressjson , this.constructUrl(urlClassesList),'Get');
         this._classeslist = data.value.liste_classe;
     }
     /**
@@ -181,7 +181,7 @@ export class User{
      */
     callAPIWorkingType(theme: string) {
         let json = '';
-        let ttoutput: any = this._conn.connexionAPI(this.gettoken(), json, this.constructUrl(urlWorkingType + theme), 'Get');
+        let ttoutput: any = this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlWorkingType + theme), 'Get');
         this._workinType = [];
         for (let j in ttoutput) {
             this._workinType.push(new ApiReturn(ttoutput[j].id));
@@ -220,7 +220,7 @@ export class User{
     getinfoForCode(theme: string, rank: string) {
         let json: string = '';
         let data: any;
-        data = this._conn.connexionAPI(this.gettoken(),json,this.constructUrl(urlGetCode,theme),'Get');
+        data = this._conn.connexionAPI(this.getToken(),json,this.constructUrl(urlGetCode,theme),'Get');
         this._themeAcc[rank].setRemaining(data.id_liste_code,data.nom,data.desc_en,data.desc_fr);
     }
     /**
@@ -398,125 +398,125 @@ export class User{
 
     /*************** Accessors ***********************/
     // Username
-    getusername(): string {
+    getUsername(): string {
         return this._username;
     }
-    setusername(value: string) {
+    setUsername(value: string) {
         this._username = value;
     }
     // Password
-    getpassword(): string {
+    getPassword(): string {
         return this._password;
     }
-    setpassword(value: string) {
+    setPassword(value: string) {
         this._password = value;
     }
     // Connexion
-    getconn(): Connexion {
+    getConn(): Connexion {
         return this._conn;
     }
-    setconn(value: Connexion) {
+    setConn(value: Connexion) {
         this._conn = value;
     }
     // Token
-    gettoken(): string {
+    getToken(): string {
         return this._token;
     }
-    settoken(value: string) {
+    setToken(value: string) {
         this._token = value;
     }
     // Tokentype 
-    gettokentype(): string {
+    getTokenType(): string {
         return this._tokentype;
     }
-    settokentype(value: string) {
+    setTokenType(value: string) {
         this._tokentype = value;
     }
     // Expired
-    getexpired(): number {
+    getExpired(): number {
         return this._expired;
     }
-    setexpired(value: number) {
+    setExpired(value: number) {
         this._expired = value;
     }
     // RightRead
-    getrightRead(): string {
+    getRightRead(): string {
         return this._rightRead.getnom();
     }
-    setrightRead(value: string) {
+    setRightRead(value: string) {
         this._rightRead.setnom(value);
     }
     // RightWrite
-    getrightWrite(): string {
+    getRightWrite(): string {
         return this._rightWrite.getnom();
     }
-    setrightWrite(value: string) {
+    setRightWrite(value: string) {
         this._rightWrite.setnom(value);
     }
     // List de theme
-    getthemeAcc(): ApiReturn[] {
+    getThemeAcc(): ApiReturn[] {
         return this._themeAcc;
     }
     getAllThemeNAme(): string {
         let output:string;
-        output = this.getthemeAcc()[0].getnom();
-        for (let i in this.getthemeAcc()) {
+        output = this.getThemeAcc()[0].getnom();
+        for (let i in this.getThemeAcc()) {
             if ( i !== '0') {
-                output += `<div>${this.getthemeAcc()[i].getnom()}</div>`
+                output += `<div>${this.getThemeAcc()[i].getnom()}</div>`
             }  
         }
         return output;
     }
-    setthemeAcc(value: string) {
+    setThemeAcc(value: string) {
         this._themeAcc[0].setnom(value);
     }
     // Liste d' environnement
-    getenvAcc(): Environnement[] {
+    getEnvAcc(): Environnement[] {
         return this._envAcc;
     }
-    setenvAcc(value: Environnement[]) {
+    setEnvAcc(value: Environnement[]) {
         this._envAcc = value;
     }
     // Environnemental selection
-    getenvironnementSel(): string {
+    getEnvironnementSel(): string {
         return this._environnementSel;
     }
-    setenvironnementSel(value: string) {
+    setEnvironnementSel(value: string) {
         this._environnementSel = value;
     }
     // Environnement URL Selected
-    geturlEnvselected(): string {
+    getUrlEnvselected(): string {
         return this._urlEnvselected;
     }
-    seturlEnvselected(value: string) {
+    setUrlEnvselected(value: string) {
         this._urlEnvselected = value;
     }
     // If the form is closeable
-    getcloseable(): boolean {
+    getCloseable(): boolean {
         return this._closeable;
     }
-    setcloseable(value: boolean) {
+    setCloseable(value: boolean) {
         this._closeable = value;
     }
     // Geometry for planning and extract
-    getgeom(): string {
+    getGeom(): string {
         return this._geom;
     }
-    setgeom(value: string) {
+    setGeom(value: string) {
         this._geom = value;
     }
     // If Advanced is visble
-    getadvanced(): boolean {
+    getAdvanced(): boolean {
         return this._advanced;
     }
-    setadvanced(value: boolean) {
+    setAdvanced(value: boolean) {
         this._advanced = value;
     }
     //equipe
-    getequipe(): ApiReturn {
+    getEquipe(): ApiReturn {
         return this._equipe;
     }
-    setequipe(value: ApiReturn) {
+    setEquipe(value: ApiReturn) {
         this._equipe = value;
     }
 }

@@ -16,7 +16,7 @@ export class FileManagerController {
         mapApi.agControllerRegister('FileManagerCtrl', function($scope) {
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.OpenFileManager = () => {
-                if (log.getenvironnementSel() !== '') {
+                if (log.getEnvironnementSel() !== '') {
                     //if the panel already exist
                     if (!this.panel) {
                         // make sure both header and body have a digest cycle run on them

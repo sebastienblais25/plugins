@@ -28,8 +28,8 @@ export class DeliveryController{
             this.selectedItemF = '';
             //set up theme list
             this.itemsE = [];
-            for (let i in log.getthemeAcc()) {
-                this.itemsE.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
+            for (let i in log.getThemeAcc()) {
+                this.itemsE.push({name : log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()});
             }
             this.itemsF = [];
             this.setList = () => {
@@ -43,7 +43,7 @@ export class DeliveryController{
             }
             /************** Advanced Setting ***************/
             this.ShowHideAdvanced = function() {
-                if (log.getenvironnementSel() !== '') {
+                if (log.getEnvironnementSel() !== '') {
                     $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
                 }  
             };
@@ -51,18 +51,18 @@ export class DeliveryController{
             this.selectedItemENT = '';
             this.itemsENT = [];
             //changement
-            for (let i in log.getenvAcc()) {
-                this.itemsENT.push({name : log.getenvAcc()[i]._env , value: log.getenvAcc()[i]._env});
+            for (let i in log.getEnvAcc()) {
+                this.itemsENT.push({name : log.getEnvAcc()[i]._env , value: log.getEnvAcc()[i]._env});
             }
             //Envoie le formulaire a l'API
             this.submitFormD = function(element) { 
                 //get all the information of the form into the class
                 if ((<HTMLInputElement>document.getElementById('fileMD')).files.length == 0) {
                     $scope.errMD = true;
-                    log.setcloseable(false);
+                    log.setCloseable(false);
                 } else if ((<HTMLInputElement>document.getElementById('filefgdb')).files.length == 0) {
                     $scope.errFGDB = true;
-                    log.setcloseable(false);
+                    log.setCloseable(false);
                 } else {
                     let formdata = new FormData();
                     formdata.append('fichier_data',(<HTMLInputElement>document.getElementById('fileMD')).files[0]);

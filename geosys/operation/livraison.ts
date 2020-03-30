@@ -26,7 +26,7 @@ export class Livraison{
         }
          let token:string = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODMyNTgxNzAsIm5iZiI6MTU4MzI1ODE3MCwiZXhwIjoxNTgzMjY2MTcwLCJpc3MiOiJOUkNhbiIsInN1YiI6IjEyMzQ1Njc4OTAiLCJub21fdXNhZ2VyIjoidG90byIsInNjb3BlIjpbMTAxMDIsMTAxMDFdLCJ0aGVtZSI6WzEwMzAyLDEwMzAxXSwiZXF1aXBlcyI6WzQ1Nl0sImF3c19hY2Nlc3MiOnsiZGVzYyI6ImJsYSBibGEiLCJpZCI6ImNsZV9hd3NfMDEiLCJhY2Nlc19pZCI6ImFhYWFhYSIsImFjY2VzX3NlY3JldCI6ImJiYmJiYiJ9fQ.1AzvAevyqIMWPJhgaoOQdr0W8Xys1EAzgKKLHKg72QU';
 
-        let apire:any = this._conn.connexionAPIFormData(token/*log.gettoken()*/, form , log.constructUrl(urlDeliveryUpdate,/* this._idUt*/), method);
+        let apire:any = this._conn.connexionAPIFormData(token/*log.getToken()*/, form , log.constructUrl(urlDeliveryUpdate,/* this._idUt*/), method);
 
         console.log(apire);
         //for test

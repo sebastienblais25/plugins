@@ -20,8 +20,8 @@ export class ValidateController {
             this.selectedItemE = '';
             this.selectedItemF = '';
             this.itemsE = [];
-            for (let i in log.getthemeAcc()) {
-                this.itemsE.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
+            for (let i in log.getThemeAcc()) {
+                this.itemsE.push({name : log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()});
             }
             this.itemsF = [];
             this.setList = () => {
@@ -37,7 +37,7 @@ export class ValidateController {
             this.submitFormV = () => { 
                 if ((<HTMLInputElement>document.getElementById('fileJSON')).files.length == 0) {
                     $scope.errJSON = true;
-                    log.setcloseable(false);
+                    log.setCloseable(false);
                 } else {
                     //get all the information of the form into the class
                     let formdata = new FormData();
@@ -50,12 +50,12 @@ export class ValidateController {
                     if (api != undefined) {
                         alert(api);
                         console.log(api);
-                        log.setcloseable(false);
+                        log.setCloseable(false);
                         $scope.SelectedMenuV = {
                             "background-color" : "red", 
                         }
                     } else {
-                        console.log(log.gettoken());
+                        console.log(log.getToken());
                         $scope.SelectedMenuV = {
                             "background-color" : "green", 
                         }

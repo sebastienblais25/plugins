@@ -25,8 +25,8 @@ export class CleaningController {
 
             //set up the theme list
             this.itemsA = [];
-            for (let i in log.getthemeAcc()) {
-                this.itemsA.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
+            for (let i in log.getThemeAcc()) {
+                this.itemsA.push({name : log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()});
             }
             this.itemsB = [];
             //création de la liste pour les unité de travail

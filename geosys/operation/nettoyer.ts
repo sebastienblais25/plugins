@@ -15,7 +15,7 @@ export class Cleaning{
     }
 
     submitForm(log:User):any{
-        this.setData(this._conn.connexionAPI(log.gettoken(),this.getJson(),log.constructUrl(urlDeleteClean,this.getIdUt()),'Delete'));
+        this.setData(this._conn.connexionAPI(log.getToken(),this.getJson(),log.constructUrl(urlDeleteClean,this.getIdUt()),'Delete'));
         return this.getData();
     }
 

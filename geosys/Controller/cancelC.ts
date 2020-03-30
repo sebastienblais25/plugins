@@ -25,8 +25,8 @@ export class CancelController {
             this.stepCan = '';
             //Set up for the list of theme
             this.itemsA = [];
-            for (let i in log.getthemeAcc()) {
-                this.itemsA.push({name : log.getthemeAcc()[i].getId() , value: log.getthemeAcc()[i].getId()});
+            for (let i in log.getThemeAcc()) {
+                this.itemsA.push({name : log.getThemeAcc()[i].getId() , value: log.getThemeAcc()[i].getId()});
             }
             this.itemsB = [];
             //création de la liste pour les unité de travail

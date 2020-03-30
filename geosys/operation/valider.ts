@@ -12,7 +12,7 @@ export class Valider{
 
     submitForm(form:any, log:User){
         console.log(form.get('fichier_data'));
-        let apire:any = this._conn.connexionAPIFormData(log.gettoken(), form , log.constructUrl(urlValidateMD), 'Post');
+        let apire:any = this._conn.connexionAPIFormData(log.getToken(), form , log.constructUrl(urlValidateMD), 'Post');
         //alert(apire);
         //for test
         if(apire == 'success'){

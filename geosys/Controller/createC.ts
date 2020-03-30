@@ -23,8 +23,8 @@ export class CreateController {
             this.selectedItemF = '';
             //set up theme list
             this.itemsE = [];
-            for (let i in log.getthemeAcc()) {
-                this.itemsE.push({name : log.getthemeAcc()[i].getnom() , value: log.getthemeAcc()[i].getId()});
+            for (let i in log.getThemeAcc()) {
+                this.itemsE.push({name : log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()});
             }
             //List working unit ID
             this.itemsF = [];

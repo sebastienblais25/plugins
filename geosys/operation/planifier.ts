@@ -59,7 +59,7 @@ export class planifier{
     submitForm(log:User):any{
         this.getInformationToJson();
         //this.saveJson(json);
-        this.setdata(this._conn.connexionAPI(log.gettoken(), this.getJson() ,log.constructUrl(urlPlaniPost),'POST'));
+        this.setdata(this._conn.connexionAPI(log.getToken(), this.getJson() ,log.constructUrl(urlPlaniPost),'POST'));
         //what we get from the API
         return this.getdata();
     }

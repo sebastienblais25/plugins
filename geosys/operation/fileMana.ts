@@ -35,7 +35,7 @@ export class FileMana{
      */
     obtainArbo(log:User){
         this._nextFolder = '';
-        this._value = this._conn.connexionAPIFileMAnager(log.gettoken(),this.setNavigation());  
+        this._value = this._conn.connexionAPIFileManager(log.getToken(),this.setNavigation(),'Get','application/json');  
     }
 
     /**
@@ -201,10 +201,9 @@ export class FileMana{
      * @memberof FileMana
      */
     uploadfile(path:string, log:User,file:File):void{
-        alert(path + ' ' + log.gettoken())
-
+        alert(path + ' ' + log.getToken())
         console.log(file);
-        this._conn.connexionAPIFileUplaod(log.gettoken(),log.constructUrl(urlFileAction,path), file)
+        this._conn.connexionAPIFileManager(log.getToken(),log.constructUrl(urlFileAction,path),'POST','application/json', file)
     }
 
     /**
@@ -216,7 +215,7 @@ export class FileMana{
      */
     downloadFile(nameFile:string, path:string, log:User):void{
         /***** API Call *****/
-        let dlFile = this._conn.connexionAPIFileDownloadDelete(log.gettoken(), log.constructUrl(urlFileAction,this._breadcrumbs + '/' + nameFile),'Get','application/octet-stream')
+        let dlFile = this._conn.connexionAPIFileManager(log.getToken(), log.constructUrl(urlFileAction,this._breadcrumbs + '/' + nameFile),'Get','application/octet-stream')
         /***** Download *****/
         console.log(dlFile);
         alert(nameFile + ' downloaded from ' + path)
@@ -233,7 +232,7 @@ export class FileMana{
      */
     deleteFile(nameFile:string, path:string,log:User):void{
         /***** API Call *****/
-        let dlFile = this._conn.connexionAPIFileDownloadDelete(log.gettoken(), log.constructUrl(urlFileAction,this._breadcrumbs + '/' + nameFile),'Delete','application/json')
+        let dlFile = this._conn.connexionAPIFileManager(log.getToken(), log.constructUrl(urlFileAction,this._breadcrumbs + '/' + nameFile),'Delete','application/json')
         console.log(dlFile)
         alert(nameFile + ' deleted from ' + path)
     }
@@ -247,7 +246,7 @@ export class FileMana{
      */
     downloadFolder(nameFolder:string,path:string,log:User){
          /***** API Call *****/
-        //let dlFile = this._conn.connexionAPIFileDownloadDelete(log.gettoken(), log.constructUrl('blah'),'Get')
+        //let dlFile = this._conn.connexionAPIFileDownloadDelete(log.getToken(), log.constructUrl('blah'),'Get')
         /***** Download *****/
         alert(nameFolder + ' downloaded from ' + path)
         let blob = new Blob([`"name":"j-s"`]/*,{type:"application/json"}*/);
@@ -263,7 +262,7 @@ export class FileMana{
      */
     deleteFolder(nameFolder:string,path:string,log:User){
         /***** API Call *****/
-        //let dlFile = this._conn.connexionAPIFileDownloadDelete(log.gettoken(), log.constructUrl('blah'),'Delete')
+        //let dlFile = this._conn.connexionAPIFileDownloadDelete(log.getToken(), log.constructUrl('blah'),'Delete')
         alert(nameFolder + ' deleted from ' + path)
     }
 

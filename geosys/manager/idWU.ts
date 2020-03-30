@@ -1,6 +1,6 @@
 
 
-export class idWu{
+export class IdWu{
 
     _theme:string;
     _wUnit:string[];

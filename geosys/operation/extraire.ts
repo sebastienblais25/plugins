@@ -66,7 +66,7 @@ export class Extraire{
         //this.saveJson(json)
         //Call to the Api
         console.log(this._envopt)
-        this.setData(this._conn.connexionAPI(log.gettoken(), this.getJson(), url, 'Get',this._envopt));
+        this.setData(this._conn.connexionAPI(log.getToken(), this.getJson(), url, 'Get',this._envopt));
         return this.getData();
    };
 

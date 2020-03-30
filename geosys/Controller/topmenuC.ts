@@ -18,16 +18,16 @@ export class TopMenuController {
             this.selectedItemENT = '';
             this.itemsENT = [];
             //changement
-            for (let i in log.getenvAcc()) {
-                this.itemsENT.push({name : 'Environnement : ' +log.getenvAcc()[i]._env , value: log.getenvAcc()[i]._env});
+            for (let i in log.getEnvAcc()) {
+                this.itemsENT.push({name : 'Environnement : ' +log.getEnvAcc()[i]._env , value: log.getEnvAcc()[i]._env});
             }
             this.setEnv = () => {
                 log.setEnvironnementSelected(this.selectedItemENT);
-                if (log.getenvironnementSel() === 'TST') {
+                if (log.getEnvironnementSel() === 'TST') {
                     $scope.bgEnv = {
                         "background-color" : "lightgreen", 
                     }
-                } else if (log.getenvironnementSel() === 'DEV') {
+                } else if (log.getEnvironnementSel() === 'DEV') {
                     $scope.bgEnv = {
                         "background-color" : "pink", 
                     }
@@ -52,11 +52,11 @@ export class TopMenuController {
                 } else {
                     this.panel.close();
                 }
-                let output = infoUser.replace('(username)',log.getusername() + ' ' + log.getpassword());
+                let output = infoUser.replace('(username)',log.getUsername() + ' ' + log.getPassword());
                 output = output.replace('(theme)',log.getAllThemeNAme());
-                output = output.replace('(right)',log.getrightRead() + ' ' + log.getrightWrite());
-                output = output.replace('(equipe)',log.getequipe().getId());
-                output = output.replace('(envir)', log.getenvironnementSel() + '  </br>URL : ' + log.geturlEnvselected());
+                output = output.replace('(right)',log.getRightRead() + ' ' + log.getRightWrite());
+                output = output.replace('(equipe)',log.getEquipe().getId());
+                output = output.replace('(envir)', log.getEnvironnementSel() + '  </br>URL : ' + log.getUrlEnvselected());
                 let paneluser: TopMenuController =  new TopMenuController()
                 paneluser.controlUserInfo(log,mapApi);
                 this.panel.body = output;
@@ -90,7 +90,7 @@ export class TopMenuController {
             $scope.IsVisibleUT = false;
             //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHide = () => {
-                if (log.getenvironnementSel() !== '' && log.getcloseable() == true) {
+                if (log.getEnvironnementSel() !== '' && log.getCloseable() == true) {
                     $scope.IsVisibleP = $scope.IsVisibleP ? false : true;
                     if ($scope.IsVisibleP == true) {
                         //hide non-selected
@@ -118,16 +118,16 @@ export class TopMenuController {
                         $scope.SelectedMenuP = {};
                     }
                 } else {
-                    log.setcloseable(true);
+                    log.setCloseable(true);
                 }    
             };
             //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideEX =  () => {
-                if (log.getenvironnementSel() !== '' && log.getcloseable() == true) {
+                if (log.getEnvironnementSel() !== '' && log.getCloseable() == true) {
                     $scope.IsVisibleEP = $scope.IsVisibleEP ? false : true; 
                     if ($scope.IsVisibleEP == true) {
                         //Advanced Setting
-                        if (log.getadvanced() == true) {
+                        if (log.getAdvanced() == true) {
                             $scope.AdvancedVisible = true;
                         } else {
                             $scope.AdvancedVisible = false;
@@ -157,16 +157,16 @@ export class TopMenuController {
                         $scope.SelectedMenuE = {};
                     }
                 } else {
-                    log.setcloseable(true);
+                    log.setCloseable(true);
                 }   
             };
             //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideEXSR = () => {
-                if (log.getenvironnementSel() !== '' && log.getcloseable() == true) {
+                if (log.getEnvironnementSel() !== '' && log.getCloseable() == true) {
                     $scope.IsVisibleSR = $scope.IsVisibleSR ? false : true;
                     if ($scope.IsVisibleSR == true) {
                         //Advanced Setting
-                        if (log.getadvanced() == true) {
+                        if (log.getAdvanced() == true) {
                             $scope.AdvancedVisible = true;
                         } else {
                             $scope.AdvancedVisible = false;
@@ -196,12 +196,12 @@ export class TopMenuController {
                         $scope.SelectedMenuEU = {}
                     }
                 } else {
-                    log.setcloseable(true);
+                    log.setCloseable(true);
                 }   
             };
             //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideCr = () => {
-                if (log.getenvironnementSel() !== '' && log.getcloseable() == true) {
+                if (log.getEnvironnementSel() !== '' && log.getCloseable() == true) {
                     $scope.IsVisibleCR = $scope.IsVisibleCR ? false : true;
                     if ($scope.IsVisibleCR == true) {
                         document.getElementsByClassName('panel-body')[7].setAttribute('id','scrolling')
@@ -231,12 +231,12 @@ export class TopMenuController {
                         $scope.SelectedMenuCr = {};
                     } 
                 } else {
-                    log.setcloseable(true);
+                    log.setCloseable(true);
                 }     
             };
             //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideV = () => {
-                if (log.getenvironnementSel() !== '' && log.getcloseable() == true) {
+                if (log.getEnvironnementSel() !== '' && log.getCloseable() == true) {
                     $scope.IsVisibleV = $scope.IsVisibleV ? false : true;
                     if ($scope.IsVisibleV == true) {
                         //hide non-selected
@@ -264,16 +264,16 @@ export class TopMenuController {
                         $scope.SelectedMenuV = {};
                     } 
                 } else {
-                    log.setcloseable(true);
+                    log.setCloseable(true);
                 }     
             };
             //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideD = () => {
-                if (log.getenvironnementSel() !== '' && log.getcloseable() == true) {
+                if (log.getEnvironnementSel() !== '' && log.getCloseable() == true) {
                     $scope.IsVisibleD = $scope.IsVisibleD ? false : true;
                     if ($scope.IsVisibleD == true) {
                         //Advanced Setting
-                        if (log.getadvanced() === true) {
+                        if (log.getAdvanced() === true) {
                             $scope.AdvancedVisible = true;
                         } else {
                             $scope.AdvancedVisible = false;
@@ -303,12 +303,12 @@ export class TopMenuController {
                         $scope.SelectedMenuD = {};
                     } 
                 } else {
-                    log.setcloseable(true);
+                    log.setCloseable(true);
                 }     
             };
             //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideCl = () => {
-                if (log.getenvironnementSel() !== '' && log.getcloseable() == true) {
+                if (log.getEnvironnementSel() !== '' && log.getCloseable() == true) {
                     $scope.IsVisibleCL = $scope.IsVisibleCL ? false : true; 
                     if ($scope.IsVisibleCL == true) {
                         //hide non-selected
@@ -336,12 +336,12 @@ export class TopMenuController {
                         $scope.SelectedMenuC = {};
                     }
                 } else {
-                    log.setcloseable(true);
+                    log.setCloseable(true);
                 }   
             };
             //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideCa = () => {
-                if (log.getenvironnementSel() !== '' && log.getcloseable() == true) {
+                if (log.getEnvironnementSel() !== '' && log.getCloseable() == true) {
                     $scope.IsVisibleCA = $scope.IsVisibleCA ? false : true; 
                     if ($scope.IsVisibleCA == true) {
                         //hide non-selected
@@ -369,12 +369,12 @@ export class TopMenuController {
                         $scope.SelectedMenuCa = {};
                     }
                 } else {
-                    log.setcloseable(true);
+                    log.setCloseable(true);
                 }   
             };
             //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHideUT = () => {
-                if (log.getenvironnementSel() !== '' && log.getcloseable() == true) {
+                if (log.getEnvironnementSel() !== '' && log.getCloseable() == true) {
                     $scope.IsVisibleUT = $scope.IsVisibleUT ? false : true;
                     if ($scope.IsVisibleUT == true) {
                         //hide non-selected
@@ -402,7 +402,7 @@ export class TopMenuController {
                         $scope.SelectedMenuUT = {};
                     }
                 } else {
-                    log.setcloseable(true);
+                    log.setCloseable(true);
                 }    
             }
         });
@@ -416,15 +416,15 @@ export class TopMenuController {
     controlUserInfo(log: User, mapApi: any): void {
         mapApi.agControllerRegister('infoUserCtrl', function($scope){
             this.emailUser = 'jean-sebastien.bruneau-blais@canada.ca';
-            this.checkAdvanced = log.getadvanced();
+            this.checkAdvanced = log.getAdvanced();
             this.changeEmail = () =>{
                 alert('hello');
             };
             this.checkingAdvanced = () => {
-                if (log.getadvanced() === true) {
-                    log.setadvanced(false);
+                if (log.getAdvanced() === true) {
+                    log.setAdvanced(false);
                 } else {
-                    log.setadvanced(true);
+                    log.setAdvanced(true);
                 }
             }
         });

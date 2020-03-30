@@ -28,8 +28,8 @@ export class PlanningController {
             this.itemsC = [];
             this.idut = '';
             //theme list
-            for (let i in log.getthemeAcc()) {
-                this.itemsC.push({ name: log.getthemeAcc()[i].getnom(), value: log.getthemeAcc()[i].getId()});
+            for (let i in log.getThemeAcc()) {
+                this.itemsC.push({ name: log.getThemeAcc()[i].getnom(), value: log.getThemeAcc()[i].getId()});
             }
             //List of working type
             this.itemsD = [];
@@ -151,24 +151,24 @@ export class PlanningController {
                 }
                 if ((<HTMLInputElement>document.getElementById("idUt")).value ==  '') {
                     $scope.erridwuvs = true;
-                    log.setcloseable(false);
+                    log.setCloseable(false);
                 } else if (this.selectedItemD == '') {
                     $scope.errwork = true;
-                    log.setcloseable(false);
+                    log.setCloseable(false);
                 } else if (listofclass.length < 1) {
                     $scope.errclass = true;
-                    log.setcloseable(false);
+                    log.setCloseable(false);
                 } else {
                     //set the information in the the json 
                     log.createGeoJson('EPSG:' + this.geomEPSG, JSON.parse(this.geomp))
-                    alert(log.getgeom())
+                    alert(log.getGeom())
                     let plan: planifier = new planifier(
                         this.selectedItemC,
                         (<HTMLInputElement>document.getElementById("idUt")).value,
                         this.selectedItemD,
                         listofclass,
                         this.dfp,
-                        log.getgeom(),
+                        log.getGeom(),
                         this.wherep);
                     //submit the form to the API
                     let ApiReturn: any = plan.submitForm(log);
@@ -177,13 +177,12 @@ export class PlanningController {
                         $scope.SelectedMenuP = {
                             "background-color": "red",
                         }
-                        log.setcloseable(false);
+                        log.setCloseable(false);
                     } else {
                         //$rootScope.IsVisibleP = false;
                         $scope.SelectedMenuP = {
                             "background-color": "green",
                         }
-                        log.setcloseable(false);
                     }
                 }
             };
