@@ -6,69 +6,70 @@ const FileSaver = require('file-saver'); // le import
 
 
 
-export class FileMana{
+export class FileMana {
 
-    _conn:Connexion = new Connexion();
-    _breadcrumbs:string = '';
-    _lastFolder:string;
-    _liveFolder:string
-    _nextFolder:string;
-    _value:any;
-    _list = [];
-
+    private _conn: Connexion = new Connexion();
+    
+    private _breadcrumbs: string = '';
+    
+    private _lastFolder: string;
+    
+    private _liveFolder: string;
+    
+    private _nextFolder: string;
+    
+    private _value: any;
+    
+    private _list = [];
+    
 
     /**
      *Creates an instance of FileMana.
      * @param {string} [nextFolder='root']
      * @memberof FileMana
      */
-    constructor(nextFolder:string = 'root'){
-        //this._breadcrumbs = 'root';
+    constructor(nextFolder: string = 'root') {
         this._nextFolder = nextFolder
         this._breadcrumbs= '...';
     }
-
     /**
      * obtain the structure of a folder with a path send
      * @param {User} log for the token
      * @memberof FileMana
      */
-    obtainArbo(log:User){
+    obtainArbo(log: User) {
         this._nextFolder = '';
         this._value = this._conn.connexionAPIFileManager(log.getToken(),this.setNavigation(),'Get','application/json');  
     }
-
     /**
      * set the url for the navigation in the file manager
      * @returns {string} return the url needed
      * @memberof FileMana
      */
-    setNavigation():string{
+    setNavigation(): string {
         return 'http://127.0.0.1:4010/' + urlListFile + this._breadcrumbs + '&__example=' + this._breadcrumbs
     }
-
     /**
      * build a list of folder with the return of the API
      * @returns return a list of folder
      * @memberof FileMana
      */
-    buildFolderList(){
+    buildFolderList() {
         let listFo = [];
-        for(let i in this._value.list_folder){
-            listFo.push( { name: this._value.list_folder[i].name, modified:this._value.list_folder[i].last_modified, wanted: false });
+        for (let i in this._value.list_folder) {
+            listFo.push( { name: this._value.list_folder[i].name, modified: this._value.list_folder[i].last_modified, wanted: false } );
         }
         return listFo;
     }
-
     /**
      * build a list of file with the return of the API
      * @returns return a list of file
      * @memberof FileMana
      */
-    buildFileList(){
+    buildFileList() {
         let listFi = [];
-        for(let i in this._value.list_file){
-            listFi.push( { name: this._value.list_file[i].name , size:this._value.list_file[i].size, modified:this._value.list_file[i].last_modified, wanted: false });
+        for (let i in this._value.list_file) {
+            listFi.push( { name: this._value.list_file[i].name , size:this._value.list_file[i].size, modified:this._value.list_file[i].last_modified, wanted: false } );
         }
         return listFi;
     }
@@ -78,7 +79,7 @@ export class FileMana{
      * @returns {string} return a template
      * @memberof FileMana
      */
-    buildUI():string{
+    buildUI(): string {
         let output:string = `
         <div ng-controller="fileManagerPanelCtrl as ctrl11">
             <div class="Geosys-topcover"></div>
@@ -151,7 +152,7 @@ export class FileMana{
      * @returns return a string for the templates
      * @memberof FileMana
      */
-    buildClickablebreadcrumbs(){
+    buildClickablebreadcrumbs() {
         this._list =  this._breadcrumbs.split('/');
         let bc:string = '';
         let lenght = this._list.length - 1;
@@ -171,7 +172,7 @@ export class FileMana{
      * @param {string} rank wich folder we want to go in
      * @memberof FileMana
      */
-    setbreacrumbsForNav(rank:string){
+    setbreacrumbsForNav(rank: string) {
         
         this._breadcrumbs = '';
         for(let i in this._list){
@@ -185,14 +186,6 @@ export class FileMana{
         }
     }
 
-    /**
-     * set properties next folder
-     * @param {string} next name of the next folder
-     * @memberof FileMana
-     */
-    setNextFolder(next:string):void{
-        this._nextFolder = next ;
-    }
 
     /**
      * set a formdata to the Api to upload a file
@@ -279,8 +272,61 @@ export class FileMana{
         //let dlFile = this._conn.connexionAPIFileDownloadDelete(token, log.constructUrl('blah'),'Delete')
         alert("the new folder " + foldername + " will be created in " + pathforfolder)
     }
-
+    /**
+     * Maybe Added feature in the future
+     * @memberof FileMana
+     */
     uploadFolder(){
 
+    }
+    /******* Accessor *******/
+    // Conn
+    getConn(): Connexion {
+        return this._conn;
+    }
+    setConn(value: Connexion) {
+        this._conn = value;
+    }
+    // Breadcrumbs
+    getBreadcrumbs(): string {
+        return this._breadcrumbs;
+    }
+    setBreadcrumbs(value: string) {
+        this._breadcrumbs = value;
+    }
+    // Last Folder
+    getLastFolder(): string {
+        return this._lastFolder;
+    }
+    setLastFolder(value: string) {
+        this._lastFolder = value;
+    }
+    // Live Folder
+    getLiveFolder(): string {
+        return this._liveFolder;
+    }
+    setLiveFolder(value: string) {
+        this._liveFolder = value;
+    }
+    // Next Folder
+    getNextFolder(): string {
+        return this._nextFolder;
+    }
+    setNextFolder(next:string):void{
+        this._nextFolder = next ;
+    }
+    // Value
+    getValue(): any {
+        return this._value;
+    }
+    setValue(value: any) {
+        this._value = value;
+    }
+    // List
+    getList() {
+        return this._list;
+    }
+    setList(value) {
+        this._list = value;
     }
 }

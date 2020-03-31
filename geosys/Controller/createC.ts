@@ -13,7 +13,7 @@ export class CreateController {
      * @memberof manageController
      */
     creerControl(log: User, mapApi: any): void {
-        mapApi.agControllerRegister('submitFromC', function($scope) {
+        mapApi.agControllerRegister('submitFromC', function() {
             /************** interactive List ***************/
             //operation type on the DB
             this.typeOper = '';
@@ -63,11 +63,11 @@ export class CreateController {
             }
             //for claases list select all the info
             this.toggleAllS = () => {
-                if( this.listeSources == true){
+                if ( this.listeSources == true) {
                     for (let i in this.sources) {
                         this.sources[i].wanted = false;
                     }  
-                }else{
+                } else {
                     for (let i in this.sources) {
                         this.sources[i].wanted = true;
                     }

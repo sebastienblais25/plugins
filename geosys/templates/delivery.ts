@@ -2,10 +2,10 @@
 
 export const formDelivery = `
 <div ng-controller="submitFromD as ctrl5">
-    <div ng-style="SelectedMenuD" class="Geosys-div-Button" ng-click="ctrl1.ShowHideD()">
+    <div ng-style="ctrl1.SelectedMenuD" class="Geosys-div-Button" ng-click="ctrl1.ShowHideD()">
         <h2>{{ 'plugins.geosys.delivery' | translate }}</h2>
     </div>
-    <div ng-show="IsVisibleD" ng-style="bgEnv">
+    <div ng-show="ctrl1.IsVisibleD" ng-style="bgEnv">
         <form name="deliform">
             <div class="rv-subsection">
                 
@@ -43,18 +43,18 @@ export const formDelivery = `
                 </md-input-container>
 
                 <div>
-                    <span><span class="Geosys-advanced">{{ 'plugins.geosys.fileMD' | translate }}</span><span class="Geosys-errormess Geosys-sizeerror" ng-show="errMD">{{ 'plugins.geosys.errorFMD' | translate }}</span></span>
+                    <span><span class="Geosys-advanced">{{ 'plugins.geosys.fileMD' | translate }}</span><span class="Geosys-errormess Geosys-sizeerror" ng-show="ctrl5.errMD">{{ 'plugins.geosys.errorFMD' | translate }}</span></span>
                     <input  type="file" id="fileMD" accept="json"/>
                 </div>
                 <div>
-                    <span><span class="Geosys-advanced">{{ 'plugins.geosys.fileGDB' | translate }}</span><span class="Geosys-errormess Geosys-sizeerror" ng-show="errFGDB">{{ 'plugins.geosys.errorFGDB' | translate }}</span></span>
+                    <span><span class="Geosys-advanced">{{ 'plugins.geosys.fileGDB' | translate }}</span><span class="Geosys-errormess Geosys-sizeerror" ng-show="ctrl5.errFGDB">{{ 'plugins.geosys.errorFGDB' | translate }}</span></span>
                     <input type="file" id="filefgdb" accept="zip"/>
                 </div>
                 
-                <div ng-show="AdvancedVisible" ng-click="ctrl5.ShowHideAdvanced()" class="Geosys-advanced">
+                <div ng-show="ctrl1.AdvancedVisible" ng-click="ctrl5.ShowHideAdvanced()" class="Geosys-advanced">
                     <span>Advanced Settings</span>
                 </div>
-                <div ng-show="IsVisibleASP">
+                <div ng-show="ctrl5.IsVisibleASP">
                     <md-input-container class="Geosys-ddlshowEX">
                         <label>{{ 'plugins.geosys.envir' | translate }}</label>
                         <md-select 
@@ -71,7 +71,7 @@ export const formDelivery = `
                 
                 <md-input-container class="Geosys-submitbtn">
                     <md-button class="md-primary md-raised" style="float: right;"
-                    ng-click="ctrl5.submitFormD(); ctrl1.ShowHideD()" ng-disabled="deliform.$invalid">
+                    ng-click="ctrl5.submitFormD(); ctrl1.ShowHideD(); ctrl1.setColorD()" ng-disabled="deliform.$invalid">
                         {{ 'plugins.geosys.submit' | translate }}
                         <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                     </md-button>

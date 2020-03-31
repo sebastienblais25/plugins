@@ -83,7 +83,7 @@ export default class Geosys {
                 let loginfo: any = log.submitForm(config);
                 // Si le retour ne contient pas de code d'erreur continue
                 if (loginfo.status === undefined) {
-                    let menu: menuManager =  new menuManager(log, panel, mapApi, config);
+                    let menu: menuManager =  new menuManager(log, panel, mapApi);
                 // Si le retour de l'API contient un code d'erreur et le message
                 } else {
                     alert(loginfo.code);

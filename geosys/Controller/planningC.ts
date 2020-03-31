@@ -1,23 +1,20 @@
 import { planifier } from "../operation/planifier";
 import { User } from "../user";
-
 export class PlanningController {
 
     constructor() { };
-
     /**
      *the controller for all the function in planning templates
      * @param {User} log All the information of the user
      * @param {*} mapApi the api of of the viewer to set the controller
-     * @param {*} config the config is for drawing 
      * @memberof manageController
      */
-    planControl(log: User, mapApi: any, config: any): void {
-        mapApi.agControllerRegister('submitFromP', function ($scope) {
+    planControl(log: User, mapApi: any): void {
+        mapApi.agControllerRegister('submitFromP', function () {
             const that = this;
-            $scope.erridwuvs = false;
-            $scope.errclass = false;
-            $scope.errwork = false;
+            this.erridwuvs = false;
+            this.errclass = false;
+            this.errwork = false;
             /************** interactive List ***************/
             this.selectedItemC = '';
             this.selectedItemD = '';
@@ -82,7 +79,7 @@ export class PlanningController {
                     }
                 }
             }
-
+            // Checkbox behave like radio button
             this.inputchck = () => {
                 this.drawingchecked = false;
                 this.filechecked = false;
@@ -101,7 +98,6 @@ export class PlanningController {
             (<any>window).drawObs.drawPolygon.subscribe(value => {
                 //create a geojson with the infromation obtain
                 if (this.drawingchecked == true) {
-                    console.log(value.rings)
                     //show the geo json in the input 
                     this.geomp = JSON.stringify(value.rings);
                     this.geomEPSG = value.spatialReference.wkid;
@@ -149,19 +145,19 @@ export class PlanningController {
                         listofclass.push(this.classes[i].name);
                     }
                 }
-                if ((<HTMLInputElement>document.getElementById("idUt")).value ==  '') {
-                    $scope.erridwuvs = true;
+                if ((<HTMLInputElement>document.getElementById("idUt")).value ===  '') {
+                    this.erridwuvs = true;
                     log.setCloseable(false);
-                } else if (this.selectedItemD == '') {
-                    $scope.errwork = true;
+                } else if (this.selectedItemD === '') {
+                    this.errwork = true;
                     log.setCloseable(false);
                 } else if (listofclass.length < 1) {
-                    $scope.errclass = true;
+                    this.errclass = true;
                     log.setCloseable(false);
                 } else {
                     //set the information in the the json 
                     log.createGeoJson('EPSG:' + this.geomEPSG, JSON.parse(this.geomp))
-                    alert(log.getGeom())
+                    log.setCloseable(true);
                     let plan: planifier = new planifier(
                         this.selectedItemC,
                         (<HTMLInputElement>document.getElementById("idUt")).value,
@@ -174,15 +170,8 @@ export class PlanningController {
                     let ApiReturn: any = plan.submitForm(log);
                     //If the return isn't a succes
                     if (ApiReturn != 'success') {
-                        $scope.SelectedMenuP = {
-                            "background-color": "red",
-                        }
+                        alert(ApiReturn.status)
                         log.setCloseable(false);
-                    } else {
-                        //$rootScope.IsVisibleP = false;
-                        $scope.SelectedMenuP = {
-                            "background-color": "green",
-                        }
                     }
                 }
             };

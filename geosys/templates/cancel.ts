@@ -3,10 +3,10 @@
 
 export const formCancel:string = `
 <div ng-controller="cancelStep as ctrl8">
-    <div ng-style="SelectedMenuCa" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideCa()">
+    <div ng-style="ctrl1.SelectedMenuCa" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideCa()">
         <h2>{{ 'plugins.geosys.annuler' | translate }}</h2>
     </div>
-    <div ng-show="IsVisibleCA" ng-style="bgEnv" class="Geosys-extractspace">
+    <div ng-show="ctrl1.IsVisibleCA" ng-style="bgEnv" class="Geosys-extractspace">
         <div class="rv-subsection">
             <md-input-container class="Geosys-ddlshowEX">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>
@@ -48,7 +48,7 @@ export const formCancel:string = `
 
             <md-input-container class="Geosys-submitbtn">
                 <md-button class="md-primary md-raised" style="float: right;"
-                ng-click="ctrl8.submitCan(); ctrl1.ShowHideCa()">
+                ng-click="ctrl8.submitCan(); ctrl1.ShowHideCa(); ctrl1.setColorCa()">
                     {{ 'plugins.geosys.submit' | translate }}
                     <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                 </md-button>

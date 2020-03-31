@@ -3,10 +3,10 @@
 
 export const formExtraireP:string = 
 `<div ng-controller="SubmitCtrl as ctrl3">
-    <div ng-style="SelectedMenuE" class="Geosys-div-Button" ng-click="ctrl1.ShowHideEX()">
+    <div ng-style="ctrl1.SelectedMenuE" class="Geosys-div-Button" ng-click="ctrl1.ShowHideEX()">
         <h2>{{ 'plugins.geosys.extrac' | translate }}</h2>
     </div>
-    <div ng-show="IsVisibleEP" ng-style="bgEnv" class="Geosys-extractspace">
+    <div ng-show="ctrl1.IsVisibleEP" ng-style="bgEnv" class="Geosys-extractspace">
         <form name="extractGeosys">
             <div class="rv-subsection">
                 <md-input-container class="Geosys-ddlshowEX">
@@ -23,7 +23,7 @@ export const formExtraireP:string =
                 </md-input-container>
 
                 <md-input-container class="Geosys-ddlshowEX">
-                    <label>{{ 'plugins.geosys.idUT' | translate }}</label><span class="Geosys-errormess" ng-show="ErrorEx">{{ 'plugins.geosys.errorWU' | translate }}</span>
+                    <label>{{ 'plugins.geosys.idUT' | translate }}</label><span class="Geosys-errormess" ng-show="ctrl3.ErrorEx">{{ 'plugins.geosys.errorWU' | translate }}</span>
                     <md-select
                     ng-model="ctrl3.selectedItemB"
                     ng-change="ctrl3.setListB()"
@@ -34,10 +34,10 @@ export const formExtraireP:string =
                     </md-select>
                 </md-input-container>
 
-                <div ng-show="AdvancedVisible" ng-click="ctrl3.ShowHideAdvanced()" class="advanced">
+                <div ng-show="ctrl1.AdvancedVisible" ng-click="ctrl3.ShowHideAdvanced()" class="advanced">
                     <span>Advanced Settings</span>
                 </div>
-                <div ng-show="IsVisibleASP">
+                <div ng-show="ctrl3.IsVisibleASP">
                     <md-input-container class="Geosys-ddlshowEX">
                         <label>{{ 'plugins.geosys.envir' | translate }}</label>
                         <md-select 
@@ -55,7 +55,7 @@ export const formExtraireP:string =
 
                 <md-input-container class="Geosys-submitbtn">
                     <md-button class="md-primary md-raised" style="float: right;"
-                    ng-click="ctrl3.submitForm(); ctrl1.ShowHideEX()" ng-disabled="extractGeosys.$invalid">
+                    ng-click="ctrl3.submitForm(); ctrl1.ShowHideEX(); ctrl1.setColorE()" ng-disabled="extractGeosys.$invalid">
                         {{ 'plugins.geosys.submit' | translate }}
                         <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                     </md-button>
@@ -68,10 +68,10 @@ export const formExtraireP:string =
 
 export const formExtraireSR:string = 
 `<div ng-controller="SubmitExCtrl as ctrl4">
-    <div ng-style="SelectedMenuEU" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideEXSR()">
+    <div ng-style="ctrl1.SelectedMenuEU" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideEXSR()">
         <h2>{{ 'plugins.geosys.extract' | translate }}</h2>
     </div>
-    <div ng-show="IsVisibleSR" ng-style="bgEnv">
+    <div ng-show="ctrl1.IsVisibleSR" ng-style="bgEnv">
         <form name="exSRform">
             <div class="rv-subsection">
                 <md-input-container class="Geosys-ddlshowEX">
@@ -88,7 +88,7 @@ export const formExtraireSR:string =
                 </md-input-container>
                 
                 <div>
-                <span class="Geosys-classeslist"><span class="Geosys-advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="Geosys-errormess Geosys-sizeerror" ng-show="errclassEX">{{ 'plugins.geosys.errorClass' | translate }}</span></span><md-checkbox aria-label="checkall" ng-model="ctrl4.listeclasse" class="md-secondary Geosys-checklist" ng-click="ctrl4.toggleAll()"></md-checkbox>
+                <span class="Geosys-classeslist"><span class="Geosys-advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="Geosys-errormess Geosys-sizeerror" ng-show="ctrl4.errclassEX">{{ 'plugins.geosys.errorClass' | translate }}</span></span><md-checkbox aria-label="checkall" ng-model="ctrl4.listeclasse" class="md-secondary Geosys-checklist" ng-click="ctrl4.toggleAll()"></md-checkbox>
                     <div class="Geosys-div-classe">
                         <md-list-item class="Geosys-itemlist" ng-repeat="class in ctrl4.classes">
                             <span class="Geosys-largeurlist">{{ class.name }}</span>
@@ -128,10 +128,10 @@ export const formExtraireSR:string =
                     </div>
                 </div>
 
-                <div ng-show="AdvancedVisible" ng-click="ctrl4.ShowHideAdvanced()" class="Geosys-advanced">
+                <div ng-show="ctrl1.AdvancedVisible" ng-click="ctrl4.ShowHideAdvanced()" class="Geosys-advanced">
                     <span>Advanced Settings</span>
                 </div>
-                <div ng-show="IsVisibleASP">
+                <div ng-show="ctrl4.IsVisibleASP">
                     <md-input-container class="Geosys-ddlshowEX">
                         <label>{{ 'plugins.geosys.envir' | translate }}</label>
                         <md-select 
@@ -148,7 +148,7 @@ export const formExtraireSR:string =
 
                 <md-input-container class="Geosys-submitbtn">
                     <md-button class="md-primary md-raised" style="float: right;"
-                    ng-click="ctrl4.submitSRForm(); ctrl1.ShowHideEXSR()" ng-disabled="exSRform.geomSR.$invalid">
+                    ng-click="ctrl4.submitSRForm(); ctrl1.ShowHideEXSR(); ctrl1.setColorEU()" ng-disabled="exSRform.geomSR.$invalid">
                         {{ 'plugins.geosys.submit' | translate }}
                         <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                     </md-button>

@@ -33,7 +33,7 @@ export class CancelController {
             this.setList = () => {
                 // populate list of working unit id
                 this.itemsB.length = 0;
-                let list:any = log.setidUTtheme(this.selectedItemA)
+                let list: any = log.setidUTtheme(this.selectedItemA)
                 for (let i in list) {
                     this.itemsB.push(list[i])
                 }

@@ -12,9 +12,9 @@ export class ExtractController {
      */
     extrairecontrols(log: User, mapApi: any): void {
         /************ À placer en fonction ou class ***********/
-        mapApi.agControllerRegister('SubmitCtrl', function($scope) { 
+        mapApi.agControllerRegister('SubmitCtrl', function() { 
             //error message if problem with the slect working unit ID
-            $scope.ErrorEx = false;
+            this.ErrorEx = false;
             /************** interactive List ***************/
             //theme
             this.selectedItemA = '';
@@ -23,7 +23,7 @@ export class ExtractController {
             //set up the theme list
             this.itemsA = [];
             for (let i in log.getThemeAcc()) {
-                this.itemsA.push({name : log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()});
+                this.itemsA.push( {name : log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()} );
             }
             this.itemsB = [];
             //création de la liste pour les unité de travail
@@ -39,7 +39,7 @@ export class ExtractController {
             /************** Advanced Setting ***************/
             this.ShowHideAdvanced = () => {
                 if (log.getEnvironnementSel() !== '') {
-                    $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
+                    this.IsVisibleASP = this.IsVisibleASP ? false : true; 
                 }  
             };
             /************** interactive List Advanced Setting ***************/
@@ -47,33 +47,25 @@ export class ExtractController {
             this.itemsENT = [];
             //changement
             for (let i in log.getEnvAcc()) {
-                this.itemsENT.push({name : log.getEnvAcc()[i]._env , value: log.getEnvAcc()[i]._env});
+                this.itemsENT.push( {name : log.getEnvAcc()[i]._env , value: log.getEnvAcc()[i]._env} );
             }
             /**************** From Submission ***************/
              this.submitForm = () => { 
                  console.log(this.selectedItemB)
                 //get all the information of the form into the class
                 if (this.selectedItemB == '') {
-                    $scope.ErrorEx = true;
+                    this.ErrorEx = true;
+                    log.setCloseable(false);
                 } else {
-                    let ext = new Extraire(
-                        this.selectedItemA
-                        ,this.selectedItemB);
+                    log.setCloseable(true);
+                    let ext = new Extraire(this.selectedItemA, this.selectedItemB);
                     ext.setOptionnalEnvironnement(this.selectedItemENT);
                     let ApiReturn:any = ext.submitForm(log);
                     //if the conection to the API is a success
                     if (ApiReturn != 'success') {
-                        alert(ApiReturn.statusText)
-                        log.setCloseable(false)
-                        $scope.SelectedMenuE = {
-                            "background-color" : "red", 
-                        }
-                    } else {
-                        //$scope.IsVisibleEP = false;
-                        $scope.SelectedMenuE = {
-                            "background-color" : "green", 
-                        }
-                    } 
+                        alert(ApiReturn.statusText);
+                        log.setCloseable(false);
+                    }
                 }
             };
         });
@@ -87,11 +79,11 @@ export class ExtractController {
      */
     extraireSRcontrols(log: User, mapApi: any): void {
         /************ Bouton Extraire ***********/
-        mapApi.agControllerRegister('SubmitExCtrl', function($scope) {
+        mapApi.agControllerRegister('SubmitExCtrl', function() {
             // to acces elemnent in the reader file
             const that = this;
             //error message for the list of the classes
-            $scope.errclassEX = false;
+            this.errclassEX = false;
             /************** interactive List ***************/
             //theme
             this.selectedItemA = '';
@@ -151,14 +143,13 @@ export class ExtractController {
             });
             /************** Shapefile load ***************/
             this.loadshpEX = () => {
-                let geom:any;
                 //get the files in the input
-                let files:any = (<HTMLInputElement>document.getElementById('fileshpEX')).files
+                let files: any = (<HTMLInputElement>document.getElementById('fileshpEX')).files
                 //if there is no file
                 if (files.length == 0) {
                     alert('No files');
                 } else {
-                    let file:any = files[0];
+                    let file: any = files[0];
                     //A file reader
                     const reader = new FileReader();
                     //fonction for the file reader
@@ -169,7 +160,7 @@ export class ExtractController {
                             //package to read a shapefile and get a geojson
                             let shp = require("shpjs");
                             //read the zip shapefile
-                            shp(reader.result).then(function(dta){
+                            shp(reader.result).then(function(dta) {
                                 //set a variable with the coordinates for the drawing
                                 let geomDR = dta.features[0].geometry.coordinates[0];
                                 //set a variable with the coordinates for the geojson
@@ -190,15 +181,15 @@ export class ExtractController {
             }
             /************** Advanced Setting ***************/
             this.ShowHideAdvanced = () => {
-                if(log.getEnvironnementSel() !== ''){
-                    $scope.IsVisibleASP = $scope.IsVisibleASP ? false : true; 
+                if (log.getEnvironnementSel() !== '') {
+                    this.IsVisibleASP = this.IsVisibleASP ? false : true; 
                 }  
             };
             /************** interactive List Advanced Setting ***************/
             this.selectedItemENT = '';
             this.itemsENT = [];
             //changement
-            for (let i in log.getEnvAcc()){
+            for (let i in log.getEnvAcc()) {
                 this.itemsENT.push({name : log.getEnvAcc()[i]._env , value: log.getEnvAcc()[i]._env});
             }
             /**************** From Submission ***************/
@@ -207,44 +198,37 @@ export class ExtractController {
                 //get all the information of the form into the class
                 this.geomSR = log.getGeom();
                 let listofclass = []
-                for(let i in this.classes){
-                    if(this.classes[i].wanted ==true){
+                for (let i in this.classes) {
+                    if (this.classes[i].wanted ==true) {
                         listofclass.push(this.classes[i].name);
                     }
                 }
                 //if the user want a clip
-                let siClip:string;
-                if(this.cbClip == true){
+                let siClip: string;
+                if (this.cbClip == true) {
                     siClip = 'oui';
-                }else{
+                } else {
                     siClip = 'non';
                 }
-                if( listofclass.length < 1){
-                    $scope.errclassEX = true;
+                if ( listofclass.length < 1) {
+                    this.errclassEX = true;
                     log.setCloseable(false);
-                }else{
+                } else {
                     //console.log(this.geomSR)
+                    log.setCloseable(true);
                     let extsr = new Extraire(
                         this.selectedItemA);
                         extsr.setInfoForSR(listofclass,
                         siClip,
                         this.whereclause,
-                        this.geomSR)
+                        this.geomSR);
                     extsr.setOptionnalEnvironnement(this.selectedItemENT);
                     //If the connection to the API is a Success
-                    let ApiReturn:any = extsr.submitForm(log);
-                    if (ApiReturn != 'success'){
+                    let ApiReturn: any = extsr.submitForm(log);
+                    if (ApiReturn != 'success') {
                         alert(ApiReturn.statusText)
                         log.setCloseable(false);
-                        $scope.SelectedMenuEU = {
-                            "background-color" : "red", 
-                        }
-                    }else{
-                        //$scope.IsVisibleSR = false;
-                        $scope.SelectedMenuEU = {
-                            "background-color" : "green", 
-                        }
-                    } 
+                    }
                 }  
             };
         });

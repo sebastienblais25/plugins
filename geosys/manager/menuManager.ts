@@ -47,10 +47,9 @@ export class menuManager{
      * @param {User} log all the user information
      * @param {*} panel the panel of the plugins
      * @param {*} mapApi the APi of the viewer
-     * @param {*} config the config of the viewer
      * @memberof menuManager
      */
-    constructor(log:User, panel:any, mapApi:any, config:any){
+    constructor(log:User, panel:any, mapApi:any){
         //set the manage controller
         this._compiler = new TopMenuController();
         this._planning = new PlanningController();
@@ -66,13 +65,13 @@ export class menuManager{
         //varaible for the form
         let outputExt:string  = this.extractManager(log,mapApi);
         let outputExtSR:string = this.extractSRManager(log,mapApi);
-        let outputPlan:string = this.planifManager(log,mapApi, config);
+        let outputPlan:string = this.planifManager(log,mapApi);
         let outputDeli:string = this.deliManager(log,mapApi);
         let outputVali:string = this.validateManager(log,mapApi);
         let outputCreer:string = this.creerMDManager(log,mapApi);
         let outputNettoyage:string = this.nettoyageManager(log,mapApi);
         let outputCancel:string = this.cancelManager(log,mapApi);
-        let outputTopmenu:string = this.topMenuManager(log,mapApi,panel);
+        let outputTopmenu:string = this.topMenuManager(log,mapApi);
         let outputFileManager:string = this.fileExplorerManager(log,mapApi);
         let outputUnit:string = this.UTManager(log,mapApi);
         
@@ -127,9 +126,9 @@ export class menuManager{
      * @returns {string} the compile output
      * @memberof menuManager
      */
-    planifManager(log:User, mapApi:any, config:any):string{
+    planifManager(log:User, mapApi:any):string{
 
-        this._planning.planControl(log, mapApi, config);
+        this._planning.planControl(log, mapApi);
 
         //add the dropdown list for the form
         let output = formPlanifier;
@@ -160,9 +159,9 @@ export class menuManager{
      * @returns {string} the compile output
      * @memberof menuManager
      */
-    topMenuManager(log:User, mapApi:any, panel:any):string{
+    topMenuManager(log:User, mapApi:any):string{
 
-        this._compiler.topmenuControl(log, mapApi,panel);
+        this._compiler.topmenuControl(log, mapApi);
 
         let output = topmenu;
         //mb.compileTemplate(output,mapApi);

@@ -4,10 +4,10 @@
 
 export const formNettoyage:string = 
 `<div ng-controller="SubmitNetCtrl as ctrl7">
-    <div ng-style="SelectedMenuC" class="Geosys-div-Button" ng-click="ctrl1.ShowHideCl()">
+    <div ng-style="ctrl1.SelectedMenuC" class="Geosys-div-Button" ng-click="ctrl1.ShowHideCl()">
         <h2>{{ 'plugins.geosys.nettoyage' | translate }}</h2>
     </div>
-    <div ng-show="IsVisibleCL" ng-style="bgEnv" class="Geosys-extractspace">
+    <div ng-show="ctrl1.IsVisibleCL" ng-style="bgEnv" class="Geosys-extractspace">
         <form name="cleaningform">
             <div class="rv-subsection">
                 <md-input-container class="Geosys-ddlshowEX">
@@ -36,7 +36,7 @@ export const formNettoyage:string =
 
                 <md-input-container class="Geosys-submitbtn">
                     <md-button class="md-primary md-raised" style="float: right;"
-                    ng-click="ctrl7.submitNett(); ctrl1.ShowHideCl()" ng-disabled="cleaningform.$invalid">
+                    ng-click="ctrl7.submitNett(); ctrl1.ShowHideCl(); ctrl1.setColorCl()" ng-disabled="cleaningform.$invalid">
                         {{ 'plugins.geosys.submit' | translate }}
                         <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
                     </md-button>
