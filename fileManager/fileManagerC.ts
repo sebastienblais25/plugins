@@ -27,9 +27,11 @@ export class FileManagerController {
             //build the UI for the file manager
             let output = tfm.buildUI() + dragdropFunction;
             if (tfm.getNextFolder() == 'root') {
-                tfm.obtainArbo(token);
-                fmc.FileManaManager(token,mapApi, tfm, this.panel);
-                this.panel.body = output;
+                tfm.obtainArbo(token).then(values => {
+                    tfm.setValue(values);
+                    fmc.FileManaManager(token,mapApi, tfm, this.panel);
+                    this.panel.body = output;
+                });   
             }  
         } else {
             this.panel.close();
@@ -59,37 +61,46 @@ export class FileManagerController {
                     tfm.setbreacrumbsForNav(rank.toString());
                     let fmc: FileManagerController = new FileManagerController();
                     let output = tfm.buildUI() + dragdropFunction;
-                    tfm.obtainArbo(token);
-                    fmc.FileManaManager(token, mapApi, tfm, panel);
-                    panel.body = output; 
+                    tfm.obtainArbo(token).then(values => {
+                        tfm.setValue(values);
+                        fmc.FileManaManager(token,mapApi, tfm, panel);
+                        panel.body = output;
+                    });   
+                    
                 } 
             }
             //refresh the folder 
             this.refresh = () => {
                 let fmc: FileManagerController = new FileManagerController();
-                let output = tfm.buildUI();
-                tfm.obtainArbo(token);
-                fmc.FileManaManager(token, mapApi, tfm, panel);
-                panel.body = output;
+                let output = tfm.buildUI() + dragdropFunction;
+                tfm.obtainArbo(token).then(values => {
+                    tfm.setValue(values);
+                    fmc.FileManaManager(token,mapApi, tfm, panel);
+                    panel.body = output;
+                });
             }
             //open the folder from the breadcrumbs
             this.followup = (folder)  => {
                 tfm.setbreacrumbsForNav(folder);
                 let fmc: FileManagerController = new FileManagerController();
-                let output = tfm.buildUI()+dragdropFunction;
-                tfm.obtainArbo(token);
-                fmc.FileManaManager(token, mapApi, tfm, panel);
-                panel.body = output;
+                let output = tfm.buildUI() + dragdropFunction;
+                tfm.obtainArbo(token).then(values => {
+                    tfm.setValue(values);
+                    fmc.FileManaManager(token,mapApi, tfm, panel);
+                    panel.body = output;
+                });
             }
             //open a folder when clicked
             this.openFolder = (folder) => {
                 tfm.setNextFolder(folder.name);
                 tfm.setBreadcrumbs(tfm.getBreadcrumbs() + '/' + tfm.getNextFolder());
-                let fmc: FileManagerController = new FileManagerController(); 
-                let output = tfm.buildUI();
-                tfm.obtainArbo(token);
-                fmc.FileManaManager(token, mapApi, tfm, panel);
-                panel.body = output;
+                let fmc: FileManagerController = new FileManagerController();
+                let output = tfm.buildUI() + dragdropFunction;
+                tfm.obtainArbo(token).then(values => {
+                    tfm.setValue(values);
+                    fmc.FileManaManager(token,mapApi, tfm, panel);
+                    panel.body = output;
+                });
             }
             //download file on download button clicked
             this.downloadFile = (file) => {
@@ -121,7 +132,7 @@ export class FileManagerController {
                     this.panel1.header.closeButton;
                     this.panel1.header.title = `Add Folder`;
                     let fmc: FileManagerController = new FileManagerController();
-                    fmc.addingFolder(token,tfm, mapApi);
+                    fmc.addingFolder(token,tfm, mapApi,this.panel1);
                     let output: string = `<div ng-controller="folderCtrl as ctrl16">
                     <md-input-container style="margin-bottom: 0px;height: 34px; width:275px; ">
                         <label>Name the folder</label>
@@ -153,10 +164,12 @@ export class FileManagerController {
      * @param {*} mapApi
      * @memberof FileManagerController
      */
-    addingFolder(token: string, tfm: FileMana, mapApi: any): void {
+    addingFolder(token: string, tfm: FileMana, mapApi: any, panel:any): void {
         mapApi.agControllerRegister('folderCtrl', function() {
             this.addfolder = () => {
                 tfm.createFolder(tfm.getBreadcrumbs(), token,this.nameFolder);
+                panel.close();
+
             }
         });
     }
