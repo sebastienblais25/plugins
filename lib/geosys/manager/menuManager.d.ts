@@ -26,10 +26,9 @@ export declare class menuManager {
      * @param {User} log all the user information
      * @param {*} panel the panel of the plugins
      * @param {*} mapApi the APi of the viewer
-     * @param {*} config the config of the viewer
      * @memberof menuManager
      */
-    constructor(log: User, panel: any, mapApi: any, config: any);
+    constructor(log: User, panel: any, mapApi: any);
     /**
      * Compile the output and the controller for the planned extraction and return it all compile
      * @param {User} log the user info for the controller
@@ -46,7 +45,7 @@ export declare class menuManager {
      * @returns {string} the compile output
      * @memberof menuManager
      */
-    planifManager(log: User, mapApi: any, config: any): string;
+    planifManager(log: User, mapApi: any): string;
     /**
      * Compile the output and the controller for the delivery and return it all compile
      * @param {User} log the user info for the controller
@@ -62,7 +61,7 @@ export declare class menuManager {
      * @returns {string} the compile output
      * @memberof menuManager
      */
-    topMenuManager(log: User, mapApi: any, panel: any): string;
+    topMenuManager(log: User, mapApi: any): string;
     /**
      * Compile the output and the controller for the extraction without planning and return it all compile
      * @param {User} log the user info for the controller

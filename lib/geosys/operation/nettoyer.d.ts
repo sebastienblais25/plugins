@@ -1,10 +1,10 @@
 import { User } from '../user';
-import { connexion } from '../apiConnect';
+import { Connexion } from '../apiConnect';
 export declare class Cleaning {
     _theme: string;
     _idUt: string;
     _json: string;
-    _conn: connexion;
+    _conn: Connexion;
     _data: any;
     constructor(theme: string, idut: string);
     submitForm(log: User): any;

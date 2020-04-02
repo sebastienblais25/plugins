@@ -5,7 +5,7 @@ export const formDelivery = `
     <div ng-style="ctrl1.SelectedMenuD" class="Geosys-div-Button" ng-click="ctrl1.ShowHideD()">
         <h2>{{ 'plugins.geosys.delivery' | translate }}</h2>
     </div>
-    <div ng-show="ctrl1.IsVisibleD" ng-style="bgEnv">
+    <div ng-show="ctrl1.IsVisibleD" ng-style="ctrl1.bgEnv">
         <form name="deliform">
             <div class="rv-subsection">
                 

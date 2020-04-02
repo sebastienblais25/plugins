@@ -10,30 +10,30 @@ export default class Geosys {
      * @returns
      * @memberof Geosys
      */
-    onMenuItemClick(): () => void;
+    onMenuItemClick(): any;
     /**
-     *Création du panel pour le plugins et ensuite ajoute le formulaire pou la connexion
+     * Création du panel pour le plugins et ensuite ajoute le formulaire pou la connexion
      * de l'utilisateur
      * @memberof Geosys
      */
     addLoginPanel(): void;
     /**
-     * first controller, the one function is the submit button to do a connexion call to the API and
-     * return all the information for the user and stored in the usr class.
-     * @param {*} panel the panel from the viewer
-     * @param {*} mapApi the API from the viewer and angular
-     * @param {*} config the config of the viewer(the other file in samples)
+     * First controller, the one function is the submit button to do a connexion call to the API and
+     * receive from API all the information for the user and stored in the usr class.
+     * @param {*} panel The panel from the viewer
+     * @param {*} mapApi The API from the viewer and angular
+     * @param {*} config The config of the viewer(the other file in samples)
      * @memberof Geosys
      */
     connexionControls(panel: any, mapApi: any, config: any): void;
     /**
-     * Compile a html template to read to compil and replace all the variable inside the template
-     * @param {*} template the html template to compile
-     * @param {*} mapApi the API of the viewer to compile it(service angular)
+     * Compile a html template to read to compile and replace all the variable inside the template
+     * @param {*} template The html template to compile
+     * @param {*} mapApi The API of the viewer to compile it(service angular)
      * @returns {JQuery<HTMLElement>}
      * @memberof Geosys
      */
-    compileTemplate(template: any, mapApi: any): JQuery<HTMLElement>;
+    compileTemplate(template: string, mapApi: any): JQuery<HTMLElement>;
 }
 export default interface Geosys {
     mapApi: any;

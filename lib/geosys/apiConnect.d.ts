@@ -1,13 +1,21 @@
-export declare class connexion {
+export declare class Connexion {
     constructor();
     /**
-     *the connexion to the Api for the login
-     * @param {string} urlgoto the url for the login
-     * @param {*} header the header with the username and the password
-     * @returns {*} return the infromation of the user
+     * The connexion to the Api for the login
+     * @param {string} urlgoto The url for the login
+     * @param {*} header The header with the username and the password
+     * @returns {*} Return the infromation of the user
      * @memberof connexion
      */
     connexionAPILogin(urlgoto: string, header: any): any;
+    /**
+    * The connexion to the Api for the login (TEST)
+    * @param {string} urlgoto The url for the login
+    * @param {*} header The header with the username and the password
+    * @returns {*} Return the infromation of the user
+    * @memberof connexion
+    */
+    connexionAPILoginP(urlgoto: string, header: any): any;
     /**
      * connection to the Api with ajax and promises
      * @param {string} token the token for the connection
@@ -17,7 +25,7 @@ export declare class connexion {
      * @returns {*} return all the information we get from the Api
      * @memberof connexion
      */
-    connexionAPI(token: string, jsonstring: any, urlgoto: string, typeConn: string, optEnv?: string): any;
+    connexionAPI(token: string, jsonString: any, urlgoto: string, typeConn: string, optEnv?: string): any;
     /**
       * connection to the Api with ajax and promises for files
       * @param {string} token the token for the connection
@@ -28,7 +36,12 @@ export declare class connexion {
      * @memberof connexion
      */
     connexionAPIFormData(token: string, formdata: any, urlgoto: string, typeConn: string, optEnv?: string): any;
-    connexionAPIFileMAnager(token: string, urltogo: string): any;
-    connexionAPIFileDownloadDelete(token: string, urltogo: string, operatio: string, content: string): any;
-    connexionAPIFileUplaod(token: string, urltogo: string, file: File): any;
+    /**
+     * Get the structure of a repository from S3
+     * @param {string} token token of the user
+     * @param {string} urltogo the url for the API
+     * @returns {*} the list of folder and file
+     * @memberof Connexion
+     */
+    connexionAPIFileManager(token: string, urltogo: string, operation: string, content: string, file?: any): any;
 }

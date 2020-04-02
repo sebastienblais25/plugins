@@ -13,23 +13,23 @@ export class ExtractController {
     extrairecontrols(log: User, mapApi: any): void {
         /************ À placer en fonction ou class ***********/
         mapApi.agControllerRegister('SubmitCtrl', function() { 
-            //error message if problem with the slect working unit ID
+            // Error message if problem with the slect working unit ID
             this.ErrorEx = false;
             /************** interactive List ***************/
-            //theme
+            // Theme
             this.selectedItemA = '';
-            //Working unit ID
+            // Working unit ID
             this.selectedItemB = '';
-            //set up the theme list
+            // Set up the theme list
             this.itemsA = [];
             for (let i in log.getThemeAcc()) {
-                this.itemsA.push( {name : log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()} );
+                this.itemsA.push( {name: log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()} );
             }
             this.itemsB = [];
-            //création de la liste pour les unité de travail
+            // Création de la liste pour les unité de travail
             this.setList = () => {
                 this.selectedItemB = '';
-                // populate list of working unit id
+                // Populate list of working unit id
                 this.itemsB.length = 0;
                 let list:any = log.setidUTtheme(this.selectedItemA)
                 for (let i in list) {
@@ -45,14 +45,14 @@ export class ExtractController {
             /************** interactive List Advanced Setting ***************/
             this.selectedItemENT = '';
             this.itemsENT = [];
-            //changement
+            // Changement
             for (let i in log.getEnvAcc()) {
                 this.itemsENT.push( {name : log.getEnvAcc()[i]._env , value: log.getEnvAcc()[i]._env} );
             }
             /**************** From Submission ***************/
-             this.submitForm = () => { 
+            this.submitForm = () => { 
                  console.log(this.selectedItemB)
-                //get all the information of the form into the class
+                // Get all the information of the form into the class
                 if (this.selectedItemB == '') {
                     this.ErrorEx = true;
                     log.setCloseable(false);
@@ -61,7 +61,7 @@ export class ExtractController {
                     let ext = new Extraire(this.selectedItemA, this.selectedItemB);
                     ext.setOptionnalEnvironnement(this.selectedItemENT);
                     let ApiReturn:any = ext.submitForm(log);
-                    //if the conection to the API is a success
+                    // If the conection to the API is a success
                     if (ApiReturn != 'success') {
                         alert(ApiReturn.statusText);
                         log.setCloseable(false);
@@ -80,33 +80,33 @@ export class ExtractController {
     extraireSRcontrols(log: User, mapApi: any): void {
         /************ Bouton Extraire ***********/
         mapApi.agControllerRegister('SubmitExCtrl', function() {
-            // to acces elemnent in the reader file
+            // To acces elemnent in the reader file
             const that = this;
-            //error message for the list of the classes
+            // Error message for the list of the classes
             this.errclassEX = false;
             /************** interactive List ***************/
-            //theme
+            // Theme
             this.selectedItemA = '';
-            //Where Clause
+            // Where Clause
             this.whereclause = '';
-            //Geom Coordinates
+            // Geom Coordinates
             this.geomSR = ''
-            //set up the list of theme
+            // Set up the list of theme
             this.itemsA = [];
             for (let i in log.getThemeAcc()) {
                 this.itemsA.push({name : log.getThemeAcc()[i].getnom() , value: log.getThemeAcc()[i].getId()});
             }
-            //set of a list of classes
+            // Set of a list of classes
             this.classes = [];
-            //création de la liste pour les unité de travail
+            // Création de la liste pour les unité de travail
             this.setList = () => {
                 let list= [];
                 list = log.getlistofclasses(this.selectedItemA);
                 this.classes.length = 0;
-                //add the new list in list for the template
+                // Add the new list in list for the template
                 this.classes = list 
             }
-            //select all the classes in the list
+            // Select all the classes in the list
             this.toggleAll = () => {
                 if (this.listeclasse == true) {
                     for (let i in this.classes) {
@@ -132,50 +132,50 @@ export class ExtractController {
                 this.drawingchecked = false;
                 this.inputchecked = false;
             }
-            /************** subscribe to the drawing event ***************/
+            /************** Subscribe to the drawing event ***************/
             (<any>window).drawObs.drawPolygon.subscribe(value => {
-                //create a geojson with the information obtain if the checkbox for drawinf is check
+                // Create a geojson with the information obtain if the checkbox for drawinf is check
                 if (this.drawingchecked == true) {
                     log.createGeoJson('ESPG:'+ value.spatialReference.wkid,value.rings)
-                    //show the geo json in the input 
+                    // Show the geo json in the input 
                     that.geomSR = log.getGeom(); 
                 }
             });
             /************** Shapefile load ***************/
             this.loadshpEX = () => {
-                //get the files in the input
+                // Get the files in the input
                 let files: any = (<HTMLInputElement>document.getElementById('fileshpEX')).files
-                //if there is no file
+                // If there is no file
                 if (files.length == 0) {
                     alert('No files');
                 } else {
                     let file: any = files[0];
-                    //A file reader
+                    // A file reader
                     const reader = new FileReader();
-                    //fonction for the file reader
+                    // Fonction for the file reader
                     reader.onload = (e) => {
                         if (reader.readyState != 2 || reader.error) {
                             return;
                         } else {
-                            //package to read a shapefile and get a geojson
+                            // Package to read a shapefile and get a geojson
                             let shp = require("shpjs");
-                            //read the zip shapefile
+                            // Read the zip shapefile
                             shp(reader.result).then(function(dta) {
-                                //set a variable with the coordinates for the drawing
+                                // Set a variable with the coordinates for the drawing
                                 let geomDR = dta.features[0].geometry.coordinates[0];
-                                //set a variable with the coordinates for the geojson
+                                // Set a variable with the coordinates for the geojson
                                 let geomGEOJSON = dta.features[0].geometry.coordinates;
-                                //Create a geojson with the onfromation of the shapefile
+                                // Create a geojson with the onfromation of the shapefile
                                 log.createGeoJson('EPSG:4326',geomGEOJSON);
-                                //set the geojson in the input
+                                // Set the geojson in the input
                                 that.geomSR = log.getGeom();
-                                //create the polygon in the viewer with a zoom on it
+                                // Create the polygon in the viewer with a zoom on it
                                 log.createPolygons(mapApi.id,geomDR);
                             });
 
                         }
                     }
-                    //read the file
+                    // Read the file
                     reader.readAsArrayBuffer(file);     
                 }
             }
@@ -188,14 +188,14 @@ export class ExtractController {
             /************** interactive List Advanced Setting ***************/
             this.selectedItemENT = '';
             this.itemsENT = [];
-            //changement
+            // Changement
             for (let i in log.getEnvAcc()) {
                 this.itemsENT.push({name : log.getEnvAcc()[i]._env , value: log.getEnvAcc()[i]._env});
             }
             /**************** From Submission ***************/
-            //Envoie le formulaire a l'Api
+            // Envoie le formulaire a l'Api
             this.submitSRForm = () => { 
-                //get all the information of the form into the class
+                // Get all the information of the form into the class
                 this.geomSR = log.getGeom();
                 let listofclass = []
                 for (let i in this.classes) {
@@ -203,7 +203,7 @@ export class ExtractController {
                         listofclass.push(this.classes[i].name);
                     }
                 }
-                //if the user want a clip
+                // If the user want a clip
                 let siClip: string;
                 if (this.cbClip == true) {
                     siClip = 'oui';
@@ -214,7 +214,7 @@ export class ExtractController {
                     this.errclassEX = true;
                     log.setCloseable(false);
                 } else {
-                    //console.log(this.geomSR)
+                    // Console.log(this.geomSR)
                     log.setCloseable(true);
                     let extsr = new Extraire(
                         this.selectedItemA);
@@ -223,7 +223,7 @@ export class ExtractController {
                         this.whereclause,
                         this.geomSR);
                     extsr.setOptionnalEnvironnement(this.selectedItemENT);
-                    //If the connection to the API is a Success
+                    // If the connection to the API is a Success
                     let ApiReturn: any = extsr.submitForm(log);
                     if (ApiReturn != 'success') {
                         alert(ApiReturn.statusText)
@@ -233,5 +233,4 @@ export class ExtractController {
             };
         });
     }
-
 }

@@ -1,46 +1,44 @@
-import { connexion } from './apiConnect';
-import { idWu } from './manager/idWU';
+import { Connexion } from './apiConnect';
 import { Environnement } from './manager/environnement';
-import { ApiReturn } from './ApiReturn';
+import { ApiReturn } from './manager/apireturn';
 export declare class User {
     /** Send to APi **/
-    _username: string;
-    _password: string;
+    private _username;
+    private _password;
     /** Environnement **/
-    _environnementSel: string;
-    _urlEnvselected: string;
-    _baseTheme: string;
+    private _environnementSel;
+    private _urlEnvselected;
+    private _baseTheme;
     /** Connexion **/
-    _conn: connexion;
+    private _conn;
     /** Return of login **/
-    _token: string;
-    _tokentype: string;
-    _expired: number;
-    _rightRead: ApiReturn;
-    _rightWrite: ApiReturn;
+    private _token;
+    private _tokentype;
+    private _expired;
+    private _right;
     /** List **/
-    _themeAcc: ApiReturn[];
-    _envAcc: Environnement[];
-    _equipe: ApiReturn;
-    _idUt: idWu;
-    _classeslist: string[];
-    _workinType: ApiReturn[];
+    private _themeAcc;
+    private _envAcc;
+    private _equipe;
+    private _idUt;
+    private _classeslist;
+    private _workinType;
     /** other **/
-    _geom: string;
-    _advanced: boolean;
-    _closeable: boolean;
+    private _geom;
+    private _advanced;
+    private _closeable;
     /**
-     *Creates an instance of User. with only the username and a password for the connections
-     * @param {string} [username] name of the user
-     * @param {string} [password] password of the user
+     * Creates an instance of User. with only the username and a password for the connections
+     * @param {string} [username] Name of the user
+     * @param {string} [password] Password of the user
      * @memberof User
      */
     constructor(username?: string, password?: string);
     /**
-     *Contruct an url with the environnement selected and the url for the action
-     * @param {string} url url of the action
-     * @param {string} [adding] add the theme or id at the end (optional)
-     * @returns {string}
+     * Contruct an url with the environnement selected and the url for the action
+     * @param {string} url Url of the action
+     * @param {string} [adding] Add the theme or id at the end (optional)
+     * @returns {string} An url with the url of the nevironnemtn and the API one
      * @memberof User
      */
     constructUrl(url: string, adding?: string): string;
@@ -53,7 +51,7 @@ export declare class User {
     submitForm(config: any): any;
     /**
      * Create the list of environnement and their url and place the PRO environnment in first
-     * @param {*} output its the data from API.
+     * @param {*} output Its the data from API.
      * @memberof User
      */
     setListEnv(output: any): void;
@@ -81,14 +79,14 @@ export declare class User {
      */
     setDataFromAPI(token: string, token_type: string, expired: number, scope: string[], theme: string[], equipe: string, config: any): void;
     /**
-     * call Api for a list of working unit
-     * @param {string} theme the theme related to the working unit
+     * Call Api for a list of working unit
+     * @param {string} theme The theme related to the working unit
      * @memberof User
      */
     callAPIWorkingUnit(theme: string): void;
     /**
-     * call the API for a list of classes
-     * @param {string} theme the theme related to the list of classes
+     * Call the API for a list of classes
+     * @param {string} theme The theme related to the list of classes
      * @memberof User
      */
     callAPIListeClasse(theme: string): void;
@@ -99,25 +97,25 @@ export declare class User {
      */
     callAPIWorkingType(theme: string): void;
     /**
-     * ordering the list to set the base theme in first place
-     * @param {string[]} theme list of theme
-     * @param {*} config the base theme
+     * Ordering the list to set the base theme in first place
+     * @param {string[]} theme List of theme
+     * @param {*} config The base theme
      * @returns
      * @memberof User
      */
-    orderThemeList(theme: string[], config: any): string[];
+    orderThemeList(theme: string[], config: any): any;
     /**
      * Get all the information of a code into the properties _themeAcc
-     * @param {string} theme the code of the theme to get all of his info
-     * @param {string} rank the rankl of the list _themeAcc
+     * @param {string} theme The code of the theme to get all of his info
+     * @param {string} rank The rankl of the list _themeAcc
      * @memberof User
      */
     getinfoForCode(theme: string, rank: string): void;
     /**
-     * build the object for the working unit id and setting the theme in front for the mocking
+     * Build the object for the working unit id and setting the theme in front for the mocking
      * and set a list for the dropdown list int the forms.
-     * @param {string} theme the theme selected by the user
-     * @returns return a list of working unit id with a name and a value for a dropdownlist
+     * @param {string} theme The theme selected by the user
+     * @returns Return a list of working unit id with a name and a value for a dropdownlist
      * @memberof User
      */
     setidUTtheme(theme: string): any[];
@@ -175,23 +173,33 @@ export declare class User {
     /*************** Accessors ***********************/
     getUsername(): string;
     setUsername(value: string): void;
-    getpassword(): string;
-    setpassword(value: string): void;
-    getconn(): connexion;
-    setconn(value: connexion): void;
+    getPassword(): string;
+    setPassword(value: string): void;
+    getConn(): Connexion;
+    setConn(value: Connexion): void;
     getToken(): string;
-    settoken(value: string): void;
-    gettokentype(): string;
-    settokentype(value: string): void;
-    getexpired(): number;
-    setexpired(value: number): void;
-    getrightRead(): string;
-    setrightRead(value: string): void;
-    getrightWrite(): string;
-    setrightWrite(value: string): void;
-    getthemeAcc(): ApiReturn[];
+    setToken(value: string): void;
+    getTokenType(): string;
+    setTokenType(value: string): void;
+    getExpired(): number;
+    setExpired(value: number): void;
+    getRight(): ApiReturn[];
+    setRight(value: string, rank: number): void;
+    getThemeAcc(): ApiReturn[];
     getAllThemeNAme(): string;
-    setthemeAcc(value: string): void;
-    getenvAcc(): Environnement[];
-    setenvAcc(value: Environnement[]): void;
+    setThemeAcc(value: string): void;
+    getEnvAcc(): Environnement[];
+    setEnvAcc(value: Environnement[]): void;
+    getEnvironnementSel(): string;
+    setEnvironnementSel(value: string): void;
+    getUrlEnvselected(): string;
+    setUrlEnvselected(value: string): void;
+    getCloseable(): boolean;
+    setCloseable(value: boolean): void;
+    getGeom(): string;
+    setGeom(value: string): void;
+    getAdvanced(): boolean;
+    setAdvanced(value: boolean): void;
+    getEquipe(): ApiReturn;
+    setEquipe(value: ApiReturn): void;
 }

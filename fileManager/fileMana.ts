@@ -12,6 +12,13 @@ export class FileMana {
     private _nextFolder: string;
     private _value: any;
     private _list = [];
+    private _url: string;
+    geturl(): string {
+        return this._url;
+    }
+    seturl(value: string) {
+        this._url = value;
+    }
     
     /**
      *Creates an instance of FileMana.

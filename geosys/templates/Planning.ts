@@ -3,7 +3,7 @@ export const formPlanifier = `
     <div ng-style="ctrl1.SelectedMenuP" class="Geosys-div-Button" ng-click="ctrl1.ShowHide()">
         <h2>{{ 'plugins.geosys.planif' | translate }}</h2>
     </div>
-    <div ng-show="ctrl1.IsVisibleP" ng-style="bgEnv">
+    <div ng-show="ctrl1.IsVisiblePlanning" ng-style="ctrl1.bgEnv">
     <form name="planning">
         <div>
             <md-input-container class="Geosys-ddlshow">

@@ -7,7 +7,7 @@ export const formNettoyage:string =
     <div ng-style="ctrl1.SelectedMenuC" class="Geosys-div-Button" ng-click="ctrl1.ShowHideCl()">
         <h2>{{ 'plugins.geosys.nettoyage' | translate }}</h2>
     </div>
-    <div ng-show="ctrl1.IsVisibleCL" ng-style="bgEnv" class="Geosys-extractspace">
+    <div ng-show="ctrl1.IsVisibleCL" ng-style="ctrl1.bgEnv" class="Geosys-extractspace">
         <form name="cleaningform">
             <div class="rv-subsection">
                 <md-input-container class="Geosys-ddlshowEX">

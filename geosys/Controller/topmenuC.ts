@@ -7,27 +7,27 @@ export class TopMenuController {
     constructor(){};
     /**
      * Change the environnement of the user and change the color of the backgournd if not PRO
-     * @param {User} log getting all the information of the user and getting the envrionnemnt h'es already in
+     * @param {User} log getting all the information of the user and getting the envrionnemnt he's already in
      * @param {*} mapApi need the mapApi for setting the controller.
      * @memberof manageController
      */
     topmenuControl(log: User, mapApi: any) {
         mapApi.agControllerRegister('topmenuCtrl', function() {
-            const that = this;
             /************** interactive List ***************/
             this.selectedItemENT = '';
             this.itemsENT = [];
             //changement
             for (let i in log.getEnvAcc()) {
-                this.itemsENT.push( {name : 'Environnement : ' +log.getEnvAcc()[i]._env , value: log.getEnvAcc()[i]._env} );
+                this.itemsENT.push( {name : 'Environnement : ' +log.getEnvAcc()[i]._env, value: log.getEnvAcc()[i]._env} );
             }
             this.setEnv = () => {
                 log.setEnvironnementSelected(this.selectedItemENT);
-                if (log.getEnvironnementSel() === 'TST') {
+                console.log(log.getEnvironnementSel());
+                if (log.getEnvironnementSel() == 'TST') {
                     this.bgEnv = {
                         "background-color" : "lightgreen", 
                     }
-                } else if (log.getEnvironnementSel() === 'DEV') {
+                } else if (log.getEnvironnementSel() == 'DEV') {
                     this.bgEnv = {
                         "background-color" : "pink", 
                     }
@@ -54,7 +54,7 @@ export class TopMenuController {
                 }
                 let output = infoUser.replace('(username)',log.getUsername() + ' ' + log.getPassword());
                 output = output.replace('(theme)',log.getAllThemeNAme());
-                output = output.replace('(right)',log.getRightRead() + ' ' + log.getRightWrite());
+                output = output.replace('(right)',log.getRight()[0].getnom() + ' ' + log.getRight()[1].getnom());
                 output = output.replace('(equipe)',log.getEquipe().getId());
                 output = output.replace('(envir)', log.getEnvironnementSel() + '  </br>URL : ' + log.getUrlEnvselected());
                 let paneluser: TopMenuController =  new TopMenuController()
@@ -79,20 +79,29 @@ export class TopMenuController {
                 this.panel1.open(); 
             }
             /**************** form opening handler ***************/
-            this.IsVisibleP = false;
+            // Planification
+            this.IsVisiblePlanning = false;
+            // Extraction GP
             this.IsVisibleEP = false;
+            // Extraction U
             this.IsVisibleSR = false;
+            // Create
             this.IsVisibleCR = false;
+            // Validate
             this.IsVisibleV = false;
+            // Delivery
             this.IsVisibleD = false;
+            // Cleaning
             this.IsVisibleCL = false;
+            // Cancel
             this.IsVisibleCA = false;
+            // Additionnal tool
             this.IsVisibleUT = false;
             //permet d'afficher ou cacher le formulaire en cliquant sur le titre
             this.ShowHide = () => {
                 if (log.getEnvironnementSel() !== '' && log.getCloseable() === true) {
-                    this.IsVisibleP = this.IsVisibleP ? false : true;
-                    if (this.IsVisibleP == true) {
+                    this.IsVisiblePlanning = this.IsVisiblePlanning ? false : true;
+                    if (this.IsVisiblePlanning == true) {
                         //hide non-selected
                         this.IsVisibleEP = false;
                         this.IsVisibleSR = false;
@@ -142,7 +151,7 @@ export class TopMenuController {
                             this.AdvancedVisible = false;
                         }
                         //hide non-selected
-                        this.IsVisibleP = false;
+                        this.IsVisiblePlanning = false;
                         this.IsVisibleSR = false;
                         this.IsVisibleCR = false;
                         this.IsVisibleV = false;
@@ -190,7 +199,7 @@ export class TopMenuController {
                             this.AdvancedVisible = false;
                         }
                         //hide non-selected
-                        this.IsVisibleP = false;
+                        this.IsVisiblePlanning = false;
                         this.IsVisibleEP = false;
                         this.IsVisibleCR = false;
                         this.IsVisibleV = false;
@@ -232,7 +241,7 @@ export class TopMenuController {
                     this.IsVisibleCR = this.IsVisibleCR ? false : true;
                     if (this.IsVisibleCR === true) {
                         //hide non-selected
-                        this.IsVisibleP = false;
+                        this.IsVisiblePlanning = false;
                         this.IsVisibleEP = false;
                         this.IsVisibleSR = false;
                         this.IsVisibleV = false;
@@ -274,7 +283,7 @@ export class TopMenuController {
                     this.IsVisibleV = this.IsVisibleV ? false : true;
                     if (this.IsVisibleV === true) {
                         //hide non-selected
-                        this.IsVisibleP = false;
+                        this.IsVisiblePlanning = false;
                         this.IsVisibleEP = false;
                         this.IsVisibleSR = false;
                         this.IsVisibleCR = false;
@@ -322,7 +331,7 @@ export class TopMenuController {
                             this.AdvancedVisible = false;
                         }
                         //hide non-selected
-                        this.IsVisibleP = false;
+                        this.IsVisiblePlanning = false;
                         this.IsVisibleEP = false;
                         this.IsVisibleSR = false;
                         this.IsVisibleCR = false;
@@ -364,7 +373,7 @@ export class TopMenuController {
                     this.IsVisibleCL = this.IsVisibleCL ? false : true; 
                     if (this.IsVisibleCL === true) {
                         //hide non-selected
-                        this.IsVisibleP = false;
+                        this.IsVisiblePlanning = false;
                         this.IsVisibleEP = false;
                         this.IsVisibleSR = false;
                         this.IsVisibleCR = false;
@@ -406,7 +415,7 @@ export class TopMenuController {
                     this.IsVisibleCA = this.IsVisibleCA ? false : true; 
                     if (this.IsVisibleCA === true) {
                         //hide non-selected
-                        this.IsVisibleP = false;
+                        this.IsVisiblePlanning = false;
                         this.IsVisibleEP = false;
                         this.IsVisibleSR = false;
                         this.IsVisibleCR = false;
@@ -448,7 +457,7 @@ export class TopMenuController {
                     this.IsVisibleUT = this.IsVisibleUT ? false : true;
                     if (this.IsVisibleUT === true) {
                         //hide non-selected
-                        this.IsVisibleP = false;
+                        this.IsVisiblePlanning = false;
                         this.IsVisibleEP = false;
                         this.IsVisibleSR = false;
                         this.IsVisibleCR = false;

@@ -17,6 +17,5 @@ export const loginmenu:string= `
             {{ 'plugins.geosys.submit' | translate }}
             <md-tooltip>{{ 'plugins.geosys.submit' | translate }}</md-tooltip>
         </md-button>
-
     </div>
 </div>`;

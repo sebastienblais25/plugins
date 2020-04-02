@@ -1,4 +1,4 @@
-export declare class idWu {
+export declare class IdWu {
     _theme: string;
     _wUnit: string[];
     constructor(theme: string, wUnit: string[]);

@@ -3,7 +3,7 @@ export const validateform:string = `
     <div ng-style="ctrl1.SelectedMenuV" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideV()">
         <h2>{{ 'plugins.geosys.valider' | translate }}</h2>
     </div>
-    <div ng-show="ctrl1.IsVisibleV" ng-style="bgEnv">
+    <div ng-show="ctrl1.IsVisibleV" ng-style="ctrl1.bgEnv">
         <form name="valiform">
             <div class="rv-subsection">
                 <md-input-container class="Geosys-ddlshowEX">

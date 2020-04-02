@@ -6,14 +6,14 @@ export const formExtraireP:string =
     <div ng-style="ctrl1.SelectedMenuE" class="Geosys-div-Button" ng-click="ctrl1.ShowHideEX()">
         <h2>{{ 'plugins.geosys.extrac' | translate }}</h2>
     </div>
-    <div ng-show="ctrl1.IsVisibleEP" ng-style="bgEnv" class="Geosys-extractspace">
+    <div ng-show="ctrl1.IsVisibleEP" ng-style="ctrl1.bgEnv" class="Geosys-extractspace">
         <form name="extractGeosys">
             <div class="rv-subsection">
                 <md-input-container class="Geosys-ddlshowEX">
                     <label>{{ 'plugins.geosys.themet' | translate }}</label>
                     <md-select 
                     ng-model="ctrl3.selectedItemA" 
-                    ng-change="ctrl3.setList()" 
+                    ng-change="ctrl3.setList()"
                     id="theme" 
                     required>
                         <md-option ng-repeat="item in ctrl3.itemsA" ng-value="item.value" ng-selected="ctrl3.itemsA.indexOf(item) == 0">
@@ -71,7 +71,7 @@ export const formExtraireSR:string =
     <div ng-style="ctrl1.SelectedMenuEU" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideEXSR()">
         <h2>{{ 'plugins.geosys.extract' | translate }}</h2>
     </div>
-    <div ng-show="ctrl1.IsVisibleSR" ng-style="bgEnv">
+    <div ng-show="ctrl1.IsVisibleSR" ng-style="ctrl1.bgEnv">
         <form name="exSRform">
             <div class="rv-subsection">
                 <md-input-container class="Geosys-ddlshowEX">

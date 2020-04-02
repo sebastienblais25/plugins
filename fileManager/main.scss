@@ -1,0 +1,183 @@
+/********** File Manager **********/
+/**** breadcrumbs ****/
+.Geosys-topcover {
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    opacity: 1;
+    height: 10px;
+    width: 100%;
+    z-index: 200;
+  }
+  .Geosys-sticky-Header {
+    position: sticky;
+    top: 10px;
+    background-color: white;
+    opacity: 1;
+    z-index: 300;
+  }
+  .Geosys-backing {
+    margin-left: 0px;
+    float: left;
+    padding-top: 10px;
+    padding-left: 3px;
+    padding-right: 2px;
+    border-right: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: lightgrey;
+    padding-bottom: 5px;
+    cursor: pointer;
+  }
+  .Geosys-backing:hover {
+    transition: 0.5s;
+    background-color: silver;
+  }
+  .Geosys-breadclass {
+    width: 99%;
+    padding: 10px 0px 10px 5px;
+    background-color: aliceblue;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: lightgrey;
+  }
+  .Geosys-breadClick {
+    background-color: aliceblue;
+    padding-top: 11px;
+    padding-bottom: 12px;
+    border-radius: 2px; 
+    cursor: pointer;
+  }
+  .Geosys-breadClick:hover {
+    transition: 0.5s;
+    background-color: silver;
+    text-decoration: underline;
+  }
+  /**** Header ****/
+  .Geosys-header-File {
+    width: 99%;
+    margin-top: 3px;
+    border-style: solid;
+    border-width: 2px;
+    //border-radius: 5px;
+    border-color: lightgrey;
+    margin-bottom: 3px;
+  }
+  .Geosys-name-File-Folder-Header {
+    width: 225px;
+    display: inline-flex;
+    padding-left: 2px;
+  }
+  .Geosys-modified-File-Folder-Header {
+    width: 150px;
+    display: inline-block;
+    border-left: 2px solid;
+    border-color: lightgrey;
+    padding-left: 2px;
+  }
+  .Geosys-size-File-Folder-Header {
+    width: 100px;
+    display: inline-block;
+    border-left: 2px solid;
+    border-color: lightgrey;
+    padding-left: 2px;
+  }
+  /**** Folder ****/
+  .Geosys-folderBtn {
+    width: 99%;
+    padding: 0px 0px 0px 10px;
+    font-size: 15px;
+    opacity: 0.6;
+    cursor: pointer;
+  }
+  // lors du hover du bouton du menu
+  .Geosys-folderBtn:hover {
+    opacity: 1;
+    background-color: #e7e6e6;
+    transition: 0.4s;
+  }
+  /**** Files ****/
+  .Geosys-fileBtn {
+    width: 99%;
+    padding: 0px 0px 0px 10px;
+    cursor: pointer;
+    font-size: 15px;
+    opacity: 0.6;
+  }
+  // lors du hover du bouton du menu
+  .Geosys-fileBtn:hover {
+    opacity: 1;
+    background-color: #f7f5f5;
+    transition: 0.3s;
+  }
+  /**** Folder and Files ****/
+  .Geosys-groupingInfo {
+    width: 100%;
+  }
+  .Geosys-name-File-Folder {
+    width: 200px;
+    display: inline-flex;
+  }
+  .Geosys-modified-File-Folder {
+    width: 150px;
+    display: inline-block;
+  }
+  .Geosys-size-File-Folder {
+    width: 100px;
+    display: inline-block;
+  }
+  .Geosys-downloadbtn {
+    padding-top: 10px;
+    padding-left: 8px;
+    width: 40px;
+    height: 45px;
+    float: right;
+    cursor:pointer;
+    //transition: 0.4s;
+  }
+  .Geosys-downloadbtn:hover {
+    background-color: rgb(204, 203, 203);
+    transition: 0.4s;
+  }
+  .Geosys-lilPad{
+    padding-top: 10px;
+  }
+  .Geosys-drop-window {
+	position: fixed;
+	top: 100px;
+	left: 450px;
+	right: 50px;
+	bottom: 100px;
+	background: rgba(0,86,132,.9);
+	z-index: 250000;
+	display: none;
+	text-align: center;
+	-webkit-transition: opacity 250ms;
+	transition: opacity 250ms;
+  pointer-events: none;
+}
+.Geosys-drop-window-content {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
+	border: 1px dashed #fff;
+}
+.Geosys-drop-window h3 {
+	margin: -.5em 0 0;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	font-size: 40px;
+	color: #fff;
+	padding: 0;
+}
+.Geosys-hidden-upload {
+  display: none;
+}

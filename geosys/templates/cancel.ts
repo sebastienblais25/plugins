@@ -6,7 +6,7 @@ export const formCancel:string = `
     <div ng-style="ctrl1.SelectedMenuCa" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideCa()">
         <h2>{{ 'plugins.geosys.annuler' | translate }}</h2>
     </div>
-    <div ng-show="ctrl1.IsVisibleCA" ng-style="bgEnv" class="Geosys-extractspace">
+    <div ng-show="ctrl1.IsVisibleCA" ng-style="ctrl1.bgEnv" class="Geosys-extractspace">
         <div class="rv-subsection">
             <md-input-container class="Geosys-ddlshowEX">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>

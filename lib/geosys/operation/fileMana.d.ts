@@ -1,13 +1,13 @@
 import { User } from '../user';
-import { connexion } from '../apiConnect';
+import { Connexion } from '../apiConnect';
 export declare class FileMana {
-    _conn: connexion;
-    _breadcrumbs: string;
-    _lastFolder: string;
-    _liveFolder: string;
-    _nextFolder: string;
-    _value: any;
-    _list: any[];
+    private _conn;
+    private _breadcrumbs;
+    private _lastFolder;
+    private _liveFolder;
+    private _nextFolder;
+    private _value;
+    private _list;
     /**
      *Creates an instance of FileMana.
      * @param {string} [nextFolder='root']
@@ -57,12 +57,6 @@ export declare class FileMana {
      */
     setbreacrumbsForNav(rank: string): void;
     /**
-     * set properties next folder
-     * @param {string} next name of the next folder
-     * @memberof FileMana
-     */
-    setNextFolder(next: string): void;
-    /**
      * set a formdata to the Api to upload a file
      * @param {string} path the path of the file
      * @param {string} token the token for the connection
@@ -109,5 +103,24 @@ export declare class FileMana {
      * @memberof FileMana
      */
     createFolder(pathforfolder: string, log: User, foldername: string): void;
+    /**
+     * Maybe Added feature in the future
+     * @memberof FileMana
+     */
     uploadFolder(): void;
+    /******* Accessor *******/
+    getConn(): Connexion;
+    setConn(value: Connexion): void;
+    getBreadcrumbs(): string;
+    setBreadcrumbs(value: string): void;
+    getLastFolder(): string;
+    setLastFolder(value: string): void;
+    getLiveFolder(): string;
+    setLiveFolder(value: string): void;
+    getNextFolder(): string;
+    setNextFolder(next: string): void;
+    getValue(): any;
+    setValue(value: any): void;
+    getList(): any[];
+    setList(value: any): void;
 }

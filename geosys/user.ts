@@ -3,7 +3,7 @@ import { urlLoginGet, urlgetidWu, urlEnvList,
 import { Connexion } from './apiConnect';
 import { IdWu } from './manager/idWU';
 import { Environnement } from './manager/environnement';
-import { ApiReturn } from './ApiReturn';
+import { ApiReturn } from './manager/apireturn';
 
 
 export class User{
@@ -19,16 +19,15 @@ export class User{
     /** Return of login **/
     private _token: string;
     private _tokentype: string;
-    private _expired: number = 3600;
-    private _rightRead:ApiReturn;
-    private _rightWrite:ApiReturn;
+    private _expired: number;
+    private _right: ApiReturn[] = [];
     /** List **/
-    private _themeAcc:ApiReturn[] = [];
+    private _themeAcc: ApiReturn[] = [];
     private _envAcc: Environnement[] = [];
     private _equipe: ApiReturn;
-    private _idUt:IdWu;
-    private _classeslist:string[];
-    private _workinType:ApiReturn[] = [];
+    private _idUt: IdWu;
+    private _classeslist: string[];
+    private _workinType: ApiReturn[] = [];
     /** other **/
     private _geom: string;
     private _advanced: boolean = false;
@@ -61,11 +60,13 @@ export class User{
      * @memberof User
      */
     submitForm(config: any): any {
-        let json = '';
+        let json: string = '';
         let data: any;
         let header: any = this.getInformationToHeader();
         data = this._conn.connexionAPILogin(this.constructUrl(urlLoginGet),header);
         this.setListEnv(this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlEnvList), 'Get'));
+        // Destroy the password for the session
+        this._password = ''
         if (!data.code) {
             this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe,config);
         } else {
@@ -100,6 +101,7 @@ export class User{
     setEnvironnementSelected(env: string) {
         for (let i in this._envAcc) {
             if (this._envAcc[i]._env === env) {
+                this._environnementSel = this._envAcc[i]._env;
                 this._urlEnvselected = this._envAcc[i]._urlEnv;
                 break;
             } 
@@ -112,7 +114,7 @@ export class User{
      */
     getInformationToHeader(): any {
         //get de properties
-        let output:any = {
+        let output: any = {
             'usager': this._username,
             'mot_de_passe': this._password,
             'duree_token': this._expired
@@ -135,11 +137,13 @@ export class User{
         this._token = token;
         this._tokentype = token_type;
         this._expired = expired;
-        this._rightRead = new ApiReturn(scope[0]);
-        this._rightWrite = new ApiReturn(scope[1]);
+        for (let i in scope) {
+            this._right.push(new ApiReturn(scope[i]));
+            //this.getinfoForCode(this._right[i].getId(),i)
+        }
         this._equipe = new ApiReturn(equipe);
         this._baseTheme = config.base_theme;
-        let ordertheme:any =this.orderThemeList(theme,config);
+        let ordertheme: any =this.orderThemeList(theme,config);
         for (let i in ordertheme){
             this._themeAcc.push(new ApiReturn(ordertheme[i]));
             this.getinfoForCode(ordertheme[i],i)
@@ -272,7 +276,7 @@ export class User{
     createJsonRessources(theme: string/*, path:string */): string {
         let output:any = {
             'fichiers': [
-              theme + ':ress_hydro.json'
+              theme + ':ress.json'
             ],
             'chemin_recherche': [
               'ressources/liste_classes'
@@ -440,18 +444,11 @@ export class User{
         this._expired = value;
     }
     // RightRead
-    getRightRead(): string {
-        return this._rightRead.getnom();
+    getRight(): ApiReturn[] {
+        return this._right
     }
-    setRightRead(value: string) {
-        this._rightRead.setnom(value);
-    }
-    // RightWrite
-    getRightWrite(): string {
-        return this._rightWrite.getnom();
-    }
-    setRightWrite(value: string) {
-        this._rightWrite.setnom(value);
+    setRight(value: string, rank:number) {
+        this._right[rank].setnom(value);
     }
     // List de theme
     getThemeAcc(): ApiReturn[] {

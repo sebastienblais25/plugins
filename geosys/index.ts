@@ -76,7 +76,7 @@ export default class Geosys {
             // Ajoute la fonction sous le controller au formulaire html
             this.userName = '';
             this.passwrd = '';
-            this.submitConn = function() {
+            this.submitConn = () => {
                 // Prends les informations des input pour envoyer a l'API
                 let log: User = new User(this.userName, this.passwrd);
                 // Envoie le formulaire a l API
@@ -89,7 +89,7 @@ export default class Geosys {
                     alert(loginfo.code);
                     alert(loginfo.message);
                 }
-            }; 
+            };
         });
     }
     /**

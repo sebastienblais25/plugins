@@ -6,7 +6,7 @@ export const formCreerMD:string = `
     <div id="create" ng-style="ctrl1.SelectedMenuCr" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideCr()">
         <h2>{{ 'plugins.geosys.creer' | translate }}</h2>
     </div>
-    <div ng-show="ctrl1.IsVisibleCR" ng-style="bgEnv">
+    <div ng-show="ctrl1.IsVisibleCR" ng-style="ctrl1.bgEnv">
         <div class="rv-subsection">
 
             <md-input-container class="Geosys-ddlshowEX">

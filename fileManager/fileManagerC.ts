@@ -11,36 +11,30 @@ export class FileManagerController {
      * @param {FileMana} tfm the object File Manager to keep where you are in a repository
      * @memberof FileManagerController
      */
-    fileManagercontrols(token: string, mapApi: any, tfm: FileMana): void {
-        mapApi.agControllerRegister('FileManagerCtrl', function() {
-            //permet d'afficher ou chacher le formulaire en cliquant sur le titre
-            this.OpenFileManager = () => {
-                //if the panel already exist
-                if (!this.panel) {
-                    // make sure both header and body have a digest cycle run on them
-                    this.panel = mapApi.panels.create('FileManager');
-                    //Size of the panel
-                    this.panel.element.css( {top: '0px;', margin: '100px 50px 100px 450px'} );
-                    //button in the header of the panel
-                    this.panel.header.toggleButton;
-                    this.panel.header.closeButton;
-                    //title on the panel
-                    this.panel.header.title = `File Manager (Alpha testing)`;
-                    let fmc: FileManagerController = new FileManagerController();
-                    //build the UI for the file manager
-                    let output = tfm.buildUI() + dragdropFunction;
-                    if (tfm.getNextFolder() == 'root') {
-                        tfm.obtainArbo(token);
-                        fmc.FileManaManager(token,mapApi, tfm, this.panel);
-                        this.panel.body = output;
-                    }  
-                } else {
-                    this.panel.close();
-                }
-                this.panel.open();
-            }
-            
-        });
+    fileManagercontrols(token: string, mapApi: any, tfm: FileMana): void {  
+        //if the panel already exist
+        if (!this.panel) {
+            // make sure both header and body have a digest cycle run on them
+            this.panel = mapApi.panels.create('FileManager');
+            //Size of the panel
+            this.panel.element.css( {top: '0px;', margin: '100px 50px 100px 450px'} );
+            //button in the header of the panel
+            this.panel.header.toggleButton;
+            this.panel.header.closeButton;
+            //title on the panel
+            this.panel.header.title = `File Manager (Alpha testing)`;
+            let fmc: FileManagerController = new FileManagerController();
+            //build the UI for the file manager
+            let output = tfm.buildUI() + dragdropFunction;
+            if (tfm.getNextFolder() == 'root') {
+                tfm.obtainArbo(token);
+                fmc.FileManaManager(token,mapApi, tfm, this.panel);
+                this.panel.body = output;
+            }  
+        } else {
+            this.panel.close();
+        }
+        this.panel.open(); 
     };
     /**
      * Create the panel body when a folder is clicked

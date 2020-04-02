@@ -30,16 +30,16 @@ import { UnitTravC } from '../controller/unitTravC';
 
 export class menuManager{
 
-    _compiler:TopMenuController;
-    _planning:PlanningController;
-    _extract:ExtractController;
-    _create:CreateController;
-    _delivery:DeliveryController;
-    _cleaning:CleaningController;
-    _cancel:CancelController;
+    _compiler: TopMenuController;
+    _planning: PlanningController;
+    _extract: ExtractController;
+    _create: CreateController;
+    _delivery: DeliveryController;
+    _cleaning: CleaningController;
+    _cancel: CancelController;
     _validate: ValidateController;
-    _fileManager:FileManagerController;
-    _workUnit:UnitTravC;
+    _fileManager: FileManagerController;
+    _workUnit: UnitTravC;
 
 
     /**
@@ -81,17 +81,19 @@ export class menuManager{
         menuprincipal = "<div>"
                             + outputTopmenu
                             + `<div class="Geosys-section">Processus Geosys</div>`
-                            + outputPlan 
+                            + outputPlan
                             + outputExt
                             + outputDeli  
                             + outputNettoyage 
                             + `<div class="Geosys-section">Utilitaire</div>`
-                            + outputExtSR 
+                            + outputExtSR
                             + outputCreer 
                             + outputVali
-                            + outputCancel 
+                            + outputCancel
                             + outputUnit
-                            + outputFileManager 
+                            + outputFileManager
+                        // First div to close the ng-controller of the topMenu 
+                        // Second div close the div of the variable
                         + "</div></div>";
         
         this._compiler.compileTemplate(menuprincipal,mapApi);
@@ -108,12 +110,9 @@ export class menuManager{
      * @memberof menuManager
      */
     extractManager(log:User, mapApi:any):string{
-        
         this._extract.extrairecontrols(log, mapApi);
-
         //add the dropdown list for the form
         let output = formExtraireP;
-        
         return output;
     }
 

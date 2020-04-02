@@ -5,7 +5,7 @@ export const uniteTravail:string = `
     <div ng-style="ctrl1.SelectedMenuUT" class="Geosys-div-Button-Uti" ng-click="ctrl1.ShowHideUT()">
         <h2>{{ 'plugins.geosys.unit' | translate }}</h2>
     </div>
-    <div ng-show="ctrl1.IsVisibleUT" ng-style="bgEnv" class="Geosys-extractspace">
+    <div ng-show="ctrl1.IsVisibleUT" ng-style="ctrl1.bgEnv" class="Geosys-extractspace">
         <form name="utform">
             <md-input-container>
                 <label>Query to add a working zone in the map</label>

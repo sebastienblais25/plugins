@@ -1,8 +1,8 @@
-import { connexion } from "../apiConnect";
+import { Connexion } from "../apiConnect";
 import { User } from '../user';
 export declare class planifier {
     /*********** Properties ***********/
-    _conn: connexion;
+    _conn: Connexion;
     _theme: string;
     _idUT: string;
     _typetravail: string;
@@ -52,8 +52,8 @@ export declare class planifier {
     setJson(json: string): void;
     getdata(): any;
     setdata(value: any): void;
-    getconn(): connexion;
-    setconn(value: connexion): void;
+    getconn(): Connexion;
+    setconn(value: Connexion): void;
     gettheme(): string;
     settheme(value: string): void;
     getzonetravail(): string;

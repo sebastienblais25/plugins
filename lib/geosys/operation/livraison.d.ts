@@ -1,7 +1,7 @@
-import { connexion } from "../apiConnect";
+import { Connexion } from "../apiConnect";
 import { User } from '../user';
 export declare class Livraison {
-    _conn: connexion;
+    _conn: Connexion;
     _theme: string;
     _idUt: string;
     _typeConn: string;
