@@ -10,13 +10,12 @@ const pluginList = {
     backToCart: path.join(SOURCE_PATH, 'backToCart'),
     coordInfo: path.join(SOURCE_PATH, 'coordInfo'),
     customExport: path.join(SOURCE_PATH, 'customExport'),
-    draw: path.join(SOURCE_PATH, 'draw'),
     fileManager: path.join(SOURCE_PATH, 'fileManager'),
     geosys: path.join(SOURCE_PATH, 'geosys'),
     swiper: path.join(SOURCE_PATH, 'swiper')
 };
 
-const hasLoader = ['enhancedTable', 'swiper', 'geosys', 'fileManager', 'draw'];
+const hasLoader = ['enhancedTable', 'swiper', 'geosys', 'fileManager'];
 
 module.exports = function(env = {}) {
     const config = {

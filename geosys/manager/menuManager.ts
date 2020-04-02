@@ -22,8 +22,7 @@ import { CleaningController } from '../controller/cleaningC';
 import { CancelController } from '../controller/cancelC';
 import { TopMenuController } from '../controller/topmenuC';
 import { ValidateController } from '../controller/validateC';
-import { FileManagerController } from '../controller/fileManagerC'
-import { FileMana } from '../operation/fileMana';
+import { FileController } from '../controller/fileManagerC'
 import { uniteTravail } from '../templates/unitTravail';
 import { UnitTravC } from '../controller/unitTravC';
 
@@ -38,7 +37,7 @@ export class menuManager{
     _cleaning: CleaningController;
     _cancel: CancelController;
     _validate: ValidateController;
-    _fileManager: FileManagerController;
+    _fileManager: FileController;
     _workUnit: UnitTravC;
 
 
@@ -59,7 +58,7 @@ export class menuManager{
         this._cleaning = new CleaningController();
         this._cancel = new CancelController();
         this._validate = new ValidateController();
-        this._fileManager = new FileManagerController();
+        this._fileManager = new FileController();
         this._workUnit = new UnitTravC();
 
         //varaible for the form
@@ -252,8 +251,7 @@ export class menuManager{
      * @memberof menuManager
      */
     fileExplorerManager(log:User, mapApi:any):string{
-        let tfm:FileMana = new FileMana();
-        this._fileManager.fileManagercontrols(log, mapApi,tfm);
+        this._fileManager.fileManagercontrols(log, mapApi);
         let output = menuFileExplorer;
         return output;
     }

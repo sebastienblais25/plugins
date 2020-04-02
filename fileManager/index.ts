@@ -44,9 +44,22 @@ export default class FileManager {
      * @memberof FileManager
      */
     addLoginPanel(): void {
+        
+        if (!this.panel) {
+            // make sure both header and body have a digest cycle run on them
+            this.panel = this.mapApi.panels.create('FileManager');
+            //Size of the panel
+            this.panel.element.css( {top: '0px;', margin: '100px 50px 100px 450px'} );
+            //button in the header of the panel
+            this.panel.header.toggleButton;
+            this.panel.header.closeButton; 
+        } else {
+            this.panel.close();
+        }
+
         let tfm: FileMana = new FileMana();
         let mainFile: FileManagerController = new FileManagerController()
-        mainFile.fileManagercontrols('hello',this.mapApi, tfm);
+        mainFile.fileManagercontrols('hello',this.mapApi, tfm, this.panel);
     }
     /**
      * Compile a html template to read to compile and replace all the variable inside the template
