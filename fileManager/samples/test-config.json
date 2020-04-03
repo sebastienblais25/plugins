@@ -267,6 +267,10 @@
     },
     "plugins": {
       "fileManager": {
+        "Server": "http://127.0.0.1:4010/",
+        "FolderFileList": "systeme/liste-contenants-fichiers?contenant_url=",
+        "FolderAction": "systeme/contenants?contenant_url=",
+        "FileAction": "systeme/fichiers?fichier_url="
       }
     }
   }

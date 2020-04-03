@@ -43,8 +43,7 @@ export default class FileManager {
      * de l'utilisateur 
      * @memberof FileManager
      */
-    addLoginPanel(): void {
-        
+    addLoginPanel(): void { 
         if (!this.panel) {
             // make sure both header and body have a digest cycle run on them
             this.panel = this.mapApi.panels.create('FileManager');
@@ -58,6 +57,7 @@ export default class FileManager {
         }
 
         let tfm: FileMana = new FileMana();
+        tfm.setUrl(this.config);
         let mainFile: FileManagerController = new FileManagerController()
         mainFile.fileManagercontrols('hello',this.mapApi, tfm, this.panel);
     }

@@ -1,7 +1,7 @@
 import { User } from '../user';
-//import ­{ FileManagerController } from '../fileManager/fileManagerC';
-import { FileManagerController } from '../../fileManager/fileManagerC'
-import { FileMana } from '../../fileManager/fileMana'
+import { FileManagerController } from '../../fileManager/fileManagerC';
+import { FileMana } from '../../fileManager/fileMana';
+import { urlFolderAction, urlFileAction, urlListFile } from '../../fileManager/url';
 
 
 export class FileController {
@@ -18,6 +18,7 @@ export class FileController {
         mapApi.agControllerRegister('FileManagerCtrl', function() {
             let panel:any;
             let tfm: FileMana = new FileMana();
+            tfm.setUrl('hello', 'http://127.0.0.1:4010/', urlListFile, urlFolderAction, urlFileAction);
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.OpenFileManager = () => {
                 if (log.getEnvironnementSel() !== '') {

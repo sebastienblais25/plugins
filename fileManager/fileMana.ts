@@ -1,4 +1,3 @@
-import { urlListFile, urlFileAction, urlFolderAction } from '../fileManager/url';
 import { Connexion } from '../fileManager/apiConnect';
 const FileSaver = require('file-saver'); // le import
 
@@ -12,7 +11,10 @@ export class FileMana {
     private _nextFolder: string;
     private _value: any;
     private _list = [];
-    private _url: string;
+    private _urlServer: string;
+    private _folderFileList: string;
+    private _folderAction: string;
+    private _fileAction: string;
     
     /**
      *Creates an instance of FileMana.
@@ -30,7 +32,7 @@ export class FileMana {
      */
     obtainArbo(token: string): any {
         this._nextFolder = '';
-        return this._conn.connexionAPIFileManager(token,this.setNavigation(urlListFile),'Get','application/json');  
+        return this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFolderFileList()),'Get','application/json');  
     }
     /**
      * set the url for the navigation in the file manager
@@ -38,7 +40,7 @@ export class FileMana {
      * @memberof FileMana
      */
     setNavigation(urlgoto: string,adding: string = ''): string {
-        return 'http://127.0.0.1:4010/' + urlgoto + this._breadcrumbs + adding + '&__example=' + this._breadcrumbs + adding;
+        return this.getUrlServer() + urlgoto + this._breadcrumbs + adding + '&__example=' + this._breadcrumbs + adding;
     }
     /**
      * build a list of folder with the return of the API
@@ -165,9 +167,9 @@ export class FileMana {
         this._breadcrumbs = '';
         for(let i in this._list){
             if(i < rank){
-                this._breadcrumbs += this._list[i] + '/'
+                this._breadcrumbs += this._list[i] + '/';
             }else if(i === rank){
-                this._breadcrumbs += this._list[i]
+                this._breadcrumbs += this._list[i];
             }else{
                 break;
             }
@@ -180,7 +182,7 @@ export class FileMana {
      * @memberof FileMana
      */
     uploadfile(path:string, token: string,file:File):void{
-        this._conn.connexionAPIFileManager(token,this.setNavigation(urlFileAction),'POST','application/json', file).then( values =>{
+        this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFileAction()),'POST','application/json', file).then( values =>{
             if (values[0].message !== undefined) {
                 console.log('File uploaded');
             } else {
@@ -198,7 +200,7 @@ export class FileMana {
      */
     downloadFile(nameFile:string, path:string, token: string):void{
         /***** API Call *****/
-        let dlFile = this._conn.connexionAPIFileManager(token, this.setNavigation(urlFileAction, nameFile),'Get','application/octet-stream').then( values =>{
+        let dlFile = this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(), nameFile),'Get','application/octet-stream').then( values =>{
             /***** Download *****/
             console.log(dlFile);
             alert(nameFile + ' downloaded from ' + path)
@@ -216,7 +218,7 @@ export class FileMana {
      */
     deleteFile(nameFile:string, path:string,token: string):void{
         /***** API Call *****/
-        let dlFile = this._conn.connexionAPIFileManager(token, this.setNavigation(urlFileAction, nameFile),'Delete','application/json').then( values =>{
+        let dlFile = this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(), nameFile),'Delete','application/json').then( values =>{
             console.log(dlFile);
             alert(nameFile + ' deleted from ' + path);
         })
@@ -231,7 +233,7 @@ export class FileMana {
      */
     downloadFolder(nameFolder:string,path:string,token: string){
          /***** API Call *****/
-         this._conn.connexionAPIFileManager(token, this.setNavigation(urlFolderAction, nameFolder),'POST','application/octet-stream').then( values =>{
+         this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), nameFolder),'POST','application/octet-stream').then( values =>{
              /***** Download *****/
             console.log(nameFolder + ' downloaded from ' + path);
             let blob = new Blob([values[0]]/*,{type:"application/json"}*/);
@@ -248,7 +250,7 @@ export class FileMana {
      */
     deleteFolder(nameFolder:string,path:string,token: string){
         /***** API Call *****/
-        this._conn.connexionAPIFileManager(token, this.setNavigation(urlFolderAction, nameFolder),'POST','application/json').then( values =>{
+        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), nameFolder),'POST','application/json').then( values =>{
             // Check if the operation is completed
             if (values[0].message !== undefined) {
                 console.log(nameFolder + ' deleted from ' + path);
@@ -266,7 +268,7 @@ export class FileMana {
      */
     createFolder(pathforfolder:string, token: string, foldername:string){
         /***** API Call *****/
-        this._conn.connexionAPIFileManager(token, this.setNavigation(urlFolderAction),'POST','application/json').then( values =>{
+        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(),foldername),'POST','application/json').then( values =>{
             // Check if the operation is completed
             if (values[0].message !== undefined) {
                 console.log("the new folder " + foldername + " will be created in " + pathforfolder);
@@ -275,6 +277,41 @@ export class FileMana {
             }
         });
         
+    }
+    /**
+     * Set all the url from the config or the parameter of the function
+     * @param {*} config Url in the config
+     * @param {string} [urlServer=''] Url 
+     * @param {string} [folderFile=''] Url
+     * @param {string} [folder=''] Url
+     * @param {string} [file=''] Url
+     * @memberof FileMana
+     */
+    setUrl(config: any, urlServer: string = '', folderFile: string = '', folder: string = '', file: string = '') {
+        // Set the url for the server
+        if (urlServer !== '') {
+            this._urlServer = urlServer;
+        } else {
+            this._urlServer = config.Server;
+        }
+        // Set the url for the navigation
+        if (folderFile !== '') {
+            this._folderFileList = folderFile;
+        } else {
+            this._folderFileList = config.FolderFileList;
+        }
+        // Set the url for the folder operation
+        if (folder !== '') {
+            this._folderAction = folder;
+        } else {
+            this._folderAction = config.FolderAction;
+        }
+        // Set the url for the file operation
+        if (file !== '') {
+            this._fileAction = file;
+        } else {
+            this._fileAction = config.FileAction;
+        }
     }
     /**
      * TO DO : Maybe Added feature in the future
@@ -333,10 +370,17 @@ export class FileMana {
     setList(value) {
         this._list = value;
     }
-    geturl(): string {
-        return this._url;
+    getUrlServer(): string {
+        return this._urlServer;
     }
-    seturl(value: string) {
-        this._url = value;
+    getFolderFileList(): string {
+        return this._folderFileList;
     }
+    getFolderAction(): string {
+        return this._folderAction;
+    }
+    getFileAction(): string {
+        return this._fileAction;
+    }
+    
 }
