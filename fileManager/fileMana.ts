@@ -151,10 +151,10 @@ export class FileMana {
         this._list =  this._breadcrumbs.split('/');
         let bc:string = '';
         let lenght = this._list.length - 1;
-        for(let i in this._list){
-            if(i === lenght.toString()){
+        for (let i in this._list) {
+            if (i === lenght.toString()) {
                 bc += `&nbsp;/<span class="Geosys-breadClick">`+this._list[i]+`</span>`;
-            }else{
+            } else {
                 bc += `&nbsp/<span class="Geosys-breadClick" ng-click="ctrl11.followup('`+ i +`')">`+this._list[i]+`</span>`;
             }
             
@@ -169,12 +169,12 @@ export class FileMana {
     setbreacrumbsForNav(rank: string) {
         
         this._breadcrumbs = '';
-        for(let i in this._list){
-            if(i < rank){
+        for (let i in this._list) {
+            if (i < rank) {
                 this._breadcrumbs += this._list[i] + '/';
-            }else if(i === rank){
+            } else if (i === rank) {
                 this._breadcrumbs += this._list[i];
-            }else{
+            } else {
                 break;
             }
         }
@@ -185,8 +185,8 @@ export class FileMana {
      * @param {string} token the token for the connection
      * @memberof FileMana
      */
-    uploadfile(path:string, token: string,file:File):void{
-        this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFileAction()),'POST','application/json', file).then( values =>{
+    uploadfile(path: string, token: string, file: File): void {
+        this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFileAction()),'POST','application/json', file).then( values => {
             if (values[0].message !== undefined) {
                 console.log('File uploaded');
             } else {
@@ -202,13 +202,13 @@ export class FileMana {
      * @param {string} token the token for the connection
      * @memberof FileMana
      */
-    downloadFile(nameFile:string, path:string, token: string):void{
+    downloadFile(nameFile: string, path: string, token: string): void {
         /***** API Call *****/
-        let dlFile = this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(), nameFile),'Get','application/octet-stream').then( values =>{
+        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(), nameFile),'Get','application/octet-stream').then( values => {
             /***** Download *****/
-            console.log(dlFile);
+            console.log(values);
             alert(nameFile + ' downloaded from ' + path)
-            let blob = new Blob([values[0]]);
+            let blob = new Blob([values]);
             FileSaver.saveAs(blob,nameFile);
         })
         
@@ -220,9 +220,9 @@ export class FileMana {
      * @param {string} token the token for the connection
      * @memberof FileMana
      */
-    deleteFile(nameFile:string, path:string,token: string):void{
+    deleteFile(nameFile: string, path: string, token: string): void {
         /***** API Call *****/
-        let dlFile = this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(), nameFile),'Delete','application/json').then( values =>{
+        let dlFile = this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(), nameFile),'Delete','application/json').then( values => {
             console.log(dlFile);
             alert(nameFile + ' deleted from ' + path);
         })
@@ -235,9 +235,9 @@ export class FileMana {
      * @param {string} token put the token for the API
      * @memberof FileMana
      */
-    downloadFolder(nameFolder:string,path:string,token: string){
+    downloadFolder(nameFolder: string, path: string, token: string): void {
          /***** API Call *****/
-         this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), nameFolder),'POST','application/octet-stream').then( values =>{
+         this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), nameFolder),'POST','application/octet-stream').then( values => {
              /***** Download *****/
             console.log(nameFolder + ' downloaded from ' + path);
             let blob = new Blob([values[0]]/*,{type:"application/json"}*/);
@@ -252,9 +252,9 @@ export class FileMana {
      * @param {string} token
      * @memberof FileMana
      */
-    deleteFolder(nameFolder:string,path:string,token: string){
+    deleteFolder(nameFolder: string, path: string, token: string): void {
         /***** API Call *****/
-        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), nameFolder),'POST','application/json').then( values =>{
+        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), nameFolder),'POST','application/json').then( values => {
             // Check if the operation is completed
             if (values[0].message !== undefined) {
                 console.log(nameFolder + ' deleted from ' + path);
@@ -270,9 +270,9 @@ export class FileMana {
      * @param {string} foldername the new folder name
      * @memberof FileMana
      */
-    createFolder(pathforfolder:string, token: string, foldername:string){
+    createFolder(pathforfolder: string, token: string, foldername: string): void {
         /***** API Call *****/
-        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(),foldername),'POST','application/json').then( values =>{
+        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(),foldername),'POST','application/json').then( values => {
             // Check if the operation is completed
             if (values[0].message !== undefined) {
                 console.log("the new folder " + foldername + " will be created in " + pathforfolder);
@@ -329,49 +329,49 @@ export class FileMana {
     getConn(): Connexion {
         return this._conn;
     }
-    setConn(value: Connexion) {
+    setConn(value: Connexion): void {
         this._conn = value;
     }
     // Breadcrumbs
     getBreadcrumbs(): string {
         return this._breadcrumbs;
     }
-    setBreadcrumbs(value: string) {
+    setBreadcrumbs(value: string): void {
         this._breadcrumbs = value;
     }
     // Last Folder
     getLastFolder(): string {
         return this._lastFolder;
     }
-    setLastFolder(value: string) {
+    setLastFolder(value: string): void {
         this._lastFolder = value;
     }
     // Live Folder
     getLiveFolder(): string {
         return this._liveFolder;
     }
-    setLiveFolder(value: string) {
+    setLiveFolder(value: string): void {
         this._liveFolder = value;
     }
     // Next Folder
     getNextFolder(): string {
         return this._nextFolder;
     }
-    setNextFolder(next:string):void{
+    setNextFolder(next:string): void {
         this._nextFolder = next ;
     }
     // Value
     getValue(): any {
         return this._value;
     }
-    setValue(value: any) {
+    setValue(value: any): void {
         this._value = value;
     }
     // List
-    getList() {
+    getList(): any {
         return this._list;
     }
-    setList(value) {
+    setList(value): void {
         this._list = value;
     }
     getUrlServer(): string {

@@ -9,7 +9,7 @@ export class Connexion {
     * @returns {*} Return the infromation of the user
     * @memberof connexion
     */
-   connexionAPILogin(urlgoto: string, header: any): any {
+   connexionAPILogin(urlgoto: string, username: string, password: string): any {
         let outputValue: any;
         /********* API CALL Login **********/
         const promises = [];
@@ -18,7 +18,8 @@ export class Connexion {
                 $.ajax( {
                     url: urlgoto,
                     headers: {
-                        header
+                        'usager': username,
+                        'mot_de_passe': password
                     },
                     type: 'GET',
                     async: false,

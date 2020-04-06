@@ -78,6 +78,8 @@ export default class Geosys {
             this.passwrd = '';
             this.submitConn = () => {
                 // Prends les informations des input pour envoyer a l'API
+                console.log(this.userName);
+                console.log(this.passwrd);
                 let log: User = new User(this.userName, this.passwrd);
                 // Envoie le formulaire a l API
                 let loginfo: any = log.submitForm(config);

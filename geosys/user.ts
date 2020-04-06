@@ -39,7 +39,7 @@ export class User{
      * @param {string} [password] Password of the user
      * @memberof User
      */
-    constructor(username?: string, password?: string) {
+    constructor(username: string, password: string) {
         this._username =  username;
         this._password = password;
     }
@@ -63,7 +63,7 @@ export class User{
         let json: string = '';
         let data: any;
         let header: any = this.getInformationToHeader();
-        data = this._conn.connexionAPILogin(this.constructUrl(urlLoginGet),header);
+        data = this._conn.connexionAPILogin(this.constructUrl(urlLoginGet),this.getUsername(),this.getPassword());
         this.setListEnv(this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlEnvList), 'Get'));
         // Destroy the password for the session
         this._password = ''
