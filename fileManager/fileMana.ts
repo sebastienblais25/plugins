@@ -4,6 +4,7 @@ const FileSaver = require('file-saver'); // le import
 
 
 export class FileMana {
+    // Properties
     private _conn: Connexion = new Connexion();
     private _breadcrumbs: string = '';
     private _lastFolder: string;
@@ -11,6 +12,7 @@ export class FileMana {
     private _nextFolder: string;
     private _value: any;
     private _list = [];
+    // URL
     private _urlServer: string;
     private _folderFileList: string;
     private _folderAction: string;
@@ -49,6 +51,7 @@ export class FileMana {
      */
     buildFolderList() {
         let listFo = [];
+        // Build the list of folder for the user UI
         for (let i in this._value.list_folder) {
             listFo.push( { name: this._value.list_folder[i].name, modified: this._value.list_folder[i].last_modified, wanted: false } );
         }
@@ -61,6 +64,7 @@ export class FileMana {
      */
     buildFileList() {
         let listFi = [];
+        // Build the list of folder for the user UI
         for (let i in this._value.list_file) {
             listFi.push( { name: this._value.list_file[i].name , size:this._value.list_file[i].size, modified:this._value.list_file[i].last_modified, wanted: false } );
         }
@@ -79,7 +83,7 @@ export class FileMana {
                 <div class="Geosys-backing" ng-click="ctrl11.precedent()"><i class="material-icons">arrow_back</i></div>
                 <div class="Geosys-backing" ng-click="ctrl11.refresh()"><i class="material-icons">refresh</i></div>
                 <div class="Geosys-backing" ng-click="ctrl11.createFolder()"><i class="material-icons">create_new_folder</i></div>
-                <div class="Geosys-breadclass">`+ this.buildClickablebreadcrumbs() +`</div>
+                <div class="Geosys-breadclass">${this.buildClickablebreadcrumbs()}</div>
                 <div class="Geosys-header-File">
                     <span class="Geosys-name-File-Folder-Header">Name</span> 
                     <span class="Geosys-modified-File-Folder-Header">Date modified</span>

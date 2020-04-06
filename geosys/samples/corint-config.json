@@ -153,21 +153,21 @@
             "table": {
                 "applyMap": false,
                 "columns": [
-                    {
-                        "data": "OBJECTID",
-                        "filter": {
-                            "type": "number",
-                            "value": "0,25"
-                        }
-                    },
-                    {
-                        "data": "Country",
-                        "filter": {
-                            "type": "string",
-                            "value": "Canada",
-                            "static": true
-                        }
+                  {
+                    "data": "OBJECTID",
+                    "filter": {
+                        "type": "number",
+                        "value": "0,25"
                     }
+                  },
+                  {
+                    "data": "Country",
+                    "filter": {
+                        "type": "string",
+                        "value": "Canada",
+                        "static": true
+                    }
+                  }
                 ]
             },
             "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/4"
