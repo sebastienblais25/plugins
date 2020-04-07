@@ -42,7 +42,7 @@ export class FileMana {
      * @memberof FileMana
      */
     setNavigation(urlgoto: string,adding: string = ''): string {
-        return this.getUrlServer() + urlgoto + this._breadcrumbs + adding + '&__example=' + this._breadcrumbs + adding;
+        return this.getUrlServer() + urlgoto + this._breadcrumbs + adding + '/' + '&__example=' + this._breadcrumbs + adding + '/';
     }
     /**
      * build a list of folder with the return of the API
@@ -166,8 +166,7 @@ export class FileMana {
      * @param {string} rank wich folder we want to go in
      * @memberof FileMana
      */
-    setbreacrumbsForNav(rank: string) {
-        
+    setbreacrumbsForNav(rank: string) { 
         this._breadcrumbs = '';
         for (let i in this._list) {
             if (i < rank) {
@@ -186,7 +185,9 @@ export class FileMana {
      * @memberof FileMana
      */
     uploadfile(path: string, token: string, file: File): void {
-        this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFileAction()),'POST','application/json', file).then( values => {
+        let form: FormData = new FormData();
+        form.append('fichier',file);
+        this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFileAction()),'POST','application/json', form).then( values => {
             if (values[0].message !== undefined) {
                 console.log('File uploaded');
             } else {

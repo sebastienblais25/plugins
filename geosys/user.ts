@@ -62,17 +62,16 @@ export class User{
     submitForm(config: any): any {
         let json: string = '';
         let data: any;
-        let header: any = this.getInformationToHeader();
+        //let header: any = this.getInformationToHeader();
         data = this._conn.connexionAPILogin(this.constructUrl(urlLoginGet),this.getUsername(),this.getPassword());
-        this.setListEnv(this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlEnvList), 'Get'));
         // Destroy the password for the session
-        this._password = ''
-        if (!data.code) {
+        this._password = '';
+        if (data.status === undefined) {
             this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe,config);
+            this.setListEnv(this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlEnvList), 'Get'));
         } else {
-            alert(data.code)
+            alert(data.status)
         }
-
         return data;     
     };
     /**

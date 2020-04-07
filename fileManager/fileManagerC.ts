@@ -84,7 +84,7 @@ export class FileManagerController {
             //open a folder when clicked
             this.openFolder = (folder) => {
                 tfm.setNextFolder(folder.name);
-                tfm.setBreadcrumbs(tfm.getBreadcrumbs() + tfm.getNextFolder());
+                tfm.setBreadcrumbs(tfm.getBreadcrumbs() + '/' + tfm.getNextFolder());
                 let fmc: FileManagerController = new FileManagerController();
                 let output = tfm.buildUI() + dragdropFunction;
                 tfm.obtainArbo(token).then(values => {

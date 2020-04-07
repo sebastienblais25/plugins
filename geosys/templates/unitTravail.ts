@@ -10,12 +10,17 @@ export const uniteTravail:string = `
             <md-input-container>
                 <label>Query to add a working zone in the map</label>
                 <textarea type="text" style="height: 30px; width: 354px;" name="text" ng-model="ctrl14.query" required></textarea>
-                <md-button class="md-raised md-primary Geosys-btnShape" style="margin-top:15px;" ng-click="ctrl14.addGeom()" ng-disabled="utform.text.$invalid">Add</md-button>
             </md-input-container>
+            <md-input-container>
+                <label>Choose the output of your query : </label>
+                <md-select>
+                    <md-option>GeoJson</md-option>
+                    <md-option>Json</md-option>
+                </md-select>
+            </md-input-container>
+            <md-checkbox­></md-checkbox>
+            <md-button class="md-raised md-primary Geosys-btnShape" style="margin-top:15px;" ng-click="ctrl14.addGeom()" ng-disabled="utform.text.$invalid">Send query</md-button>
         </form>
-        <div>
-        </div>
-        
     </div>
 <div>
 `

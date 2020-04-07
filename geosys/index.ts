@@ -78,18 +78,12 @@ export default class Geosys {
             this.passwrd = '';
             this.submitConn = () => {
                 // Prends les informations des input pour envoyer a l'API
-                console.log(this.userName);
-                console.log(this.passwrd);
                 let log: User = new User(this.userName, this.passwrd);
                 // Envoie le formulaire a l API
                 let loginfo: any = log.submitForm(config);
                 // Si le retour ne contient pas de code d'erreur continue
                 if (loginfo.status === undefined) {
                     let menu: menuManager =  new menuManager(log, panel, mapApi);
-                // Si le retour de l'API contient un code d'erreur et le message
-                } else {
-                    alert(loginfo.code);
-                    alert(loginfo.message);
                 }
             };
         });

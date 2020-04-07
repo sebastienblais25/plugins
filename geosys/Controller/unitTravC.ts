@@ -13,7 +13,6 @@ export class UnitTravC{
                 let regexU = /(?:^|\W)update(?:$|\W)/gi;
                 let regexI = /(?:^|\W)insert(?:$|\W)/gi;
                 let query: string = this.query;
-                console.log(this.query)
                 if (query.search(regexD) == -1) {
                     if (query.search(regexA) == -1) {
                         if (query.search(regexU) == -1) {

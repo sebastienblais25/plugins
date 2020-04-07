@@ -19,7 +19,8 @@ export class Connexion {
                     url: urlgoto,
                     headers: {
                         'usager': username,
-                        'mot_de_passe': password
+                        'mot_de_passe': password,
+                        'duree_token': '8000'
                     },
                     type: 'GET',
                     async: false,
@@ -139,7 +140,7 @@ export class Connexion {
                         'Authorization': `Bearer ${token}`,
                         optEnv
                     },
-                    type: 'POST',
+                    type: typeConn,
                     async: false,
                     data: formdata,
                     cache: false,
