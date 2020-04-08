@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
-        <title>Plugin: geosys</title>
+        <title>Plugin: Coordinate Info</title>
 
         <style>
             body {
@@ -15,23 +15,22 @@
                 height: 100%;
             }
         </style>
-    
+
         <link rel="stylesheet" href="/rv-styles.css" />
-        <link rel="stylesheet" href="../geosys.css" />
-        <link rel="stylesheet" href="https://jolevesq.github.io/contributed-plugins/draw/draw.css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <script src="../geosys.js"></script>
-        <script src="https://jolevesq.github.io/contributed-plugins/draw/draw.js"></script><!--https://dev.gcgeo.gc.ca//fgpv/fgpv-3.3.0/plugins/draw/draw.js-->
+        <link rel="stylesheet" href="../fileManager.css" />
+        <script src="../fileManager.js"></script>
+
     </head>
 
     <body>
         <div
             class="myMap"
-            id="mapChart"
+            id="sample-map"
             is="rv-map"
-            rv-config="corint-config.json"
+            rv-config="test-config.json"
             rv-langs='["en-CA", "fr-CA"]'
-            rv-plugins="geosys, draw"
+            rv-plugins="fileManager"
         >
             <noscript>
                 <p>
@@ -46,9 +45,7 @@
                 </p>
             </noscript>
         </div>
-
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Object.entries,Object.values,Array.prototype.find,Array.prototype.findIndex,Array.prototype.values,Array.prototype.includes,HTMLCanvasElement.prototype.toBlob,String.prototype.repeat,String.prototype.codePointAt,String.fromCodePoint,NodeList.prototype.@@iterator,Promise,Promise.prototype.finally"></script>
-        <script src="/legacy-api.js"></script>
         <script src="/rv-main.js"></script>
     </body>
 </html>

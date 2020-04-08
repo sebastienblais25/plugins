@@ -91,86 +91,27 @@
       },
       "layers": [
         {
-            "id": "1",
-            "name": "2 column filters",
-            "layerType": "esriFeature",
-            "table": {
-                "applyMap": true,
-                "columns": [
-                    {
-                        "data": "OBJECTID",
-                        "filter": {
-                            "type": "number",
-                            "value": "0,10"
-                        }
-                    },
-                    {
-                        "data": "City",
-                        "filter": {
-                            "type": "string",
-                            "value": "Abbotsford"
-                        }
-                    }
-                ],
-                "lazyFilter": true
-            },
-            "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/2"
+          "id": "0",
+          "name": "Electric Transmission Line",
+          "layerType": "esriFeature",
+          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/1"
         },
         {
-            "id": "2",
-            "name": "3 column filters",
-            "layerType": "esriFeature",
-            "table": {
-                "applyMap": true,
-                "columns": [
-                    {
-                        "data": "OBJECTID",
-                        "filter": {
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "data": "Country",
-                        "filter": {
-                            "type": "string"
-                        },
-                        "searchable": false
-                    },
-                    {
-                        "data": "Latitude",
-                        "filter": {
-                            "type": "number"
-                        }
-                    }
-                ]
-            },
-            "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/3"
+          "id": "powerplant100mw-naturalGas",
+          "name": "Natural Gas Pipeline",
+          "layerType": "esriFeature",
+          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/2"
         },
         {
-            "id": "3",
-            "name": "With filter but not applied to map",
-            "layerType": "esriFeature",
-            "table": {
-                "applyMap": false,
-                "columns": [
-                  {
-                    "data": "OBJECTID",
-                    "filter": {
-                        "type": "number",
-                        "value": "0,25"
-                    }
-                  },
-                  {
-                    "data": "Country",
-                    "filter": {
-                        "type": "string",
-                        "value": "Canada",
-                        "static": true
-                    }
-                  }
-                ]
-            },
-            "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/4"
+          "id": "GeoChron",
+          "name": "GeoChron",
+          "layerType": "esriDynamic",
+          "layerEntries": [{
+            "index": 0,
+            "nameField": "OBJECTID",
+            "name": "Geo"
+          }],
+          "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/GSCC/Geochronology/MapServer/"
         }
       ],
       "extentSets": [
@@ -325,11 +266,11 @@
       ]
     },
     "plugins": {
-      "geosys": {
-        "base_theme": "1011"
-      },
-      "draw": {  
-        "tools": ["picker", "polygon", "measure", "extent"]
+      "fileManager": {
+        "Server": "http://127.0.0.1:4010/",
+        "FolderFileList": "systeme/liste-contenants-fichiers?contenant_url=",
+        "FolderAction": "systeme/contenants?contenant_url=",
+        "FileAction": "systeme/fichiers?fichier_url="
       }
     }
   }
