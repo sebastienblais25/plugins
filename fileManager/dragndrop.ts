@@ -8,7 +8,6 @@ function onDragOver(e) {
     e.dataTransfer.dropEffect = "move";
 }
 function onDragEnter(e) {
-   
     e.preventDefault();  
     e.stopPropagation();
 } 

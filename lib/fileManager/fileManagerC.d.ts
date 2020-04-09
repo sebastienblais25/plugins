@@ -8,7 +8,7 @@ export declare class FileManagerController {
      * @param {FileMana} tfm the object File Manager to keep where you are in a repository
      * @memberof FileManagerController
      */
-    fileManagercontrols(token: string, mapApi: any, tfm: FileMana): void;
+    fileManagercontrols(token: string, mapApi: any, tfm: FileMana, panel: any): void;
     /**
      * Create the panel body when a folder is clicked
      * @param {User} log User tools
@@ -25,7 +25,7 @@ export declare class FileManagerController {
      * @param {*} mapApi
      * @memberof FileManagerController
      */
-    addingFolder(token: string, tfm: FileMana, mapApi: any): void;
+    addingFolder(token: string, tfm: FileMana, mapApi: any, panel: any): void;
 }
 export interface FileManagerController {
     panel: any;

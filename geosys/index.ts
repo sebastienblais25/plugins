@@ -12,6 +12,7 @@ export default class Geosys {
     init(api: any): void {
         // Set la variable api pour le plugin
         this.mapApi = api;
+        console.log(this.mapApi)
         // Set _RV
         this.config = this._RV.getConfig('plugins').geosys;
         // Set la langue pour le plugin

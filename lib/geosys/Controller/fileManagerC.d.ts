@@ -1,6 +1,5 @@
-import { User } from "../user";
-import { FileMana } from '../operation/fileMana';
-export declare class FileManagerController {
+import { User } from '../user';
+export declare class FileController {
     constructor();
     /**
      * Create the first panel for the with the root
@@ -9,19 +8,5 @@ export declare class FileManagerController {
      * @param {FileMana} tfm the object File Manager to keep where you are in a repository
      * @memberof FileManagerController
      */
-    fileManagercontrols(log: User, mapApi: any, tfm: FileMana): void;
-    /**
-     * Create the panel body when a folder is clicked
-     * @param {User} log User tools
-     * @param {*} mapApi the map Object
-     * @param {FileMana} tfm to keep track where you are
-     * @param {*} panel the panel to add the body
-     * @memberof FileManagerController
-     */
-    FileManaManager(log: User, mapApi: any, tfm: FileMana, panel: any): void;
-    addingFolder(log: User, tfm: FileMana, mapApi: any): void;
-}
-export interface FileManagerController {
-    panel: any;
-    panel1: any;
+    fileManagercontrols(log: User, mapApi: any): void;
 }

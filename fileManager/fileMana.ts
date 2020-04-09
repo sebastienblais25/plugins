@@ -1,8 +1,6 @@
 import { Connexion } from '../fileManager/apiConnect';
 const FileSaver = require('file-saver'); // le import
 
-
-
 export class FileMana {
     // Properties
     private _conn: Connexion = new Connexion();
@@ -280,8 +278,7 @@ export class FileMana {
             } else {
                 alert(values[0]);
             }
-        });
-        
+        }); 
     }
     /**
      * Set all the url from the config or the parameter of the function

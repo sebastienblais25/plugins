@@ -8,7 +8,7 @@ import { CleaningController } from '../controller/cleaningC';
 import { CancelController } from '../controller/cancelC';
 import { TopMenuController } from '../controller/topmenuC';
 import { ValidateController } from '../controller/validateC';
-import { FileManagerController } from '../controller/fileManagerC';
+import { FileController } from '../controller/fileManagerC';
 import { UnitTravC } from '../controller/unitTravC';
 export declare class menuManager {
     _compiler: TopMenuController;
@@ -19,7 +19,7 @@ export declare class menuManager {
     _cleaning: CleaningController;
     _cancel: CancelController;
     _validate: ValidateController;
-    _fileManager: FileManagerController;
+    _fileManager: FileController;
     _workUnit: UnitTravC;
     /**
      *Creates an instance of menuManager. and create the main menu for the plugins

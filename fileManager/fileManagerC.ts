@@ -56,7 +56,7 @@ export class FileManagerController {
                         tfm.setValue(values);
                         fmc.FileManaManager(token,mapApi, tfm, panel);
                         panel.body = output;
-                    });   
+                    });
                     
                 } 
             }

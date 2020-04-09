@@ -9,7 +9,6 @@ export const formPlanifier = `
             <md-input-container class="Geosys-ddlshow">
                 <label>{{ 'plugins.geosys.themet' | translate }}</label>
                 <md-select 
-                
                 ng-model="ctrl2.selectedItemC" 
                 ng-change="ctrl2.setList()" 
                 id="theme" 
@@ -43,20 +42,20 @@ export const formPlanifier = `
         </div>
 
         <div>
-                <span class="Geosys-classeslist"><span class="Geosys-advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="Geosys-errormess Geosys-sizeerror" ng-show="ctrl2.errclass">{{ 'plugins.geosys.errorClass' | translate }}</span></span><md-checkbox ng-model="ctrl2.listeclasse" aria-label="checkall" class="md-secondary Geosys-checklist" ng-click="ctrl2.toggleAll()"></md-checkbox>
-                <div class="Geosys-planning">
-                    <md-list-item class="Geosys-itemlist" ng-repeat="class in ctrl2.classes">
-                        <span class="Geosys-largeurlist">{{ class.name }}</span>
-                        <md-checkbox class="md-secondary Geosys-checklist" aria-label="{{ class.name }}" ng-model="class.wanted"></md-checkbox>
-                    </md-list-item>
-                </div>
+            <span class="Geosys-classeslist"><span class="Geosys-advanced">{{ 'plugins.geosys.classe' | translate }}</span><span class="Geosys-errormess Geosys-sizeerror" ng-show="ctrl2.errclass">{{ 'plugins.geosys.errorClass' | translate }}</span></span><md-checkbox ng-model="ctrl2.listeclasse" aria-label="checkall" class="md-secondary Geosys-checklist" ng-click="ctrl2.toggleAll()"></md-checkbox>
+            <div class="Geosys-planning">
+                <md-list-item class="Geosys-itemlist" ng-repeat="class in ctrl2.classes">
+                    <span class="Geosys-largeurlist">{{ class.name }}</span>
+                    <md-checkbox class="md-secondary Geosys-checklist" aria-label="{{ class.name }}" ng-model="class.wanted"></md-checkbox>
+                </md-list-item>
+            </div>
         </div>
         
         <div>
-        <md-input-container class="Geosys-datfinfield">
-            <label>{{ 'plugins.geosys.datefinprv' | translate }}</label>
-            <md-datepicker name="dfp" ng-model="ctrl2.dfp"></md-datepicker>
-        </md-input-container>
+            <md-input-container class="Geosys-datfinfield">
+                <label>{{ 'plugins.geosys.datefinprv' | translate }}</label>
+                <md-datepicker name="dfp" ng-model="ctrl2.dfp"></md-datepicker>
+            </md-input-container>
         </div>
 
         <div>

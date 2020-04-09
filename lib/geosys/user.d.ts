@@ -33,7 +33,7 @@ export declare class User {
      * @param {string} [password] Password of the user
      * @memberof User
      */
-    constructor(username?: string, password?: string);
+    constructor(username: string, password: string);
     /**
      * Contruct an url with the environnement selected and the url for the action
      * @param {string} url Url of the action

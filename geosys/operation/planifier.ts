@@ -45,10 +45,7 @@ export class planifier{
         this._whereclause = wc;
         this._geom = geom;
     }
-
     /************* Methods *************/
-
-
     /**
      *Send a json to the API and return with the information 
      *
@@ -84,8 +81,6 @@ export class planifier{
         };
         this._json= JSON.stringify(output)
     }
-
-
     /**
      * sauvegarde un fichier json dans le fichier de download de l'utilisateur
      * @param {*} output le fichier json a sauvegarder.

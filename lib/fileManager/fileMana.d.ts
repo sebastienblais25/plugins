@@ -7,6 +7,10 @@ export declare class FileMana {
     private _nextFolder;
     private _value;
     private _list;
+    private _urlServer;
+    private _folderFileList;
+    private _folderAction;
+    private _fileAction;
     /**
      *Creates an instance of FileMana.
      * @param {string} [nextFolder='root']
@@ -18,13 +22,13 @@ export declare class FileMana {
      * @param {User} log for the token
      * @memberof FileMana
      */
-    obtainArbo(token: string): void;
+    obtainArbo(token: string): any;
     /**
      * set the url for the navigation in the file manager
      * @returns {string} return the url needed
      * @memberof FileMana
      */
-    setNavigation(urlgoto: string): string;
+    setNavigation(urlgoto: string, adding?: string): string;
     /**
      * build a list of folder with the return of the API
      * @returns return a list of folder
@@ -103,7 +107,17 @@ export declare class FileMana {
      */
     createFolder(pathforfolder: string, token: string, foldername: string): void;
     /**
-     * Maybe Added feature in the future
+     * Set all the url from the config or the parameter of the function
+     * @param {*} config Url in the config
+     * @param {string} [urlServer=''] Url
+     * @param {string} [folderFile=''] Url
+     * @param {string} [folder=''] Url
+     * @param {string} [file=''] Url
+     * @memberof FileMana
+     */
+    setUrl(config: any, urlServer?: string, folderFile?: string, folder?: string, file?: string): void;
+    /**
+     * TO DO : Maybe Added feature in the future
      * @memberof FileMana
      */
     uploadFolder(): void;
@@ -120,6 +134,10 @@ export declare class FileMana {
     setNextFolder(next: string): void;
     getValue(): any;
     setValue(value: any): void;
-    getList(): any[];
+    getList(): any;
     setList(value: any): void;
+    getUrlServer(): string;
+    getFolderFileList(): string;
+    getFolderAction(): string;
+    getFileAction(): string;
 }

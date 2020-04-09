@@ -7,7 +7,7 @@ export declare class Connexion {
      * @returns {*} Return the infromation of the user
      * @memberof connexion
      */
-    connexionAPILogin(urlgoto: string, header: any): any;
+    connexionAPILogin(urlgoto: string, username: string, password: string): any;
     /**
     * The connexion to the Api for the login (TEST)
     * @param {string} urlgoto The url for the login
@@ -36,12 +36,4 @@ export declare class Connexion {
      * @memberof connexion
      */
     connexionAPIFormData(token: string, formdata: any, urlgoto: string, typeConn: string, optEnv?: string): any;
-    /**
-     * Get the structure of a repository from S3
-     * @param {string} token token of the user
-     * @param {string} urltogo the url for the API
-     * @returns {*} the list of folder and file
-     * @memberof Connexion
-     */
-    connexionAPIFileManager(token: string, urltogo: string, operation: string, content: string, file?: any): any;
 }
