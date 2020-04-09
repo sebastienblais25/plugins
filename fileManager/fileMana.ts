@@ -15,6 +15,7 @@ export class FileMana {
     private _folderFileList: string;
     private _folderAction: string;
     private _fileAction: string;
+    private _fileUpload: string;
     
     /**
      *Creates an instance of FileMana.
@@ -32,7 +33,7 @@ export class FileMana {
      */
     obtainArbo(token: string): any {
         this._nextFolder = '';
-        return this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFolderFileList()),'Get','application/json');  
+        return this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFolderFileList(), '/'),'Get','application/json');  
     }
     /**
      * set the url for the navigation in the file manager
@@ -40,7 +41,7 @@ export class FileMana {
      * @memberof FileMana
      */
     setNavigation(urlgoto: string,adding: string = ''): string {
-        return this.getUrlServer() + urlgoto + this._breadcrumbs + adding + '/' + '&__example=' + this._breadcrumbs + adding + '/';
+        return this.getUrlServer() + urlgoto + this._breadcrumbs + adding + '&__example=' + this._breadcrumbs + adding;
     }
     /**
      * build a list of folder with the return of the API
@@ -95,7 +96,7 @@ export class FileMana {
             <form>
                 <md-list-item class="Geosys-folderBtn" ng-repeat="folder in ctrl11.folders">
                     <div class="Geosys-groupingInfo">
-                        <div ng-click="ctrl11.openFolder(folder)" style="width: 90%;margin: 0;float: left;">
+                        <div ng-click="ctrl11.openFolder(folder)" ng-disabled="true" style="width: 90%;margin: 0;float: left;">
                             <md-icon>
                                 <i class="material-icons">
                                     folder
@@ -105,8 +106,8 @@ export class FileMana {
                             <span class="Geosys-name-File-Folder Geosys-lilPad">{{ folder.name }}</span>
                             <span class="Geosys-modified-File-Folder Geosys-lilPad">{{ folder.modified }}</span>
                         </div>
-                        <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFolder(folder)"><i class="material-icons">delete</i></div>
-                        <div class="Geosys-downloadbtn" ng-click="ctrl11.downloadFolder(folder)"><i style="padding-top: 2px;" class="material-icons">get_app</i></div>
+                        <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFolder(folder); ctrl11.refresh()"><i class="material-icons">delete</i></div>
+                        <!--<div class="Geosys-downloadbtn" ng-click="ctrl11.downloadFolder(folder)"><i style="padding-top: 2px;" class="material-icons">get_app</i></div>-->
                     </div>
                 </md-list-item>
                 
@@ -120,8 +121,8 @@ export class FileMana {
                         <span class="Geosys-name-File-Folder Geosys-lilPad">{{ file.name }}</span> 
                         <span class="Geosys-modified-File-Folder Geosys-lilPad">{{ file.modified }}</span>
                         <span class="Geosys-size-File-Folder Geosys-lilPad">{{ file.size }} KB</span>
-                        <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFile(file)"><i class="material-icons">delete</i></div>
-                        <div class="Geosys-downloadbtn" ng-click="ctrl11.downloadFile(file)"><i style="padding-top: 2px;" class="material-icons">get_app</i></div>
+                        <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFile(file); ctrl11.refresh()"><i class="material-icons">delete</i></div>
+                        <div class="Geosys-downloadbtn" ng-click="ctrl11.downloadFile(file); ctrl11.refresh()"><i style="padding-top: 2px;" class="material-icons">get_app</i></div>
                     </div>       
                 </md-list-item>
                 <div class="Geosys-hidden-upload">
@@ -184,16 +185,12 @@ export class FileMana {
      */
     uploadfile(path: string, token: string, file: File): void {
         let form: FormData = new FormData();
-        form.append('fichier',file);
-        this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFileAction()),'POST','application/json', form).then( values => {
-            if (values[0].message !== undefined) {
-                console.log('File uploaded');
-            } else {
-                alert(values[0]);
-            }
+        console.log(file)
+        form.append('fichier', file);
+        this._conn.connexionAPIFileManagerTestUpload(token,this.setNavigation(this.getFileAction(),'/'),'POST', form).then( values => {
+            console.log(values[0]);
         })
     }
-
     /**
      * receive a blob dorm the APi to save the file into the download repository
      * @param {string} nameFile name of the file
@@ -202,8 +199,9 @@ export class FileMana {
      * @memberof FileMana
      */
     downloadFile(nameFile: string, path: string, token: string): void {
+        alert(nameFile + ' downloaded from ' + path)
         /***** API Call *****/
-        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(), nameFile),'Get','application/octet-stream').then( values => {
+        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(),'/'+ nameFile),'GET','application/octet-stream').then( values => {
             /***** Download *****/
             console.log(values);
             alert(nameFile + ' downloaded from ' + path)
@@ -221,7 +219,7 @@ export class FileMana {
      */
     deleteFile(nameFile: string, path: string, token: string): void {
         /***** API Call *****/
-        let dlFile = this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(), nameFile),'Delete','application/json').then( values => {
+        let dlFile = this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(), '/' + nameFile),'DELETE','application/json').then( values => {
             console.log(dlFile);
             alert(nameFile + ' deleted from ' + path);
         })
@@ -236,7 +234,7 @@ export class FileMana {
      */
     downloadFolder(nameFolder: string, path: string, token: string): void {
          /***** API Call *****/
-         this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), nameFolder),'POST','application/octet-stream').then( values => {
+         this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), nameFolder),'GET','application/octet-stream').then( values => {
              /***** Download *****/
             console.log(nameFolder + ' downloaded from ' + path);
             let blob = new Blob([values[0]]/*,{type:"application/json"}*/);
@@ -253,7 +251,7 @@ export class FileMana {
      */
     deleteFolder(nameFolder: string, path: string, token: string): void {
         /***** API Call *****/
-        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), nameFolder),'POST','application/json').then( values => {
+        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), '/' + nameFolder + '/'),'DELETE','application/json').then( values => {
             // Check if the operation is completed
             if (values[0].message !== undefined) {
                 console.log(nameFolder + ' deleted from ' + path);
@@ -271,7 +269,7 @@ export class FileMana {
      */
     createFolder(pathforfolder: string, token: string, foldername: string): void {
         /***** API Call *****/
-        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(),foldername),'POST','application/json').then( values => {
+        this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), '/' + foldername + '/'),'POST','application/json').then( values => {
             // Check if the operation is completed
             if (values[0].message !== undefined) {
                 console.log("the new folder " + foldername + " will be created in " + pathforfolder);
@@ -289,7 +287,7 @@ export class FileMana {
      * @param {string} [file=''] Url
      * @memberof FileMana
      */
-    setUrl(config: any, urlServer: string = '', folderFile: string = '', folder: string = '', file: string = '') {
+    setUrl(config: any, urlServer: string = '', folderFile: string = '', folder: string = '', file: string = '', fileU: string = '') {
         // Set the url for the server
         if (urlServer !== '') {
             this._urlServer = urlServer;
@@ -313,6 +311,11 @@ export class FileMana {
             this._fileAction = file;
         } else {
             this._fileAction = config.FileAction;
+        }
+        if (fileU !== '') {
+            this._fileUpload = fileU;
+        } else {
+            this._fileUpload = config.fileU;
         }
     }
     /**

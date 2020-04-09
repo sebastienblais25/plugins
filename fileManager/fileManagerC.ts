@@ -11,9 +11,10 @@ export class FileManagerController {
      * @param {FileMana} tfm the object File Manager to keep where you are in a repository
      * @memberof FileManagerController
      */
-    fileManagercontrols(token: string, mapApi: any, tfm: FileMana, panel:any): void {  
+    fileManagercontrols(token: string, mapApi: any, tfm: FileMana, panel: any, panel1: any): void {  
         //if the panel already exist
         this.panel = panel;
+        this.panel1 = panel1;
         //title on the panel
         this.panel.header.title = `File Manager (Alpha testing)`;
         let fmc: FileManagerController = new FileManagerController();
@@ -22,7 +23,7 @@ export class FileManagerController {
         if (tfm.getNextFolder() == 'root') {
             tfm.obtainArbo(token).then(values => {
                 tfm.setValue(values);
-                fmc.FileManaManager(token,mapApi, tfm, this.panel);
+                fmc.FileManaManager(token,mapApi, tfm, this.panel, this.panel1);
                 this.panel.body = output;
             });   
         }  
@@ -37,7 +38,7 @@ export class FileManagerController {
      * @param {*} panel the panel to add the body
      * @memberof FileManagerController
      */
-    FileManaManager(token: string, mapApi: any, tfm: FileMana, panel: any): void {
+    FileManaManager(token: string, mapApi: any, tfm: FileMana, panel: any, panel1: any): void {
         mapApi.agControllerRegister('fileManagerPanelCtrl', function() {
             //building the list of folder and file
             this.folders = [];
@@ -54,7 +55,7 @@ export class FileManagerController {
                     let output = tfm.buildUI() + dragdropFunction;
                     tfm.obtainArbo(token).then(values => {
                         tfm.setValue(values);
-                        fmc.FileManaManager(token,mapApi, tfm, panel);
+                        fmc.FileManaManager(token,mapApi, tfm, panel, panel1);
                         panel.body = output;
                     });
                     
@@ -66,7 +67,7 @@ export class FileManagerController {
                 let output = tfm.buildUI() + dragdropFunction;
                 tfm.obtainArbo(token).then(values => {
                     tfm.setValue(values);
-                    fmc.FileManaManager(token,mapApi, tfm, panel);
+                    fmc.FileManaManager(token,mapApi, tfm, panel , panel1);
                     panel.body = output;
                 });
             }
@@ -77,19 +78,20 @@ export class FileManagerController {
                 let output = tfm.buildUI() + dragdropFunction;
                 tfm.obtainArbo(token).then(values => {
                     tfm.setValue(values);
-                    fmc.FileManaManager(token,mapApi, tfm, panel);
+                    fmc.FileManaManager(token,mapApi, tfm, panel, panel1);
                     panel.body = output;
                 });
             }
             //open a folder when clicked
             this.openFolder = (folder) => {
+                panel.body = ' ';
                 tfm.setNextFolder(folder.name);
                 tfm.setBreadcrumbs(tfm.getBreadcrumbs() + '/' + tfm.getNextFolder());
                 let fmc: FileManagerController = new FileManagerController();
                 let output = tfm.buildUI() + dragdropFunction;
                 tfm.obtainArbo(token).then(values => {
                     tfm.setValue(values);
-                    fmc.FileManaManager(token,mapApi, tfm, panel);
+                    fmc.FileManaManager(token,mapApi, tfm, panel, panel1);
                     panel.body = output;
                 });
             }
@@ -112,6 +114,7 @@ export class FileManagerController {
             //create a new folder
             this.createFolder = () => {
                 if (!this.panel1) {
+                    this.panel1 = panel1;
                     // make sure both header and body have a digest cycle run on them
                     this.panel1 = mapApi.panels.create('AddFolder');
                     this.panel1.element.css({

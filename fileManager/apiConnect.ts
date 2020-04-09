@@ -32,7 +32,7 @@ export class Connexion {
         }) 
     }
 
-    connexionAPIFileManagerTestDownload(token: string, urltogo: string, operation: string, content: string, file: any = ''): any {
+    connexionAPIFileManagerTestDownload(token: string, urltogo: string, operation: string, content: string): any {
         /********* API CALL **********/
         return new Promise(resolve => {
             $.ajax( {
@@ -46,14 +46,30 @@ export class Connexion {
                     'Authorization': `Bearer ${token}`,
                     'contentType': content
                 },
-
                 // Type of the operation GET,POST ,PUT or DELETE
                 type: operation,
-                // The typ of the data
-                //dataType: 'json',
-                data: file,
                 processData: false,
                 // Send the data in the promise
+                success: data => resolve(data)
+            })
+        }) 
+    }
+
+    connexionAPIFileManagerTestUpload(token: string, urltogo: string, operation: string, file: any ): any {
+        /********* API CALL **********/
+        return new Promise(resolve => {
+            $.ajax( {
+                // URL of the API
+                url: urltogo,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                type: operation,
+                async: false,
+                data: file,
+                cache: false,
+                contentType: false,
+                processData: false,
                 success: data => resolve(data)
             })
         }) 

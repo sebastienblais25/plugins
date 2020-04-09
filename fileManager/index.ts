@@ -55,11 +55,11 @@ export default class FileManager {
         } else {
             this.panel.close();
         }
-
+        let panel: any;
         let tfm: FileMana = new FileMana();
         tfm.setUrl(this.config);
         let mainFile: FileManagerController = new FileManagerController()
-        mainFile.fileManagercontrols('hello',this.mapApi, tfm, this.panel);
+        mainFile.fileManagercontrols('hello',this.mapApi, tfm, this.panel, panel);
     }
     /**
      * Compile a html template to read to compile and replace all the variable inside the template

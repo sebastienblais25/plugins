@@ -47,8 +47,11 @@ export const urlCancelStep:string = `suivi-prod/etape-ut/`;
 // Url for testing a file manager 
 export const urlListFile:string = `systeme/liste-contenants-fichiers?contenant_url=`;
 
-// Url Download/Delete/Upload File
+// Url Download/Delete File
 export const urlFileAction: string = `systeme/fichiers?fichier_url=`;
+
+// Url Upload File
+export const urlFileActionUpload: string = `systeme/fichiers?contenant_url=`;
 
 // Url Create/Download/Delete Folder
 export const urlFolderAction: string = `systeme/contenants?contenant_url=`;
