@@ -60,6 +60,7 @@ export class CreateController {
                 for (let i in list) {
                     this.itemsF.push(list[i])
                 }
+                //log.setbaseTheme(this.selectedItemE);
             }
             //for claases list select all the info
             this.toggleAllS = () => {

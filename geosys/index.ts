@@ -117,6 +117,8 @@ export default interface Geosys {
 Geosys.prototype.translations = {
     'en-CA': {
         // Commun
+        uti: 'Utilities',
+        geo: 'Processus Geosys',
         envir: 'Select an environnement:',
         themet: 'Select a theme:',
         idUT: 'Select a working unit id:',
@@ -126,21 +128,21 @@ Geosys.prototype.translations = {
         where: 'Enter a Where Clause:',
         shp: 'Download Shapefile (.zip)',
         // Extraction seulement
-        extrac: 'Extract',
+        extrac: 'Checkout',
         extract: 'Extract',
         clip: 'If clip',
         // Planifier seulement
         testbutton: 'GeoSys',
-        planif: 'Planning',
-        typeTrv: 'working type:',
-        classe: 'Select class(es):',
+        planif: 'Schedule',
+        typeTrv: 'Working type :',
+        classe: 'Select class(es) :',
         datefinprv: 'Final date planned',
         // Login seulement
         login: 'Login',
-        username: "username",
+        username: 'username',
         password: 'password',
         // Livraison seulement
-        delivery: 'Delivery',
+        delivery: 'Deliver',
         postput: 'Select an operation :',
         insert: 'Overwrite',
         update: 'Update',
@@ -155,7 +157,7 @@ Geosys.prototype.translations = {
         valider: 'ValidateMD',
         filejson: 'Metadata fiel: ',
         // Nettoyage seulement
-        nettoyage: 'Cleaning',
+        nettoyage: 'Clean',
         // Annuler seulement
         annuler: 'Cancel (work in progress)',
         // Info user
@@ -164,7 +166,7 @@ Geosys.prototype.translations = {
         equipe: 'Team',
         enviro: 'Environnement',
         // Unité de travail
-        unit: 'Additionnal tools',
+        unit: 'Additionnal tool',
         // file manager
         filem: 'File manager (Alpha)',
         // Error Message
@@ -182,6 +184,8 @@ Geosys.prototype.translations = {
     'fr-CA': {
         
         // Commun
+        uti: 'Utilitaires',
+        geo: 'Processus Geosys',
         envir: 'Sélectionne un environnement :',
         themet: 'Sélectionne un theme :',
         idUT: 'Selectionne un identifiant d unité de travail :',
@@ -191,8 +195,8 @@ Geosys.prototype.translations = {
         where: 'Entrer une where clause :',
         shp: 'Téléchargement Shapefile (.zip)',
         // Extraction seulement
-        extrac: 'Extraction',
-        extract: 'Extraction',
+        extrac: 'Emprunter',
+        extract: 'Extraire des donnée',
         clip: 'Si clip',
         // Planifier seulement
         testbutton: 'GeoSys',
@@ -205,22 +209,22 @@ Geosys.prototype.translations = {
         username: 'nom d usager',
         password: 'mot de passe', 
         // Livraison seulement 
-        delivery: 'Livraison',
+        delivery: 'Livrer',
         postput: 'Sélectionne une opération :',
         insert: 'Écraser',
         update: 'Mise à jour', 
         fileMD: 'Fichier métadonnée : ',
         fileGDB: 'Fichier géo base de donnée : ',
         // CréerMD seulement
-        creer: 'CreerMD (work in progress)',
+        creer: 'Creer une MD (work in progress)',
         source: 'Sélectionner les identifiants des sources : ',
         precision: 'Sélectionner les identifiants de précison : ',
         contrainte: 'Sélectionner les identifiants de contraintes légales : ',
         // ValiderMD seulement
-        valider: 'ValiderMD',
+        valider: 'Valider une métadonnée',
         filejson: 'fichier JSON à valider : ',
         // Nettoyage seulement
-        nettoyage: 'Nettoyage',
+        nettoyage: 'Nettoyer',
         // Annuler seulement
         annuler: 'Annuler (work in progress)',
         // Info user
@@ -229,7 +233,7 @@ Geosys.prototype.translations = {
         equipe: 'Equipe',
         enviro: 'Environnement',
         // unité de travail
-        unit: 'Outils additionnel',
+        unit: 'Requêter la base de données',
         // file manager
         filem: 'Explorateur de fichier (Alpha)',
         // errormessage

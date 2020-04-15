@@ -16,30 +16,44 @@ export class FileController {
      */
     fileManagercontrols(log: User, mapApi: any): void {
         mapApi.agControllerRegister('FileManagerCtrl', function() {
-            let panel: any;
-            let panel1: any;
             let tfm: FileMana = new FileMana();
             tfm.setUrl('hello', 'http://127.0.0.1:4010/', urlListFile, urlFolderAction, urlFileAction, urlFileActionUpload);
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.OpenFileManager = () => {
                 // Check if an environnment is selected
                 if (log.getEnvironnementSel() !== '') {
-                    if (!panel) {
+                    if (!this.panel) {
                         // make sure both header and body have a digest cycle run on them
-                        panel = mapApi.panels.create('FileManager');
+                        this.panel = mapApi.panels.create('FileManager');
                         //Size of the panel
-                        panel.element.css( {top: '0px;', margin: '100px 50px 100px 450px'} );
+                        this.panel.element.css( {top: '0px;', margin: '100px 50px 100px 450px'} );
                         //button in the header of the panel
-                        panel.header.toggleButton;
-                        panel.header.closeButton; 
+                        this.panel.header.toggleButton;
+                        this.panel.header.closeButton;
+                        this.panel1 = mapApi.panels.create('AddFolder');
+                        this.panel1.element.css({
+                            bottom: '0em',
+                            width: '300px',
+                            height: '200px'
+                        });
+                        this.panel1.element.css({top: '0px;', margin: '200px 50px 100px 650px'});
+                        this.panel1.header.closeButton;
+                        this.panel1.header.title = `Add Folder`;
                     } else {
-                        panel.close();
+                        this.panel.close();
+                        this.panel1.close();
                     }
                     // Create the interface for the file manager
                     let mainFile: FileManagerController = new FileManagerController()
-                    mainFile.fileManagercontrols(log.getToken(), mapApi, tfm, panel, panel1);
+                    mainFile.fileManagercontrols(log.getToken(), mapApi, tfm, this.panel, this.panel1);
                 }
             };
         });
     };
+}
+
+
+export interface FileController {
+    panel: any;
+    panel1: any;
 }

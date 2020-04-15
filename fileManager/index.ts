@@ -35,7 +35,7 @@ export default class FileManager {
             // Alert(this.mapApi.layer);
             this._RV.toggleSideNav('close');
             // Open the panel
-            this.addLoginPanel();
+            this.addPanel();
         };
     }
     /**
@@ -43,7 +43,7 @@ export default class FileManager {
      * de l'utilisateur 
      * @memberof FileManager
      */
-    addLoginPanel(): void { 
+    addPanel(): void { 
         if (!this.panel) {
             // make sure both header and body have a digest cycle run on them
             this.panel = this.mapApi.panels.create('FileManager');
@@ -91,7 +91,7 @@ FileManager.prototype.translations = {
     'en-CA': {
         // Commun
         // file manager
-        filem: 'File manager (Alpha)',
+        filem: 'File Explorer (Alpha)',
     },
 
     'fr-CA': {

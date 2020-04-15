@@ -16,8 +16,11 @@ export class FileManagerController {
         this.panel = panel;
         this.panel1 = panel1;
         //title on the panel
-        this.panel.header.title = `File Manager (Alpha testing)`;
+        this.panel.header.title = `{{ 'plugins.geosys.filem' | translate }}`;
         let fmc: FileManagerController = new FileManagerController();
+        // make sure both header and body have a digest cycle run on them
+        fmc.addingFolder(token,tfm, mapApi,this.panel1); 
+        panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
         //build the UI for the file manager
         let output = tfm.buildUI() + dragdropFunction;
         if (tfm.getNextFolder() == 'root') {
@@ -84,7 +87,7 @@ export class FileManagerController {
             }
             //open a folder when clicked
             this.openFolder = (folder) => {
-                panel.body = ' ';
+                panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
                 tfm.setNextFolder(folder.name);
                 tfm.setBreadcrumbs(tfm.getBreadcrumbs() + '/' + tfm.getNextFolder());
                 let fmc: FileManagerController = new FileManagerController();
@@ -102,6 +105,13 @@ export class FileManagerController {
             //delete file on delete button clicked
             this.deleteFile = (file) => {
                 tfm.deleteFile(file.name, tfm.getBreadcrumbs(), token);
+                let fmc: FileManagerController = new FileManagerController();
+                let output = tfm.buildUI() + dragdropFunction;
+                tfm.obtainArbo(token).then(values => {
+                    tfm.setValue(values);
+                    fmc.FileManaManager(token,mapApi, tfm, panel , panel1);
+                    panel.body = output;
+                });
             }
             //download file on download button clicked
             this.downloadFolder = (folder) => {
@@ -110,39 +120,29 @@ export class FileManagerController {
             //delete file on delete button clicked
             this.deleteFolder = (folder) => {
                 tfm.deleteFolder(folder.name, tfm.getBreadcrumbs(), token);
+                let fmc: FileManagerController = new FileManagerController();
+                let output = tfm.buildUI() + dragdropFunction;
+                tfm.obtainArbo(token).then(values => {
+                    tfm.setValue(values);
+                    fmc.FileManaManager(token,mapApi, tfm, panel , panel1);
+                    panel.body = output;
+                });
             }
             //create a new folder
             this.createFolder = () => {
-                if (!this.panel1) {
-                    this.panel1 = panel1;
-                    // make sure both header and body have a digest cycle run on them
-                    this.panel1 = mapApi.panels.create('AddFolder');
-                    this.panel1.element.css({
-                        bottom: '0em',
-                        width: '300px',
-                        height: '200px'
-                    });
-                    this.panel1.element.css({top: '0px;', margin: '200px 50px 100px 650px'});
-                    this.panel1.header.closeButton;
-                    this.panel1.header.title = `Add Folder`;
-                    let fmc: FileManagerController = new FileManagerController();
-                    fmc.addingFolder(token,tfm, mapApi,this.panel1);
-                    let output: string = `<div ng-controller="folderCtrl as ctrl16">
-                    <md-input-container style="margin-bottom: 0px;height: 34px; width:275px; ">
-                        <label>Name the folder</label>
-                        <input type="text" ng-model="ctrl16.nameFolder"/>
-                    </md-input-container>
-                    <md-input-container style="float:right;">
-                        <md-button class="md-raised" ng-click="ctrl16.addfolder()">
-                            add Folder
-                        </md-button>
-                    </md-input-container>
-                    </div>`;
-                    this.panel1.body = output;  
-                } else {
-                    this.panel1.close();
-                }
-                this.panel1.open();
+                let output: string = `<div ng-controller="folderCtrl as ctrl16">
+                <md-input-container style="margin-bottom: 0px;height: 34px; width:275px; ">
+                    <label>Name the folder</label>
+                    <input type="text" ng-model="ctrl16.nameFolder"/>
+                </md-input-container>
+                <md-input-container style="float:right;">
+                    <md-button class="md-raised" ng-click="ctrl16.addfolder()">
+                        add Folder
+                    </md-button>
+                </md-input-container>
+                </div>`;
+                panel1.body = output; 
+                panel1.open();
             }
             //upload file on drag and drop of file
             this.uploadFile = () => {
@@ -163,7 +163,6 @@ export class FileManagerController {
             this.addfolder = () => {
                 tfm.createFolder(tfm.getBreadcrumbs(), token,this.nameFolder);
                 panel.close();
-
             }
         });
     }

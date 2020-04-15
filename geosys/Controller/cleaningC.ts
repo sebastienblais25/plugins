@@ -42,6 +42,7 @@ export class CleaningController {
                     log.setCloseable(true);
                     let nettoyage: Cleaning = new Cleaning(this.selectedItemA ,this.selectedItemB);
                     let renet= nettoyage.submitForm(log);
+                    
                     if (renet != 'success') {
                         log.setCloseable(false);
                         alert(renet.statusText);

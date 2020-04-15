@@ -42,33 +42,6 @@ export class Connexion {
         });
         return outputValue;
     };
-
-    /**
-    * The connexion to the Api for the login (TEST)
-    * @param {string} urlgoto The url for the login
-    * @param {*} header The header with the username and the password
-    * @returns {*} Return the infromation of the user
-    * @memberof connexion
-    */
-   connexionAPILoginP(urlgoto: string, header: any): any {
-        return new Promise(resolve => {
-            $.ajax( {
-                url: urlgoto,
-                headers: {
-                    header
-                },
-                type: 'GET',
-                async: false,
-                dataType: 'json',
-                success:data => resolve(data)
-            })
-        })
-    /*
-    Promise.all(promises).then(values => {
-        console.log(values);
-    });*/
-    
-};
     /**
      * connection to the Api with ajax and promises
      * @param {string} token the token for the connection

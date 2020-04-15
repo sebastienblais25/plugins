@@ -13,7 +13,10 @@ export class User{
     /** Environnement **/
     private _environnementSel: string;
     private _urlEnvselected: string;
-    private _baseTheme:string;
+    private _baseTheme: string;
+    _baseThemeU: string;
+    _baseThemeT: string;
+    _baseThemeC: string;
     /** Connexion **/
     private _conn: Connexion = new Connexion();
     /** Return of login **/
@@ -123,6 +126,15 @@ export class User{
         return output
     }
     /**
+     * Reset Base theme for the form
+     * @memberof User
+     */
+    resetBaseTheme(): void {
+        this._baseThemeU = this._baseTheme;
+        this._baseThemeT = this._baseTheme;
+        this._baseThemeC = this._baseTheme;
+    }
+    /**
      * sett all the info information obtain form a login into the properties of the class
      * @param {string} token
      * @param {string} token_type
@@ -142,6 +154,9 @@ export class User{
         }
         this._equipe = new ApiReturn(equipe);
         this._baseTheme = config.base_theme;
+        this._baseThemeU = config.base_theme;
+        this._baseThemeT = config.base_theme;
+        this._baseThemeC = config.base_theme;
         let ordertheme: any =this.orderThemeList(theme,config);
         for (let i in ordertheme){
             this._themeAcc.push(new ApiReturn(ordertheme[i]));
@@ -161,10 +176,6 @@ export class User{
         let json = '';
         let output: any =this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlgetidWu + theme), 'Get');
         this._idUt = new IdWu(theme,output.value);
-        //À enlever Mocking Only
-        for (let j in this._idUt._wUnit) {
-            this._idUt._wUnit[j] = this._idUt._theme + ' - ' + this._idUt._wUnit[j];
-        }
     }
     /**
      * Call the API for a list of classes
@@ -174,7 +185,7 @@ export class User{
     callAPIListeClasse(theme: string) {
         let resstheme: string = theme + ':ress.json'
         let ressjson = this.createJsonRessources(resstheme/*,path*/);
-        let data: any = this._conn.connexionAPI(this.getToken(), ressjson , this.constructUrl(urlClassesList),'Get');
+        let data: any = this._conn.connexionAPI(this.getToken(), ressjson , this.constructUrl(urlClassesList,theme),'Get');
         this._classeslist = data.value.liste_classe;
     }
     /**
@@ -184,7 +195,7 @@ export class User{
      */
     callAPIWorkingType(theme: string) {
         let json = '';
-        let ttoutput: any = this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlWorkingType + theme), 'Get');
+        let ttoutput: any = this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlWorkingType+ theme.toString()), 'Get');
         this._workinType = [];
         for (let j in ttoutput) {
             this._workinType.push(new ApiReturn(ttoutput[j].id));
@@ -235,7 +246,8 @@ export class User{
      */
     setidUTtheme(theme: string) {
         //set the new url and get the connection
-        if (theme.toString() != this._baseTheme.toString()) {
+        if (theme.toString() !== this._baseThemeU.toString()) {
+            this._baseThemeU = theme;
             this.callAPIWorkingUnit(theme)
         }
         let list = [];
@@ -254,7 +266,8 @@ export class User{
      */
     setworkingtype(theme: string) {
         //set the new url and get the connection
-        if (theme != this._baseTheme) {
+        if (theme.toString() !== this._baseThemeT.toString()) {
+            this._baseThemeT = theme;
             this.callAPIWorkingType(theme); 
         }
         let list = [];
@@ -291,7 +304,8 @@ export class User{
      */
     getlistofclasses(theme: string/*,path:string*/) {
         let listS = [];
-        if (theme != this._baseTheme) {
+        if (theme.toString() !== this._baseThemeC.toString()) {
+            this._baseThemeC = theme;
             this.callAPIListeClasse(theme);
         }
         for (let i in this._classeslist) {
@@ -413,6 +427,13 @@ export class User{
     }
     setPassword(value: string) {
         this._password = value;
+    }
+    //basetheme
+    getbaseTheme(): string {
+        return this._baseTheme;
+    }
+    setbaseTheme(value: string) {
+        this._baseTheme = value;
     }
     // Connexion
     getConn(): Connexion {

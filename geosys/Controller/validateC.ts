@@ -32,6 +32,7 @@ export class ValidateController {
                 for (let i in list){
                     this.itemsF.push(list[i])
                 }
+                //log.setbaseTheme(this.selectedItemE);
             }
             //Envoie le fromulaire a l'API
             this.submitFormV = () => { 
@@ -47,6 +48,7 @@ export class ValidateController {
                     formdata.append('fichier_json', (<HTMLInputElement>document.getElementById('fileJSON')).files[0]);
                     let vali: Valider = new Valider();
                     let api: any = vali.submitForm(formdata,log);
+                    
                     if (api !== undefined) {
                         alert(api);
                         log.setCloseable(false);

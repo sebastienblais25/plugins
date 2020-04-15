@@ -14,7 +14,7 @@ export class QueryCall {
      * @param {Boolean} simply
      * @memberof QueryCall
      */
-    submitquery(log: User, format: string, simply: Boolean): any {
+    submitquery(log: User, format: string, simply: boolean): any {
         return this._conn.connexionAPI(log.getToken(),this._json,log.constructUrl(urlQuery,'?output_format=' + format + '&simplifier=' + simply),'Get');
     }
     /**
@@ -26,6 +26,7 @@ export class QueryCall {
         this._json = {
             'sql': query
         }
+        this._json = JSON.stringify(this._json);
     }
     /***** Accessor ******/
     getConn(): Connexion {

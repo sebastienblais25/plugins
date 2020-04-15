@@ -326,9 +326,10 @@
     },
     "plugins": {
       "geosys": {
-        "base_theme": "1011"
+        "base_theme": "1007"
       },
       "draw": {  
+        "open": true,
         "tools": ["picker", "polygon", "measure", "extent"]
       }
     }

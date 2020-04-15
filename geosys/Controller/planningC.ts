@@ -66,6 +66,7 @@ export class PlanningController {
                 //add the new list in list for the template
                 this.classes = list;
                 this.itemsD = listTT;
+                //log.setbaseTheme(this.selectedItemA);
             }
             //for claases list select all the info
             this.toggleAll = () => {
@@ -168,6 +169,7 @@ export class PlanningController {
                         this.wherep);
                     //submit the form to the API
                     let ApiReturn: any = plan.submitForm(log);
+                    
                     //If the return isn't a succes
                     if (ApiReturn != 'success') {
                         alert(ApiReturn.status)

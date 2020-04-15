@@ -133,6 +133,7 @@ export class TopMenuController {
                     this.SelectedMenuP = {
                         "background-color": "red",
                     }
+                    log.setCloseable(true);
                 } else {
                     this.SelectedMenuP = {
                         "background-color": "green",
@@ -181,6 +182,7 @@ export class TopMenuController {
                     this.SelectedMenuE = {
                         "background-color": "red",
                     }
+                    log.setCloseable(true);
                 } else {
                     this.SelectedMenuE = {
                         "background-color": "green",
@@ -229,6 +231,7 @@ export class TopMenuController {
                     this.SelectedMenuEU = {
                         "background-color": "red",
                     }
+                    log.setCloseable(true);
                 } else {
                     this.SelectedMenuEU = {
                         "background-color": "green",
@@ -271,6 +274,7 @@ export class TopMenuController {
                     this.SelectedMenuCr = {
                         "background-color": "red",
                     }
+                    log.setCloseable(true);
                 } else {
                     this.SelectedMenuCr = {
                         "background-color": "green",
@@ -313,6 +317,7 @@ export class TopMenuController {
                     this.SelectedMenuV = {
                         "background-color": "red",
                     }
+                    log.setCloseable(true);
                 } else {
                     this.SelectedMenuV = {
                         "background-color": "green",
@@ -361,6 +366,7 @@ export class TopMenuController {
                     this.SelectedMenuD = {
                         "background-color": "red",
                     }
+                    log.setCloseable(true);
                 } else {
                     this.SelectedMenuD = {
                         "background-color": "green",
@@ -403,6 +409,7 @@ export class TopMenuController {
                     this.SelectedMenuCL = {
                         "background-color": "red",
                     }
+                    log.setCloseable(true);
                 } else {
                     this.SelectedMenuCL = {
                         "background-color": "green",
@@ -445,6 +452,7 @@ export class TopMenuController {
                     this.SelectedMenuCa = {
                         "background-color": "red",
                     }
+                    log.setCloseable(true);
                 } else {
                     this.SelectedMenuCa = {
                         "background-color": "green",

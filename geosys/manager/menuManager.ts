@@ -23,8 +23,8 @@ import { CancelController } from '../controller/cancelC';
 import { TopMenuController } from '../controller/topmenuC';
 import { ValidateController } from '../controller/validateC';
 import { FileController } from '../controller/fileManagerC'
-import { uniteTravail } from '../templates/unitTravail';
-import { UnitTravC } from '../controller/unitTravC';
+import { uniteTravail } from '../templates/queryCallsTemp';
+import { QueryCallC } from '../Controller/queryCallsC';
 
 
 export class menuManager{
@@ -38,7 +38,7 @@ export class menuManager{
     _cancel: CancelController;
     _validate: ValidateController;
     _fileManager: FileController;
-    _workUnit: UnitTravC;
+    _workUnit: QueryCallC;
 
 
     /**
@@ -59,7 +59,7 @@ export class menuManager{
         this._cancel = new CancelController();
         this._validate = new ValidateController();
         this._fileManager = new FileController();
-        this._workUnit = new UnitTravC();
+        this._workUnit = new QueryCallC();
 
         //varaible for the form
         let outputExt:string  = this.extractManager(log,mapApi);
@@ -79,12 +79,12 @@ export class menuManager{
         //compile the form together
         menuprincipal = "<div>"
                             + outputTopmenu
-                            + `<div class="Geosys-section">Processus Geosys</div>`
+                            + `<div class="Geosys-section">{{ 'plugins.geosys.geo' | translate }}</div>`
                             + outputPlan
                             + outputExt
                             + outputDeli  
                             + outputNettoyage 
-                            + `<div class="Geosys-section">Utilitaire</div>`
+                            + `<div class="Geosys-section">{{ 'plugins.geosys.uti' | translate }}</div>`
                             + outputExtSR
                             + outputCreer 
                             + outputVali

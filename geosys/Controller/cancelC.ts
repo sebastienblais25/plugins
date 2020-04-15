@@ -37,6 +37,7 @@ export class CancelController {
                 for (let i in list) {
                     this.itemsB.push(list[i])
                 }
+                //log.setbaseTheme(this.selectedItemA);
             }
             /**************** From Submission ***************/
              this.submitCan = () => { 
@@ -45,17 +46,10 @@ export class CancelController {
                      this.selectedItemA
                     ,this.selectedItemB);     
                 let ApiReturn:any = ext.submitForm(log);
+                log.resetBaseTheme();
                 if (ApiReturn != 'success'){
                     alert(ApiReturn.statusText)
-                    $scope.SelectedMenu = {
-                        "background-color" : "red", 
-                    }
-                }else{
-                    $scope.IsVisibleCA = false;
-                    console.log(log._token);
-                    $scope.SelectedMenu = {
-                        "background-color" : "green", 
-                    }
+                }
                 }*/
                 //alert(this._ApiReturn.value);    
             };

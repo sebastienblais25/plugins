@@ -1,4 +1,5 @@
 import { Connexion } from '../fileManager/apiConnect';
+import { stringify } from 'querystring';
 const FileSaver = require('file-saver'); // le import
 
 export class FileMana {
@@ -76,19 +77,7 @@ export class FileMana {
      */
     buildUI(): string {
         let output:string = `
-        <div ng-controller="fileManagerPanelCtrl as ctrl11">
-            <div class="Geosys-topcover"></div>
-            <div class="Geosys-sticky-Header">
-                <div class="Geosys-backing" ng-click="ctrl11.precedent()"><i class="material-icons">arrow_back</i></div>
-                <div class="Geosys-backing" ng-click="ctrl11.refresh()"><i class="material-icons">refresh</i></div>
-                <div class="Geosys-backing" ng-click="ctrl11.createFolder()"><i class="material-icons">create_new_folder</i></div>
-                <div class="Geosys-breadclass">${this.buildClickablebreadcrumbs()}</div>
-                <div class="Geosys-header-File">
-                    <span class="Geosys-name-File-Folder-Header">Name</span> 
-                    <span class="Geosys-modified-File-Folder-Header">Date modified</span>
-                    <span class="Geosys-size-File-Folder-Header">Size</span>
-                </div>
-            </div>
+            ${this.buildHeaderFileManager()}
             <div id="div1" ondragenter="onDragEnter(event);"
             ondragover="onDragOver(event);"
             ondragleave="onDragLeave(event);"
@@ -106,7 +95,7 @@ export class FileMana {
                             <span class="Geosys-name-File-Folder Geosys-lilPad">{{ folder.name }}</span>
                             <span class="Geosys-modified-File-Folder Geosys-lilPad">{{ folder.modified }}</span>
                         </div>
-                        <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFolder(folder); ctrl11.refresh()"><i class="material-icons">delete</i></div>
+                        <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFolder(folder)"><i class="material-icons">delete</i></div>
                         <!--<div class="Geosys-downloadbtn" ng-click="ctrl11.downloadFolder(folder)"><i style="padding-top: 2px;" class="material-icons">get_app</i></div>-->
                     </div>
                 </md-list-item>
@@ -121,8 +110,8 @@ export class FileMana {
                         <span class="Geosys-name-File-Folder Geosys-lilPad">{{ file.name }}</span> 
                         <span class="Geosys-modified-File-Folder Geosys-lilPad">{{ file.modified }}</span>
                         <span class="Geosys-size-File-Folder Geosys-lilPad">{{ file.size }} KB</span>
-                        <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFile(file); ctrl11.refresh()"><i class="material-icons">delete</i></div>
-                        <div class="Geosys-downloadbtn" ng-click="ctrl11.downloadFile(file); ctrl11.refresh()"><i style="padding-top: 2px;" class="material-icons">get_app</i></div>
+                        <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFile(file)"><i class="material-icons">delete</i></div>
+                        <div class="Geosys-downloadbtn" ng-click="ctrl11.downloadFile(file)"><i style="padding-top: 2px;" class="material-icons">get_app</i></div>
                     </div>       
                 </md-list-item>
                 <div class="Geosys-hidden-upload">
@@ -139,6 +128,31 @@ export class FileMana {
             </div>
         </div>
         `
+        return output;
+    }
+
+    /**
+     * Build the header for the file manager
+     * @returns {string}
+     * @memberof FileMana
+     */
+    buildHeaderFileManager(): string {
+        let output:string = `
+        <div ng-controller="fileManagerPanelCtrl as ctrl11">
+            <div class="Geosys-topcover"></div>
+            <div class="Geosys-sticky-Header">
+                <div class="Geosys-backing" ng-click="ctrl11.precedent()"><i class="material-icons">arrow_back</i></div>
+                <div class="Geosys-backing" ng-click="ctrl11.refresh()"><i class="material-icons">refresh</i></div>
+                <div class="Geosys-backing" ng-click="ctrl11.createFolder()"><i class="material-icons">create_new_folder</i></div>
+                <div class="Geosys-breadclass">${this.buildClickablebreadcrumbs()}</div>
+                <div class="Geosys-header-File">
+                    <span class="Geosys-name-File-Folder-Header">Name</span> 
+                    <span class="Geosys-modified-File-Folder-Header">Date modified</span>
+                    <span class="Geosys-size-File-Folder-Header">Size</span>
+                </div>
+            </div>
+        `;
+
         return output;
     }
     /**

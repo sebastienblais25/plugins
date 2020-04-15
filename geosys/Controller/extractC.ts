@@ -35,6 +35,7 @@ export class ExtractController {
                 for (let i in list) {
                     this.itemsB.push(list[i])
                 }
+                //log.setbaseTheme(this.selectedItemA);
             }
             /************** Advanced Setting ***************/
             this.ShowHideAdvanced = () => {
@@ -61,6 +62,7 @@ export class ExtractController {
                     let ext = new Extraire(this.selectedItemA, this.selectedItemB);
                     ext.setOptionnalEnvironnement(this.selectedItemENT);
                     let ApiReturn:any = ext.submitForm(log);
+                    
                     // If the conection to the API is a success
                     if (ApiReturn != 'success') {
                         alert(ApiReturn.statusText);
@@ -104,7 +106,8 @@ export class ExtractController {
                 list = log.getlistofclasses(this.selectedItemA);
                 this.classes.length = 0;
                 // Add the new list in list for the template
-                this.classes = list 
+                this.classes = list
+                log.setbaseTheme(this.selectedItemA); 
             }
             // Select all the classes in the list
             this.toggleAll = () => {
@@ -225,6 +228,7 @@ export class ExtractController {
                     extsr.setOptionnalEnvironnement(this.selectedItemENT);
                     // If the connection to the API is a Success
                     let ApiReturn: any = extsr.submitForm(log);
+                    
                     if (ApiReturn != 'success') {
                         alert(ApiReturn.statusText)
                         log.setCloseable(false);

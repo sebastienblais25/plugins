@@ -39,6 +39,7 @@ export class DeliveryController{
                 for (let i in list) {
                     this.itemsF.push(list[i])
                 }
+                //log.setbaseTheme(this.selectedItemE);
             }
             /************** Advanced Setting ***************/
             this.ShowHideAdvanced = function() {
@@ -70,7 +71,8 @@ export class DeliveryController{
                     let livre:Livraison = new Livraison(this.selectedItemF,this.selectedItemE,this.typeOper);
                     livre.setOptionnalEnvironnement(this.selectedItemENT);
                     //submit form
-                    let ApiReturn:any = livre.submitForm(formdata,log);     
+                    let ApiReturn:any = livre.submitForm(formdata,log);
+                       
                     if (ApiReturn != undefined) {
                         log.setCloseable(false);
                         alert(ApiReturn);
