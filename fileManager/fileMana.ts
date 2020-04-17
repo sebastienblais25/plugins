@@ -22,7 +22,7 @@ export class FileMana {
      * @param {string} [nextFolder='root']
      * @memberof FileMana
      */
-    constructor(nextFolder: string = 'root', startingFolder: string = '...') {
+    constructor(nextFolder: string = 'root', startingFolder: string = 'dev/travail/themes/HYDRO_50K') {
         this._nextFolder = nextFolder
         this._breadcrumbs= startingFolder;
     }
@@ -41,7 +41,7 @@ export class FileMana {
      * @memberof FileMana
      */
     setNavigation(urlgoto: string,adding: string = ''): string {
-        return this.getUrlServer() + urlgoto + this._breadcrumbs + adding + '&__example=' + this._breadcrumbs + adding;
+        return this.getUrlServer() + urlgoto + this._breadcrumbs + adding;
     }
     /**
      * build a list of folder with the return of the API

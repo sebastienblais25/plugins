@@ -15,7 +15,7 @@ export class QueryCall {
      * @memberof QueryCall
      */
     submitquery(log: User, format: string, simply: boolean): any {
-        return this._conn.connexionAPI(log.getToken(),this._json,log.constructUrl(urlQuery,'?output_format=' + format + '&simplifier=' + simply),'Get');
+        return this._conn.connexionAPI(log.getToken(),this._json,"http://127.0.0.1:8080/geosys-api/v1/suivi-prod/requete-bd?output_format=geojson&simplifier=True"/*log.constructUrl(urlQuery,'?output_format=' + format + '&simplifier=' + simply)*/,'Post');
     }
     /**
      *
