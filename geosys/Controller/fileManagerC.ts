@@ -17,7 +17,7 @@ export class FileController {
     fileManagercontrols(log: User, mapApi: any): void {
         mapApi.agControllerRegister('FileManagerCtrl', function() {
             let tfm: FileMana = new FileMana();
-            tfm.setUrl('hello', 'http://132.156.9.78:8080/geosys-api/v1/', urlListFile, urlFolderAction, urlFileAction, urlFileActionUpload);
+            tfm.setUrl('hello', 'http://127.0.0.1:4010/'/*'http://132.156.9.78:8080/geosys-api/v1/'*/, urlListFile, urlFolderAction, urlFileAction, urlFileActionUpload);
             //permet d'afficher ou chacher le formulaire en cliquant sur le titre
             this.OpenFileManager = () => {
                 // Check if an environnment is selected

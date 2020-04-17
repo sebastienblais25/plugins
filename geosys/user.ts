@@ -71,7 +71,7 @@ export class User{
         this._password = '';
         if (data.status === undefined) {
             this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe,config);
-            this.setListEnv(this._conn.connexionAPI(this.getToken(), json, "http://132.156.9.78:8080/geosys-api/v1/systeme/envs"/*this.constructUrl(urlEnvList)*/, 'Get'));
+            this.setListEnv(this._conn.connexionAPI(this.getToken(), json, /*"http://132.156.9.78:8080/geosys-api/v1/systeme/envs"*/this.constructUrl(urlEnvList), 'Get'));
         } else {
             alert(data.status)
         }
@@ -164,7 +164,7 @@ export class User{
         }
         //set all form with the base theme
         this.callAPIWorkingUnit(this._baseTheme);
-        this.callAPIListeClasse(this._baseTheme);
+        //this.callAPIListeClasse(this._baseTheme);
         this.callAPIWorkingType(this._baseTheme);
     }
     /**

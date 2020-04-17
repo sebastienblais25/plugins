@@ -22,7 +22,7 @@ export class FileMana {
      * @param {string} [nextFolder='root']
      * @memberof FileMana
      */
-    constructor(nextFolder: string = 'root', startingFolder: string = 'dev/travail/themes/HYDRO_50K') {
+    constructor(nextFolder: string = 'root', startingFolder: string = '...' /*'dev/travail/themes/HYDRO_50K'*/) {
         this._nextFolder = nextFolder
         this._breadcrumbs= startingFolder;
     }
@@ -63,9 +63,17 @@ export class FileMana {
      */
     buildFileList() {
         let listFi = [];
+        let max: number = 50;
         // Build the list of folder for the user UI
         for (let i in this._value.list_file) {
-            listFi.push( { name: this._value.list_file[i].name , size:this._value.list_file[i].size, modified:this._value.list_file[i].last_modified, wanted: false } );
+            let len: number = this._value.list_file[i].name.length;
+            let substring: string = '';
+            if (len > max) {
+                substring = this._value.list_file[i].name.substr(0,46) + ' ...';
+            }else{
+                substring = this._value.list_file[i].name;
+            }
+            listFi.push( { name: this._value.list_file[i].name , size:this._value.list_file[i].size, modified:this._value.list_file[i].last_modified, namecut:substring } );
         }
         return listFi;
     }
@@ -91,7 +99,7 @@ export class FileMana {
                                 </i>
                             </md-icon>
                             
-                            <span class="Geosys-name-File-Folder Geosys-lilPad">{{ folder.name }}</span>
+                            <span class="Geosys-name-File-Folder Geosys-lilPad">{{ folder.name }}<md-tooltip>{{ folder.name }}</md-tooltip></span>
                             <span class="Geosys-modified-File-Folder Geosys-lilPad">{{ folder.modified }}</span>
                         </div>
                         <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFolder(folder)"><i class="material-icons">delete</i></div>
@@ -106,7 +114,7 @@ export class FileMana {
                                 insert_drive_file
                             </i>
                         </md-icon>
-                        <span class="Geosys-name-File-Folder Geosys-lilPad">{{ file.name }}</span> 
+                        <span class="Geosys-name-File-Folder Geosys-lilPad">{{ file.namecut }}<md-tooltip>{{ file.name }}</md-tooltip></span> 
                         <span class="Geosys-modified-File-Folder Geosys-lilPad">{{ file.modified }}</span>
                         <span class="Geosys-size-File-Folder Geosys-lilPad">{{ file.size }} KB</span>
                         <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFile(file)"><i class="material-icons">delete</i></div>

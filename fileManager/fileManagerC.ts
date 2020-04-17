@@ -19,7 +19,7 @@ export class FileManagerController {
         this.panel.header.title = `{{ 'plugins.geosys.filem' | translate }}`;
         let fmc: FileManagerController = new FileManagerController();
         // make sure both header and body have a digest cycle run on them
-        fmc.addingFolder(token,tfm, mapApi,this.panel1); 
+        fmc.addingFolder(token, tfm, mapApi, this.panel, this.panel1); 
         panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
         //build the UI for the file manager
         let output = tfm.buildUI() + dragdropFunction;
@@ -48,9 +48,9 @@ export class FileManagerController {
             this.files = tfm.buildFileList();
             //click on the left arrow to back one folder
             this.precedent = () => {
-                let rank = tfm.getList().length - 2
-                panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
+                let rank = tfm.getList().length - 2 
                 if (rank >= 0) {
+                    panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
                     tfm.setbreacrumbsForNav(rank.toString());
                     let fmc: FileManagerController = new FileManagerController();
                     let output = tfm.buildUI() + dragdropFunction;
@@ -168,11 +168,19 @@ export class FileManagerController {
      * @param {*} mapApi
      * @memberof FileManagerController
      */
-    addingFolder(token: string, tfm: FileMana, mapApi: any, panel:any): void {
+    addingFolder(token: string, tfm: FileMana, mapApi: any, panel:any, panel1:any): void {
         mapApi.agControllerRegister('folderCtrl', function() {
             this.addfolder = () => {
                 tfm.createFolder(tfm.getBreadcrumbs(), token,this.nameFolder);
-                panel.close();
+                panel1.close();
+                panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
+                let fmc: FileManagerController = new FileManagerController();
+                let output = tfm.buildUI() + dragdropFunction;
+                tfm.obtainArbo(token).then(values => {
+                    tfm.setValue(values);
+                    fmc.FileManaManager(token,mapApi, tfm, panel , panel1);
+                    panel.body = output;
+                });
             }
         });
     }
