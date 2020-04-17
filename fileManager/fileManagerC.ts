@@ -49,6 +49,7 @@ export class FileManagerController {
             //click on the left arrow to back one folder
             this.precedent = () => {
                 let rank = tfm.getList().length - 2
+                panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
                 if (rank >= 0) {
                     tfm.setbreacrumbsForNav(rank.toString());
                     let fmc: FileManagerController = new FileManagerController();

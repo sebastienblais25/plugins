@@ -71,7 +71,7 @@ export class User{
         this._password = '';
         if (data.status === undefined) {
             this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe,config);
-            this.setListEnv(this._conn.connexionAPI(this.getToken(), json, this.constructUrl(urlEnvList), 'Get'));
+            this.setListEnv(this._conn.connexionAPI(this.getToken(), json, "http://132.156.9.78:8080/geosys-api/v1/systeme/envs"/*this.constructUrl(urlEnvList)*/, 'Get'));
         } else {
             alert(data.status)
         }
@@ -82,16 +82,16 @@ export class User{
      * @param {*} output Its the data from API.
      * @memberof User
      */
-    setListEnv(output: any) {
-        for (let i in output) {
-            if (output[i].env === 'PRO') {
-                this._envAcc.push(new Environnement(output[i].env,output[i].url))
+    setListEnv(output: any) {        
+        for (let i in output.envs) {
+            if (output.envs[i].env === 'PRO') {
+                this._envAcc.push(new Environnement(output.envs[i].env,output.envs[i].url))
                 break;
             } 
         }
-        for (let i in output) {
-            if (output[i].env != 'PRO') {
-                this._envAcc.push(new Environnement(output[i].env,output[i].url))
+        for (let i in output.envs) {
+            if (output.envs[i].env != 'PRO') {
+                this._envAcc.push(new Environnement(output.envs[i].env,output.envs[i].url))
             }  
         }
     }
@@ -185,7 +185,7 @@ export class User{
     callAPIListeClasse(theme: string) {
         let resstheme: string = theme;
         let ressjson = this.createJsonRessources(resstheme/*,path*/);
-        let data: any = this._conn.connexionAPI(this.getToken(), ressjson , this.constructUrl(urlClassesList,theme),'Get');
+        let data: any = this._conn.connexionAPI(this.getToken(), ressjson , this.constructUrl(urlClassesList),'Post');
         this._classeslist = data.value.liste_classe;
     }
     /**

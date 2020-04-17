@@ -61,7 +61,7 @@ export class Connexion {
                     url: urlgoto,
                     headers: {
                         'Authorization': `Bearer ${token}`,
-                        //'content-Type': 'application/json',
+                        'content-Type': 'application/json',
                         optEnv
                     },
                     type: typeConn,

@@ -9,19 +9,19 @@ export const urlgeoDatGetId: string = `geodata/`;
 //export const urlLoginGet: string = `securite/login`;
 
 // Url for the id working unit(/suivi-prod/unite-travail/id/theme/actif/{theme}) Get
-export const urlgetidWu: string = `suivi-prod/unite-travail/id/theme/actif/1007?__example=`;
+export const urlgetidWu: string = `suivi-prod/unite-travail/id/theme/actif/`;
 
 // Send planning to the API(/suivi-prod/planification) Post
 export const urlPlaniPost: string = `suivi-prod/planification`;
 
 // Url getting environnement(/systeme/envs) Get
-export const urlEnvList: string = `systeme/envs?__example=exSystemeEnv_01`;
+export const urlEnvList: string = `systeme/envs`;
 
 // Url getting list of classes(/systeme/ressources) Get
-export const urlClassesList: string = `systeme/ressources?__example=`;
+export const urlClassesList: string = `systeme/ressources-recherche`;
 
 // Url getting the list of working type for theme(/suivi-prod/type-travail/theme/{theme}) Get
-export const urlWorkingType: string = `suivi-prod/type-travail/theme/1007?__example=`;
+export const urlWorkingType: string = `suivi-prod/type-travail/theme/`;
 
 // Url for delivery(Insert)(/geodata/{identifiant}) Post
 export const urlDeliveryInsert: string = `geodata/`;
@@ -36,7 +36,7 @@ export const urlCreateMD: string = `geosys/creer-md`;
 export const urlValidateMD: string = `geosys/valider-md`;
 
 // Url for getting all the info for a code(/suivi-prod/codes/{code}) Get
-export const urlGetCode: string = `suivi-prod/codes/hello?__example=`;
+export const urlGetCode: string = `suivi-prod/codes/`;
 
 // Url for cleaning a working unit id (/suivi-prod/unite-travail/{identifiant}) Delete
 export const urlDeleteClean: string = `suivi-prod/unite-travail/`
