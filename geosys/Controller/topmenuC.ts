@@ -406,12 +406,12 @@ export class TopMenuController {
             };
             this.setColorCl = () => {
                 if ( log.getCloseable() === false) {
-                    this.SelectedMenuCL = {
+                    this.SelectedMenuC = {
                         "background-color": "red",
                     }
                     log.setCloseable(true);
                 } else {
-                    this.SelectedMenuCL = {
+                    this.SelectedMenuC = {
                         "background-color": "green",
                     }
                 }

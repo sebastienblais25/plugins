@@ -326,6 +326,7 @@
     },
     "plugins": {
       "geosys": {
+        "url_login": "http://127.0.0.1:4010/securite/login",
         "base_theme": "1007"
       },
       "draw": {  

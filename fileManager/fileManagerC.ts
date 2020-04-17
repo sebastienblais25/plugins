@@ -23,14 +23,11 @@ export class FileManagerController {
         panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
         //build the UI for the file manager
         let output = tfm.buildUI() + dragdropFunction;
-        if (tfm.getNextFolder() == 'root') {
-            tfm.obtainArbo(token).then(values => {
-                tfm.setValue(values);
-                fmc.FileManaManager(token,mapApi, tfm, this.panel, this.panel1);
-                this.panel.body = output;
-            });   
-        }  
-        
+        tfm.obtainArbo(token).then(values => {
+            tfm.setValue(values);
+            fmc.FileManaManager(token,mapApi, tfm, this.panel, this.panel1);
+            this.panel.body = output;
+        });   
         this.panel.open(); 
     };
     /**
@@ -66,6 +63,7 @@ export class FileManagerController {
             }
             //refresh the folder 
             this.refresh = () => {
+                panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
                 let fmc: FileManagerController = new FileManagerController();
                 let output = tfm.buildUI() + dragdropFunction;
                 tfm.obtainArbo(token).then(values => {
@@ -76,6 +74,7 @@ export class FileManagerController {
             }
             //open the folder from the breadcrumbs
             this.followup = (folder)  => {
+                panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
                 tfm.setbreacrumbsForNav(folder);
                 let fmc: FileManagerController = new FileManagerController();
                 let output = tfm.buildUI() + dragdropFunction;
@@ -105,6 +104,7 @@ export class FileManagerController {
             //delete file on delete button clicked
             this.deleteFile = (file) => {
                 tfm.deleteFile(file.name, tfm.getBreadcrumbs(), token);
+                panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
                 let fmc: FileManagerController = new FileManagerController();
                 let output = tfm.buildUI() + dragdropFunction;
                 tfm.obtainArbo(token).then(values => {
@@ -120,6 +120,7 @@ export class FileManagerController {
             //delete file on delete button clicked
             this.deleteFolder = (folder) => {
                 tfm.deleteFolder(folder.name, tfm.getBreadcrumbs(), token);
+                panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
                 let fmc: FileManagerController = new FileManagerController();
                 let output = tfm.buildUI() + dragdropFunction;
                 tfm.obtainArbo(token).then(values => {
@@ -148,6 +149,14 @@ export class FileManagerController {
             this.uploadFile = () => {
                 let file = (<HTMLInputElement>document.getElementById('fileInput')).files[0];
                 tfm.uploadfile(tfm.getBreadcrumbs(),token,file);
+                panel.body = tfm.buildHeaderFileManager() + `<br/><div class="loader"></div>` + '<div>';
+                let fmc: FileManagerController = new FileManagerController();
+                let output = tfm.buildUI() + dragdropFunction;
+                tfm.obtainArbo(token).then(values => {
+                    tfm.setValue(values);
+                    fmc.FileManaManager(token,mapApi, tfm, panel , panel1);
+                    panel.body = output;
+                });
             }
         });
     }

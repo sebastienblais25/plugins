@@ -1,5 +1,4 @@
 import { Connexion } from '../fileManager/apiConnect';
-import { stringify } from 'querystring';
 const FileSaver = require('file-saver'); // le import
 
 export class FileMana {
@@ -23,9 +22,9 @@ export class FileMana {
      * @param {string} [nextFolder='root']
      * @memberof FileMana
      */
-    constructor(nextFolder: string = 'root') {
+    constructor(nextFolder: string = 'root', startingFolder: string = '...') {
         this._nextFolder = nextFolder
-        this._breadcrumbs= '...';
+        this._breadcrumbs= startingFolder;
     }
     /**
      * obtain the structure of a folder with a path send
@@ -201,7 +200,7 @@ export class FileMana {
         let form: FormData = new FormData();
         console.log(file)
         form.append('fichier', file);
-        this._conn.connexionAPIFileManagerTestUpload(token,this.setNavigation(this.getFileAction(),'/'),'POST', form).then( values => {
+        this._conn.connexionAPIFileManagerTestUpload(token,this.setNavigation(this.getFileUAction(),'/'),'POST', form).then( values => {
             console.log(values[0]);
         })
     }
@@ -400,6 +399,9 @@ export class FileMana {
     }
     getFileAction(): string {
         return this._fileAction;
+    }
+    getFileUAction(): string {
+        return this._fileUpload;
     }
     
 }

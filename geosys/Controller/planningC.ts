@@ -165,8 +165,8 @@ export class PlanningController {
                         this.selectedItemD,
                         listofclass,
                         this.dfp,
-                        log.getGeom(),
-                        this.wherep);
+                        this.wherep,
+                        log.getGeom());
                     //submit the form to the API
                     let ApiReturn: any = plan.submitForm(log);
                     

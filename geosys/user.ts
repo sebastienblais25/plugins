@@ -1,4 +1,4 @@
-import { urlLoginGet, urlgetidWu, urlEnvList,
+import { urlgetidWu, urlEnvList,
      urlClassesList,urlWorkingType, urlGetCode } from './config/url';
 import { Connexion } from './apiConnect';
 import { IdWu } from './manager/idWU';
@@ -66,7 +66,7 @@ export class User{
         let json: string = '';
         let data: any;
         //let header: any = this.getInformationToHeader();
-        data = this._conn.connexionAPILogin(this.constructUrl(urlLoginGet),this.getUsername(),this.getPassword());
+        data = this._conn.connexionAPILogin(config.url_login,this.getUsername(),this.getPassword());
         // Destroy the password for the session
         this._password = '';
         if (data.status === undefined) {
@@ -183,7 +183,7 @@ export class User{
      * @memberof User
      */
     callAPIListeClasse(theme: string) {
-        let resstheme: string = theme + ':ress.json'
+        let resstheme: string = theme;
         let ressjson = this.createJsonRessources(resstheme/*,path*/);
         let data: any = this._conn.connexionAPI(this.getToken(), ressjson , this.constructUrl(urlClassesList,theme),'Get');
         this._classeslist = data.value.liste_classe;
@@ -313,8 +313,6 @@ export class User{
         }
         return listS;
     }
-
-
     /************************* For Geometry ******************************/
     /**
      * Work around for a follow-up duplicates
@@ -362,7 +360,7 @@ export class User{
             'coordinates': 
                 coord
         };
-        this._geom = JSON.stringify(geojson);  
+        this._geom = JSON.stringify(geojson);
     }
     /**
      * Create a layer in the viewer to add a polygon in viewer
@@ -412,7 +410,6 @@ export class User{
         //the zoom on the polygon
         myMap.setExtent(ext.expand(expand));
     }
-
     /*************** Accessors ***********************/
     // Username
     getUsername(): string {

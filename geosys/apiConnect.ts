@@ -61,7 +61,7 @@ export class Connexion {
                     url: urlgoto,
                     headers: {
                         'Authorization': `Bearer ${token}`,
-                        'contentType': 'application/json',
+                        //'content-Type': 'application/json',
                         optEnv
                     },
                     type: typeConn,
@@ -81,7 +81,8 @@ export class Connexion {
                             }
                         }
                     },
-                    error: (xhr) => {
+                    error: (response,xhr) => {
+                        console.log(response.responseJSON.message)
                         outputValue = xhr;
                     }
                 })
@@ -127,7 +128,8 @@ export class Connexion {
                             outputValue = response;
                         }
                     },
-                    error: (xhr) => {
+                    error: (response,xhr) => {
+                        console.log(response.responseJSON.message)
                         outputValue = xhr;
                     }
                 })

@@ -6,7 +6,7 @@ export const urlgeoDataGet: string = `geodata`;
 export const urlgeoDatGetId: string = `geodata/`;
 
 // Url for the login(/securite/login) Get
-export const urlLoginGet: string = `securite/login`;
+//export const urlLoginGet: string = `securite/login`;
 
 // Url for the id working unit(/suivi-prod/unite-travail/id/theme/actif/{theme}) Get
 export const urlgetidWu: string = `suivi-prod/unite-travail/id/theme/actif/1007?__example=`;

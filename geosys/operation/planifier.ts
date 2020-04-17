@@ -56,6 +56,7 @@ export class planifier{
     submitForm(log:User):any{
         this.getInformationToJson();
         //this.saveJson(json);
+        //alert(this._json)
         this.setdata(this._conn.connexionAPI(log.getToken(), this.getJson() ,log.constructUrl(urlPlaniPost),'POST'));
         //what we get from the API
         return this.getdata();
@@ -71,7 +72,7 @@ export class planifier{
         //get de properties
         //alert(this.getclasses());
         let output:any = {
-            "theme": this.gettheme(),
+            "theme": this.gettheme().toString(),
             "id_ut": this.getidUT(),
             "type_travail": this.gettypetravail().toString(),
             "liste_classes": this.getclasses(),

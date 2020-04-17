@@ -166,7 +166,7 @@ Geosys.prototype.translations = {
         equipe: 'Team',
         enviro: 'Environnement',
         // Unité de travail
-        unit: 'Additionnal tool',
+        unit: 'Query tool',
         // file manager
         filem: 'File manager (Alpha)',
         // Error Message
