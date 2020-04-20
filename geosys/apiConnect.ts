@@ -39,7 +39,7 @@ export class Connexion {
         );
         Promise.all(promises).then(values => {
             console.log(values);
-        });
+        });        
         return outputValue;
     };
     /**
@@ -90,7 +90,7 @@ export class Connexion {
         );
         Promise.all(promises).then(values => {
             console.log(values);
-        });
+        });        
         return outputValue;
     };
    /**

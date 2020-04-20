@@ -22,7 +22,7 @@ export class FileMana {
      * @param {string} [nextFolder='root']
      * @memberof FileMana
      */
-    constructor(nextFolder: string = 'root', startingFolder: string = '...' /*'dev/travail/themes/HYDRO_50K'*/) {
+    constructor(nextFolder: string = 'root', startingFolder: string = '' ) {
         this._nextFolder = nextFolder
         this._breadcrumbs= startingFolder;
     }
@@ -33,7 +33,7 @@ export class FileMana {
      */
     obtainArbo(token: string): any {
         this._nextFolder = '';
-        return this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFolderFileList(), '/'),'Get','application/json');  
+        return this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFolderFileList(), ' '),'Get','application/json');  
     }
     /**
      * set the url for the navigation in the file manager

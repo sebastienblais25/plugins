@@ -54,7 +54,7 @@ export class User{
      * @memberof User
      */
     constructUrl(url: string, adding: string = ''): string {
-        return /*this._urlEnvselected*/'http://127.0.0.1:4010/' + url + adding
+        return this._urlEnvselected /*'http://127.0.0.1:4010/'*/ + url + adding
     }
     /**
      * With the connexion to the APi send a json file with the username and the password in the header to get
@@ -69,9 +69,9 @@ export class User{
         data = this._conn.connexionAPILogin(config.url_login,this.getUsername(),this.getPassword());
         // Destroy the password for the session
         this._password = '';
-        if (data.status === undefined) {
+        if (data.status === undefined) {            
             this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe,config);
-            this.setListEnv(this._conn.connexionAPI(this.getToken(), json, /*"http://132.156.9.78:8080/geosys-api/v1/systeme/envs"*/this.constructUrl(urlEnvList), 'Get'));
+            
         } else {
             alert(data.status)
         }
@@ -94,13 +94,14 @@ export class User{
                 this._envAcc.push(new Environnement(output.envs[i].env,output.envs[i].url))
             }  
         }
+        this.setEnvironnementSelected("PRO")
     }
     /**
      * Set the environnement url to a properties with the environnement selected
      * @param {string} env the environnement selected by the user
      * @memberof User
      */
-    setEnvironnementSelected(env: string) {
+    setEnvironnementSelected(env: string) {        
         for (let i in this._envAcc) {
             if (this._envAcc[i]._env === env) {
                 this._environnementSel = this._envAcc[i]._env;
@@ -145,6 +146,8 @@ export class User{
      * @memberof User
      */
     setDataFromAPI(token: string, token_type: string, expired: number, scope: string[], theme: string[] , equipe: string, config: any): void {
+        let json = ""
+        this.setListEnv(this._conn.connexionAPI(this.getToken(), json, "http://132.156.9.78:8080/geosys-api/v1/systeme/envs" /*this.constructUrl(urlEnvList)*/, 'Get'));
         this._token = token;
         this._tokentype = token_type;
         this._expired = expired;
@@ -162,6 +165,7 @@ export class User{
             this._themeAcc.push(new ApiReturn(ordertheme[i]));
             this.getinfoForCode(ordertheme[i],i)
         }
+        console.log(this._themeAcc)
         //set all form with the base theme
         this.callAPIWorkingUnit(this._baseTheme);
         //this.callAPIListeClasse(this._baseTheme);
@@ -209,20 +213,21 @@ export class User{
      * @returns
      * @memberof User
      */
-    orderThemeList(theme: string[],config: any): any { 
+    orderThemeList(theme: string[],config: any): any {
+        console.log(theme) 
         let newtheme: string[] = [];
         for (let i in theme) {
-            if (theme[i] === config.base_theme) {
+            if (theme[i] === config.base_theme.toString()) {
                 newtheme.push(theme[i]);
                 break;
             } 
         }
         for (let i in theme) {
-            if (theme[i]!= config.base_theme) {
+            if (theme[i] !== config.base_theme.toString()) {
                 newtheme.push(theme[i]);
             }  
         }
-
+        console.log(newtheme)
         return newtheme
     }
     /**
