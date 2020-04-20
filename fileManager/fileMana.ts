@@ -50,9 +50,17 @@ export class FileMana {
      */
     buildFolderList() {
         let listFo = [];
+        let max: number = 50;
         // Build the list of folder for the user UI
         for (let i in this._value.list_folder) {
-            listFo.push( { name: this._value.list_folder[i].name, modified: this._value.list_folder[i].last_modified, wanted: false } );
+            let len: number = this._value.list_folder[i].name.length;
+            let substring: string = '';
+            if (len > max) {
+                substring = this._value.list_folder[i].name.substr(0,46) + ' ...';
+            }else{
+                substring = this._value.list_folder[i].name;
+            }
+            listFo.push( { name: this._value.list_folder[i].name, modified: this._value.list_folder[i].last_modified, namecut:substring } );
         }
         return listFo;
     }
@@ -99,7 +107,7 @@ export class FileMana {
                                 </i>
                             </md-icon>
                             
-                            <span class="Geosys-name-File-Folder Geosys-lilPad">{{ folder.name }}<md-tooltip>{{ folder.name }}</md-tooltip></span>
+                            <span class="Geosys-name-File-Folder Geosys-lilPad">{{ folder.namecut }}<md-tooltip>{{ folder.name }}</md-tooltip></span>
                             <span class="Geosys-modified-File-Folder Geosys-lilPad">{{ folder.modified }}</span>
                         </div>
                         <div class="Geosys-downloadbtn" ng-click="ctrl11.deleteFolder(folder)"><i class="material-icons">delete</i></div>
