@@ -153,6 +153,8 @@ export class User{
         this._expired = expired;
         for (let i in scope) {
             this._right.push(new ApiReturn(scope[i]));
+            let data = this._conn.connexionAPI(this.getToken(),json,this.constructUrl(urlGetCode,this._right[i].getId()),'Get');
+            this._right[i].setRemaining(data.id_liste_code,data.nom,data.desc_en,data.desc_fr);
             //this.getinfoForCode(this._right[i].getId(),i)
         }
         this._equipe = new ApiReturn(equipe);
@@ -165,11 +167,13 @@ export class User{
             this._themeAcc.push(new ApiReturn(ordertheme[i]));
             this.getinfoForCode(ordertheme[i],i)
         }
-        console.log(this._themeAcc)
         //set all form with the base theme
         this.callAPIWorkingUnit(this._baseTheme);
-        //this.callAPIListeClasse(this._baseTheme);
+        this.callAPIListeClasse(this._baseTheme);
         this.callAPIWorkingType(this._baseTheme);
+        let data: any;
+        data = this._conn.connexionAPI(this.getToken(),json,this.constructUrl(urlGetCode,this._equipe.getId()),'Get');
+        this._equipe.setRemaining(data.id_liste_code,data.nom,data.desc_en,data.desc_fr);
     }
     /**
      * Call Api for a list of working unit 

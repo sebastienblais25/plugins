@@ -22,7 +22,7 @@ export class FileMana {
      * @param {string} [nextFolder='root']
      * @memberof FileMana
      */
-    constructor(nextFolder: string = 'root', startingFolder: string = '' ) {
+    constructor(nextFolder: string = 'root', startingFolder: string = '') {
         this._nextFolder = nextFolder
         this._breadcrumbs= startingFolder;
     }
@@ -41,6 +41,7 @@ export class FileMana {
      * @memberof FileMana
      */
     setNavigation(urlgoto: string,adding: string = ''): string {
+        console.log(this.getUrlServer() + urlgoto + this._breadcrumbs + adding)
         return this.getUrlServer() + urlgoto + this._breadcrumbs + adding;
     }
     /**
@@ -177,6 +178,7 @@ export class FileMana {
      */
     buildClickablebreadcrumbs() {
         this._list =  this._breadcrumbs.split('/');
+        this._list[0] = '...'
         let bc:string = '';
         let lenght = this._list.length - 1;
         for (let i in this._list) {
@@ -197,13 +199,21 @@ export class FileMana {
     setbreacrumbsForNav(rank: string) { 
         this._breadcrumbs = '';
         for (let i in this._list) {
-            if (i < rank) {
-                this._breadcrumbs += this._list[i] + '/';
-            } else if (i === rank) {
-                this._breadcrumbs += this._list[i];
+            if (i === '0') {
+                this._breadcrumbs = ' ';
+                if (this._list.length > 1) {
+                    this._breadcrumbs += '/';
+                }
             } else {
-                break;
+                if (i < rank) {
+                this._breadcrumbs += this._list[i] + '/';
+                } else if (i === rank) {
+                    this._breadcrumbs += this._list[i];
+                } else {
+                    break;
+                }
             }
+            
         }
     }
     /**
