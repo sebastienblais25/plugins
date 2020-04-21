@@ -1,4 +1,4 @@
-import { Connexion } from '../fileManager/apiConnect';
+import { Connexion } from '../apiConnect';
 const FileSaver = require('file-saver'); // le import
 
 export class FileMana {
@@ -18,16 +18,16 @@ export class FileMana {
     private _fileUpload: string;
     
     /**
-     *Creates an instance of FileMana.
+     * Creates an instance of FileMana.
      * @param {string} [nextFolder='root']
      * @memberof FileMana
      */
-    constructor(nextFolder: string = 'root', startingFolder: string = '') {
+    constructor(nextFolder: string = 'root', startingFolder: string = '...') {
         this._nextFolder = nextFolder
         this._breadcrumbs= startingFolder;
     }
     /**
-     * obtain the structure of a folder with a path send
+     * Obtain the structure of a folder with a path send
      * @param {User} log for the token
      * @memberof FileMana
      */
@@ -36,7 +36,7 @@ export class FileMana {
         return this._conn.connexionAPIFileManager(token,this.setNavigation(this.getFolderFileList(), ' '),'Get','application/json');  
     }
     /**
-     * set the url for the navigation in the file manager
+     * Set the url for the navigation in the file manager
      * @returns {string} return the url needed
      * @memberof FileMana
      */
@@ -45,7 +45,7 @@ export class FileMana {
         return this.getUrlServer() + urlgoto + this._breadcrumbs + adding;
     }
     /**
-     * build a list of folder with the return of the API
+     * Build a list of folder with the return of the API
      * @returns return a list of folder
      * @memberof FileMana
      */
@@ -66,7 +66,7 @@ export class FileMana {
         return listFo;
     }
     /**
-     * build a list of file with the return of the API
+     * Build a list of file with the return of the API
      * @returns return a list of file
      * @memberof FileMana
      */
@@ -172,7 +172,7 @@ export class FileMana {
         return output;
     }
     /**
-     * build a clickable breacrumbs for the navigations
+     * Build a clickable breacrumbs for the navigations
      * @returns return a string for the templates
      * @memberof FileMana
      */
@@ -192,32 +192,25 @@ export class FileMana {
         return bc;
     }
     /**
-     * set the path needed to get into the good folder
+     * Set the path needed to get into the good folder
      * @param {string} rank wich folder we want to go in
      * @memberof FileMana
      */
     setbreacrumbsForNav(rank: string) { 
         this._breadcrumbs = '';
+        this._list[0] = '';
         for (let i in this._list) {
-            if (i === '0') {
-                this._breadcrumbs = ' ';
-                if (this._list.length > 1) {
-                    this._breadcrumbs += '/';
-                }
+            if (i < rank) {
+            this._breadcrumbs += this._list[i] + '/';
+            } else if (i === rank) {
+                this._breadcrumbs += this._list[i];
             } else {
-                if (i < rank) {
-                this._breadcrumbs += this._list[i] + '/';
-                } else if (i === rank) {
-                    this._breadcrumbs += this._list[i];
-                } else {
-                    break;
-                }
+                break;
             }
-            
         }
     }
     /**
-     * set a formdata to the Api to upload a file
+     * Set a formdata to the Api to upload a file
      * @param {string} path the path of the file
      * @param {string} token the token for the connection
      * @memberof FileMana
@@ -231,7 +224,7 @@ export class FileMana {
         })
     }
     /**
-     * receive a blob dorm the APi to save the file into the download repository
+     * Receive a blob dorm the APi to save the file into the download repository
      * @param {string} nameFile name of the file
      * @param {string} path the path of the file
      * @param {string} token the token for the connection
@@ -243,14 +236,14 @@ export class FileMana {
         this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFileAction(),'/'+ nameFile),'GET','application/octet-stream').then( values => {
             /***** Download *****/
             console.log(values);
-            alert(nameFile + ' downloaded from ' + path)
+            console.log(nameFile + ' downloaded from ' + path)
             let blob = new Blob([values]);
             FileSaver.saveAs(blob,nameFile);
         })
         
     }
     /**
-     * to delete a file in the repository S3
+     * To delete a file in the repository S3
      * @param {string} nameFile name of the file
      * @param {string} path the path of the file
      * @param {string} token the token for the connection
@@ -292,11 +285,8 @@ export class FileMana {
         /***** API Call *****/
         this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), '/' + nameFolder + '/'),'DELETE','application/json').then( values => {
             // Check if the operation is completed
-            if (values[0].message !== undefined) {
-                console.log(nameFolder + ' deleted from ' + path);
-            } else {
-                alert(values[0]);
-            }
+            console.log(values);
+            console.log(nameFolder + ' deleted from ' + path);
         });
     }
     /**
@@ -310,11 +300,9 @@ export class FileMana {
         /***** API Call *****/
         this._conn.connexionAPIFileManager(token, this.setNavigation(this.getFolderAction(), '/' + foldername + '/'),'POST','application/json').then( values => {
             // Check if the operation is completed
-            if (values[0].message !== undefined) {
-                console.log("the new folder " + foldername + " will be created in " + pathforfolder);
-            } else {
-                alert(values[0]);
-            }
+            console.log("the new folder " + foldername + " will be created in " + pathforfolder);
+            console.log(values);
+            
         }); 
     }
     /**

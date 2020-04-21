@@ -1,9 +1,9 @@
 import { urlgetidWu, urlEnvList,
      urlClassesList,urlWorkingType, urlGetCode } from './config/url';
 import { Connexion } from './apiConnect';
-import { IdWu } from './manager/idWU';
-import { Environnement } from './manager/environnement';
-import { ApiReturn } from './manager/apireturn';
+import { IdWu } from './util/idWU';
+import { Environnement } from './util/environnement';
+import { ApiReturn } from './util/apireturn';
 
 
 export class User{
@@ -63,15 +63,17 @@ export class User{
      * @memberof User
      */
     submitForm(config: any): any {
-        let json: string = '';
         let data: any;
-        //let header: any = this.getInformationToHeader();
+        // let header: any = this.getInformationToHeader();
         data = this._conn.connexionAPILogin(config.url_login,this.getUsername(),this.getPassword());
         // Destroy the password for the session
         this._password = '';
-        if (data.status === undefined) {            
-            this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe,config);
-            
+        // Set the data from the connexion
+        if (data.status === undefined) { 
+            let json = '';
+            // Set environnement
+            this.setListEnv(this._conn.connexionAPI(this.getToken(), json, config.url_env, 'Get'));           
+            this.setDataFromAPI(data.access_token,data.token_type,data.expired, data.scope ,data.theme, data.equipe,config);   
         } else {
             alert(data.status)
         }
@@ -136,7 +138,7 @@ export class User{
         this._baseThemeC = this._baseTheme;
     }
     /**
-     * sett all the info information obtain form a login into the properties of the class
+     * Set all the info information obtain form a login into the properties of the class
      * @param {string} token
      * @param {string} token_type
      * @param {number} expired
@@ -147,7 +149,7 @@ export class User{
      */
     setDataFromAPI(token: string, token_type: string, expired: number, scope: string[], theme: string[] , equipe: string, config: any): void {
         let json = ""
-        this.setListEnv(this._conn.connexionAPI(this.getToken(), json, "http://132.156.9.78:8080/geosys-api/v1/systeme/envs" /*this.constructUrl(urlEnvList)*/, 'Get'));
+        // Set the data from the connexion return
         this._token = token;
         this._tokentype = token_type;
         this._expired = expired;
@@ -155,13 +157,17 @@ export class User{
             this._right.push(new ApiReturn(scope[i]));
             let data = this._conn.connexionAPI(this.getToken(),json,this.constructUrl(urlGetCode,this._right[i].getId()),'Get');
             this._right[i].setRemaining(data.id_liste_code,data.nom,data.desc_en,data.desc_fr);
-            //this.getinfoForCode(this._right[i].getId(),i)
         }
         this._equipe = new ApiReturn(equipe);
+        let data: any;
+        data = this._conn.connexionAPI(this.getToken(),json,this.constructUrl(urlGetCode,this._equipe.getId()),'Get');
+        this._equipe.setRemaining(data.id_liste_code,data.nom,data.desc_en,data.desc_fr);
+        // Set base theme from the config
         this._baseTheme = config.base_theme;
         this._baseThemeU = config.base_theme;
         this._baseThemeT = config.base_theme;
         this._baseThemeC = config.base_theme;
+        // Order the theme
         let ordertheme: any =this.orderThemeList(theme,config);
         for (let i in ordertheme){
             this._themeAcc.push(new ApiReturn(ordertheme[i]));
@@ -170,10 +176,7 @@ export class User{
         //set all form with the base theme
         this.callAPIWorkingUnit(this._baseTheme);
         this.callAPIListeClasse(this._baseTheme);
-        this.callAPIWorkingType(this._baseTheme);
-        let data: any;
-        data = this._conn.connexionAPI(this.getToken(),json,this.constructUrl(urlGetCode,this._equipe.getId()),'Get');
-        this._equipe.setRemaining(data.id_liste_code,data.nom,data.desc_en,data.desc_fr);
+        this.callAPIWorkingType(this._baseTheme);  
     }
     /**
      * Call Api for a list of working unit 
@@ -218,7 +221,6 @@ export class User{
      * @memberof User
      */
     orderThemeList(theme: string[],config: any): any {
-        console.log(theme) 
         let newtheme: string[] = [];
         for (let i in theme) {
             if (theme[i] === config.base_theme.toString()) {
@@ -231,7 +233,6 @@ export class User{
                 newtheme.push(theme[i]);
             }  
         }
-        console.log(newtheme)
         return newtheme
     }
     /**

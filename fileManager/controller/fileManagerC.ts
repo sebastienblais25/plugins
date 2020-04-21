@@ -1,5 +1,5 @@
-import { FileMana } from '../fileManager/fileMana';
-import { dragdropFunction } from "../fileManager/dragndrop";
+import { FileMana } from '../operation/fileMana';
+import { dragdropFunction } from "../javascript/dragndrop";
 
 export class FileManagerController {
 

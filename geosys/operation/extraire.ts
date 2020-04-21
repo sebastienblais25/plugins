@@ -57,13 +57,12 @@ export class Extraire{
         if(this._idUT === ""){
             this.getInformationToJsonSR();
             url = log.constructUrl(urlgeoDataGet);
-            alert(this.getJson())
+            //alert(this.getJson())
         //if idUt is set sent the idUt in the url and the json is empty
         }else{
             url = log.constructUrl(urlgeoDatGetId + this._idUT);
-            alert('extract planned')
+            //alert('extract planned')
         }
-        //this.saveJson(json)
         //Call to the Api
         console.log(this._envopt)
         this.setData(this._conn.connexionAPI(log.getToken(), this.getJson(), url, 'Get',this._envopt));

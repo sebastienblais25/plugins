@@ -1,6 +1,6 @@
 import { User } from '../user';
-import { FileManagerController } from '../../fileManager/fileManagerC';
-import { FileMana } from '../../fileManager/fileMana';
+import { FileManagerController } from '../../fileManager/controller/fileManagerC';
+import { FileMana } from '../../fileManager/operation/fileMana';
 import { urlFolderAction, urlFileAction, urlListFile, urlFileActionUpload } from '../config/url';
 
 

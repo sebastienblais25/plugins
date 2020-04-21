@@ -52,10 +52,14 @@ export class TopMenuController {
                 } else {
                     this.panel.close();
                 }
+                let listRight: string = '';
+                for (let i in log.getRight()) {
+                    listRight += log.getRight()[i].getnom() + '<br/>'
+                }
                 let output = infoUser.replace('(username)',log.getUsername() + ' ' + log.getPassword());
                 output = output.replace('(theme)',log.getAllThemeNAme());
-                output = output.replace('(right)',log.getRight()[0].getnom() + ' ' + log.getRight()[1].getnom());
-                output = output.replace('(equipe)',log.getEquipe().getId());
+                output = output.replace('(right)',listRight);
+                output = output.replace('(equipe)',log.getEquipe().getnom());
                 output = output.replace('(envir)', log.getEnvironnementSel() + '  </br>URL : ' + log.getUrlEnvselected());
                 let paneluser: TopMenuController =  new TopMenuController()
                 paneluser.controlUserInfo(log,mapApi);

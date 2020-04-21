@@ -169,7 +169,6 @@ export class PlanningController {
                         log.getGeom());
                     //submit the form to the API
                     let ApiReturn: any = plan.submitForm(log);
-                    
                     //If the return isn't a succes
                     if (ApiReturn != 'success') {
                         alert(ApiReturn.status)

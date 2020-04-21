@@ -1,5 +1,5 @@
-import { FileManagerController } from '../fileManager/fileManagerC';
-import { FileMana } from '../fileManager/fileMana';
+import { FileManagerController } from './controller/fileManagerC';
+import { FileMana } from './operation/fileMana';
 
 export default class FileManager {
     /**

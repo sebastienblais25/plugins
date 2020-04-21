@@ -1,5 +1,6 @@
 import { User } from "../user";
 import { QueryCall } from "../operation/queryCall";
+const FileSaver = require('file-saver'); // le import
 
 export class QueryCallC{
     
@@ -10,21 +11,7 @@ export class QueryCallC{
         mapApi.agControllerRegister('WorkUnit', function() {
             this.output = '';
             this.simply = false
-            this.query = `select 
-                            lot.id, 
-                            lot.theme_cl, 
-                            code.nom, 
-                            lot.statut_lot_cl, 
-                            unite_travail_2.id as id_ut, 
-                            unite_travail_2.shape 
-                          from 
-                            jmp.lot, 
-                            jmp.unite_travail_2, 
-                            jmp.code 
-                          where 
-                                unite_travail_2.id in ('AUTO_BUILDING_20181211_NBDNR16', 'AUTO_BUILDING_20181211_LCOUNTY') 
-                            and lot.id = unite_travail_2.id_lot 
-                            and lot.theme_cl = code.id`;
+            this.query = ``;
             this.addGeom = () => {
                 let regexD = /(?:^|\W)drop(?:$|\W)/gi;
                 let regexA = /(?:^|\W)alter(?:$|\W)/gi;
@@ -52,6 +39,9 @@ export class QueryCallC{
                                         "url": objURL
                                     };
                                     const myConfigLayer = myMap.layers.addLayer(layerJSON);
+                                }else {
+                                    let file = new Blob([json]);
+                                    FileSaver.saveAs(file,'Query.json')
                                 }
                             } else {
                                 alert('no good')

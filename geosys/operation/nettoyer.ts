@@ -14,6 +14,12 @@ export class Cleaning {
         this._idUt = idut;
     }
 
+    /**
+     *  Send the form the API
+     * @param {User} log
+     * @returns {*}
+     * @memberof Cleaning
+     */
     submitForm(log: User): any {
         this.setData(this._conn.connexionAPI(log.getToken(),this.getJson(),log.constructUrl(urlDeleteClean,this.getIdUt()),'Delete'));
         return this.getData();
