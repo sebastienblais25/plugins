@@ -9,7 +9,7 @@ import { CancelController } from '../controller/cancelC';
 import { TopMenuController } from '../controller/topmenuC';
 import { ValidateController } from '../controller/validateC';
 import { FileController } from '../controller/fileManagerC';
-import { UnitTravC } from '../controller/unitTravC';
+import { QueryCallC } from '../Controller/queryCallsC';
 export declare class menuManager {
     _compiler: TopMenuController;
     _planning: PlanningController;
@@ -20,7 +20,7 @@ export declare class menuManager {
     _cancel: CancelController;
     _validate: ValidateController;
     _fileManager: FileController;
-    _workUnit: UnitTravC;
+    _workUnit: QueryCallC;
     /**
      *Creates an instance of menuManager. and create the main menu for the plugins
      * @param {User} log all the user information

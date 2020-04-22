@@ -16,7 +16,7 @@ export default class FileManager {
      * de l'utilisateur
      * @memberof FileManager
      */
-    addLoginPanel(): void;
+    addPanel(): void;
     /**
      * Compile a html template to read to compile and replace all the variable inside the template
      * @param {*} template The html template to compile

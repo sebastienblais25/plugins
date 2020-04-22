@@ -1,6 +1,6 @@
 import { Connexion } from './apiConnect';
-import { Environnement } from './manager/environnement';
-import { ApiReturn } from './manager/apireturn';
+import { Environnement } from './util/environnement';
+import { ApiReturn } from './util/apireturn';
 export declare class User {
     /** Send to APi **/
     private _username;
@@ -9,6 +9,9 @@ export declare class User {
     private _environnementSel;
     private _urlEnvselected;
     private _baseTheme;
+    _baseThemeU: string;
+    _baseThemeT: string;
+    _baseThemeC: string;
     /** Connexion **/
     private _conn;
     /** Return of login **/
@@ -68,7 +71,12 @@ export declare class User {
      */
     getInformationToHeader(): any;
     /**
-     * sett all the info information obtain form a login into the properties of the class
+     * Reset Base theme for the form
+     * @memberof User
+     */
+    resetBaseTheme(): void;
+    /**
+     * Set all the info information obtain form a login into the properties of the class
      * @param {string} token
      * @param {string} token_type
      * @param {number} expired
@@ -175,6 +183,8 @@ export declare class User {
     setUsername(value: string): void;
     getPassword(): string;
     setPassword(value: string): void;
+    getbaseTheme(): string;
+    setbaseTheme(value: string): void;
     getConn(): Connexion;
     setConn(value: Connexion): void;
     getToken(): string;

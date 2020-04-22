@@ -8,5 +8,6 @@ export declare class Connexion {
      * @memberof Connexion
      */
     connexionAPIFileManager(token: string, urltogo: string, operation: string, content: string, file?: any): any;
-    connexionAPIFileManagerTestDownload(token: string, urltogo: string, operation: string, content: string, file?: any): any;
+    connexionAPIFileManagerTestDownload(token: string, urltogo: string, operation: string, content: string): any;
+    connexionAPIFileManagerTestUpload(token: string, urltogo: string, operation: string, file: any): any;
 }

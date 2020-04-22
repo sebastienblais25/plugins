@@ -1,6 +1,5 @@
 export declare const urlgeoDataGet: string;
 export declare const urlgeoDatGetId: string;
-export declare const urlLoginGet: string;
 export declare const urlgetidWu: string;
 export declare const urlPlaniPost: string;
 export declare const urlEnvList: string;
@@ -15,5 +14,6 @@ export declare const urlDeleteClean: string;
 export declare const urlCancelStep: string;
 export declare const urlListFile: string;
 export declare const urlFileAction: string;
+export declare const urlFileActionUpload: string;
 export declare const urlFolderAction: string;
 export declare const urlQuery: string;

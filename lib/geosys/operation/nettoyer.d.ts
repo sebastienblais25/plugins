@@ -7,6 +7,12 @@ export declare class Cleaning {
     _conn: Connexion;
     _data: any;
     constructor(theme: string, idut: string);
+    /**
+     *  Send the form the API
+     * @param {User} log
+     * @returns {*}
+     * @memberof Cleaning
+     */
     submitForm(log: User): any;
     /******* Accessor ********/
     getData(): any;

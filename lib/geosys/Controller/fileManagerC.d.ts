@@ -10,3 +10,7 @@ export declare class FileController {
      */
     fileManagercontrols(log: User, mapApi: any): void;
 }
+export interface FileController {
+    panel: any;
+    panel1: any;
+}

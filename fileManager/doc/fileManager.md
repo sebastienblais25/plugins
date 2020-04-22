@@ -67,3 +67,7 @@ Le fichier peut être supprimer du serveur
 
 Ce fichier contient toutes les fonctions du plugins.
 Il a les templates pour construire l'interface du plugin
+
+### FileManagerC.ts
+
+Ce fichier contient le controller pour l'interface du plugins

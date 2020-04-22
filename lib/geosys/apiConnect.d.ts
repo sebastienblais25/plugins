@@ -9,14 +9,6 @@ export declare class Connexion {
      */
     connexionAPILogin(urlgoto: string, username: string, password: string): any;
     /**
-    * The connexion to the Api for the login (TEST)
-    * @param {string} urlgoto The url for the login
-    * @param {*} header The header with the username and the password
-    * @returns {*} Return the infromation of the user
-    * @memberof connexion
-    */
-    connexionAPILoginP(urlgoto: string, header: any): any;
-    /**
      * connection to the Api with ajax and promises
      * @param {string} token the token for the connection
      * @param {*} jsonstring the body in json
